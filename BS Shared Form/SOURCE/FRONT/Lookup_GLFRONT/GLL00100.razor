@@ -1,0 +1,35 @@
+@inherits R_Page
+@attribute [R_Page(Title = "REFERENCE NO LOOKUP")]
+
+
+<R_StackLayout Row>
+    <R_Grid @ref="@_gridRef"
+            DataSource="_viewModel.ReferenceNoGrid"
+            R_ServiceGetListRecord="R_ServiceGetListRecordAsync"
+            Pageable
+            PageSize="5">
+        <R_GridColumns>
+            <R_GridTextColumn FieldName="CREF_NO" HeaderText="Reference No."></R_GridTextColumn>
+            <R_GridTextColumn FieldName="CREF_DATE" HeaderText="Reference Date"></R_GridTextColumn>
+            <R_GridTextColumn FieldName="CDOC_NO" HeaderText="Document No."></R_GridTextColumn>
+            <R_GridTextColumn FieldName="CDOC_DATE" HeaderText="Document Date"></R_GridTextColumn>
+            <R_GridTextColumn FieldName="CDEPT_CODE" HeaderText="Dept."></R_GridTextColumn>
+            <R_GridTextColumn FieldName="CCURRENCY" HeaderText="Currency"></R_GridTextColumn>
+            <R_GridNumericColumn FieldName="NTRANS_AMOUNT" HeaderText="Amount"></R_GridNumericColumn>
+            <R_GridTextColumn FieldName="CSTATUS_NAME" HeaderText="Status"></R_GridTextColumn>
+        </R_GridColumns>
+    </R_Grid>
+</R_StackLayout>
+
+<R_StackLayout Row Class="justify-content-end">
+    <R_ItemLayout xs="2">
+        <R_Button OnClick="Button_OnClickOkAsync">
+            OK
+        </R_Button>
+    </R_ItemLayout>
+    <R_ItemLayout xs="2">
+        <R_Button OnClick="Button_OnClickCloseAsync">
+            Cancel
+        </R_Button>
+    </R_ItemLayout>
+</R_StackLayout>

@@ -1,0 +1,29 @@
+﻿@inherits R_Page
+@attribute [R_Page(Title = "Category")]
+@using Lookup_GSCOMMON.DTOs
+@inject R_ILocalizer<Lookup_GSFrontResources.Resources_Dummy_Class> _localizer
+
+<R_StackLayout Style="width: 800px">
+    <R_StackLayout Row>
+        <R_TreeView @ref="@_treeRef"
+                    DataSource="@_viewModel.CategoryGrid"
+                    TextField="DisplayTree"
+                    IdField="Id"
+                    ParentIdField="ParentId"
+                    HasChildrenField="HasChildren"
+                    Height="400px"
+                    R_ServiceGetListRecord="@R_ServiceGetListRecordAsync"
+                    >
+        </R_TreeView>
+    </R_StackLayout>
+
+    <R_StackLayout Row Class="justify-content-end">
+            <R_Button OnClick="Button_OnClickOkAsync">
+                @_localizer["_OkBtn"]
+            </R_Button>
+            <R_Button OnClick="Button_OnClickCloseAsync">
+                @_localizer["_CancelBtn"]
+            </R_Button>
+    </R_StackLayout>
+
+</R_StackLayout>

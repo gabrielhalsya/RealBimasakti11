@@ -1,0 +1,127 @@
+﻿@inherits R_Page
+
+<R_StackLayout Row Spacing="1" Class="mt-0">
+     <R_ItemLayout col="2">
+         @* grid unit type cctg *@
+         <R_Grid @ref="@_gridUnitTypeCTG"
+                 DataSource="@_viewModelPricing._unitTypeCategoryList"
+                 R_ConductorSource="@_conUnitTypeCTG"
+                 R_GridType="@R_eGridType.Navigator"
+                 R_ServiceGetListRecord="@UnitTypeCTG_ServiceGetListRecord"
+                 AllowAddNewRow="false"
+                 AllowDeleteRow="false"
+                 AllowEditRow="false"
+                 Height="400px"
+                 Pageable="true">
+             <R_GridColumns>
+                 <R_GridTextColumn Filterable="false" FieldName="@nameof(UnitTypeCategoryDTO.CUNIT_TYPE_CATEGORY_NAME)" HeaderText=" Unit Type Category" Width="250px"></R_GridTextColumn>
+             </R_GridColumns>
+         </R_Grid>
+         @* add button *@
+         <R_Popup @ref="R_PopupCheck"
+                  R_Before_Open_Popup="@BeforeOpenPopup_AddNextPricing"
+                  R_After_Open_Popup="@AfterOpenPopup_AddNextPricing"
+                 Enabled
+                  Class="mt-4">
+             <R_Label>Add</R_Label>
+         </R_Popup>
+     </R_ItemLayout>
+
+     <R_ItemLayout col="4">
+         @* grid pricingdate *@
+         <R_Grid @ref="_gridPricingDate"
+                 DataSource="@_viewModelPricing._pricingDateList"
+                 R_ConductorSource="_conPricingDate"
+                 Pageable="true"
+                 R_GridType="R_eGridType.Navigator"
+                 AllowAddNewRow="false"
+                 AllowDeleteRow="false"
+                 AllowEditRow="false"
+                 R_ServiceGetListRecord="@NextPricingDate_ServiceGetListRecord"
+                 Height="450px">
+             <R_GridColumns>
+                 <R_GridTextColumn FieldName="@nameof(PricingDTO.CVALID_INTERNAL_ID)"
+                                   HeaderText="Valid ID"
+                                   Width="150px"></R_GridTextColumn>
+                 <R_GridDatePickerColumn FieldName="@nameof(PricingDTO.DVALID_DATE)"
+                                         HeaderText="Valid From Date"
+                                         Width="200px"></R_GridDatePickerColumn>
+             </R_GridColumns>
+         </R_Grid>
+     </R_ItemLayout>
+
+     <R_ItemLayout col="6">
+         @* grid next pricing  *@
+         <R_Grid @ref="_gridPricing"
+                 DataSource="@_viewModelPricing._pricingList"
+                 R_ConductorSource="_conPricing"
+                 Pageable="true"
+                 R_GridType="R_eGridType.Navigator"
+                 AllowAddNewRow="false"
+                 AllowDeleteRow="false"
+                 AllowEditRow="false"
+                 R_ServiceGetListRecord="NextPricing_ServiceGetListRecord"
+                 Height="450px">
+             <R_GridColumns>
+                 <R_GridTextColumn FieldName="@nameof(PricingDTO.CCHARGES_TYPE_DESCR)"
+                                   HeaderText="Charge Type"
+                                   Width="200px"></R_GridTextColumn>
+                 <R_GridTextColumn FieldName="@nameof(PricingDTO.CCHARGES_NAME)"
+                                   HeaderText="Charge Id" Width="200px"></R_GridTextColumn>
+                 <R_GridTextColumn FieldName="@nameof(PricingDTO.CPRICE_MODE_DESCR)"
+                                   HeaderText="Price Mode"
+                                   Width="200px"></R_GridTextColumn>
+                 <R_GridNumericColumn FieldName="@nameof(PricingDTO.NNORMAL_PRICE)"
+                                      HeaderText="Normal Price"
+                                      Width="250px"
+                                      ThousandSeparator="true"></R_GridNumericColumn>
+                 <R_GridNumericColumn FieldName="@nameof(PricingDTO.NBOTTOM_PRICE)"
+                                      HeaderText="Bottom Price"
+                                      Width="250px"
+                                      ThousandSeparator="true"></R_GridNumericColumn>
+                 <R_GridCheckBoxColumn FieldName="@nameof(PricingDTO.LOVERWRITE)"
+                                       HeaderText="Overwrite"
+                                       Width="100px"></R_GridCheckBoxColumn>
+                 <R_GridTextColumn FieldName="@nameof(PricingDTO.CUPDATE_BY)"
+                                   HeaderText="Updated By"
+                                   Width="200px"
+                                   R_EnableAdd="false"
+                                   R_EnableEdit="false"></R_GridTextColumn>
+                 <R_GridTextColumn FieldName="@nameof(PricingDTO.DUPDATE_DATE)"
+                                   HeaderText="Updated Date"
+                                   Width="200px"
+                                   R_EnableAdd="false"
+                                   R_EnableEdit="false"></R_GridTextColumn>
+                 <R_GridTextColumn FieldName="@nameof(PricingDTO.CCREATE_BY)"
+                                   HeaderText="Created By"
+                                   Width="200px"
+                                   R_EnableAdd="false"
+                                   R_EnableEdit="false"></R_GridTextColumn>
+                 <R_GridTextColumn FieldName="@nameof(PricingDTO.DCREATE_DATE)"
+                                   HeaderText="Created Date"
+                                   Width="200px"
+                                   R_EnableAdd="false"
+                                   R_EnableEdit="false"></R_GridTextColumn>
+             </R_GridColumns>
+         </R_Grid>
+     </R_ItemLayout>
+
+     <R_Conductor @ref="@_conUnitTypeCTG"
+                  R_ConductorParent="@_conPricingDate"
+                  R_ViewModel="@_viewModelPricing"
+                  R_ServiceGetRecord="@UnitTypeCTG_ServiceGetRecord"
+                  R_Display="@UnitTypeCTG_ServiceDisplay">
+     </R_Conductor>
+
+     <R_Conductor @ref="@_conPricingDate"
+                  R_IsHeader="true"
+                  R_ViewModel="@_viewModelPricing"
+                  R_ServiceGetRecord="@NextPricingDate_ServiceGetRecord"
+                  R_Display="@NextPricingDate_Display">
+     </R_Conductor>
+     <R_Conductor @ref="@_conPricing"
+                 R_ServiceGetRecord="@NextPricing_ServiceGetRecord"
+                  R_ConductorParent="@_conPricingDate"
+                  R_ViewModel="@_viewModelPricing">
+     </R_Conductor>
+ </R_StackLayout>

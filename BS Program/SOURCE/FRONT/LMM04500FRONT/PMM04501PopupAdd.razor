@@ -1,0 +1,114 @@
+﻿@inherits R_Page
+
+<R_StackLayout Row Style="width:820px">
+    <R_ItemLayout col="12">
+
+        <R_StackLayout Row Spacing="2">
+            <R_ItemLayout col="4">
+                <R_Label>Unit Type Cateory</R_Label>
+            </R_ItemLayout>
+            <R_ItemLayout col="4">
+                <R_TextBox @bind-Value="_pricingAdd_ViewModel._unitTypeCategoryName" Enabled="false"></R_TextBox>
+            </R_ItemLayout>
+        </R_StackLayout>
+        <R_StackLayout Row Spacing="2">
+            <R_ItemLayout col="4">
+                <R_Label>Valid From Date</R_Label>
+            </R_ItemLayout>
+            <R_ItemLayout col="4">
+                <R_DatePicker @ref="@_validDateForm"
+                              Value="_pricingAdd_ViewModel._validDateForm"
+                              ValueChanged="@((DateTime? poParam) => PricingAddForm_ValidDateValueChangedAsync(poParam))"></R_DatePicker>
+            </R_ItemLayout>
+        </R_StackLayout>
+
+        <R_Grid DataSource="@_pricingAdd_ViewModel._pricingSaveList"
+                @ref="@_gridPricing"
+                Pageable="false"
+                R_GridType="@R_eGridType.Batch"
+                R_ConductorGridSource="@_conGridPricing"
+                AllowAddNewRow="true"
+                AllowEditRow="true"
+                AllowDeleteRow="true"
+                R_ServiceGetListRecord="@PricingAdd_GetListRecord"
+                R_ServiceGetRecord="@PricingAdd_GetRecord"
+                R_Before_Open_Grid_Lookup="@PricingAdd_BeforeLookup"
+                R_After_Open_Grid_Lookup="@PricingAdd_AfterLookup"
+                R_CellValueChanged="@PricingAdd_CellValueChanged"
+                Height="300px"
+                R_AfterAdd="@PricingAdd_AfterAddAsync">
+            <R_GridColumns>
+                <R_GridComboBoxColumn Data=@_pricingAdd_ViewModel._chargesTypeList
+                                      ValueField="@nameof(TypeDTO.CCODE)"
+                                      TextField="@nameof(TypeDTO.CDESCRIPTION)"
+                                      FieldName="@nameof(PricingBulkSaveDTO.CCHARGES_TYPE)"
+                                      HeaderText="Charges Type"
+                                      R_EnableAdd="true"
+                                      R_EnableEdit="true"
+                                      Width="150px" />
+                <R_GridLookupColumn FieldName="@nameof(PricingBulkSaveDTO.CCHARGES_NAME)"
+                                    Name="@nameof(PricingBulkSaveDTO.CCHARGES_NAME)"
+                                    HeaderText="Charges Id"
+                                    R_EnableAdd="true"
+                                    R_EnableEdit="true"
+                                    Width="200px"></R_GridLookupColumn>
+                <R_GridComboBoxColumn Data=@_pricingAdd_ViewModel._priceTypeList
+                                      ValueField="@nameof(TypeDTO.CCODE)"
+                                      TextField="@nameof(TypeDTO.CDESCRIPTION)"
+                                      FieldName="@nameof(PricingBulkSaveDTO.CPRICE_MODE)"
+                                      HeaderText="Price Mode"
+                                      R_EnableAdd
+                                      R_EnableEdit
+                                      Width="200px" />
+                <R_GridNumericColumn FieldName="@nameof(PricingBulkSaveDTO.NNORMAL_PRICE)"
+                                     R_EnableAdd="true"
+                                     R_EnableEdit="true"
+                                     HeaderText="Normal Price"
+                                     Width="150px"
+                                     ThousandSeparator></R_GridNumericColumn>
+                <R_GridNumericColumn FieldName="@nameof(PricingBulkSaveDTO.NBOTTOM_PRICE)"
+                                     R_EnableAdd="true"
+                                     R_EnableEdit="true"
+                                     HeaderText="Bottom Price"
+                                     Width="150px" ThousandSeparator></R_GridNumericColumn>
+                <R_GridCheckBoxColumn FieldName="@nameof(PricingBulkSaveDTO.LOVERWRITE)"
+                                      R_EnableAdd="true"
+                                      R_EnableEdit="true"
+                                      HeaderText="Overwrite"
+                                      Width="150px"></R_GridCheckBoxColumn>
+                <R_GridTextColumn FieldName="@nameof(PricingBulkSaveDTO.CUPDATE_BY)"
+                                  HeaderText="Updated By"
+                                  Width="120px"
+                                  R_EnableAdd="false"
+                                  R_EnableEdit="false"></R_GridTextColumn>
+                <R_GridDatePickerColumn FieldName="@nameof(PricingBulkSaveDTO.DUPDATE_DATE)"
+                                        HeaderText="Updated Date"
+                                        Width="200px"
+                                        R_EnableAdd="false"
+                                        R_EnableEdit="false"></R_GridDatePickerColumn>
+                <R_GridTextColumn FieldName="@nameof(PricingBulkSaveDTO.CCREATE_BY)"
+                                  HeaderText="Created By"
+                                  Width="120px"
+                                  R_EnableAdd="false"
+                                  R_EnableEdit="false"></R_GridTextColumn>
+                <R_GridDatePickerColumn FieldName="@nameof(PricingBulkSaveDTO.DCREATE_DATE)"
+                                        HeaderText="Created Date"
+                                        Width="200px"
+                                        R_EnableAdd="false"
+                                        R_EnableEdit="false"></R_GridDatePickerColumn>
+            </R_GridColumns>
+        </R_Grid>
+
+        @* conductor *@
+        <R_ConductorGrid @ref="@_conGridPricing"
+                         R_IsHeader />
+    </R_ItemLayout>
+</R_StackLayout>
+
+<R_StackLayout Row Class="mt-2">
+    <R_ItemLayout col="10"></R_ItemLayout>
+    <R_ItemLayout col="2">
+        <R_Button OnClick="@PricingAdd_CancelAsync">Cancel</R_Button>
+        <R_Button OnClick="@PricingAdd_Process">Process</R_Button>
+    </R_ItemLayout>
+</R_StackLayout>
