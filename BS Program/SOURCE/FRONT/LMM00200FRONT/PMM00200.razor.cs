@@ -25,7 +25,6 @@ namespace PMM00200FRONT
         private R_NumericTextBox<int> _numTextBoxUserLevel; //ref for Value textbox
         [Inject] private R_ILocalizer<PMM00200FrontResources.Resources_Dummy_Class> _localizer { get; set; }
         [Inject] IClientHelper _clientHelper { get; set; }
-
         protected async override Task<bool> R_LockUnlock(R_LockUnlockEventArgs eventArgs)
         {
             var loEx = new R_Exception();
