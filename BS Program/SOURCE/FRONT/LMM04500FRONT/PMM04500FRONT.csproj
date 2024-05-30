@@ -11,15 +11,12 @@
 	</ItemGroup>
 	
 	<ItemGroup>
-	  <ProjectReference Include="..\..\..\..\BS Shared Form\SOURCE\BACK\GFF00900COMMON\GFF00900COMMON.csproj" />
-	  <ProjectReference Include="..\..\..\..\BS Shared Form\SOURCE\BACK\Lookup_LMCOMMON\Lookup_PMCOMMON.csproj" />
 	  <ProjectReference Include="..\..\..\..\BS Shared Form\SOURCE\FRONT\GFF00900FrontResources\GFF00900FrontResources.csproj" />
 	  <ProjectReference Include="..\..\..\..\BS Shared Form\SOURCE\FRONT\GFF00900FRONT\GFF00900FRONT.csproj" />
 	  <ProjectReference Include="..\..\..\..\BS Shared Form\SOURCE\FRONT\GFF00900Model\GFF00900Model.csproj" />
 	  <ProjectReference Include="..\..\..\..\BS Shared Form\SOURCE\FRONT\Lookup_LMFRONT\Lookup_PMFRONT.csproj" />
 	  <ProjectReference Include="..\LMM04500FrontResources\PMM04500FrontResources.csproj" />
 	  <ProjectReference Include="..\LMM04500MODEL\PMM04500MODEL.csproj" />
-		<ProjectReference Include="..\..\COMMON\LM\LMM04500COMMON\PMM04500COMMON.csproj" />
 
 	</ItemGroup>
 
