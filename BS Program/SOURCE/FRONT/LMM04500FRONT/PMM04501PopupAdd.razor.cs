@@ -144,7 +144,6 @@ namespace PMM04500FRONT
                         };
                         loResult = await PopupService.Show(typeof(GFF00900FRONT.GFF00900), loParam);
 
-                        await Task.Delay(300);
                         //if not success show message
                         if (!loResult.Success || !(bool)loResult.Result)
                         {

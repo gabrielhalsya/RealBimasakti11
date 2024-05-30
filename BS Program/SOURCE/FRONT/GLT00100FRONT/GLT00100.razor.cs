@@ -338,7 +338,6 @@ namespace GLT00100FRONT
                 var loData = R_FrontUtility.ConvertObjectToObject<GLT00110DTO>(_conductorRef.R_GetCurrentData());
                 var loParam = new GLT01100FrontPredefinedParamDTO();
                 loParam.PARAM_FROM_INTERNAL_JOURNAL_LIST = loData;
-
                 eventArgs.Parameter = loParam;
                 eventArgs.TargetPageType = typeof(GLT00110);
             }
@@ -349,51 +348,6 @@ namespace GLT00100FRONT
             R_DisplayException(loEx);
         }
 
-        //private void Predef_JournalEntry_TEST(R_InstantiateDockEventArgs eventArgs)
-        //{
-
-        //    var loEx = new R_Exception();
-        //    try
-        //    {
-        //        var loData = R_FrontUtility.ConvertObjectToObject<GLT00110DTO>(_conductorRef.R_GetCurrentData());
-        //        GLT01100FrontPredefinedParamDTO loParam = new GLT01100FrontPredefinedParamDTO()
-        //        {
-        //            PARAM_CALLER_ID = "PMT05500",
-        //            PARAM_CALLER_TRANS_CODE = "802030",
-        //            PARAM_CALLER_REF_NO = "CheckFIN-20240400002-PM",
-        //            PARAM_CALLER_ACTION = "NEW",
-        //            PARAM_DEPT_CODE = "FIN",
-        //            //belum tau
-        //            PARAM_REF_NO = "refno-depositmngr",
-        //            PARAM_DOC_NO = "docno-depositmngr",
-        //            PARAM_DOC_DATE = "20240520",
-        //            //belum tau
-        //            PARAM_DESCRIPTION = "Adjustmant Journal",
-        //            PARAM_GLACCOUNT_NO = "0A155",
-        //            PARAM_CENTER_CODE = "ERC",
-        //            PARAM_AMOUNT = 200,
-        //            PARAM_CURRENCY_CODE = "IDR",
-        //            PARAM_LC_BASE_RATE = 1,
-        //            PARAM_LC_RATE = 1,
-        //            PARAM_BC_BASE_RATE = 1,
-        //            PARAM_BC_RATE = 1,
-        //            PARAM_BSIS = "B",
-        //            PARAM_DBCR = 'D'
-        //            //PARAM_GLACCOUNT_NAME = _depositViewModel._currentDeposit.CGLACCOUNT_NO,
-        //            //PARAM_CENTER_NAME = _depositViewModel._currentDeposit.CGLACCOUNT_NO,
-        //            //PARAM_DEPT_NAME = _depositViewModel._currentDeposit.CGLACCOUNT_NO,
-        //        };
-
-
-        //        eventArgs.Parameter = loParam;
-        //        eventArgs.TargetPageType = typeof(GLT00110);
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        loEx.Add(ex);
-        //    }
-        //    R_DisplayException(loEx);
-        //}
         private async Task AfterPredef_JournalEntryAsync(R_AfterOpenPredefinedDockEventArgs eventArgs)
         {
             var loEx = new R_Exception();

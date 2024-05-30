@@ -164,7 +164,7 @@ namespace GLT00100MODEL
                 //CR6
                 poEntity.HeaderData.CSOURCE_TRANS_CODE = string.IsNullOrWhiteSpace(ExternalParam.PARAM_CALLER_TRANS_CODE) ? "" : ExternalParam.PARAM_CALLER_TRANS_CODE;
                 poEntity.HeaderData.CSOURCE_REF_NO = string.IsNullOrWhiteSpace(ExternalParam.PARAM_REF_NO) ? "" : ExternalParam.PARAM_REF_NO;
-                poEntity.HeaderData.CSOURCE_MODULE = string.IsNullOrWhiteSpace(ExternalParam.PARAM_CALLER_ID) ? "" : ExternalParam.PARAM_CALLER_ID.Substring(0, 2);
+                poEntity.HeaderData.CSOURCE_MODULE = string.IsNullOrWhiteSpace(ExternalParam.PARAM_CALLER_ID) ? "GL" : ExternalParam.PARAM_CALLER_ID.Substring(0, 2);
 
                 //save journal
                 var loResult = await _GLT00110Model.SaveJournalAsync(poEntity);

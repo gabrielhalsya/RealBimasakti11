@@ -274,7 +274,7 @@ namespace GLT00100FRONT
                     loData.CDEPT_NAME = _JournalEntryViewModel.ExternalParam.PARAM_DEPT_NAME;
                     loData.CDOC_NO = _JournalEntryViewModel.ExternalParam.PARAM_DOC_NO;
                     _JournalEntryViewModel.RefDate = _JournalEntryViewModel.VAR_TODAY.DTODAY;
-                    _JournalEntryViewModel.DocDate = string.IsNullOrWhiteSpace(_JournalEntryViewModel.ExternalParam.PARAM_DOC_DATE) ? null : DateTime.ParseExact(_JournalEntryViewModel.ExternalParam.PARAM_DOC_DATE, "yyyyMMdd", CultureInfo.InvariantCulture);
+                    _JournalEntryViewModel.DocDate = DateTime.ParseExact(_JournalEntryViewModel.ExternalParam.PARAM_DOC_DATE, "yyyyMMdd", CultureInfo.InvariantCulture);
                     loData.CCURRENCY_CODE = _JournalEntryViewModel.ExternalParam.PARAM_CURRENCY_CODE;
                     loData.NLBASE_RATE = _JournalEntryViewModel.ExternalParam.PARAM_LC_BASE_RATE;
                     loData.NLCURRENCY_RATE = _JournalEntryViewModel.ExternalParam.PARAM_LC_RATE;
@@ -298,7 +298,7 @@ namespace GLT00100FRONT
                         _numericTxt_NLCURRENCY_RATE.Enabled = false;
                         _numericTxt_NBBASE_RATE.Enabled = false;
                         _numericTxt_NBCURRENCY_RATE.Enabled = false;
-                        
+
                         //add new record data
                         GLT00101DTO loDetailRecordData = new();
                         loDetailRecordData.CINPUT_TYPE = 'A';
@@ -315,7 +315,7 @@ namespace GLT00100FRONT
                         loDetailRecordData.CDOCUMENT_NO = _JournalEntryViewModel.ExternalParam.PARAM_DOC_NO;
                         loDetailRecordData.CDOCUMENT_DATE = _JournalEntryViewModel.ExternalParam.PARAM_DOC_DATE;
                         loDetailRecordData.DDOCUMENT_DATE = DateTime.ParseExact(_JournalEntryViewModel.ExternalParam.PARAM_DOC_DATE, "yyyyMMdd", CultureInfo.InvariantCulture);
-                        
+
                         //assign to grid binding
                         _JournalEntryViewModel.JournalDetailGrid.Add(loDetailRecordData);
                     }
@@ -576,8 +576,8 @@ namespace GLT00100FRONT
                 else
                 {
                     _JournalEntryViewModel.JournalDetailGrid = _JournalEntryViewModel.JournalDetailGridTemp; //assign detail back from temp
-                    _JournalEntryViewModel.RefDate = DateTime.ParseExact(_JournalEntryViewModel.Data.CREF_DATE, "yyyyMMdd", CultureInfo.InvariantCulture);
-                    _JournalEntryViewModel.DocDate = DateTime.ParseExact(_JournalEntryViewModel.Data.CDOC_DATE, "yyyyMMdd", CultureInfo.InvariantCulture);
+                    _JournalEntryViewModel.RefDate = string.IsNullOrWhiteSpace(_JournalEntryViewModel.Data.CREF_DATE) ? _JournalEntryViewModel.VAR_TODAY.DTODAY : DateTime.ParseExact(_JournalEntryViewModel.Data.CREF_DATE, "yyyyMMdd", CultureInfo.InvariantCulture);
+                    _JournalEntryViewModel.DocDate = string.IsNullOrWhiteSpace(_JournalEntryViewModel.Data.CDOC_DATE) ? null : DateTime.ParseExact(_JournalEntryViewModel.Data.CDOC_DATE, "yyyyMMdd", CultureInfo.InvariantCulture);
                     if (eventArgs.ConductorMode == R_eConductorMode.Add)
                     {
                         _gridDetailRef.DataSource.Clear();

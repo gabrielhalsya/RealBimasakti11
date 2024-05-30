@@ -32,3 +32,5 @@ EXEC RSP_GS_GET_GL_ACCOUNT_LIST 'rcd','','GLM00101','','',false,false,'ghc','','
 EXEC RSP_GS_GET_GL_ACCOUNT_LIST 'rcd','','GLM00101','','',false,false,'ghc','','en',''
 select * from gsm_goa_coa where CGOA_CODE in ('CASH','BANK')
 and  ccompany_id='rcd'
+
+EXEC RSP_GL_SEARCH_JOURNAL_LIST 'BSI','ghc','000000','02','202405','','','en'
