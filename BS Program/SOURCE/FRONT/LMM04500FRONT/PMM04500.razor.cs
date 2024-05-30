@@ -31,7 +31,7 @@ namespace PMM04500FRONT
         private R_TabPage _tabHistoryPricing; //tabpageNextPricing
         private R_TabPage _tabPricingRate; //tabpageNextPricing
 
-        public bool _pageNextPricingOnCRUDmode = false; //to prevent moving tab while crudmode
+        private bool _pageNextPricingOnCRUDmode = false; //to prevent moving tab while crudmode
         private bool _comboboxPropertyEnabled = true; //to prevent combobox while crudmode
 
         protected override async Task R_Init_From_Master(object poParameter)

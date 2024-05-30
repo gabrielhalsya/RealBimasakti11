@@ -15,6 +15,7 @@
 	  <ProjectReference Include="..\..\..\..\BS Shared Form\SOURCE\FRONT\GFF00900FRONT\GFF00900FRONT.csproj" />
 	  <ProjectReference Include="..\..\..\..\BS Shared Form\SOURCE\FRONT\GFF00900Model\GFF00900Model.csproj" />
 	  <ProjectReference Include="..\..\..\..\BS Shared Form\SOURCE\FRONT\Lookup_LMFRONT\Lookup_PMFRONT.csproj" />
+	  <ProjectReference Include="..\..\COMMON\LM\LMM04500COMMON\PMM04500COMMON.csproj" />
 	  <ProjectReference Include="..\LMM04500FrontResources\PMM04500FrontResources.csproj" />
 	  <ProjectReference Include="..\LMM04500MODEL\PMM04500MODEL.csproj" />
 

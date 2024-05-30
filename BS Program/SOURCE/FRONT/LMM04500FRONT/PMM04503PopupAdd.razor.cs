@@ -1,23 +1,13 @@
-﻿using BlazorClientHelper;
-using GFF00900COMMON.DTOs;
-using Microsoft.AspNetCore.Components;
-using PMM04500COMMON;
+﻿using PMM04500COMMON;
 using PMM04500COMMON.DTO_s;
 using PMM04500MODEL;
 using R_BlazorFrontEnd.Controls;
 using R_BlazorFrontEnd.Controls.DataControls;
-using R_BlazorFrontEnd.Controls.Enums;
 using R_BlazorFrontEnd.Controls.Events;
 using R_BlazorFrontEnd.Controls.MessageBox;
-using R_BlazorFrontEnd.Controls.Popup;
 using R_BlazorFrontEnd.Exceptions;
 using R_BlazorFrontEnd.Helpers;
-using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PMM04500FRONT
 {
@@ -119,7 +109,7 @@ namespace PMM04500FRONT
                 await _viewModel_PricingRate.SavePricing();
                 if (!loEx.HasError)
                 {
-                    R_eMessageBoxResult loMessageResult = await R_MessageBox.Show("", "Process Complete", R_eMessageBoxButtonType.OK);
+                    R_eMessageBoxResult r_eMessageBoxResult = await R_MessageBox.Show("", "Process Complete", R_eMessageBoxButtonType.OK);
                 }
                 await this.Close(true, null);
             }

@@ -1,0 +1,109 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<inherited BaseReport="BaseHeaderLandscapeCommon.frx" BaseReportAbsolutePath="D:\RealCode\RSF\BIMASAKTI_11\1.00\PROGRAM\BS Program\SOURCE\API\LM\BIMASAKTI_PM_API\Reports\BaseHeaderLandscapeCommon.frx" ScriptLanguage="CSharp" ReportInfo.Created="08/04/2023 16:21:34" ReportInfo.Modified="05/30/2024 11:11:59" ReportInfo.CreatorVersion="2023.2.21.0">
+  <Dictionary>
+    <BusinessObjectDataSource Name="ResponseDataModel" ReferenceName="ResponseDataModel" DataType="System.Collections.ArrayList" Enabled="true">
+      <Column Name="SummaryData" DataType="PMR00200COMMON.Print_DTO.PMR00200PrintDisplayDTO, PMR00200COMMON, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+        <Column Name="Title" DataType="System.String"/>
+        <Column Name="Header" DataType="System.String"/>
+        <Column Name="Column" DataType="PMR00200COMMON.Print_DTO.PMR00200SummaryColumnDTO, PMR00200COMMON, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+          <Column Name="COLUMN_CTRANS_NAME" DataType="System.String"/>
+          <Column Name="COLUMN_CSALESMAN_ID_NAME" DataType="System.String"/>
+          <Column Name="COLUMN_CREF_NO" DataType="System.String"/>
+          <Column Name="COLUMN_CREF_DATE" DataType="System.String"/>
+          <Column Name="COLUMN_CTENURE" DataType="System.String"/>
+          <Column Name="COLUMN_NTOTAL_GROSS_AREA_SIZE" DataType="System.String"/>
+          <Column Name="COLUMN_GRAND_TOT_AREA" DataType="System.String"/>
+          <Column Name="COLUMN_NTOTAL_NET_AREA_SIZE" DataType="System.String"/>
+          <Column Name="COLUMN_NTOTAL_COMMON_AREA_SIZE" DataType="System.String"/>
+          <Column Name="COLUMN_CTRANS_STATUS_NAME" DataType="System.String"/>
+          <Column Name="COLUMN_NTOTAL_PRICE" DataType="System.String"/>
+          <Column Name="COLUMN_CTAX" DataType="System.String"/>
+          <Column Name="COLUMN_CTENANT_NAME" DataType="System.String"/>
+          <Column Name="COLUMN_CTC_MESSAGE" DataType="System.String"/>
+        </Column>
+        <Column Name="HeaderParam" DataType="PMR00200COMMON.PMR00200PrintParamDTO, PMR00200COMMON, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+          <Column Name="CCOMPANY_ID" DataType="System.String"/>
+          <Column Name="CPROPERTY_ID" DataType="System.String"/>
+          <Column Name="CFROM_DEPARTMENT_ID" DataType="System.String"/>
+          <Column Name="CFROM_DEPARTMENT_NAME" DataType="System.String"/>
+          <Column Name="CTO_DEPARTMENT_ID" DataType="System.String"/>
+          <Column Name="CTO_DEPARTMENT_NAME" DataType="System.String"/>
+          <Column Name="CFROM_SALESMAN_ID" DataType="System.String"/>
+          <Column Name="CFROM_SALESMAN_NAME" DataType="System.String"/>
+          <Column Name="CTO_SALESMAN_ID" DataType="System.String"/>
+          <Column Name="CTO_SALESMAN_NAME" DataType="System.String"/>
+          <Column Name="CFROM_PERIOD" DataType="System.String"/>
+          <Column Name="CTO_PERIOD" DataType="System.String"/>
+          <Column Name="LIS_OUTSTANDING" DataType="System.Boolean" BindableControl="CheckBox"/>
+          <Column Name="CLANG_ID" DataType="System.String"/>
+        </Column>
+        <BusinessObjectDataSource Name="Data" DataType="System.Collections.Generic.List`1[[PMR00200COMMON.Print_DTO.PMR00200DataResultDTO, PMR00200COMMON, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]" Enabled="true">
+          <Column Name="CTRANS_CODE" DataType="System.String"/>
+          <Column Name="CTRANS_NAME" DataType="System.String"/>
+          <BusinessObjectDataSource Name="Detail1" DataType="System.Collections.Generic.List`1[[PMR00200COMMON.Print_DTO.PMR00200DataRes1, PMR00200COMMON, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]" Enabled="true">
+            <Column Name="CSALESMAN_ID" DataType="System.String"/>
+            <Column Name="CSALESMAN_NAME" DataType="System.String"/>
+            <BusinessObjectDataSource Name="Detail2" DataType="System.Collections.Generic.List`1[[PMR00200COMMON.Print_DTO.PMR00200DataRes2, PMR00200COMMON, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]" Enabled="true">
+              <Column Name="CREF_NO" DataType="System.String"/>
+              <Column Name="CREF_DATE" DataType="System.String"/>
+              <Column Name="CTENURE" DataType="System.String"/>
+              <Column Name="NTOTAL_GROSS_AREA_SIZE" DataType="System.Decimal"/>
+              <Column Name="NTOTAL_NET_AREA_SIZE" DataType="System.Decimal"/>
+              <Column Name="NTOTAL_COMMON_AREA_SIZE" DataType="System.Decimal"/>
+              <Column Name="CTRANS_STATUS_NAME" DataType="System.String"/>
+              <Column Name="NTOTAL_PRICE" DataType="System.Decimal"/>
+              <Column Name="CTAX" DataType="System.String"/>
+              <Column Name="CTENANT_ID" DataType="System.String"/>
+              <Column Name="CTC_MESSAGE" DataType="System.String"/>
+              <Column Name="CTENANT_NAME" DataType="System.String"/>
+            </BusinessObjectDataSource>
+          </BusinessObjectDataSource>
+        </BusinessObjectDataSource>
+      </Column>
+      <Column Name="BaseHeaderData" DataType="BaseHeaderReportCOMMON.BaseHeaderDTO, BaseHeaderReportCOMMON, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+        <Column Name="BLOGO_COMPANY" DataType="System.Byte[]" BindableControl="Picture"/>
+        <Column Name="CPRINT_CODE" DataType="System.String"/>
+        <Column Name="CCOMPANY_NAME" DataType="System.String"/>
+        <Column Name="CPRINT_NAME" DataType="System.String"/>
+        <Column Name="CUSER_ID" DataType="System.String"/>
+      </Column>
+      <Column Name="BaseHeaderColumn" DataType="BaseHeaderReportCOMMON.BaseHeaderColumnDTO, BaseHeaderReportCOMMON, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+        <Column Name="Page" DataType="System.String"/>
+        <Column Name="Of" DataType="System.String"/>
+        <Column Name="Print_Date" DataType="System.String"/>
+        <Column Name="Print_By" DataType="System.String"/>
+      </Column>
+    </BusinessObjectDataSource>
+  </Dictionary>
+  <inherited Name="Page1">
+    <inherited Name="PageHeader1">
+      <inherited Name="Picture1"/>
+      <inherited Name="Text33"/>
+      <inherited Name="Text40">
+        <Formats>
+          <GeneralFormat/>
+          <GeneralFormat/>
+          <GeneralFormat/>
+          <GeneralFormat/>
+        </Formats>
+      </inherited>
+      <inherited Name="Text36"/>
+      <inherited Name="Text38"/>
+      <inherited Name="Text34"/>
+      <inherited Name="Text37"/>
+      <inherited Name="Text39"/>
+      <ChildBand Name="Child1" ZOrder="-1" Top="79.6" Width="1047.06" Height="37.8"/>
+    </inherited>
+    <ColumnHeaderBand Name="ColumnHeader1" ZOrder="-1" Top="121.4" Width="1047.06" Height="37.8">
+      <TextObject Name="Text41" Width="94.5" Height="18.9" Text="[ResponseDataModel.SummaryData.Column.COLUMN_CTRANS_NAME]" Font="Arial, 8pt"/>
+    </ColumnHeaderBand>
+    <DataBand Name="Data1" ZOrder="0" Top="163.2" Width="1047.06" Height="37.8">
+      <DataBand Name="Data2" Top="205" Width="1047.06" Height="37.8">
+        <DataBand Name="Data3" Top="246.8" Width="1047.06" Height="37.8"/>
+        <DataFooterBand Name="DataFooter1" Top="288.6" Width="1047.06" Height="37.8"/>
+      </DataBand>
+      <DataFooterBand Name="DataFooter2" Top="330.4" Width="1047.06" Height="37.8"/>
+    </DataBand>
+    <PageFooterBand Name="PageFooter1" ZOrder="-1" Top="372.2" Width="1047.06" Height="37.8"/>
+  </inherited>
+</inherited>

@@ -30,7 +30,7 @@ namespace PMR00200COMMON.DTO_s
         public decimal NTOTAL_GROSS_AREA_SIZE { get; set; }
         public decimal NTOTAL_NET_AREA_SIZE { get; set; }
         public decimal NTOTAL_COMMON_AREA_SIZE { get; set; }
-        public string NTOTAL_PRICE { get; set; }
+        public decimal NTOTAL_PRICE { get; set; }
         public string CUNIT_DETAIL_ID { get; set; }
         public string CUNIT_DETAIL_NAME { get; set; }
         public string CUNIT_DETAIL_TYPE_ID { get; set; }
