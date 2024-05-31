@@ -8,6 +8,7 @@ namespace PMR00200COMMON.DTO_s
     {
         public string CCOMPANY_ID { get; set; }
         public string CPROPERTY_ID { get; set; }
+        public string CPROPERTY_NAME { get; set; }
         public string CFROM_DEPARTMENT_ID { get; set; }
         public string CFROM_DEPARTMENT_NAME { get; set; }
         public string CTO_DEPARTMENT_ID { get; set; }

@@ -59,7 +59,6 @@ namespace PMR00200FRONT
         }
         #endregion
 
-
         #region lookupFromDept
         private void BeforeOpen_lookupFromDept(R_BeforeOpenLookupEventArgs eventArgs)
         {

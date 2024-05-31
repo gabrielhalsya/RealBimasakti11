@@ -117,8 +117,7 @@ namespace PMR00200MODEL.View_Models
             PeriodYearDTO loRtn = null;
             try
             {
-                var loResult = await _PMR00200model.GetPeriodYearRecordAsync(new PeriodYearDTO() { CMODE = "", CYEAR = ""});
-                _PeriodYear = loResult;
+                loRtn = await _PMR00200model.GetPeriodYearRecordAsync(new PeriodYearDTO() { CMODE = "", CYEAR = ""});
             }
             catch (Exception ex)
             {
