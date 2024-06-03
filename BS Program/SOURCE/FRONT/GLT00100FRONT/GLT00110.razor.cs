@@ -7,7 +7,6 @@ using Lookup_GSCOMMON.DTOs;
 using Lookup_GSFRONT;
 using Lookup_GSModel.ViewModel;
 using Microsoft.AspNetCore.Components;
-using Microsoft.Extensions.Logging;
 using R_BlazorFrontEnd.Controls;
 using R_BlazorFrontEnd.Controls.DataControls;
 using R_BlazorFrontEnd.Controls.Enums;
@@ -19,7 +18,6 @@ using R_BlazorFrontEnd.Exceptions;
 using R_BlazorFrontEnd.Helpers;
 using R_CommonFrontBackAPI;
 using R_LockingFront;
-using System.Collections.Generic;
 using System.Globalization;
 
 namespace GLT00100FRONT
@@ -274,7 +272,10 @@ namespace GLT00100FRONT
                     loData.CDEPT_NAME = _JournalEntryViewModel.ExternalParam.PARAM_DEPT_NAME;
                     loData.CDOC_NO = _JournalEntryViewModel.ExternalParam.PARAM_DOC_NO;
                     _JournalEntryViewModel.RefDate = _JournalEntryViewModel.VAR_TODAY.DTODAY;
-                    _JournalEntryViewModel.DocDate = DateTime.ParseExact(_JournalEntryViewModel.ExternalParam.PARAM_DOC_DATE, "yyyyMMdd", CultureInfo.InvariantCulture);
+
+                    //handle if param_doc_date like yyyyMM,or yyyyMMdd
+                    _JournalEntryViewModel.DocDate = string.IsNullOrWhiteSpace(_JournalEntryViewModel.ExternalParam.PARAM_DOC_DATE) ? null : (_JournalEntryViewModel.ExternalParam.PARAM_DOC_DATE.Length == 6 ? DateTime.ParseExact(_JournalEntryViewModel.ExternalParam.PARAM_DOC_DATE, "yyyyMM", CultureInfo.InvariantCulture) : DateTime.ParseExact(_JournalEntryViewModel.ExternalParam.PARAM_DOC_DATE, "yyyyMMdd", CultureInfo.InvariantCulture));
+
                     loData.CCURRENCY_CODE = _JournalEntryViewModel.ExternalParam.PARAM_CURRENCY_CODE;
                     loData.NLBASE_RATE = _JournalEntryViewModel.ExternalParam.PARAM_LC_BASE_RATE;
                     loData.NLCURRENCY_RATE = _JournalEntryViewModel.ExternalParam.PARAM_LC_RATE;
@@ -453,6 +454,11 @@ namespace GLT00100FRONT
                 if (_JournalEntryViewModel.RefDate < DateTime.ParseExact(_JournalEntryViewModel.VAR_CCURRENT_PERIOD_START_DATE.CSTART_DATE, "yyyyMMdd", CultureInfo.InvariantCulture))
                 {
                     loEx.Add("", "Reference Date cannot be before Current Period!");
+                }
+
+                if (_JournalEntryViewModel.RefDate > _JournalEntryViewModel.VAR_TODAY.DTODAY)
+                {
+                    loEx.Add("", "Reference Date cannot be after today!");
                 }
 
                 if (_JournalEntryViewModel.DocDate < DateTime.ParseExact(_JournalEntryViewModel.VAR_CCURRENT_PERIOD_START_DATE.CSTART_DATE, "yyyyMMdd", CultureInfo.InvariantCulture))

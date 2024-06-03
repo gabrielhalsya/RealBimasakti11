@@ -34,3 +34,17 @@ select * from gsm_goa_coa where CGOA_CODE in ('CASH','BANK')
 and  ccompany_id='rcd'
 
 EXEC RSP_GL_SEARCH_JOURNAL_LIST 'BSI','ghc','000000','02','202405','','','en'
+
+
+"@CCHARGE_MODE": "01",
+        "@CBUILDING_ID": "TW-A",
+        "@CCOMPANY_ID": "rcd",
+        "@CDEPT_CODE": "ACC",
+        "@CFLOOR_ID": "L01",
+        "@CPROPERTY_ID": "ASHMD",
+        "@CREF_NO": "CheckACC-20240500003-PM",
+        "@CTRANS_CODE": "802030",
+        "@CUNIT_ID": "A0102",
+        "@CUSER_ID": "ghc"
+
+EXEC RSP_PM_GET_DEPOSIT_LIST 'rcd','ASHMD','ACC','802030','CheckACC-20240500003-PM','01','TW-A','L01','A0102','ghc'

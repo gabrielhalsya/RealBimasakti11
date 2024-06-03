@@ -12,14 +12,14 @@
                     <R_Label>Department</R_Label>
                 </R_ItemLayout>
                 <R_ItemLayout col="2">
-                    <R_TextBox @ref="_txt_CDEPT_CODE"
-                               @bind-Value="_JournalEntryViewModel.Data.CDEPT_CODE"
-                               R_ConductorSource="_conductorRef"
+                    <R_TextBox @ref="@_txt_CDEPT_CODE"
+                               @bind-Value="@_JournalEntryViewModel.Data.CDEPT_CODE"
+                               R_ConductorSource="@_conductorRef"
                                R_EnableAdd
-                               R_EnableEdit="false"
-                               CharacterCasing="R_eCharacterCasing.Upper"
+                               R_EnableEdit="@false"
+                               CharacterCasing="@R_eCharacterCasing.Upper"
                                MaxLength="5"
-                               OnLostFocus="OnLostFocus_LookupDept" />
+                               OnLostFocus="@OnLostFocus_LookupDept" />
                 </R_ItemLayout>
                 <R_ItemLayout Class="col d-flex justify-content-center">
                     <R_Lookup R_ConductorSource="_conductorRef" R_Before_Open_Lookup="@Before_Open_lookupDept" R_After_Open_Lookup="@After_Open_lookupDept" @ref="@_lookup_CDEPT_CODE">...</R_Lookup>

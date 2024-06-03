@@ -11,6 +11,7 @@ using R_ReportFastReportBack;
 using System.Collections;
 using System.Diagnostics;
 using System.Globalization;
+using R_Cache;
 
 namespace PMR00200SERVICE
 {
@@ -100,8 +101,7 @@ namespace PMR00200SERVICE
             try
             {
                 // Deserialize the GUID from the cache
-                loResultGUID = R_NetCoreUtility.R_DeserializeObjectFromByte<PMR00200PrintLogKey>(
-                    R_DistributedCache.Cache.Get(pcGuid));
+                loResultGUID = R_NetCoreUtility.R_DeserializeObjectFromByte<PMR00200PrintLogKey>(R_DistributedCache.Cache.Get(pcGuid));
                 _logger.LogDebug("Deserialized GUID: {pcGuid}", pcGuid);
 
                 // Get Parameter
