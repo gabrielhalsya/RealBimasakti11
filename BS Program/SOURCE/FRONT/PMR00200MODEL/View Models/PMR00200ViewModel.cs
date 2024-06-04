@@ -9,6 +9,9 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
+using PMR00200FrontResources;
+using R_BlazorFrontEnd.Interfaces;
+
 
 namespace PMR00200MODEL.View_Models
 {
@@ -20,12 +23,7 @@ namespace PMR00200MODEL.View_Models
         public ObservableCollection<PeriodDtDTO> _fromPeriods = new ObservableCollection<PeriodDtDTO>();
         public ObservableCollection<PeriodDtDTO> _toPeriods = new ObservableCollection<PeriodDtDTO>();
         public PMR00200ParamDTO _ReportParam = new PMR00200ParamDTO();
-
-        public List<ReportTypeDTO> _radioReportTypeList { get; set; } = new List<ReportTypeDTO>
-        {
-            new ReportTypeDTO { CTYPE = "S", CTYPE_NAME = "Summary" },
-            new ReportTypeDTO { CTYPE= "D", CTYPE_NAME = "Detail" },
-        };
+        public List<ReportTypeDTO> _radioReportTypeList { get; set; } = new List<ReportTypeDTO>();
 
         public DateTime _InitToday = new DateTime();
         public PeriodYearDTO _PeriodYear = new PeriodYearDTO();
@@ -36,7 +34,7 @@ namespace PMR00200MODEL.View_Models
         public string _MonthToPeriod = "";
         public string _ReportType = "";
 
-        public async Task InitProcess()
+        public async Task InitProcess(R_ILocalizer<Resources_Dummy_Class> poParamLocalizer)
         {
             R_Exception loEx = new R_Exception();
             try
@@ -50,6 +48,24 @@ namespace PMR00200MODEL.View_Models
                 var loCurrentPeriods = await GetPeriodDtAsync(loCurrentYearPeriod);
                 _fromPeriods = new ObservableCollection<PeriodDtDTO>(loCurrentPeriods);
                 _toPeriods = new ObservableCollection<PeriodDtDTO>(loCurrentPeriods);
+
+                //generate report type
+                _radioReportTypeList = new List<ReportTypeDTO> {
+                    new ReportTypeDTO { CTYPE = "S", CTYPE_NAME = poParamLocalizer["_radioSummary"] },
+                    new ReportTypeDTO { CTYPE = "D", CTYPE_NAME = poParamLocalizer ["_radioDetail"] },
+                };
+
+                //set default data
+                if (_properties.Count > 0)
+                {
+                    _ReportParam.CPROPERTY_ID = _properties.FirstOrDefault().CPROPERTY_ID;
+                }
+                _YearFromPeriod = int.Parse(_InitToday.Year.ToString());
+                _MonthFromPeriod = _InitToday.ToString("MM");
+                _YearToPeriod = int.Parse(_InitToday.Year.ToString());
+                _MonthToPeriod = _InitToday.ToString("MM");
+                _ReportType = "S";
+                _ReportParam.LIS_OUTSTANDING = true;
             }
             catch (Exception ex)
             {
@@ -117,7 +133,7 @@ namespace PMR00200MODEL.View_Models
             PeriodYearDTO loRtn = null;
             try
             {
-                loRtn = await _PMR00200model.GetPeriodYearRecordAsync(new PeriodYearDTO() { CMODE = "", CYEAR = ""});
+                loRtn = await _PMR00200model.GetPeriodYearRecordAsync(new PeriodYearDTO() { CMODE = "", CYEAR = "" });
             }
             catch (Exception ex)
             {

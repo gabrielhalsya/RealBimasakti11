@@ -147,6 +147,12 @@
   <data name="_labelTo" xml:space="preserve">
     <value>To</value>
   </data>
+  <data name="_radioDetail" xml:space="preserve">
+    <value>Detail</value>
+  </data>
+  <data name="_radioSummary" xml:space="preserve">
+    <value>Summary</value>
+  </data>
   <data name="_validationDeptFromResult" xml:space="preserve">
     <value>Department [From] [INPUT Department Code] not found!</value>
   </data>

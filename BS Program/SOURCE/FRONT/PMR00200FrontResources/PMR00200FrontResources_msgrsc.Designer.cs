@@ -151,6 +151,24 @@ namespace PMR00200FrontResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Detail.
+        /// </summary>
+        internal static string _radioDetail {
+            get {
+                return ResourceManager.GetString("_radioDetail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Summary.
+        /// </summary>
+        internal static string _radioSummary {
+            get {
+                return ResourceManager.GetString("_radioSummary", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Department [From] [INPUT Department Code] not found!.
         /// </summary>
         internal static string _validationDeptFromResult {

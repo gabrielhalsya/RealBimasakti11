@@ -7,6 +7,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\COMMON\LM\PMR00200COMMON\PMR00200COMMON.csproj" />
+    <ProjectReference Include="..\PMR00200FrontResources\PMR00200FrontResources.csproj" />
   </ItemGroup>
 
 	<ItemGroup>

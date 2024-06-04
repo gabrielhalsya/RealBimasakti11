@@ -34,7 +34,7 @@ namespace PMR00200FRONT
             R_Exception loEx = new R_Exception();
             try
             {
-                await _viewModel.InitProcess();
+                await _viewModel.InitProcess(_localizer);
             }
             catch (Exception ex)
             {
@@ -296,6 +296,10 @@ namespace PMR00200FRONT
 
             R_DisplayException(loEx);
         }
+        #endregion
+
+        #region print
+        private void OnclickBtn_Print() { }
         #endregion
 
     }
