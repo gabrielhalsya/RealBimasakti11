@@ -289,8 +289,6 @@ namespace GLT00100BACK
                     loDb.R_AddCommandParameter(loCmd, "@CSOURCE_REF_NO", DbType.String, int.MaxValue, poEntity.HeaderData.CSOURCE_REF_NO);
                     loDb.R_AddCommandParameter(loCmd, "@CSOURCE_MODULE", DbType.String, int.MaxValue, poEntity.HeaderData.CSOURCE_MODULE);
 
-
-
                     R_ExternalException.R_SP_Init_Exception(loConn);
 
                     try

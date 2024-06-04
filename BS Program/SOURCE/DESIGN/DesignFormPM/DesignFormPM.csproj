@@ -9,7 +9,6 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\..\COMMON\LM\PMR00200COMMON\PMR00200COMMON.csproj" />
 		<PackageReference Include="FastReport.Net.Pro" Version="2023.2.21" />
 	</ItemGroup>
 

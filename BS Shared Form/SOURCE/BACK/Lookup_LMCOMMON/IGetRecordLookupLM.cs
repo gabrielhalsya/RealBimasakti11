@@ -12,5 +12,6 @@ namespace Lookup_PMCOMMON
         LMLGenericRecord<LML00600DTO> LML00600Tenant(LML00600ParameterDTO poParam);
         LMLGenericRecord<LML00700DTO> LML00700Discount(LML00700ParameterDTO poParam);
         LMLGenericRecord<LML00800DTO> LML00800Agreement(LML00800ParameterDTO poParam);
+      //  LMLGenericRecord<LML00900DTO> LML00900Transaction(LML00900ParameterDTO poParam);
     }
 }

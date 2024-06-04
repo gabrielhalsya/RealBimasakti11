@@ -58,6 +58,7 @@ namespace Lookup_PMSERVICES
             catch (Exception ex)
             {
                 loEx.Add(ex);
+                _loggerLookup.LogError(ex);
             }
 
             loEx.ThrowExceptionIfErrors();
@@ -94,6 +95,7 @@ namespace Lookup_PMSERVICES
             catch (Exception ex)
             {
                 loEx.Add(ex);
+                _loggerLookup.LogError(ex);
             }
             loEx.ThrowExceptionIfErrors();
             _loggerLookup.LogInfo(string.Format("END process method {0} on Controller", lcMethodName));
@@ -130,6 +132,7 @@ namespace Lookup_PMSERVICES
             catch (Exception ex)
             {
                 loEx.Add(ex);
+                _loggerLookup.LogError(ex);
             }
 
             loEx.ThrowExceptionIfErrors();
@@ -166,6 +169,7 @@ namespace Lookup_PMSERVICES
             catch (Exception ex)
             {
                 loEx.Add(ex);
+                _loggerLookup.LogError(ex);
             }
             loEx.ThrowExceptionIfErrors();
             _loggerLookup.LogInfo(string.Format("END process method {0} on Controller", lcMethodName));
@@ -201,6 +205,7 @@ namespace Lookup_PMSERVICES
             catch (Exception ex)
             {
                 loEx.Add(ex);
+                _loggerLookup.LogError(ex);
             }
             loEx.ThrowExceptionIfErrors();
             _loggerLookup.LogInfo(string.Format("END process method {0} on Controller", lcMethodName));
@@ -236,6 +241,7 @@ namespace Lookup_PMSERVICES
             catch (Exception ex)
             {
                 loEx.Add(ex);
+                _loggerLookup.LogError(ex);
             }
             loEx.ThrowExceptionIfErrors();
             _loggerLookup.LogInfo(string.Format("END process method {0} on Controller", lcMethodName));
@@ -264,7 +270,7 @@ namespace Lookup_PMSERVICES
 
                 _loggerLookup.LogInfo(string.Format("Get Parameter {0} on Controller", lcMethodName));
                 _loggerLookup.LogDebug("DbParameter {@Parameter} ", poParameter);
-                _loggerLookup.LogInfo("Call method GetAllDiscount");
+                _loggerLookup.LogInfo("Call method GetAllAgreement");
 
                 loReturnTemp = loCls.GetAgreement(poParameter);
                 loRtn = GetStreaming(loReturnTemp);
@@ -272,10 +278,79 @@ namespace Lookup_PMSERVICES
             catch (Exception ex)
             {
                 loEx.Add(ex);
+                _loggerLookup.LogError(ex);
             }
             loEx.ThrowExceptionIfErrors();
             _loggerLookup.LogInfo(string.Format("END process method {0} on Controller", lcMethodName));
             return loRtn!;
+        }
+        [HttpPost]
+        public IAsyncEnumerable<LML00900DTO> LML00900TransactionList()
+        {
+            string lcMethodName = nameof(LML00900TransactionList);
+            using Activity activity = _activitySource.StartActivity(lcMethodName)!;
+            _loggerLookup.LogInfo(string.Format("START process method {0} on Controller", lcMethodName));
+
+            var loEx = new R_Exception();
+            IAsyncEnumerable<LML00900DTO> loRtn = null;
+            List<LML00900DTO> loReturnTemp;
+
+            try
+            {
+                var loCls = new PublicLookupLMCls();
+                var poParameter = new LML00900ParameterDTO();
+                poParameter.CCOMPANY_ID = R_BackGlobalVar.COMPANY_ID;
+                poParameter.CPROPERTY_ID = R_Utility.R_GetStreamingContext<string>(ContextConstantPublicLookup.CPROPERTY_ID);
+                poParameter.CDEPT_CODE = R_Utility.R_GetStreamingContext<string>(ContextConstantPublicLookup.CDEPT_CODE);
+                poParameter.CTENANT_ID = R_Utility.R_GetStreamingContext<string>(ContextConstantPublicLookup.CTENANT_ID);            
+                poParameter.CUSER_ID = R_BackGlobalVar.USER_ID;
+                poParameter.CTRANS_CODE = R_Utility.R_GetStreamingContext<string>(ContextConstantPublicLookup.CTRANS_CODE);
+                poParameter.CPERIOD = R_Utility.R_GetStreamingContext<string>(ContextConstantPublicLookup.CPERIOD);
+                poParameter.LHAS_REMAINING = R_Utility.R_GetStreamingContext<bool>(ContextConstantPublicLookup.LHAS_REMAINING);
+                poParameter.LNO_REMAINING = R_Utility.R_GetStreamingContext<bool>(ContextConstantPublicLookup.LNO_REMAINING);
+                poParameter.CLANGUAGE_ID = R_BackGlobalVar.CULTURE;
+                poParameter.CCURRENCY_CODE = R_Utility.R_GetStreamingContext<string>(ContextConstantPublicLookup.CCURRENCY_CODE);
+
+                _loggerLookup.LogInfo(string.Format("Get Parameter {0} on Controller", lcMethodName));
+                _loggerLookup.LogDebug("DbParameter {@Parameter} ", poParameter);
+                _loggerLookup.LogInfo($"Call method {0}", lcMethodName);
+
+                loReturnTemp = loCls.GetTransaction(poParameter);
+                loRtn = GetStreaming(loReturnTemp);
+            }
+            catch (Exception ex)
+            {
+                loEx.Add(ex);
+                _loggerLookup.LogError(ex);
+            }
+            loEx.ThrowExceptionIfErrors();
+            _loggerLookup.LogInfo(string.Format("END process method {0} on Controller", lcMethodName));
+            return loRtn!;
+        }
+        [HttpPost]
+        public LML00900InitialProcessDTO InitialProcess()
+        {
+            string lcMethodName = nameof(InitialProcess);
+            using Activity activity = _activitySource.StartActivity(lcMethodName)!;
+            _loggerLookup.LogInfo(string.Format("START process method {0} on Controller", lcMethodName));
+            R_Exception loException = new R_Exception();
+            LML00900InitialProcessDTO? loReturn = null;
+            try
+            {
+                var loCls = new PublicLookupLMCls();
+                string loDbParameter = R_BackGlobalVar.COMPANY_ID;
+                _loggerLookup.LogInfo("Call method IntialProcess on Controller");
+                loReturn = loCls.GetInitialProcess(loDbParameter);
+            }
+            catch (Exception ex)
+            {
+                loException.Add(loException);
+                _loggerLookup.LogError(ex);
+            }
+            loException.ThrowExceptionIfErrors();
+            _loggerLookup.LogInfo(string.Format("END process method {0} on Controller", lcMethodName));
+
+            return loReturn!;
         }
 
 
@@ -287,7 +362,7 @@ namespace Lookup_PMSERVICES
                 yield return item;
             }
         }
-
+     
         #endregion
     }
     

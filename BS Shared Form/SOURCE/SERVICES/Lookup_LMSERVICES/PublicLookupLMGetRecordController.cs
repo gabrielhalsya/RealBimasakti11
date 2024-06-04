@@ -44,6 +44,8 @@ namespace Lookup_PMSERVICES
             try
             {
                 var loCls = new PublicLookupLMCls();
+                poParam.CCOMPANY_ID = R_BackGlobalVar.COMPANY_ID;
+                poParam.CUSER_ID = R_BackGlobalVar.USER_ID;
                 _loggerLookup.LogInfo("Call method GetUnitCharges");
                 var loTempList = loCls.GetAllUnitCharges(poParam);
 
@@ -75,6 +77,8 @@ namespace Lookup_PMSERVICES
             try
             {
                 var loCls = new PublicLookupLMCls();
+                poParam.CCOMPANY_ID = R_BackGlobalVar.COMPANY_ID;
+                poParam.CUSER_ID = R_BackGlobalVar.USER_ID;
                 _loggerLookup.LogInfo("Call method GetSupervisor");
                 var loTempList = loCls.GetAllSupervisor(poParam);
 
@@ -108,6 +112,8 @@ namespace Lookup_PMSERVICES
             try
             {
                 var loCls = new PublicLookupLMCls();
+                poParam.CCOMPANY_ID = R_BackGlobalVar.COMPANY_ID;
+                poParam.CUSER_ID = R_BackGlobalVar.USER_ID;
                 _loggerLookup.LogInfo("Call method GetUtilityCharges");
                 var loTempList = loCls.GetAllUtilityCharges(poParam);
 
@@ -141,7 +147,8 @@ namespace Lookup_PMSERVICES
             try
             {
                 var loCls = new PublicLookupLMCls();
-
+                poParam.CCOMPANY_ID = R_BackGlobalVar.COMPANY_ID;
+                poParam.CUSER_ID = R_BackGlobalVar.USER_ID;
                 _loggerLookup.LogInfo("Call method GetSalesman");
                 var loTempList = loCls.GetAllSalesman(poParam);
 
@@ -174,6 +181,8 @@ namespace Lookup_PMSERVICES
             try
             {
                 var loCls = new PublicLookupLMCls();
+                poParam.CCOMPANY_ID = R_BackGlobalVar.COMPANY_ID;
+                poParam.CUSER_ID = R_BackGlobalVar.USER_ID;
                 _loggerLookup.LogInfo("Call method GetAllTenant");
                 var loTempList = loCls.GetTenant(poParam);
 
@@ -204,6 +213,8 @@ namespace Lookup_PMSERVICES
             try
             {
                 var loCls = new PublicLookupLMCls();
+                poParam.CCOMPANY_ID = R_BackGlobalVar.COMPANY_ID;
+                poParam.CUSER_ID = R_BackGlobalVar.USER_ID;
                 _loggerLookup.LogInfo("Call method GetAllDiscount");
                 var loTempList = loCls.GetDiscount(poParam);
 
@@ -235,6 +246,8 @@ namespace Lookup_PMSERVICES
             try
             {
                 var loCls = new PublicLookupLMCls();
+                poParam.CCOMPANY_ID = R_BackGlobalVar.COMPANY_ID;
+                poParam.CLANG_ID = R_BackGlobalVar.CULTURE;
                 _loggerLookup.LogInfo("Call method GetAllAgreement");
                 var loTempList = loCls.GetAgreement(poParam);
 

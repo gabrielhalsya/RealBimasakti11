@@ -72,9 +72,9 @@ namespace RSP_GL_SAVE_JOURNALResources {
         /// <summary>
         ///   Looks up a localized string similar to Process failed! unable to save Journal transaction {0}.
         /// </summary>
-        internal static string ERROR_PROCESS {
+        internal static string ERROR_PROC {
             get {
-                return ResourceManager.GetString("ERROR_PROCESS", resourceCulture);
+                return ResourceManager.GetString("ERROR_PROC", resourceCulture);
             }
         }
         

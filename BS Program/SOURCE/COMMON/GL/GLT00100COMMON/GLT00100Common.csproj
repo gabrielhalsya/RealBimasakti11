@@ -5,10 +5,6 @@
     <Nullable>disable</Nullable>
   </PropertyGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\..\BaseHeaderReportCommon\BaseHeaderReportCOMMON.csproj" />
-  </ItemGroup>
-
 	<ItemGroup>
 		<Reference Include="R_APICommonDTO">
 			<HintPath>..\..\..\..\..\SYSTEM\SOURCE\LIBRARY\Back\R_APICommonDTO.dll</HintPath>

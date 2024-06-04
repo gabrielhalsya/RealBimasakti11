@@ -56,6 +56,14 @@ namespace Lookup_PMModel
         {
             throw new NotImplementedException();
         }
+        public IAsyncEnumerable<LML00900DTO> LML00900TransactionList()
+        {
+            throw new NotImplementedException();
+        }
+        public LML00900InitialProcessDTO InitialProcess()
+        {
+            throw new NotImplementedException();
+        }
         #endregion
 
 
@@ -241,6 +249,57 @@ namespace Lookup_PMModel
                 loEx.Add(ex);
             }
 
+            loEx.ThrowExceptionIfErrors();
+            return loResult;
+        }
+        #endregion
+
+        #region LML00900
+        public async Task<LMLGenericList<LML00900DTO>> LML00900GetTransactionListAsync()
+        {
+            var loEx = new R_Exception();
+            LMLGenericList<LML00900DTO> loResult = new LMLGenericList<LML00900DTO>();
+            try
+            {
+                R_HTTPClientWrapper.httpClientName = _HttpClientName;
+                var loTempResult = await R_HTTPClientWrapper.R_APIRequestStreamingObject<LML00900DTO>(
+                    _RequestServiceEndPoint,
+                    nameof(IPublicLookupLM.LML00900TransactionList),
+                    DEFAULT_MODULE,
+                    _SendWithContext,
+                    _SendWithToken);
+
+                loResult.Data = loTempResult;
+            }
+            catch (Exception ex)
+            {
+                loEx.Add(ex);
+            }
+
+            loEx.ThrowExceptionIfErrors();
+            return loResult;
+        }
+        #endregion
+
+        #region Utility
+        public async Task<LML00900InitialProcessDTO> GetInitialProcessAsyncModel()
+        {
+            var loEx = new R_Exception();
+            LML00900InitialProcessDTO loResult = new LML00900InitialProcessDTO();
+            try
+            {
+                R_HTTPClientWrapper.httpClientName = _HttpClientName;
+                loResult = await R_HTTPClientWrapper.R_APIRequestObject<LML00900InitialProcessDTO>(
+                    _RequestServiceEndPoint,
+                    nameof(IPublicLookupLM.InitialProcess),
+                    DEFAULT_MODULE,
+                    _SendWithContext,
+                    _SendWithToken);
+            }
+            catch (Exception ex)
+            {
+                loEx.Add(ex);
+            }
             loEx.ThrowExceptionIfErrors();
             return loResult;
         }

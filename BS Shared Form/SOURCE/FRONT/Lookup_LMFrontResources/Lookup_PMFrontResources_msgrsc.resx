@@ -117,6 +117,12 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="00901" xml:space="preserve">
+    <value>Period Year is required!</value>
+  </data>
+  <data name="00902" xml:space="preserve">
+    <value>Please select Period!</value>
+  </data>
   <data name="_agreementNo" xml:space="preserve">
     <value>Agreement No</value>
   </data>
@@ -135,11 +141,20 @@
   <data name="_ChargeType" xml:space="preserve">
     <value>Charges Type</value>
   </data>
+  <data name="_curr" xml:space="preserve">
+    <value>Curr.</value>
+  </data>
   <data name="_cust" xml:space="preserve">
     <value>Customer</value>
   </data>
   <data name="_Dept" xml:space="preserve">
     <value>Department</value>
+  </data>
+  <data name="_dept." xml:space="preserve">
+    <value>Dept.</value>
+  </data>
+  <data name="_desc" xml:space="preserve">
+    <value>Description</value>
   </data>
   <data name="_discountId" xml:space="preserve">
     <value>Discount Id</value>
@@ -150,14 +165,38 @@
   <data name="_discountType" xml:space="preserve">
     <value>Discount Type</value>
   </data>
+  <data name="_docDate" xml:space="preserve">
+    <value>Document Date</value>
+  </data>
+  <data name="_docNo" xml:space="preserve">
+    <value>Document No.</value>
+  </data>
+  <data name="_dueDate" xml:space="preserve">
+    <value>Due Date</value>
+  </data>
   <data name="_Email" xml:space="preserve">
     <value>Email</value>
   </data>
   <data name="_ErrLookup01" xml:space="preserve">
     <value>Not found data by search text!!</value>
   </data>
+  <data name="_period" xml:space="preserve">
+    <value>Period</value>
+  </data>
   <data name="_Phone" xml:space="preserve">
     <value>Phone 1</value>
+  </data>
+  <data name="_refDate" xml:space="preserve">
+    <value>Reference Date</value>
+  </data>
+  <data name="_refNo" xml:space="preserve">
+    <value>Reference No.</value>
+  </data>
+  <data name="_refresh" xml:space="preserve">
+    <value>Refresh</value>
+  </data>
+  <data name="_remainingAmount" xml:space="preserve">
+    <value>Remaining Amount</value>
   </data>
   <data name="_SalesmanId" xml:space="preserve">
     <value>Salesman Id</value>
@@ -194,6 +233,9 @@
   </data>
   <data name="_TenantType" xml:space="preserve">
     <value>Tenant Type</value>
+  </data>
+  <data name="_transType" xml:space="preserve">
+    <value>Transaction Type</value>
   </data>
   <data name="_unitDescription" xml:space="preserve">
     <value>Unit Description</value>

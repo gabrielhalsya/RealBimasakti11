@@ -16,5 +16,12 @@ namespace Lookup_PMCOMMON.DTOs
         public const string CTAXABLE_TYPE = "CTAXABLE_TYPE";
         public const string CACTIVE_TYPE = "CACTIVE_TYPE";
         public const string CTAX_DATE = "CTAX_DATE";
+        public const string CTENANT_ID = "CTENANT_ID";
+        public const string CTRANS_CODE = "CTRANS_CODE";
+        public const string CPERIOD = "CPERIOD";
+        public const string CCURRENCY_CODE = "CCURRENCY_CODE";
+        public const string CLANGUAGE_ID = "CLANGUAGE_ID";
+        public const string LNO_REMAINING = "LNO_REMAINING";
+        public const string LHAS_REMAINING = "LHAS_REMAINING";
     }
 }

@@ -81,10 +81,7 @@ namespace GLM00200Front
                 var loData = (JournalDTO)eventArgs.Data;
                 if (eventArgs.ConductorMode != R_eConductorMode.Normal)
                 {
-                    //if (string.IsNullOrEmpty(loData.CREF_NO) || string.IsNullOrWhiteSpace(loData.CREF_NO))
-                    //{
-                    //    loEx.Add("", "Account No. is required!");
-                    //}
+
                     if (_journalVM.RefDate == null)
                     {
                         loEx.Add("", "Reference Date is required!");
@@ -93,6 +90,11 @@ namespace GLM00200Front
                     {
                         loEx.Add("", "Reference Date cannot be before Current Period!");
                     }
+                    if (_journalVM.RefDate > _journalVM.VAR_TODAY.DTODAY)
+                    {
+                        loEx.Add("", "Reference Date cannot be after today!");
+                    }
+
                     if (_journalVM.RefDate > _journalVM.StartDate)
                     {
                         loEx.Add("", "Reference Date cannot be after Start Date!");

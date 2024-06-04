@@ -13,5 +13,10 @@ namespace Lookup_PMCOMMON
         IAsyncEnumerable<LML00600DTO> LML00600TenantList();
         IAsyncEnumerable<LML00700DTO> LML00700DiscountList();
         IAsyncEnumerable<LML00800DTO> LML00800AgreementList();
+        IAsyncEnumerable<LML00900DTO> LML00900TransactionList();
+     
+        #region Utility
+        LML00900InitialProcessDTO InitialProcess();
+        #endregion
     }
 }

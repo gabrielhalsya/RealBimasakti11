@@ -26,7 +26,7 @@ namespace PMR00200FRONT
         [Inject] IClientHelper _clientHelper { get; set; }
         [Inject] private R_ILocalizer<Resources_Dummy_Class> _localizer { get; set; }
 
-        private R_RadioGroup<ReportTypeDTO,string> _radioReportType;
+        private R_RadioGroup<ReportTypeDTO, string> _radioReportType;
 
         protected override async Task R_Init_From_Master(object poParameter)
         {
@@ -62,6 +62,7 @@ namespace PMR00200FRONT
         #region lookupFromDept
         private void BeforeOpen_lookupFromDept(R_BeforeOpenLookupEventArgs eventArgs)
         {
+            eventArgs.Parameter = new GSL00700ParameterDTO();
             eventArgs.TargetPageType = typeof(GSL00700);
         }
         private async Task AfterOpen_lookupFromDeptAsync(R_AfterOpenLookupEventArgs eventArgs)
@@ -117,6 +118,7 @@ namespace PMR00200FRONT
         #region lookupFromDept
         private void BeforeOpen_lookupToDept(R_BeforeOpenLookupEventArgs eventArgs)
         {
+            eventArgs.Parameter = new GSL00700ParameterDTO();
             eventArgs.TargetPageType = typeof(GSL00700);
         }
         private async Task AfterOpen_lookupToDeptAsync(R_AfterOpenLookupEventArgs eventArgs)
@@ -172,7 +174,12 @@ namespace PMR00200FRONT
         #region lookupFromSalesman
         private void BeforeOpen_lookupFromSalesman(R_BeforeOpenLookupEventArgs eventArgs)
         {
-            eventArgs.Parameter = new LML00500ParameterDTO() { CPROPERTY_ID = _viewModel._ReportParam.CPROPERTY_ID };
+            eventArgs.Parameter = new LML00500ParameterDTO()
+            {
+                CPROPERTY_ID = _viewModel._ReportParam.CPROPERTY_ID,
+                CCOMPANY_ID = _clientHelper.CompanyId,
+                CUSER_ID = _clientHelper.UserId
+            };
             eventArgs.TargetPageType = typeof(LML00500);
         }
         private async Task AfterOpen_lookupFromSalesmanAsync(R_AfterOpenLookupEventArgs eventArgs)

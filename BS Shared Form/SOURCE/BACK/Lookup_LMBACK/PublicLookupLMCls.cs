@@ -7,6 +7,7 @@ using R_Common;
 using Lookup_PMCOMMON.Logs;
 using R_CommonFrontBackAPI;
 using System.Diagnostics;
+using System.Windows.Input;
 
 namespace Lookup_PMBACK
 {
@@ -52,7 +53,7 @@ namespace Lookup_PMBACK
                     .Where(x => x != null && x.ParameterName.StartsWith("@"))
                     .ToDictionary(x => x.ParameterName, x => x.Value);
                 _loggerLookup.LogDebug("{@ObjectQuery} {@Parameter}", loCmd.CommandText, loDbParam);
-                
+
                 var loReturnTemp = loDb.SqlExecQuery(loConn, loCmd, true);
                 loResult = R_Utility.R_ConvertTo<LML00200DTO>(loReturnTemp).ToList();
             }
@@ -128,7 +129,7 @@ namespace Lookup_PMBACK
                 loDb.R_AddCommandParameter(loCmd, "@CUSER_ID", DbType.String, 50, poEntity.CUSER_ID);
                 loDb.R_AddCommandParameter(loCmd, "@CPROPERTY_ID", DbType.String, 25, poEntity.CPROPERTY_ID);
                 loDb.R_AddCommandParameter(loCmd, "@CCHARGE_TYPE_ID", DbType.String, 99, poEntity.CCHARGE_TYPE_ID);
-               
+
                 var loDbParam = loCmd.Parameters.Cast<DbParameter>()
                     .Where(x => x != null && x.ParameterName.StartsWith("@"))
                     .ToDictionary(x => x.ParameterName, x => x.Value);
@@ -151,7 +152,7 @@ namespace Lookup_PMBACK
             string lcMethodName = nameof(GetAllSalesman);
             using Activity activity = _activitySource.StartActivity(lcMethodName);
             _loggerLookup.LogInfo(string.Format("START process method {0} on Cls", lcMethodName));
-            
+
             var loEx = new R_Exception();
             List<LML00500DTO> loResult = null;
             R_Db loDb;
@@ -168,7 +169,7 @@ namespace Lookup_PMBACK
                 loDb.R_AddCommandParameter(loCmd, "@CCOMPANY_ID", DbType.String, 20, poEntity.CCOMPANY_ID);
                 loDb.R_AddCommandParameter(loCmd, "@CUSER_ID", DbType.String, 8, poEntity.CUSER_ID);
                 loDb.R_AddCommandParameter(loCmd, "@CPROPERTY_ID", DbType.String, 20, poEntity.CPROPERTY_ID);
-                
+
                 var loDbParam = loCmd.Parameters.Cast<DbParameter>()
                     .Where(x => x != null && x.ParameterName.StartsWith("@"))
                     .ToDictionary(x => x.ParameterName, x => x.Value);
@@ -268,11 +269,11 @@ namespace Lookup_PMBACK
         public List<LML00800DTO> GetAgreement(LML00800ParameterDTO poEntity)
         {
             string lcMethodName = nameof(GetAgreement);
-            using Activity activity = _activitySource.StartActivity(lcMethodName);
+            using Activity activity = _activitySource.StartActivity(lcMethodName)!;
             _loggerLookup.LogInfo(string.Format("START process method {0} on Cls", lcMethodName));
 
             var loEx = new R_Exception();
-            List<LML00800DTO> loResult = null;
+            List<LML00800DTO>? loResult = null;
             R_Db loDb;
             try
             {
@@ -306,5 +307,100 @@ namespace Lookup_PMBACK
             _loggerLookup.LogInfo(string.Format("END process method {0} on Cls", lcMethodName));
             return loResult!;
         }
+        public List<LML00900DTO> GetTransaction(LML00900ParameterDTO poEntity)
+        {
+            string lcMethodName = nameof(GetTransaction);
+            using Activity activity = _activitySource.StartActivity(lcMethodName)!;
+            _loggerLookup.LogInfo(string.Format("START process method {0} on Cls", lcMethodName));
+
+            var loEx = new R_Exception();
+            List<LML00900DTO>? loResult = null;
+            R_Db loDb;
+            try
+            {
+                loDb = new R_Db();
+                var loConn = loDb.GetConnection();
+                var loCmd = loDb.GetCommand();
+
+                var lcQuery = @"RSP_PM_LOOKUP_TRX_REF_NO";
+                loCmd.CommandText = lcQuery;
+                loCmd.CommandType = CommandType.StoredProcedure;
+
+                loDb.R_AddCommandParameter(loCmd, "@CCOMPANY_ID", DbType.String, 8, poEntity.CCOMPANY_ID);
+                loDb.R_AddCommandParameter(loCmd, "@CPROPERTY_ID", DbType.String, 20, poEntity.CPROPERTY_ID);
+                loDb.R_AddCommandParameter(loCmd, "@CDEPT_CODE", DbType.String, 20, poEntity.CDEPT_CODE);
+                loDb.R_AddCommandParameter(loCmd, "@CUSER_ID", DbType.String, 20, poEntity.CUSER_ID);
+                loDb.R_AddCommandParameter(loCmd, "@CTRANS_CODE", DbType.String, 20, poEntity.CTRANS_CODE);
+
+                loDb.R_AddCommandParameter(loCmd, "@CCUSTOMER_ID", DbType.String, 20, poEntity.CTENANT_ID);
+
+                loDb.R_AddCommandParameter(loCmd, "@CPERIOD", DbType.String, 6, poEntity.CPERIOD);
+                loDb.R_AddCommandParameter(loCmd, "@LHAS_REMAINING", DbType.Boolean, 5, poEntity.LHAS_REMAINING);
+                loDb.R_AddCommandParameter(loCmd, "@LNO_REMAINING", DbType.Boolean, 5, poEntity.LNO_REMAINING);
+                loDb.R_AddCommandParameter(loCmd, "@CLANGUAGE_ID", DbType.String, 10, poEntity.CLANGUAGE_ID);
+                loDb.R_AddCommandParameter(loCmd, "@CCURRENCY_CODE", DbType.String, 3, poEntity.CCURRENCY_CODE);
+
+                var loDbParam = loCmd.Parameters.Cast<DbParameter>()
+                    .Where(x => x != null && x.ParameterName.StartsWith("@"))
+                    .ToDictionary(x => x.ParameterName, x => x.Value);
+                _loggerLookup.LogDebug("{@ObjectQuery} {@Parameter}", loCmd.CommandText, loDbParam);
+
+                var loReturnTemp = loDb.SqlExecQuery(loConn, loCmd, true);
+                loResult = R_Utility.R_ConvertTo<LML00900DTO>(loReturnTemp).ToList();
+            }
+            catch (Exception ex)
+            {
+                loEx.Add(ex);
+            }
+            loEx.ThrowExceptionIfErrors();
+            _loggerLookup.LogInfo(string.Format("END process method {0} on Cls", lcMethodName));
+            return loResult!;
+        }
+
+        #region Utility
+        public LML00900InitialProcessDTO GetInitialProcess(string pcParam)
+        {
+            string lcMethodName = nameof(GetInitialProcess);
+            using Activity activity = _activitySource.StartActivity(lcMethodName)!;
+            _loggerLookup.LogInfo(string.Format("START process method {0} on Cls", lcMethodName));
+
+            var loEx = new R_Exception();
+            LML00900InitialProcessDTO? loResult = null;
+            R_Db loDb;
+            try
+            {
+                loDb = new R_Db();
+                var loConn = loDb.GetConnection();
+                var loCmd = loDb.GetCommand();
+
+                var lcQuery = @"RSP_GS_GET_PERIOD_YEAR_RANGE";
+                loCmd.CommandText = lcQuery;
+                loCmd.CommandType = CommandType.StoredProcedure;
+
+                loDb.R_AddCommandParameter(loCmd, "@CCOMPANY_ID", DbType.String, 20, pcParam);
+                loDb.R_AddCommandParameter(loCmd, "@CYEAR", DbType.String, 4, "");
+                loDb.R_AddCommandParameter(loCmd, "@CMODE", DbType.String, 10, "");
+
+                var loDbParam = loCmd.Parameters.Cast<DbParameter>()
+                    .Where(x => x != null && x.ParameterName.StartsWith("@"))
+                    .ToDictionary(x => x.ParameterName, x => x.Value);
+                _loggerLookup.LogDebug("{@ObjectQuery} {@Parameter}", loCmd.CommandText, loDbParam);
+
+                var loReturnTemp = loDb.SqlExecQuery(loConn, loCmd, true);
+                loResult = R_Utility.R_ConvertTo<LML00900InitialProcessDTO>(loReturnTemp).FirstOrDefault();
+                //if(TempResult != null)
+                //{
+
+                //}
+            }
+            catch (Exception ex)
+            {
+                loEx.Add(ex);
+            }
+            loEx.ThrowExceptionIfErrors();
+            _loggerLookup.LogInfo(string.Format("END process method {0} on Cls", lcMethodName));
+            return loResult!;
+        }
+        #endregion
     }
 }

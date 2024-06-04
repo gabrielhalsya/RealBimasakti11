@@ -129,7 +129,7 @@
   <data name="Error900" xml:space="preserve">
     <value>Process failed! unable to save Journal transaction {0}</value>
   </data>
-  <data name="ERROR_PROCESS" xml:space="preserve">
+  <data name="ERROR_PROC" xml:space="preserve">
     <value>Process failed! unable to save Journal transaction {0}</value>
   </data>
   <data name="JOURNAL_EXISTS" xml:space="preserve">

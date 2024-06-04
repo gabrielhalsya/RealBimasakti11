@@ -61,6 +61,24 @@ namespace Lookup_PMFrontResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Period Year is required!.
+        /// </summary>
+        internal static string _00901 {
+            get {
+                return ResourceManager.GetString("00901", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please select Period!.
+        /// </summary>
+        internal static string _00902 {
+            get {
+                return ResourceManager.GetString("00902", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Agreement No.
         /// </summary>
         internal static string _agreementNo {
@@ -115,6 +133,15 @@ namespace Lookup_PMFrontResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Curr..
+        /// </summary>
+        internal static string _curr {
+            get {
+                return ResourceManager.GetString("_curr", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Customer.
         /// </summary>
         internal static string _cust {
@@ -129,6 +156,24 @@ namespace Lookup_PMFrontResources {
         internal static string _Dept {
             get {
                 return ResourceManager.GetString("_Dept", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Dept..
+        /// </summary>
+        internal static string _dept_ {
+            get {
+                return ResourceManager.GetString("_dept.", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Description.
+        /// </summary>
+        internal static string _desc {
+            get {
+                return ResourceManager.GetString("_desc", resourceCulture);
             }
         }
         
@@ -160,6 +205,33 @@ namespace Lookup_PMFrontResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Document Date.
+        /// </summary>
+        internal static string _docDate {
+            get {
+                return ResourceManager.GetString("_docDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Document No..
+        /// </summary>
+        internal static string _docNo {
+            get {
+                return ResourceManager.GetString("_docNo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Due Date.
+        /// </summary>
+        internal static string _dueDate {
+            get {
+                return ResourceManager.GetString("_dueDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Email.
         /// </summary>
         internal static string _Email {
@@ -178,11 +250,56 @@ namespace Lookup_PMFrontResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Period.
+        /// </summary>
+        internal static string _period {
+            get {
+                return ResourceManager.GetString("_period", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Phone 1.
         /// </summary>
         internal static string _Phone {
             get {
                 return ResourceManager.GetString("_Phone", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reference Date.
+        /// </summary>
+        internal static string _refDate {
+            get {
+                return ResourceManager.GetString("_refDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reference No..
+        /// </summary>
+        internal static string _refNo {
+            get {
+                return ResourceManager.GetString("_refNo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Refresh.
+        /// </summary>
+        internal static string _refresh {
+            get {
+                return ResourceManager.GetString("_refresh", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Remaining Amount.
+        /// </summary>
+        internal static string _remainingAmount {
+            get {
+                return ResourceManager.GetString("_remainingAmount", resourceCulture);
             }
         }
         
@@ -291,6 +408,15 @@ namespace Lookup_PMFrontResources {
         internal static string _TenantType {
             get {
                 return ResourceManager.GetString("_TenantType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Transaction Type.
+        /// </summary>
+        internal static string _transType {
+            get {
+                return ResourceManager.GetString("_transType", resourceCulture);
             }
         }
         
