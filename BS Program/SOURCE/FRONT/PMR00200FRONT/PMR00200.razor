@@ -161,16 +161,17 @@
                     <R_NumericTextBox Arrows="true"
                                       @bind-Value="@_viewModel._YearFromPeriod"
                                       Max="@_viewModel._PeriodYear.IMAX_YEAR"
-                                      Min="@_viewModel._PeriodYear.IMAX_YEAR"
+                                      Min="@_viewModel._PeriodYear.IMIN_YEAR"
                                       ThousandSeparator="false"
                                       Style="height:25px"
-                                      TabIndex="9" />
+                                      TabIndex="9"
+                                      OnChanged="NumOnChanged_FromPeriod"/>
                 </R_ItemLayout>
                 <R_ItemLayout col="3">
                     <R_ComboBox @bind-Value="@_viewModel._MonthFromPeriod"
                                 Data="_viewModel._fromPeriods"
                                 ValueField="@nameof(PeriodDtDTO.CPERIOD_NO)"
-                                TextField="@nameof(PeriodDtDTO.CPERIOD_NO)"
+                                TextField="@nameof(PeriodDtDTO.CPERIOD_NAME_DISPLAY)"
                                 TabIndex="10" />
                 </R_ItemLayout>
                 <R_ItemLayout class="col"></R_ItemLayout>
@@ -185,16 +186,17 @@
                     <R_NumericTextBox Arrows="true"
                                       @bind-Value="@_viewModel._YearToPeriod"
                                       Max="@_viewModel._PeriodYear.IMAX_YEAR"
-                                      Min="@_viewModel._PeriodYear.IMAX_YEAR"
+                                      Min="@_viewModel._PeriodYear.IMIN_YEAR"
                                       ThousandSeparator="false"
                                       Style="height:25px"
-                                      TabIndex="11" />
+                                      TabIndex="11" 
+                                      OnChanged="NumOnChanged_ToPeriod" />
                 </R_ItemLayout>
                 <R_ItemLayout col="3">
                     <R_ComboBox @bind-Value="@_viewModel._MonthToPeriod"
                                 Data="_viewModel._toPeriods"
                                 ValueField="@nameof(PeriodDtDTO.CPERIOD_NO)"
-                                TextField="@nameof(PeriodDtDTO.CPERIOD_NO)"
+                                TextField="@nameof(PeriodDtDTO.CPERIOD_NAME_DISPLAY)"
                                 TabIndex="12" />
                     <R_ItemLayout class="col"></R_ItemLayout>
                 </R_ItemLayout>

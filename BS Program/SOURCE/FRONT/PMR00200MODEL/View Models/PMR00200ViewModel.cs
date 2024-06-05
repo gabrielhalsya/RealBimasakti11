@@ -11,6 +11,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using PMR00200FrontResources;
 using R_BlazorFrontEnd.Interfaces;
+using System.Globalization;
 
 
 namespace PMR00200MODEL.View_Models
@@ -112,11 +113,13 @@ namespace PMR00200MODEL.View_Models
         {
             R_Exception loEx = new R_Exception();
             List<PeriodDtDTO> loRtn = null;
+            DateTimeFormatInfo loDateTimeFormatInfo = CultureInfo.InvariantCulture.DateTimeFormat;
             try
             {
                 R_FrontContext.R_SetStreamingContext(PMR00200ContextConstant.CYEAR, pcYear);
                 var loResult = await _PMR00200model.GetPeriodDtListAsync();
                 loRtn = loResult.ToList();
+                loRtn.ForEach(x => x.CPERIOD_NAME_DISPLAY = loDateTimeFormatInfo.GetMonthName(int.Parse(x.CPERIOD_NO)));
             }
             catch (Exception ex)
             {

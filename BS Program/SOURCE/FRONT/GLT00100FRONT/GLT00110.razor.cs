@@ -1312,28 +1312,30 @@ namespace GLT00100FRONT
 
             try
             {
-                if (_JournalEntryViewModel.Data.CDEPT_CODE.Length > 0) { }
-
-                LookupGSL00700ViewModel loLookupViewModel = new LookupGSL00700ViewModel(); //use GSL's model
-                var loParam = new GSL00700ParameterDTO // use match param as GSL's dto, send as type in search texbox
+                if (_JournalEntryViewModel.Data.CDEPT_CODE.Length > 0)
                 {
-                    CSEARCH_TEXT = _JournalEntryViewModel.Data.CDEPT_CODE, // property that bindded to search textbox
-                };
+
+                    LookupGSL00700ViewModel loLookupViewModel = new LookupGSL00700ViewModel(); //use GSL's model
+                    var loParam = new GSL00700ParameterDTO // use match param as GSL's dto, send as type in search texbox
+                    {
+                        CSEARCH_TEXT = _JournalEntryViewModel.Data.CDEPT_CODE, // property that bindded to search textbox
+                    };
 
 
-                var loResult = await loLookupViewModel.GetDepartment(loParam); //retrive single record 
+                    var loResult = await loLookupViewModel.GetDepartment(loParam); //retrive single record 
 
-                //show result & show name/related another fields
-                if (loResult == null)
-                {
-                    loEx.Add(R_FrontUtility.R_GetError(
-                            typeof(Lookup_GSFrontResources.Resources_Dummy_Class),
-                            "_ErrLookup01"));
-                    _JournalEntryViewModel.Data.CDEPT_NAME = ""; //kosongin bind textbox name kalo gaada
-                    goto EndBlock;
+                    //show result & show name/related another fields
+                    if (loResult == null)
+                    {
+                        loEx.Add(R_FrontUtility.R_GetError(
+                                typeof(Lookup_GSFrontResources.Resources_Dummy_Class),
+                                "_ErrLookup01"));
+                        _JournalEntryViewModel.Data.CDEPT_NAME = ""; //kosongin bind textbox name kalo gaada
+                        goto EndBlock;
+                    }
+                    _JournalEntryViewModel.Data.CDEPT_CODE = loResult.CDEPT_CODE;
+                    _JournalEntryViewModel.Data.CDEPT_NAME = loResult.CDEPT_NAME; //assign bind textbox name kalo ada
                 }
-                _JournalEntryViewModel.Data.CDEPT_CODE = loResult.CDEPT_CODE;
-                _JournalEntryViewModel.Data.CDEPT_NAME = loResult.CDEPT_NAME; //assign bind textbox name kalo ada
             }
             catch (Exception ex)
             {

@@ -16,6 +16,7 @@ using R_BlazorFrontEnd.Controls.MessageBox;
 using R_BlazorFrontEnd.Exceptions;
 using R_BlazorFrontEnd.Helpers;
 using R_BlazorFrontEnd.Interfaces;
+using System.Collections.ObjectModel;
 
 namespace PMR00200FRONT
 {
@@ -84,28 +85,28 @@ namespace PMR00200FRONT
 
             try
             {
-                if (_viewModel._ReportParam.CFROM_DEPARTMENT_ID.Length > 0) { }
-
-                LookupGSL00700ViewModel loLookupViewModel = new LookupGSL00700ViewModel(); //use GSL's model
-                var loParam = new GSL00700ParameterDTO // use match param as GSL's dto, send as type in search texbox
+                if (!string.IsNullOrWhiteSpace(_viewModel._ReportParam.CFROM_DEPARTMENT_ID))
                 {
-                    CSEARCH_TEXT = _viewModel._ReportParam.CFROM_DEPARTMENT_ID, // property that bindded to search textbox
-                };
 
+                    LookupGSL00700ViewModel loLookupViewModel = new LookupGSL00700ViewModel(); //use GSL's model
+                    var loParam = new GSL00700ParameterDTO // use match param as GSL's dto, send as type in search texbox
+                    {
+                        CSEARCH_TEXT = _viewModel._ReportParam.CFROM_DEPARTMENT_ID, // property that bindded to search textbox
+                    };
+                    var loResult = await loLookupViewModel.GetDepartment(loParam); //retrive single record 
 
-                var loResult = await loLookupViewModel.GetDepartment(loParam); //retrive single record 
-
-                //show result & show name/related another fields
-                if (loResult == null)
-                {
-                    loEx.Add(R_FrontUtility.R_GetError(
-                            typeof(Lookup_GSFrontResources.Resources_Dummy_Class),
-                            "_ErrLookup01"));
-                    _viewModel._ReportParam.CFROM_DEPARTMENT_NAME = ""; //kosongin bind textbox name kalo gaada
-                    goto EndBlock;
+                    //show result & show name/related another fields
+                    if (loResult == null)
+                    {
+                        loEx.Add(R_FrontUtility.R_GetError(
+                                typeof(Lookup_GSFrontResources.Resources_Dummy_Class),
+                                "_ErrLookup01"));
+                        _viewModel._ReportParam.CFROM_DEPARTMENT_NAME = ""; //kosongin bind textbox name kalo gaada
+                        goto EndBlock;
+                    }
+                    _viewModel._ReportParam.CFROM_DEPARTMENT_ID = loResult.CDEPT_CODE;
+                    _viewModel._ReportParam.CFROM_DEPARTMENT_NAME = loResult.CDEPT_NAME; //assign bind textbox name kalo ada
                 }
-                _viewModel._ReportParam.CFROM_DEPARTMENT_ID = loResult.CDEPT_CODE;
-                _viewModel._ReportParam.CFROM_DEPARTMENT_NAME = loResult.CDEPT_NAME; //assign bind textbox name kalo ada
             }
             catch (Exception ex)
             {
@@ -140,28 +141,29 @@ namespace PMR00200FRONT
 
             try
             {
-                if (_viewModel._ReportParam.CTO_DEPARTMENT_ID.Length > 0) { }
-
-                LookupGSL00700ViewModel loLookupViewModel = new LookupGSL00700ViewModel(); //use GSL's model
-                var loParam = new GSL00700ParameterDTO // use match param as GSL's dto, send as type in search texbox
+                if (!string.IsNullOrWhiteSpace(_viewModel._ReportParam.CTO_DEPARTMENT_ID))
                 {
-                    CSEARCH_TEXT = _viewModel._ReportParam.CTO_DEPARTMENT_ID, // property that bindded to search textbox
-                };
 
+                    LookupGSL00700ViewModel loLookupViewModel = new LookupGSL00700ViewModel(); //use GSL's model
+                    var loParam = new GSL00700ParameterDTO // use match param as GSL's dto, send as type in search texbox
+                    {
+                        CSEARCH_TEXT = _viewModel._ReportParam.CTO_DEPARTMENT_ID, // property that bindded to search textbox
+                    };
 
-                var loResult = await loLookupViewModel.GetDepartment(loParam); //retrive single record 
+                    var loResult = await loLookupViewModel.GetDepartment(loParam); //retrive single record 
 
-                //show result & show name/related another fields
-                if (loResult == null)
-                {
-                    loEx.Add(R_FrontUtility.R_GetError(
-                            typeof(Lookup_GSFrontResources.Resources_Dummy_Class),
-                            "_ErrLookup01"));
-                    _viewModel._ReportParam.CTO_DEPARTMENT_NAME = ""; //kosongin bind textbox name kalo gaada
-                    goto EndBlock;
+                    //show result & show name/related another fields
+                    if (loResult == null)
+                    {
+                        loEx.Add(R_FrontUtility.R_GetError(
+                                typeof(Lookup_GSFrontResources.Resources_Dummy_Class),
+                                "_ErrLookup01"));
+                        _viewModel._ReportParam.CTO_DEPARTMENT_NAME = ""; //kosongin bind textbox name kalo gaada
+                        goto EndBlock;
+                    }
+                    _viewModel._ReportParam.CTO_DEPARTMENT_ID = loResult.CDEPT_CODE;
+                    _viewModel._ReportParam.CTO_DEPARTMENT_NAME = loResult.CDEPT_NAME; //assign bind textbox name kalo ada
                 }
-                _viewModel._ReportParam.CTO_DEPARTMENT_ID = loResult.CDEPT_CODE;
-                _viewModel._ReportParam.CTO_DEPARTMENT_NAME = loResult.CDEPT_NAME; //assign bind textbox name kalo ada
             }
             catch (Exception ex)
             {
@@ -242,7 +244,12 @@ namespace PMR00200FRONT
         #region lookupFromSalesman
         private void BeforeOpen_lookupToSalesman(R_BeforeOpenLookupEventArgs eventArgs)
         {
-            eventArgs.Parameter = new LML00500ParameterDTO() { CPROPERTY_ID = _viewModel._ReportParam.CPROPERTY_ID };
+            eventArgs.Parameter = new LML00500ParameterDTO()
+            {
+                CPROPERTY_ID = _viewModel._ReportParam.CPROPERTY_ID,
+                CCOMPANY_ID = _clientHelper.CompanyId,
+                CUSER_ID = _clientHelper.UserId,
+            };
             eventArgs.TargetPageType = typeof(LML00500);
         }
         private async Task AfterOpen_lookupToSalesmanAsync(R_AfterOpenLookupEventArgs eventArgs)
@@ -300,9 +307,60 @@ namespace PMR00200FRONT
         }
         #endregion
 
-        #region print
-        private void OnclickBtn_Print() { }
+        #region PeriodOnchange
+        public async Task NumOnChanged_FromPeriod()
+        {
+            R_Exception loEx = new R_Exception();
+            try
+            {
+                _viewModel._fromPeriods = new ObservableCollection<PeriodDtDTO>(
+                    await _viewModel.GetPeriodDtAsync(
+                        string.IsNullOrWhiteSpace(_viewModel._YearFromPeriod.ToString())
+                        ? _viewModel._InitToday.Year.ToString()
+                        : _viewModel._YearFromPeriod.ToString())
+                    );
+            }
+            catch (Exception ex)
+            {
+                loEx.Add(ex);
+            }
+            loEx.ThrowExceptionIfErrors();
+        }
+        public async Task NumOnChanged_ToPeriod()
+        {
+            R_Exception loEx = new R_Exception();
+            try
+            {
+                _viewModel._toPeriods = new ObservableCollection<PeriodDtDTO>(
+                    await _viewModel.GetPeriodDtAsync(
+                        string.IsNullOrWhiteSpace(_viewModel._YearToPeriod.ToString())
+                        ? _viewModel._InitToday.Year.ToString()
+                        : _viewModel._YearToPeriod.ToString()));
+            }
+            catch (Exception ex)
+            {
+                loEx.Add(ex);
+            }
+            loEx.ThrowExceptionIfErrors();
+        }
         #endregion
 
+        #region print
+        private void OnclickBtn_Print()
+        {
+            R_Exception loEx = new R_Exception();
+            try
+            {
+
+            }
+            catch (Exception ex)
+            {
+                loEx.Add(ex);
+            }
+            loEx.ThrowExceptionIfErrors();
+        }
     }
+    #endregion
+
 }
+

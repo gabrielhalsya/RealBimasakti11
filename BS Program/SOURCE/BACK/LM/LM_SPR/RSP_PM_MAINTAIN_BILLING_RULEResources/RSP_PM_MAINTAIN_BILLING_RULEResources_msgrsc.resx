@@ -117,76 +117,67 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="3501" xml:space="preserve">
+  <data name="6001" xml:space="preserve">
     <value>Error process, please contact your administrator!</value>
   </data>
-  <data name="3502" xml:space="preserve">
-    <value>Duplicate Contractor Id!</value>
+  <data name="6002" xml:space="preserve">
+    <value>Cannot delete, Billing Rule already in used!</value>
   </data>
-  <data name="3503" xml:space="preserve">
-    <value>Cannot Delete, Contractor already in used</value>
+  <data name="6003" xml:space="preserve">
+    <value>Duplicate Billing Rule Id!</value>
   </data>
-  <data name="3504" xml:space="preserve">
-    <value>Contractor Id cannot be empty!</value>
+  <data name="6004" xml:space="preserve">
+    <value>Billing Rule Id cannot be empty!</value>
   </data>
-  <data name="3505" xml:space="preserve">
-    <value>Contractor Name cannot be empty!</value>
+  <data name="6005" xml:space="preserve">
+    <value>Billing Rule Name cannot be empty!</value>
   </data>
-  <data name="3506" xml:space="preserve">
-    <value>Contractor Id cannot be greater than 20 character!</value>
+  <data name="6006" xml:space="preserve">
+    <value>Billing Rule Id cannot be greater than 20 character!</value>
   </data>
-  <data name="3507" xml:space="preserve">
-    <value>Contractor Name cannot be greater than 100 character!</value>
+  <data name="6007" xml:space="preserve">
+    <value>Billing Rule Name cannot be greater than 100 character!</value>
   </data>
-  <data name="3508" xml:space="preserve">
-    <value>Address cannot be empty!</value>
+  <data name="6008" xml:space="preserve">
+    <value>Booking Fee charges cannot be empty!</value>
   </data>
-  <data name="3509" xml:space="preserve">
-    <value>Contractor Group cannot be empty!</value>
+  <data name="6009" xml:space="preserve">
+    <value>Invalid Booking Fee Charges Id!</value>
   </data>
-  <data name="3510" xml:space="preserve">
-    <value>Invalid Contractor Group!</value>
+  <data name="6010" xml:space="preserve">
+    <value>DP Percentage cannot be empty!</value>
   </data>
-  <data name="3511" xml:space="preserve">
-    <value>Contractor Category cannot be empty!</value>
+  <data name="6011" xml:space="preserve">
+    <value>DP Invertal cannot be empty!</value>
   </data>
-  <data name="3512" xml:space="preserve">
-    <value>Invalid Contractor Type!</value>
+  <data name="6012" xml:space="preserve">
+    <value>DP Period Mode cannot be empty!</value>
   </data>
-  <data name="3513" xml:space="preserve">
-    <value>Journal Group cannot be empty!</value>
+  <data name="6013" xml:space="preserve">
+    <value>DP Charges Id cannot be empty!</value>
   </data>
-  <data name="3514" xml:space="preserve">
-    <value>Invalid Journal Group!</value>
+  <data name="6014" xml:space="preserve">
+    <value>Invalid DP Charges Id!</value>
   </data>
-  <data name="3515" xml:space="preserve">
-    <value>Payment Term cannot be empty!</value>
+  <data name="6015" xml:space="preserve">
+    <value>Installment percentage cannot be empty!</value>
   </data>
-  <data name="3516" xml:space="preserve">
-    <value>Invalid Payment Term!</value>
+  <data name="6016" xml:space="preserve">
+    <value>Installment Interval cannot be empty!</value>
   </data>
-  <data name="3517" xml:space="preserve">
-    <value>Currency cannot be empty!</value>
+  <data name="6017" xml:space="preserve">
+    <value>Installment Period Mode cannot be empty!</value>
   </data>
-  <data name="3518" xml:space="preserve">
-    <value>Invalid Currency!</value>
+  <data name="6018" xml:space="preserve">
+    <value>Installment Charges Id cannot be empty!</value>
   </data>
-  <data name="3519" xml:space="preserve">
-    <value>Salesman cannot be empty!</value>
+  <data name="6019" xml:space="preserve">
+    <value>Invalid Installment Charges Id!</value>
   </data>
-  <data name="3520" xml:space="preserve">
-    <value>Invalid Salesman!</value>
+  <data name="6020" xml:space="preserve">
+    <value>Bank Credit Percentage cannot be empty!</value>
   </data>
-  <data name="3521" xml:space="preserve">
-    <value>Line of Business cannot be empty!</value>
-  </data>
-  <data name="3522" xml:space="preserve">
-    <value>Invalid Line of Business!</value>
-  </data>
-  <data name="3523" xml:space="preserve">
-    <value>Invalid Contractor Category!</value>
-  </data>
-  <data name="3524" xml:space="preserve">
-    <value>Contractor Type cannot be empty!</value>
+  <data name="6021" xml:space="preserve">
+    <value>Bank Credit Interval cannot be empty!</value>
   </data>
 </root>
