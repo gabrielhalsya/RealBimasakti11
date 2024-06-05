@@ -27,6 +27,7 @@ namespace PMR00200FRONT
         [Inject] IClientHelper _clientHelper { get; set; }
         [Inject] private R_ILocalizer<Resources_Dummy_Class> _localizer { get; set; }
         [Inject] private R_IReport _reportService { get; set; }
+
         private R_RadioGroup<ReportTypeDTO, string> _radioReportType;
 
         protected override async Task R_Init_From_Master(object poParameter)
