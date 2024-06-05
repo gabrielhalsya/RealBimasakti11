@@ -25,6 +25,7 @@ namespace CBT01100FRONT
         private CBT01100ViewModel _TransactionListViewModel = new();
         private CBT01110ViewModel _TransactionEntryViewModel = new();
         private R_Conductor _conductorRef;
+        private R_Conductor _conductorDetailRef;
         private R_Grid<CBT01100DTO> _gridRef;
         private R_Grid<CBT01101DTO> _gridDetailRef;
 
@@ -52,6 +53,7 @@ namespace CBT01100FRONT
             var loEx = new R_Exception();
             try
             {
+                //validate
                 if (string.IsNullOrEmpty(_TransactionListViewModel.JournalParam.CDEPT_CODE))
                 {
                     loEx.Add(new Exception("Please input keyword to search!"));
@@ -68,7 +70,11 @@ namespace CBT01100FRONT
                     loEx.Add(new Exception("Minimum search keyword is 3 characters!"));
                     goto EndBlock;
                 }
-                _TransactionEntryViewModel.JournalDetailGrid.Clear();
+                //set rule button
+                _TransactionListViewModel._isShowAll = false;
+
+                //clear data
+                
                 await _gridRef.R_RefreshGrid(null);
             }
             catch (Exception ex)
@@ -84,9 +90,11 @@ namespace CBT01100FRONT
             var loEx = new R_Exception();
             try
             {
-                //reset detail
-                _TransactionEntryViewModel.JournalDetailGrid.Clear();
-                await _gridRef.R_RefreshGrid(null);
+                //set param & rule button to view model
+                _TransactionListViewModel._isShowAll=true;
+                _TransactionListViewModel.JournalParam.CSEARCH_TEXT= "";
+
+                await _gridRef.R_RefreshGrid(_TransactionListViewModel.JournalParam);
             }
             catch (Exception ex)
             {
@@ -105,9 +113,12 @@ namespace CBT01100FRONT
             {
                 await _TransactionListViewModel.GetJournalList();
                 eventArgs.ListEntityResult = _TransactionListViewModel.JournalGrid;
+                //_gridRef.R_SetCurrentData(_TransactionListViewModel.JournalGrid.FirstOrDefault());
                 if (_TransactionListViewModel.JournalGrid.Count <= 0)
                 {
-                    loEx.Add("", "Data Not Found!");
+                    _TransactionListViewModel.JournalGrid.Clear();
+                    _TransactionEntryViewModel.JournalDetailGrid.Clear();
+                    var loMsg=await R_MessageBox.Show("", "Data Not Found!");
                 }
             }
             catch (Exception ex)
@@ -116,10 +127,9 @@ namespace CBT01100FRONT
             }
             R_DisplayException(loEx);
         }
-        private async Task JournalGrid_ServiceGetRecord(R_ServiceGetRecordEventArgs eventArgs)
+        private void JournalGrid_ServiceGetRecord(R_ServiceGetRecordEventArgs eventArgs)
         {
             R_Exception loEx = new R_Exception();
-
             try
             {
                 eventArgs.Result = (CBT01100DTO)eventArgs.Data;
@@ -163,7 +173,10 @@ namespace CBT01100FRONT
                     loEx.Add("", "You don’t have right to approve this journal!");
                     goto EndBlock;
                 }
-
+                if (await R_MessageBox.Show("", "Are you sure want to undo committed this journal? ", R_eMessageBoxButtonType.YesNo) == R_eMessageBoxResult.No)
+                {
+                    goto EndBlock;
+                }
                 var loParam = R_FrontUtility.ConvertObjectToObject<CBT01100UpdateStatusDTO>(loData);
                 loParam.LAUTO_COMMIT = _TransactionEntryViewModel.VAR_GL_SYSTEM_PARAM.LCOMMIT_APVJRN;
                 loParam.LUNDO_COMMIT = false;
@@ -188,28 +201,26 @@ namespace CBT01100FRONT
             {
                 var loData = (CBT01100DTO)_conductorRef.R_GetCurrentData();
 
+                //confirmation
                 if (loData.CSTATUS == "80")
                 {
-                    if (_TransactionEntryViewModel.VAR_IUNDO_COMMIT_JRN.IOPTION == 3)
+                    if (await R_MessageBox.Show("", "Are you sure want to undo committed this journal? ", R_eMessageBoxButtonType.YesNo) == R_eMessageBoxResult.No)
                     {
-                        loValidate = await R_MessageBox.Show("", "Are you sure want to undo committed this journal? ", R_eMessageBoxButtonType.YesNo);
-                        if (loValidate == R_eMessageBoxResult.No)
-                        { goto EndBlock; }
-                        _TransactionListViewModel.CommitLabel = @_localizer["_Commit"];
+                        goto EndBlock;
                     }
                 }
                 else
                 {
-                    loValidate = await R_MessageBox.Show("", "Are you sure want to commit this journal? ", R_eMessageBoxButtonType.YesNo);
-                    if (loValidate == R_eMessageBoxResult.No)
+                    if (await R_MessageBox.Show("", "Are you sure want to commit this journal? ", R_eMessageBoxButtonType.YesNo) == R_eMessageBoxResult.No)
+                    {
                         goto EndBlock;
-                    _TransactionListViewModel.CommitLabel = @_localizer["_Commit"];
+                    }
                 }
 
                 var loParam = R_FrontUtility.ConvertObjectToObject<CBT01100UpdateStatusDTO>(loData);
                 loParam.LAUTO_COMMIT = _TransactionEntryViewModel.VAR_GL_SYSTEM_PARAM.LCOMMIT_APVJRN;
                 loParam.LUNDO_COMMIT = loData.CSTATUS == "80" ? true : false;
-                loParam.CNEW_STATUS = loData.CSTATUS == "80" ? "20" : "80";
+                loParam.CNEW_STATUS = loData.CSTATUS == "80" ? (_TransactionEntryViewModel.VAR_GSM_TRANSACTION_CODE.LAPPROVAL_FLAG ? "10" : "00") : "80";
 
                 await _TransactionEntryViewModel.UpdateJournalStatus(loParam);
                 await _gridRef.R_RefreshGrid(null);
@@ -229,7 +240,6 @@ namespace CBT01100FRONT
             var loEx = new R_Exception();
             try
             {
-                // var loParam = R_FrontUtility.ConvertObjectToObject<CBT01101DTO>(eventArgs.Parameter);
                 await _TransactionEntryViewModel.GetJournalDetailList();
                 eventArgs.ListEntityResult = _TransactionEntryViewModel.JournalDetailGrid;
             }
@@ -242,7 +252,7 @@ namespace CBT01100FRONT
         #endregion
 
         #region lookupDept
-        private async void BeforeOpen_lookupDept(R_BeforeOpenLookupEventArgs eventArgs)
+        private void BeforeOpen_lookupDept(R_BeforeOpenLookupEventArgs eventArgs)
         {
             R_Exception loEx = new R_Exception();
             try

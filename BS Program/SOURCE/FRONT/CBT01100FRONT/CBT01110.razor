@@ -382,7 +382,7 @@
                 R_After_Open_Grid_Lookup="After_Open_Lookup" R_DisableCancelConfirmation>
             <R_GridColumns>
                 <R_GridNumericColumn Width="67px" FieldName="@nameof(CBT01110ParamDTO.INO)" HeaderText="@_localizer["_No"]"></R_GridNumericColumn>
-                <R_GridLookupColumn Width="200px" FieldName="@nameof(CBT01110ParamDTO.CGLACCOUNT_NO)" R_EnableAdd="true" R_EnableEdit="true" HeaderText="@_localizer["_AccountNo"]"></R_GridLookupColumn>
+                <R_GridLookupColumn Width="200px" FieldName="@nameof(CBT01110ParamDTO.CGLACCOUNT_NO)" R_EnableAdd="true" R_EnableEdit="true" HeaderText="@_localizer["_AccountNo"]" MaxLength="20"></R_GridLookupColumn>
                 <R_GridTextColumn Width="250px" FieldName="@nameof(CBT01110ParamDTO.CGLACCOUNT_NAME)" R_EnableAdd="false" R_EnableEdit="false" HeaderText="@_localizer["_AccountName"]"></R_GridTextColumn>
                 <R_GridComboBoxColumn Width="180px" Data="@_TransactionEntryViewModel.VAR_CENTER_LIST"
                                       FieldName="@nameof(CBT01110ParamDTO.CCENTER_CODE)"

@@ -16,7 +16,8 @@
         <R_TextBox @bind-Value="_TransactionListViewModel.JournalParam.CDEPT_CODE"
                    R_ConductorSource="_conductorRef"
                    Enabled="true"
-                   OnLostFocus="OnLostFocus_LookupDept" />
+                   OnLostFocus="OnLostFocus_LookupDept"
+                   MaxLength="20" />
     </R_ItemLayout>
     <R_ItemLayout>
         <R_Lookup R_Before_Open_Lookup="@BeforeOpen_lookupDept" R_After_Open_Lookup="@AfterOpen_lookupDept">
@@ -57,7 +58,7 @@
         </R_ComboBox>
     </R_ItemLayout>
     <R_ItemLayout col="1">
-        <R_TextBox @bind-Value="_TransactionListViewModel.JournalParam.CSEARCH_TEXT" />
+        <R_TextBox @bind-Value="_TransactionListViewModel.JournalParam.CSEARCH_TEXT" MaxLength="20" />
     </R_ItemLayout>
     <R_ItemLayout>
         <R_Button OnClick="OnclickSearch">Search</R_Button>
@@ -124,15 +125,15 @@
 </R_StackLayout>
 <R_StackLayout Row>
     <R_ItemLayout>
-        <R_Button Enabled="@(_TransactionListViewModel.JournalGrid.Count > 0 && (_TransactionListViewModel.Data.CSTATUS == "10" && _TransactionListViewModel.VAR_GSM_TRANSACTION_CODE.LAPPROVAL_FLAG == true))" 
-            OnClick="ApproveJournalProcess">
+        <R_Button Enabled="@(_TransactionListViewModel.JournalGrid.Count > 0 && (_TransactionListViewModel.Data.CSTATUS == "10" && _TransactionListViewModel.VAR_GSM_TRANSACTION_CODE.LAPPROVAL_FLAG == true))"
+                  OnClick="ApproveJournalProcess">
             @_localizer["_Approve"]
-            </R_Button>
+        </R_Button>
     </R_ItemLayout>
     <R_ItemLayout>
-        <R_Button Enabled="@( 
-                            (_TransactionListViewModel.Data.CSTATUS == "20" || (_TransactionListViewModel.Data.CSTATUS == "10" && _TransactionListViewModel.VAR_GSM_TRANSACTION_CODE.LAPPROVAL_FLAG == false)) || 
-                            (_TransactionListViewModel.Data.CSTATUS == "80" ) && 
+        <R_Button Enabled="@(
+                            (_TransactionListViewModel.Data.CSTATUS == "20" || (_TransactionListViewModel.Data.CSTATUS == "10" && _TransactionListViewModel.VAR_GSM_TRANSACTION_CODE.LAPPROVAL_FLAG == false)) ||
+                            (_TransactionListViewModel.Data.CSTATUS == "80" ) &&
                             (int.Parse(_TransactionListViewModel.JournalPeriodYear + _TransactionListViewModel.JournalPeriodMonth) >= int.Parse(_TransactionListViewModel.VAR_CB_SYSTEM_PARAM.CSOFT_PERIOD)) )"
                   OnClick="CommitJournalProcess">
             @_TransactionListViewModel.CommitLabel
@@ -146,3 +147,6 @@
              R_IsHeader
              R_ServiceGetRecord="JournalGrid_ServiceGetRecord"
              R_Display="JournalGrid_Display" />
+<R_Conductor @ref="_conductorDetailRef"
+             R_ConductorParent="_conductorRef"
+             R_ViewModel=" _TransactionEntryViewModel" />

@@ -97,6 +97,7 @@ namespace CBT01100MODEL
         public ObservableCollection<CBT01101DTO> JournalDetailGrid { get; set; } = new ObservableCollection<CBT01101DTO>();
         public DateTime? RefDate { get; set; }
         public DateTime? DocDate { get; set; }
+        public bool _isShowAll = false;
         #endregion
 
         #region Universal DTO
@@ -167,6 +168,10 @@ namespace CBT01100MODEL
 
             try
             {
+                if (_isShowAll)
+                {
+                    JournalParam.CSEARCH_TEXT = "";
+                }
                 JournalParam.CPERIOD = JournalPeriodYear + JournalPeriodMonth;
                 var loResult = await _CBT01100Model.GetJournalListAsync(JournalParam);
 
