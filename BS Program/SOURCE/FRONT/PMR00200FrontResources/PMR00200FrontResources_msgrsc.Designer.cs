@@ -232,29 +232,11 @@ namespace PMR00200FrontResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Department (To) is higher than Department (From).
-        /// </summary>
-        internal static string _validationHigherDept {
-            get {
-                return ResourceManager.GetString("_validationHigherDept", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Period (To) is higher than Period (From)!.
         /// </summary>
         internal static string _validationHigherPeriod {
             get {
                 return ResourceManager.GetString("_validationHigherPeriod", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Salesman (To) is higher than Salesman (From).
-        /// </summary>
-        internal static string _validationHigherSalesman {
-            get {
-                return ResourceManager.GetString("_validationHigherSalesman", resourceCulture);
             }
         }
         
@@ -273,6 +255,15 @@ namespace PMR00200FrontResources {
         internal static string _validationSalesmanToResult {
             get {
                 return ResourceManager.GetString("_validationSalesmanToResult", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string String1 {
+            get {
+                return ResourceManager.GetString("String1", resourceCulture);
             }
         }
     }

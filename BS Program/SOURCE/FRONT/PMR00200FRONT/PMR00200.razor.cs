@@ -6,6 +6,7 @@ using Lookup_PMCOMMON.DTOs;
 using Lookup_PMFRONT;
 using Lookup_PMModel.ViewModel.LML00500;
 using Microsoft.AspNetCore.Components;
+using PMR00200COMMON;
 using PMR00200COMMON.DTO_s;
 using PMR00200FrontResources;
 using PMR00200MODEL.View_Models;
@@ -351,7 +352,48 @@ namespace PMR00200FRONT
             R_Exception loEx = new R_Exception();
             try
             {
+                var loParam = new PMR00200PrintParamDTO();
+                loParam.CLANG_ID = _clientHelper.Culture.Name;
+                loParam.CCOMPANY_ID = _clientHelper.CompanyId;
+                loParam.CPROPERTY_ID = _viewModel._ReportParam.CPROPERTY_ID;
+                loParam.CPROPERTY_NAME = _viewModel._properties.Where(x => x.CPROPERTY_ID == _viewModel._ReportParam.CPROPERTY_ID).FirstOrDefault().CPROPERTY_NAME;
+                loParam.CFROM_DEPARTMENT_ID = _viewModel._ReportParam.CFROM_DEPARTMENT_ID;
+                loParam.CFROM_DEPARTMENT_NAME = _viewModel._ReportParam.CFROM_DEPARTMENT_NAME;
+                loParam.CTO_DEPARTMENT_ID = _viewModel._ReportParam.CTO_DEPARTMENT_ID;
+                loParam.CTO_DEPARTMENT_NAME = _viewModel._ReportParam.CTO_DEPARTMENT_NAME;
+                loParam.CFROM_SALESMAN_ID = _viewModel._ReportParam.CFROM_SALESMAN_ID;
+                loParam.CFROM_SALESMAN_NAME = _viewModel._ReportParam.CFROM_SALESMAN_NAME;
+                loParam.CTO_SALESMAN_ID = _viewModel._ReportParam.CTO_SALESMAN_ID;
+                loParam.CTO_SALESMAN_NAME = _viewModel._ReportParam.CTO_SALESMAN_NAME;
+                loParam.CFROM_PERIOD = _viewModel._YearFromPeriod + _viewModel._MonthFromPeriod;
+                loParam.CTO_PERIOD = _viewModel._YearToPeriod + _viewModel._MonthToPeriod;
+                loParam.LIS_OUTSTANDING = _viewModel._ReportParam.LIS_OUTSTANDING;
 
+                //validation
+                if (string.IsNullOrWhiteSpace(loParam.CPROPERTY_ID))
+                {
+                    loEx.Add("", _localizer["_validationEmptyProperty"]);
+                }
+                if (string.IsNullOrWhiteSpace(loParam.CFROM_DEPARTMENT_ID))
+                {
+                    loEx.Add("", _localizer["_validationEmptyFromDept"]);
+                }
+                if (string.IsNullOrWhiteSpace(loParam.CTO_DEPARTMENT_ID))
+                {
+                    loEx.Add("", _localizer["_validationEmptyToDept"]);
+                }
+                if (string.IsNullOrWhiteSpace(loParam.CFROM_SALESMAN_ID))
+                {
+                    loEx.Add("", _localizer["_validationEmptyFromSalesman"]);
+                }
+                if (string.IsNullOrWhiteSpace(loParam.CTO_SALESMAN_ID))
+                {
+                    loEx.Add("", _localizer["_validationEmptyToSalesman"]);
+                }
+                if (int.Parse(loParam.CTO_PERIOD)>int.Parse(loParam.CFROM_PERIOD))
+                {
+                    loEx.Add("", _localizer["_validationHigherPeriod"]);
+                }
             }
             catch (Exception ex)
             {

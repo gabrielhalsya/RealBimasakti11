@@ -117,26 +117,56 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="String1" xml:space="preserve">
-    <value />
-  </data>
-  <data name="_btnPrint" xml:space="preserve">
-    <value>Print</value>
-  </data>
-  <data name="_checkBoxOutAgreementTrans" xml:space="preserve">
-    <value>Outstanding Agreement Transaction</value>
-  </data>
   <data name="_labelDepartment" xml:space="preserve">
     <value>Department</value>
-  </data>
-  <data name="_labelFilter" xml:space="preserve">
-    <value>Filter</value>
   </data>
   <data name="_labelFrom" xml:space="preserve">
     <value>From</value>
   </data>
+  <data name="_labelLOOStatus" xml:space="preserve">
+    <value>LOO Status</value>
+  </data>
+  <data name="_labelMonth1" xml:space="preserve">
+    <value>January</value>
+  </data>
+  <data name="_labelMonth10" xml:space="preserve">
+    <value>October</value>
+  </data>
+  <data name="_labelMonth11" xml:space="preserve">
+    <value>November</value>
+  </data>
+  <data name="_labelMonth12" xml:space="preserve">
+    <value>December</value>
+  </data>
+  <data name="_labelMonth2" xml:space="preserve">
+    <value>February</value>
+  </data>
+  <data name="_labelMonth3" xml:space="preserve">
+    <value>March</value>
+  </data>
+  <data name="_labelMonth4" xml:space="preserve">
+    <value>April</value>
+  </data>
+  <data name="_labelMonth5" xml:space="preserve">
+    <value>May</value>
+  </data>
+  <data name="_labelMonth6" xml:space="preserve">
+    <value>June</value>
+  </data>
+  <data name="_labelMonth7" xml:space="preserve">
+    <value>July</value>
+  </data>
+  <data name="_labelMonth8" xml:space="preserve">
+    <value>August</value>
+  </data>
+  <data name="_labelMonth9" xml:space="preserve">
+    <value>September</value>
+  </data>
   <data name="_labelPeriod" xml:space="preserve">
     <value>Period</value>
+  </data>
+  <data name="_labelPrint" xml:space="preserve">
+    <value>Print</value>
   </data>
   <data name="_labelProperty" xml:space="preserve">
     <value>Property</value>
@@ -144,46 +174,34 @@
   <data name="_labelReportType" xml:space="preserve">
     <value>Report Type</value>
   </data>
+  <data name="_labelReportType1" xml:space="preserve">
+    <value>Summary</value>
+  </data>
+  <data name="_labelReportType2" xml:space="preserve">
+    <value>Detail</value>
+  </data>
   <data name="_labelSalesman" xml:space="preserve">
     <value>Salesman</value>
   </data>
   <data name="_labelTo" xml:space="preserve">
     <value>To</value>
   </data>
-  <data name="_radioDetail" xml:space="preserve">
-    <value>Detail</value>
-  </data>
-  <data name="_radioSummary" xml:space="preserve">
-    <value>Summary</value>
-  </data>
-  <data name="_validationDeptFromResult" xml:space="preserve">
-    <value>Department [From] [INPUT Department Code] not found!</value>
-  </data>
-  <data name="_validationDeptToResult" xml:space="preserve">
-    <value>Department [To] [INPUT Department Code] not found!</value>
-  </data>
-  <data name="_validationEmptyFromDept" xml:space="preserve">
-    <value>Please select Department (From)!</value>
-  </data>
-  <data name="_validationEmptyFromSalesman" xml:space="preserve">
-    <value>Please select Salesman (From)!</value>
-  </data>
-  <data name="_validationEmptyProperty" xml:space="preserve">
-    <value>Please select Property!</value>
-  </data>
-  <data name="_validationEmptyToDept" xml:space="preserve">
-    <value>Please select Department (To)!</value>
-  </data>
-  <data name="_validationEmptyToSalesman" xml:space="preserve">
-    <value>Please select Salesman (To)!</value>
-  </data>
-  <data name="_validationHigherPeriod" xml:space="preserve">
+  <data name="_validationCTOnothigherthanCFROM" xml:space="preserve">
     <value>Period (To) is higher than Period (From)!</value>
   </data>
-  <data name="_validationSalesmanFromResult" xml:space="preserve">
-    <value>Salesman [From] [INPUT Salesman Code] not found!</value>
+  <data name="_validationDeptFrom" xml:space="preserve">
+    <value>Please select Department (From)!</value>
   </data>
-  <data name="_validationSalesmanToResult" xml:space="preserve">
-    <value>Salesman [To] [INPUT Salesman Code] not found!</value>
+  <data name="_validationDeptTo" xml:space="preserve">
+    <value>Please select Department (To)!</value>
+  </data>
+  <data name="_validationProperty" xml:space="preserve">
+    <value>Please select Property !</value>
+  </data>
+  <data name="_validationSalesmanFrom" xml:space="preserve">
+    <value>Please select Salesman (From)!</value>
+  </data>
+  <data name="_validationSalesmanTo" xml:space="preserve">
+    <value>Please select Salesman (To)!</value>
   </data>
 </root>
