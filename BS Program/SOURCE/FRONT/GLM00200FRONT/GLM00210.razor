@@ -431,7 +431,7 @@
                                  HeaderText="No"
                                  Enabled=false
                                  Width="100px" Max="0"></R_GridNumericColumn>
-            <R_GridLookupColumn Width="300px" FieldName="@nameof(JournalDetailGridDTO.CGLACCOUNT_NO)" R_EnableAdd="true" R_EnableEdit="true" HeaderText="Account No." />
+            <R_GridLookupColumn Width="300px" FieldName="@nameof(JournalDetailGridDTO.CGLACCOUNT_NO)" R_EnableAdd="true" R_EnableEdit="true" HeaderText="Account No." MaxLength="20" />
             <R_GridTextColumn FieldName="@nameof(JournalDetailGridDTO.CGLACCOUNT_NAME)" HeaderText="Account Name" Enabled="false" Width="400px" />
             <R_GridComboBoxColumn Data=@_journalVM.CENTER_LIST
                                   FieldName="@nameof(JournalDetailGridDTO.CCENTER_CODE)"

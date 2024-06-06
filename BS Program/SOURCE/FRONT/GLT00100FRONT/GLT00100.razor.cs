@@ -61,6 +61,7 @@ namespace GLT00100FRONT
 
                 if (_JournalListViewModel.JournalGrid.Count <= 0)
                 {
+                    _JournalListViewModel.JournalDetailGrid.Clear();
                     loEx.Add("", "Data Not Found!");
                 }
             }
@@ -78,10 +79,11 @@ namespace GLT00100FRONT
             try
             {
                 //reset detail
-                _JournalListViewModel.JournalDetailGrid.Clear();
+                _JournalListViewModel.JournalParam.CSEARCH_TEXT = "";
                 await _gridRef.R_RefreshGrid(null);
                 if (_JournalListViewModel.JournalGrid.Count <= 0)
                 {
+                    _JournalListViewModel.JournalDetailGrid.Clear();
                     loEx.Add("", "Data Not Found!");
                 }
             }

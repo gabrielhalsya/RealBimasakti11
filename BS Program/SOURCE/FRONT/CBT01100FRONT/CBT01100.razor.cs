@@ -76,6 +76,12 @@ namespace CBT01100FRONT
                 //clear data
                 
                 await _gridRef.R_RefreshGrid(null);
+                if (_TransactionListViewModel.JournalGrid.Count <= 0)
+                {
+                    _TransactionListViewModel.JournalGrid.Clear();
+                    _TransactionEntryViewModel.JournalDetailGrid.Clear();
+                    var loMsg = await R_MessageBox.Show("", "Data Not Found!");
+                }
             }
             catch (Exception ex)
             {
@@ -95,6 +101,12 @@ namespace CBT01100FRONT
                 _TransactionListViewModel.JournalParam.CSEARCH_TEXT= "";
 
                 await _gridRef.R_RefreshGrid(_TransactionListViewModel.JournalParam);
+                if (_TransactionListViewModel.JournalGrid.Count <= 0)
+                {
+                    _TransactionListViewModel.JournalGrid.Clear();
+                    _TransactionEntryViewModel.JournalDetailGrid.Clear();
+                    var loMsg = await R_MessageBox.Show("", "Data Not Found!");
+                }
             }
             catch (Exception ex)
             {
@@ -113,13 +125,6 @@ namespace CBT01100FRONT
             {
                 await _TransactionListViewModel.GetJournalList();
                 eventArgs.ListEntityResult = _TransactionListViewModel.JournalGrid;
-                //_gridRef.R_SetCurrentData(_TransactionListViewModel.JournalGrid.FirstOrDefault());
-                if (_TransactionListViewModel.JournalGrid.Count <= 0)
-                {
-                    _TransactionListViewModel.JournalGrid.Clear();
-                    _TransactionEntryViewModel.JournalDetailGrid.Clear();
-                    var loMsg=await R_MessageBox.Show("", "Data Not Found!");
-                }
             }
             catch (Exception ex)
             {

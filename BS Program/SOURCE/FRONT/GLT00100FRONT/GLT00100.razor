@@ -12,7 +12,8 @@
         <R_TextBox @bind-Value="_JournalListViewModel.JournalParam.CDEPT_CODE"
                    R_ConductorSource="_conductorRef"
                    Enabled="true" 
-                   OnLostFocus="OnLostFocus_LookupDept"/>
+                   OnLostFocus="OnLostFocus_LookupDept"
+                   MaxLength="20"/>
     </R_ItemLayout>
     <R_ItemLayout>
         <R_Lookup R_Before_Open_Lookup="@Before_Open_lookupDept" R_After_Open_Lookup="@After_Open_lookupDept">
@@ -49,7 +50,7 @@
         </R_ComboBox>
     </R_ItemLayout>
     <R_ItemLayout col="1">
-        <R_TextBox @bind-Value="_JournalListViewModel.JournalParam.CSEARCH_TEXT" />
+        <R_TextBox @bind-Value="_JournalListViewModel.JournalParam.CSEARCH_TEXT" MaxLength="20"/>
     </R_ItemLayout>
     <R_ItemLayout>
         <R_Button OnClick="OnclickSearch">Search</R_Button>

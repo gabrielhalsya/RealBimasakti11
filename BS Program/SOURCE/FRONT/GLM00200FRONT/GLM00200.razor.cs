@@ -117,7 +117,13 @@ namespace GLM00200Front
             var loEx = new R_Exception();
             try
             {
+                _journalVM.Parameter.CSEARCH_TEXT = "";
                 await _gridJournal.R_RefreshGrid(null);
+                if (_journalVM.JournalGrid.Count == 0)
+                {
+                    _journalVM.JournaDetailGrid.Clear();
+                    loEx.Add("", "Data Not Found!");
+                }
             }
             catch (Exception ex)
             {
@@ -147,6 +153,12 @@ namespace GLM00200Front
                 }
 
                 await _gridJournal.R_RefreshGrid(null);
+                if (_journalVM.JournalGrid.Count == 0)
+                {
+                    _journalVM.JournaDetailGrid.Clear();
+                    loEx.Add("", "Data Not Found!");
+                }
+
             }
             catch (Exception ex)
             {
@@ -164,11 +176,6 @@ namespace GLM00200Front
             try
             {
                 await _journalVM.ShowAllJournals();
-
-                if (_journalVM.JournalGrid.Count == 0)
-                {
-                    loEx.Add("", "No Found Data");
-                }
                 eventArgs.ListEntityResult = _journalVM.JournalGrid;
             }
             catch (Exception ex)
@@ -189,27 +196,15 @@ namespace GLM00200Front
             {
                 var loData = (JournalDTO)eventArgs.Data;
                 _journalVM.Journal = loData;
-
-
-
-                if (loData.CSTATUS == "80")
-                {
-                    lcCommitLabel = "Undo Commit";
-                }
-                else
-                {
-                    lcCommitLabel = "Commit";
-                }
-
                 await _gridJournalDet.R_RefreshGrid(loData);
             }
             catch (Exception ex)
             {
                 loEx.Add(ex);
             }
+        EndBlock:
             R_DisplayException(loEx);
         }
-
         #endregion
 
         #region Approve & Commit
@@ -219,7 +214,7 @@ namespace GLM00200Front
             try
             {
                 //get data
-                var loCurrentData= (JournalDTO)_conJournal.R_GetCurrentData();
+                var loCurrentData = (JournalDTO)_conJournal.R_GetCurrentData();
                 await _journalProcessVM.GetJournal(new JournalDTO() { CJRN_ID = loCurrentData.CREC_ID });
                 var loData = _journalProcessVM.Journal;
 

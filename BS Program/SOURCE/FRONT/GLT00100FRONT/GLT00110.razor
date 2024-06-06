@@ -86,7 +86,8 @@
                     <R_TextArea @bind-Value="_JournalEntryViewModel.Data.CTRANS_DESC"
                                 R_ConductorSource="_conductorRef"
                                 R_EnableAdd
-                                R_EnableEdit />
+                                R_EnableEdit
+                                MaxLength="200"/>
                 </R_ItemLayout>
             </R_StackLayout>
 
@@ -323,7 +324,13 @@
                     R_EnableEdit="true">
                 <R_GridColumns>
                     <R_GridNumericColumn Width="70px" FieldName="@nameof(GLT00101DTO.INO)" HeaderText="No." Min="0"></R_GridNumericColumn>
-                    <R_GridLookupColumn @ref="_gridLookup_GLACCOUNT" Width="300px" FieldName="@nameof(GLT00101DTO.CGLACCOUNT_NO)" R_EnableAdd="true" R_EnableEdit="true" HeaderText="Account No."></R_GridLookupColumn>
+                    <R_GridLookupColumn @ref="_gridLookup_GLACCOUNT"
+                                        Width="300px"
+                                        FieldName="@nameof(GLT00101DTO.CGLACCOUNT_NO)"
+                                        R_EnableAdd="true"
+                                        R_EnableEdit="true"
+                                        HeaderText="Account No."
+                                        MaxLength="20"/>
                     <R_GridTextColumn Width="160px" FieldName="@nameof(GLT00101DTO.CGLACCOUNT_NAME)" R_EnableAdd="false" R_EnableEdit="false" HeaderText="Account Name"></R_GridTextColumn>
                     <R_GridComboBoxColumn @ref="@_gridCombobox_CENTER"
                                           Width="180px"
@@ -338,7 +345,7 @@
                     <R_GridNumericColumn @ref="@_gridNumeric_NDEBIT" Width="180px" Decimals="2" FieldName="@nameof(GLT00101DTO.NDEBIT)" R_EnableAdd R_EnableEdit HeaderText="Debit" Min="0"></R_GridNumericColumn>
                     <R_GridNumericColumn @ref="@_gridNumeric_NCREDIT" Width="180px" Decimals="2" FieldName="@nameof(GLT00101DTO.NCREDIT)" R_EnableAdd R_EnableEdit HeaderText="Credit" Min="0"></R_GridNumericColumn>
                     <R_GridTextColumn @ref="@_gridText_CDETAIL_DESC" Width="500px" FieldName="@nameof(GLT00101DTO.CDETAIL_DESC)" HeaderText="Description" R_EnableAdd="true" R_EnableEdit="true"></R_GridTextColumn>
-                    <R_GridTextColumn @ref="@_gridText_CDOCUMENT_NO" Width="120px" FieldName="@nameof(GLT00101DTO.CDOCUMENT_NO)" HeaderText="Voucher No."></R_GridTextColumn>
+                    <R_GridTextColumn @ref="@_gridText_CDOCUMENT_NO" Width="120px" FieldName="@nameof(GLT00101DTO.CDOCUMENT_NO)" HeaderText="Voucher No." MaxLength="30"></R_GridTextColumn>
                     <R_GridDatePickerColumn @ref="@_gridDatePicker_DDOCUMENT_DATE" Width="150px" FieldName="@nameof(GLT00101DTO.DDOCUMENT_DATE)" HeaderText="Voucher Date"></R_GridDatePickerColumn>
                     <R_GridNumericColumn Width="150px" FieldName="@nameof(GLT00101DTO.NLDEBIT)" R_EnableAdd R_EnableEdit HeaderText="DB (Local)" Min="0"></R_GridNumericColumn>
                     <R_GridNumericColumn Width="150px" FieldName="@nameof(GLT00101DTO.NLCREDIT)" R_EnableAdd R_EnableEdit HeaderText="CR (Local)" Min="0"></R_GridNumericColumn>
