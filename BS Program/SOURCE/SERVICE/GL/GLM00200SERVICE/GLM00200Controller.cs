@@ -11,7 +11,7 @@ using System.Globalization;
 using System.Reflection;
 using System.Runtime.CompilerServices;
 
-namespace GLM00200Service
+namespace GLM00200SERVICE
 {
     [Route("api/[controller]/[action]")]
     [ApiController]

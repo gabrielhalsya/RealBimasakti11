@@ -14,7 +14,7 @@ using System.Collections;
 using System.Diagnostics;
 using System.Globalization;
 
-namespace GLM00200Service
+namespace GLM00200SERVICE
 {
     public class GLM00200PrintController : R_ReportControllerBase
     {

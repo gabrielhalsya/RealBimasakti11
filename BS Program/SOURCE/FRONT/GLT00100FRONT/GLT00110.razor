@@ -355,13 +355,13 @@
                 <R_AddButton @ref="_addButton" R_Conductor="_conductorRef">Add</R_AddButton>
             </R_ItemLayout>
             <R_ItemLayout>
-                <R_Button OnClick="CopyJournalEntryProcessAsync" @ref="_btnCopy" Enabled="@(EnableHaveRecId && _conductorRef.R_ConductorMode == R_eConductorMode.Normal)">Copy</R_Button>
+                <R_Button OnClick="CopyJournalEntryProcessAsync" @ref="_btnCopy" Enabled="@(_EnableHaveRecId && _conductorRef.R_ConductorMode == R_eConductorMode.Normal)">Copy</R_Button>
             </R_ItemLayout>
             <R_ItemLayout>
-                <R_EditButton @ref="_editButton" R_Conductor="_conductorRef" Enabled="@(EnableEdit && _conductorRef.R_ConductorMode == R_eConductorMode.Normal)"></R_EditButton>
+                <R_EditButton @ref="_editButton" R_Conductor="_conductorRef" Enabled="@(_EnableEdit && _conductorRef.R_ConductorMode == R_eConductorMode.Normal)"></R_EditButton>
             </R_ItemLayout>
             <R_ItemLayout>
-                <R_Button @ref="_deleteButton" Enabled="@(EnableDelete && _conductorRef.R_ConductorMode == R_eConductorMode.Normal)" OnClick="@BtnDelete_OnClick">Delete</R_Button>
+                <R_Button @ref="_deleteButton" Enabled="@(_EnableDelete && _conductorRef.R_ConductorMode == R_eConductorMode.Normal)" OnClick="@BtnDelete_OnClick">Delete</R_Button>
             </R_ItemLayout>
             <R_ItemLayout Class="ms-2">
                 <R_CancelButton @ref="_cancelButton" R_Conductor="_conductorRef">Cancel</R_CancelButton>
@@ -370,19 +370,19 @@
                 <R_SaveButton @ref="_saveButton" R_Conductor="_conductorRef">Save</R_SaveButton>
             </R_ItemLayout>
             <R_ItemLayout Class="ms-2">
-                <R_Lookup R_Before_Open_Lookup="@Before_Open_lookupPrint" Enabled="@(EnableHaveRecId && _conductorRef.R_ConductorMode == R_eConductorMode.Normal)" @ref@="@_btnPrint">Print</R_Lookup>
+                <R_Lookup R_Before_Open_Lookup="@Before_Open_lookupPrint" Enabled="@(_EnableHaveRecId && _conductorRef.R_ConductorMode == R_eConductorMode.Normal)" @ref@="@_btnPrint">Print</R_Lookup>
             </R_ItemLayout>
         </R_StackLayout>
         <R_StackLayout Row>
             <R_ItemLayout>
-                <R_Button @ref="@_btnSubmit" Enabled="@(EnableSubmit && _conductorRef.R_ConductorMode == R_eConductorMode.Normal)" OnClick="SubmitJournalProcess">@lcLabelSubmit</R_Button>
+                <R_Button @ref="@_btnSubmit" Enabled="@(_EnableSubmit && _conductorRef.R_ConductorMode == R_eConductorMode.Normal)" OnClick="SubmitJournalProcess">@_lcLabelSubmit</R_Button>
             </R_ItemLayout>
             <R_ItemLayout>
-                <R_Button @ref="@_btnApprove" Enabled="@(EnableApprove && _conductorRef.R_ConductorMode == R_eConductorMode.Normal)" OnClick="ApproveJournalProcess">Approve</R_Button>
+                <R_Button @ref="@_btnApprove" Enabled="@(_EnableApprove && _conductorRef.R_ConductorMode == R_eConductorMode.Normal)" OnClick="ApproveJournalProcess">Approve</R_Button>
             </R_ItemLayout>
             <R_ItemLayout>
-                <R_Button @ref="@_btnCommit" Enabled="@(EnableCommit && _conductorRef.R_ConductorMode == R_eConductorMode.Normal)"
-                          OnClick="CommitJournalProcess">@lcLabelCommit</R_Button>
+                <R_Button @ref="@_btnCommit" Enabled="@(_EnableCommit && _conductorRef.R_ConductorMode == R_eConductorMode.Normal)"
+                          OnClick="CommitJournalProcess">@_lcLabelCommit</R_Button>
             </R_ItemLayout>
         </R_StackLayout>
     </R_StackLayout>

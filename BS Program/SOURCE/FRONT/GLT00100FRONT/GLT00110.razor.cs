@@ -30,15 +30,15 @@ namespace GLT00100FRONT
         private R_Grid<GLT00101DTO> _gridDetailRef;
 
         #region Private Property
-        private string lcLabelSubmit = "Submit";
-        private string lcLabelCommit = "Commit";
-        private bool EnableEdit = false;
-        private bool EnableDelete = false;
-        private bool EnableSubmit = false;
-        private bool EnableApprove = false;
-        private bool EnableCommit = false;
-        private bool EnableHaveRecId = false;
-        private bool EnableSetOther = false;
+        private string _lcLabelSubmit = "Submit";
+        private string _lcLabelCommit = "Commit";
+        private bool _EnableEdit = false;
+        private bool _EnableDelete = false;
+        private bool _EnableSubmit = false;
+        private bool _EnableApprove = false;
+        private bool _EnableCommit = false;
+        private bool _EnableHaveRecId = false;
+        private bool _EnableSetOther = false;
         #endregion
 
         [Inject] IClientHelper _clientHelper { get; set; }
@@ -373,21 +373,21 @@ namespace GLT00100FRONT
 
         private async Task JournalForm_RDisplay(R_DisplayEventArgs eventArgs)
         {
-            EnableSetOther = eventArgs.ConductorMode != R_eConductorMode.Normal;
+            _EnableSetOther = eventArgs.ConductorMode != R_eConductorMode.Normal;
             var loData = (GLT00110DTO)eventArgs.Data;
             if (!string.IsNullOrWhiteSpace(loData.CSTATUS))
             {
-                lcLabelCommit = loData.CSTATUS == "80" ? "Undo Commit" : "Commit";
-                lcLabelSubmit = loData.CSTATUS == "10" ? "Undo Submit" : "Submit";
-                EnableEdit = loData.CSTATUS == "00";
-                EnableDelete = loData.CSTATUS == "00";
-                EnableSubmit = loData.CSTATUS == "00" || loData.CSTATUS == "10";
-                EnableApprove = loData.CSTATUS == "10" && _JournalEntryViewModel.VAR_GSM_TRANSACTION_CODE.LAPPROVAL_FLAG;
-                EnableCommit =
+                _lcLabelCommit = loData.CSTATUS == "80" ? "Undo Commit" : "Commit";
+                _lcLabelSubmit = loData.CSTATUS == "10" ? "Undo Submit" : "Submit";
+                _EnableEdit = loData.CSTATUS == "00";
+                _EnableDelete = loData.CSTATUS == "00";
+                _EnableSubmit = loData.CSTATUS == "00" || loData.CSTATUS == "10";
+                _EnableApprove = loData.CSTATUS == "10" && _JournalEntryViewModel.VAR_GSM_TRANSACTION_CODE.LAPPROVAL_FLAG;
+                _EnableCommit =
                    ((loData.CSTATUS == "20")
                     || (loData.CSTATUS == "80" && _JournalEntryViewModel.VAR_IUNDO_COMMIT_JRN.IOPTION != 1))
                     && int.Parse(loData.CREF_PRD) >= int.Parse(_JournalEntryViewModel.VAR_GL_SYSTEM_PARAM.CSOFT_PERIOD);
-                EnableHaveRecId = !string.IsNullOrWhiteSpace(loData.CREC_ID);
+                _EnableHaveRecId = !string.IsNullOrWhiteSpace(loData.CREC_ID);
 
             }
 

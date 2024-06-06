@@ -13,7 +13,7 @@
 	</ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\SERVICE\GL\GLM00200SERVICE\GLM00200Service.csproj" />
+    <ProjectReference Include="..\..\..\SERVICE\GL\GLM00200SERVICE\GLM00200SERVICE.csproj" />
     <ProjectReference Include="..\..\..\SERVICE\GL\GLT00100SERVICE\GLT00100SERVICE.csproj" />
     <ProjectReference Include="..\..\..\SERVICE\GL\GLTR00100SERVICE\GLTR00100SERVICE.csproj" />
   </ItemGroup>
