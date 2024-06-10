@@ -7,8 +7,8 @@ namespace PMT05000COMMON
 {
     public interface IPMM05000
     {
-        IAsyncEnumerable<AgreementChrgDiscDetailDTO> GetAgreementChargesDiscountList(AgreementChrgDiscParamDTO poParam);
-        AgreementChrgDiscResultDTO ProcessAgreementChargeDiscount(AgreementChrgDiscParamDTO popaParam);
+        IAsyncEnumerable<AgreementChrgDiscDetailDTO> GetAgreementChargesDiscountList();
+        AgreementChrgDiscResultDTO ProcessAgreementChargeDiscount(AgreementChrgDiscParamDTO poParam);
 
     }
 }

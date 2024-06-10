@@ -5,8 +5,8 @@ namespace PMT05000COMMON
 {
     public interface IPMM05000Init
     {
-        IAsyncEnumerable<PropertyDTO> GetProperty();
-        IAsyncEnumerable<GSB_CodeInfoDTO> GetGSBCodeInfo();
-        IAsyncEnumerable<GSPeriodDT_DTO> GetGSPeriodDT();
+        IAsyncEnumerable<PropertyDTO> GetPropertyList();
+        IAsyncEnumerable<GSB_CodeInfoDTO> GetGSBCodeInfoList();
+        IAsyncEnumerable<GSPeriodDT_DTO> GetGSPeriodDTList();
     }
 }

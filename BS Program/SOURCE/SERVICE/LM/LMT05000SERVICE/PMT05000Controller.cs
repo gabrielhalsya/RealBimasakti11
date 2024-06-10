@@ -15,10 +15,10 @@ namespace PMT05000SERVICE
 {
     [Route("api/[controller]/[action]")]
     [ApiController]
-    public class PMT05000Controller : ControllerBase, IPMM05000
+    public class PMT05000Controller : ControllerBase, IPMM05000Init
     {
         private LogerPMT05000 _logger;
-        
+
         private readonly ActivitySource _activitySource;
 
         public PMT05000Controller(ILogger<PMT05000Controller> logger)
@@ -38,15 +38,105 @@ namespace PMT05000SERVICE
         }
 
         [HttpPost]
-        public IAsyncEnumerable<AgreementChrgDiscDetailDTO> GetAgreementChargesDiscountList(AgreementChrgDiscParamDTO poParam)
+        public IAsyncEnumerable<GSB_CodeInfoDTO> GetGSBCodeInfoList()
         {
-            throw new NotImplementedException();
+            using Activity activity = _activitySource.StartActivity($"{GetType().Name}.{MethodBase.GetCurrentMethod().Name}");
+            ShowLogStart();
+            var loEx = new R_Exception();
+            IAsyncEnumerable<GSB_CodeInfoDTO> loRtn = null;
+
+            try
+            {
+                var loCls = new PMM05000InitCls();
+
+                ShowLogExecute();
+                var loParam = new GSB_CodeInfoParam()
+                {
+                    CCOMPANY_ID = R_BackGlobalVar.COMPANY_ID,
+                    CLASS_APPLICATION=R_Utility.R_GetStreamingContext<string>(ContextConstantPMT05000.CLASS_APPLICATION ),
+                    CLASS_ID=R_Utility.R_GetStreamingContext<string>(ContextConstantPMT05000.CLASS_ID ),
+                    REC_ID_LIST=R_Utility.R_GetStreamingContext<string>(ContextConstantPMT05000.REC_ID_LIST ),
+                    LANG_ID= R_BackGlobalVar.CULTURE
+                };
+                var loTempRtn = loCls.GetGSBCodeInfoList(loParam);
+
+                loRtn = StreamListHelper<GSB_CodeInfoDTO>(loTempRtn);
+            }
+            catch (Exception ex)
+            {
+                loEx.Add(ex);
+                ShowLogError(loEx);
+
+            }
+
+            loEx.ThrowExceptionIfErrors();
+            ShowLogEnd();
+
+            return loRtn;
         }
 
         [HttpPost]
-        public AgreementChrgDiscResultDTO ProcessAgreementChargeDiscount(AgreementChrgDiscParamDTO popaParam)
+        public IAsyncEnumerable<GSPeriodDT_DTO> GetGSPeriodDTList()
         {
-            throw new NotImplementedException();
+            using Activity activity = _activitySource.StartActivity($"{GetType().Name}.{MethodBase.GetCurrentMethod().Name}");
+            ShowLogStart();
+            var loEx = new R_Exception();
+            IAsyncEnumerable<GSPeriodDT_DTO> loRtn = null;
+
+            try
+            {
+                var loCls = new PMM05000InitCls();
+
+                ShowLogExecute();
+                var loParam = new GSTPeriodDT_Param()
+                {
+                    CCOMPANY_ID = R_BackGlobalVar.COMPANY_ID,
+                    CYEAR= R_Utility.R_GetStreamingContext<string>(ContextConstantPMT05000. CYEAR),
+                };
+                var loTempRtn = loCls.GetGSPeriodDT(loParam);
+
+                loRtn = StreamListHelper<GSPeriodDT_DTO>(loTempRtn);
+            }
+            catch (Exception ex)
+            {
+                loEx.Add(ex);
+                ShowLogError(loEx);
+
+            }
+
+            loEx.ThrowExceptionIfErrors();
+            ShowLogEnd();
+
+            return loRtn;
+        }
+
+        [HttpPost]
+        public IAsyncEnumerable<PropertyDTO> GetPropertyList()
+        {
+            using Activity activity = _activitySource.StartActivity($"{GetType().Name}.{MethodBase.GetCurrentMethod().Name}");
+            ShowLogStart();
+            R_Exception loException = new R_Exception();
+            List<PropertyDTO> loRtnTemp = null;
+            PMM05000InitCls loCls;
+            try
+            {
+                loCls = new PMM05000InitCls();
+                ShowLogExecute();
+                loRtnTemp = loCls.GetPropertyList(new PropertyParamDTO()
+                {
+                    CCOMPANY_ID = R_BackGlobalVar.COMPANY_ID,
+                    CUSER_ID = R_BackGlobalVar.USER_ID,
+                });
+            }
+            catch (Exception ex)
+            {
+                loException.Add(ex);
+                ShowLogError(loException);
+            }
+        EndBlock:
+            loException.ThrowExceptionIfErrors();
+            ShowLogEnd();
+            return StreamListHelper(loRtnTemp);
         }
 
         #region logger

@@ -57,7 +57,7 @@ namespace PMT05000BACK
             return loRtn;
         }
 
-        public List<GSB_CodeInfoDTO> GetChargesPriceTypeList(GSB_CodeInfoParam poParam)
+        public List<GSB_CodeInfoDTO> GetGSBCodeInfoList(GSB_CodeInfoParam poParam)
         {
             using Activity activity = _activitySource.StartActivity(MethodBase.GetCurrentMethod().Name);
             R_Exception loEx = new();

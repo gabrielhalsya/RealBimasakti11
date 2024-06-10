@@ -18,19 +18,11 @@ namespace PMT05000SERVICE
 {
     [Route("api/[controller]/[action]")]
     [ApiController]
-    public class PMT05001Controller : ControllerBase, IPMM05000Init
+    public class PMT05001Controller : ControllerBase, IPMM05000
     {
         private LogerPMT05000 _logger;
 
         private readonly ActivitySource _activitySource;
-
-        private async IAsyncEnumerable<T> StreamListHelper<T>(List<T> poList)
-        {
-            foreach (T loEntity in poList)
-            {
-                yield return loEntity;
-            }
-        }
 
         public PMT05001Controller(ILogger<PMT05001Controller> logger)
         {
@@ -40,67 +32,78 @@ namespace PMT05000SERVICE
             _activitySource = PMT05000Activity.R_InitializeAndGetActivitySource(GetType().Name);
         }
 
-        public IAsyncEnumerable<GSB_CodeInfoDTO> GetGSBCodeInfo()
+        private async IAsyncEnumerable<T> StreamListHelper<T>(List<T> poList)
         {
-            using Activity activity = _activitySource.StartActivity($"{GetType().Name}.{MethodBase.GetCurrentMethod().Name}");
-            ShowLogStart();
-            var loEx = new R_Exception();
-            IAsyncEnumerable<GSB_CodeInfoDTO> loRtn = null;
-
-            try
+            foreach (T loEntity in poList)
             {
-                var loCls = new PMM05000InitCls();
-
-                ShowLogExecute();
-                //var loTempRtn = loCls.GetGSPeriodDT();
-
-                //loRtn = StreamListData<GSB_CodeInfoDTO>(loTempRtn);
+                yield return loEntity;
             }
-            catch (Exception ex)
-            {
-                loEx.Add(ex);
-                ShowLogError(loEx);
-
-            }
-
-            loEx.ThrowExceptionIfErrors();
-            ShowLogEnd();
-
-            return loRtn;
         }
 
-        public IAsyncEnumerable<GSPeriodDT_DTO> GetGSPeriodDT()
-        {
-            throw new NotImplementedException();
-        }
-
-        public IAsyncEnumerable<PropertyDTO> GetProperty()
+        [HttpPost]
+        public IAsyncEnumerable<AgreementChrgDiscDetailDTO> GetAgreementChargesDiscountList()
         {
             using Activity activity = _activitySource.StartActivity($"{GetType().Name}.{MethodBase.GetCurrentMethod().Name}");
             ShowLogStart();
             R_Exception loException = new R_Exception();
-            List<PropertyDTO> loRtnTemp = null;
-            PMM05000InitCls loCls;
+            List<AgreementChrgDiscDetailDTO> loRtnTemp = null;
+            PMT05000Cls loCls;
             try
             {
-                loCls = new PMM05000InitCls();
+                loCls = new PMT05000Cls();
                 ShowLogExecute();
-                loRtnTemp = loCls.GetPropertyList(new PropertyParamDTO()
+                var loParam = new AgreementChrgDiscListParamDTO()
                 {
                     CCOMPANY_ID = R_BackGlobalVar.COMPANY_ID,
-                    CUSER_ID = R_BackGlobalVar.USER_ID,
-                });
+                    CPROPERTY_ID = R_Utility.R_GetStreamingContext<string>(ContextConstantPMT05000.CPROPERTY_ID),
+                    CCHARGES_TYPE = R_Utility.R_GetStreamingContext<string>(ContextConstantPMT05000.CCHARGES_TYPE),
+                    CCHARGES_ID = R_Utility.R_GetStreamingContext<string>(ContextConstantPMT05000.CCHARGES_ID),
+                    CDISCOUNT_CODE = R_Utility.R_GetStreamingContext<string>(ContextConstantPMT05000.CDISCOUNT_CODE),
+                    CDISCOUNT_TYPE = R_Utility.R_GetStreamingContext<string>(ContextConstantPMT05000.CDISCOUNT_TYPE),
+                    CINV_PRD = R_Utility.R_GetStreamingContext<string>(ContextConstantPMT05000.CINV_PRD),
+                    LALL_BUILDING = R_Utility.R_GetStreamingContext<bool>(ContextConstantPMT05000.LALL_BUILDING),
+                    CBUILDING_ID = R_Utility.R_GetStreamingContext<string>(ContextConstantPMT05000.CBUILDING_ID),
+                    CAGREEMENT_TYPE = R_Utility.R_GetStreamingContext<string>(ContextConstantPMT05000.CAGREEMENT_TYPE),
+                    CUSER_ID = R_BackGlobalVar.CULTURE,
+                };
+                loRtnTemp = loCls.GetAgreementChargesDiscountList(loParam);
             }
             catch (Exception ex)
             {
                 loException.Add(ex);
                 ShowLogError(loException);
             }
-        EndBlock:
             loException.ThrowExceptionIfErrors();
             ShowLogEnd();
             return StreamListHelper(loRtnTemp);
         }
+
+        [HttpPost]
+        public AgreementChrgDiscResultDTO ProcessAgreementChargeDiscount(AgreementChrgDiscParamDTO poParam)
+        {
+            using Activity activity = _activitySource.StartActivity($"{GetType().Name}.{MethodBase.GetCurrentMethod().Name}");
+            ShowLogStart();
+            R_Exception loException = new R_Exception();
+            AgreementChrgDiscResultDTO loRtn = new();
+            PMT05000Cls loCls;
+            try
+            {
+                loCls = new PMT05000Cls();
+                ShowLogExecute();
+                poParam.CCOMPANY_ID= R_BackGlobalVar.COMPANY_ID;
+                poParam.CUSER_ID = R_BackGlobalVar.USER_ID;
+                loCls.ProcessAgreementChargeDiscount(poParam);
+            }
+            catch (Exception ex)
+            {
+                loException.Add(ex);
+                ShowLogError(loException);
+            }
+            loException.ThrowExceptionIfErrors();
+            ShowLogEnd();
+            return loRtn;
+        }
+
 
         #region logger
         private void ShowLogStart([CallerMemberName] string pcMethodCallerName = "") => _logger.LogInfo($"Starting {pcMethodCallerName} in {GetType().Name}");

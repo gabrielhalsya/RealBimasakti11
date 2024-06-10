@@ -5,4 +5,19 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Compile Update="PMT05000FRONTResources_msgrsc.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>PMT05000FRONTResources_msgrsc.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="PMT05000FRONTResources_msgrsc.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>PMT05000FRONTResources_msgrsc.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+
 </Project>
