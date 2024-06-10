@@ -23,6 +23,7 @@ using R_BlazorFrontEnd.Controls.Tab;
 using System.Xml.Linq;
 using GLTR00100COMMON;
 using GLTR00100FRONT;
+using Lookup_GSModel.ViewModel;
 
 namespace GLM00200Front
 {
@@ -445,6 +446,45 @@ namespace GLM00200Front
                 loEx.Add(ex);
             }
             loEx.ThrowExceptionIfErrors();
+        }
+        private async Task OnLostFocus_LookupDept()
+        {
+            var loEx = new R_Exception();
+
+            try
+            {
+                if (!String.IsNullOrWhiteSpace(_journalVM.Data.CDEPT_CODE))
+                {
+
+                    LookupGSL00700ViewModel loLookupViewModel = new LookupGSL00700ViewModel(); //use GSL's model
+                    var loParam = new GSL00700ParameterDTO // use match param as GSL's dto, send as type in search texbox
+                    {
+                        CSEARCH_TEXT = _journalVM.Data.CDEPT_CODE, // property that bindded to search textbox
+                    };
+
+
+                    var loResult = await loLookupViewModel.GetDepartment(loParam); //retrive single record 
+
+                    //show result & show name/related another fields
+                    if (loResult == null)
+                    {
+                        loEx.Add(R_FrontUtility.R_GetError(
+                                typeof(Lookup_GSFrontResources.Resources_Dummy_Class),
+                                "_ErrLookup01"));
+                        _journalVM.Data.CDEPT_NAME = ""; //kosongin bind textbox name kalo gaada
+                    }
+                    else
+                    {
+                        _journalVM.Data.CDEPT_NAME = loResult.CDEPT_NAME; //assign bind textbox name kalo ada
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                loEx.Add(ex);
+            }
+
+            R_DisplayException(loEx);
         }
         #endregion
 

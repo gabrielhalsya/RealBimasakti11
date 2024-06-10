@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Globalization;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace GLT00100MODEL
@@ -187,7 +188,8 @@ namespace GLT00100MODEL
 
             try
             {
-                var loResult = await _GLT00100Model.GetJournalDetailListAsync(poEntity);
+                var loResultTemp = await _GLT00100Model.GetJournalDetailListAsync(poEntity);
+                var loResult = ConvertCDateToDDateHelper(loResultTemp, "CDOCUMENT_DATE", "DDOCUMENT_DATE");
                 JournalDetailGrid = new ObservableCollection<GLT00101DTO>(loResult);
             }
             catch (Exception ex)
@@ -199,5 +201,24 @@ namespace GLT00100MODEL
         }
         #endregion
 
+        public List<T> ConvertCDateToDDateHelper<T>(List<T> items, string cDateColumnName, string dDateColumnName)
+        {
+            return items.Select(item =>
+            {
+                var cDateProp = typeof(T).GetProperty(cDateColumnName);
+                var dDateProp = typeof(T).GetProperty(dDateColumnName);
+
+                if (cDateProp != null && dDateProp != null)
+                {
+                    var cDateValue = (string)cDateProp.GetValue(item);
+                    if (!string.IsNullOrWhiteSpace(cDateValue) && cDateValue.Length >= 8)
+                    {
+                        var dDateValue = DateTime.ParseExact(cDateValue, "yyyyMMdd", CultureInfo.InvariantCulture);
+                        dDateProp.SetValue(item, dDateValue);
+                    }
+                }
+                return item;
+            }).ToList();
+        }
     }
 }

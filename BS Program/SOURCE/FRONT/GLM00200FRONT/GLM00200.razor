@@ -5,14 +5,15 @@
 
 <R_TabStrip @ref="@_tabStrip_Recurring">
     <R_TabStripTab Title="Recurring List" id="@nameof(GLM00200)">
-        
+
         <R_StackLayout Row="true">
             <R_ItemLayout col="1">
                 <R_Label>Department</R_Label>
             </R_ItemLayout>
             <R_ItemLayout col="1">
                 <R_TextBox @bind-Value="_journalVM.Parameter.CDEPT_CODE"
-                           CharacterCasing="R_eCharacterCasing.Upper"></R_TextBox>
+                           CharacterCasing="R_eCharacterCasing.Upper"
+                           OnLostFocus="@OnLostFocus_LookupDept"></R_TextBox>
             </R_ItemLayout>
             <R_ItemLayout>
                 <R_Lookup R_Before_Open_Lookup="Dept_Before_Open_Lookup"
