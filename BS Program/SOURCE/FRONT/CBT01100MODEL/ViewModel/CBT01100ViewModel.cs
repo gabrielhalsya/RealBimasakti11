@@ -174,7 +174,11 @@ namespace CBT01100MODEL
                 }
                 JournalParam.CPERIOD = JournalPeriodYear + JournalPeriodMonth;
                 var loResult = await _CBT01100Model.GetJournalListAsync(JournalParam);
-
+                loResult.ForEach(item =>
+                {
+                    if (!string.IsNullOrWhiteSpace(item.CREF_DATE))
+                        item.DREF_DATE = DateTime.ParseExact(item.CREF_DATE, "yyyyMMdd", CultureInfo.InvariantCulture);
+                });
                 JournalGrid = new ObservableCollection<CBT01100DTO>(loResult);
             }
             catch (Exception ex)

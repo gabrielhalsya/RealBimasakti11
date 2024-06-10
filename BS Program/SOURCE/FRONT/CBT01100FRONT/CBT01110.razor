@@ -379,7 +379,9 @@
                 R_ServiceSave="@JournalDet_ServiceSave"
                 R_AfterSave="@JournalDetail_AfterSave"
                 R_Before_Open_Grid_Lookup="Before_Open_Lookup"
-                R_After_Open_Grid_Lookup="After_Open_Lookup" R_DisableCancelConfirmation>
+                R_After_Open_Grid_Lookup="After_Open_Lookup"
+                R_CellLostFocused="JournalDet_CellLostFocusedAsync"
+                R_DisableCancelConfirmation>
             <R_GridColumns>
                 <R_GridNumericColumn Width="67px" FieldName="@nameof(CBT01110ParamDTO.INO)" HeaderText="@_localizer["_No"]"></R_GridNumericColumn>
                 <R_GridLookupColumn Width="200px" FieldName="@nameof(CBT01110ParamDTO.CGLACCOUNT_NO)" R_EnableAdd="true" R_EnableEdit="true" HeaderText="@_localizer["_AccountNo"]" MaxLength="20"></R_GridLookupColumn>
@@ -397,7 +399,7 @@
                 <R_GridNumericColumn Width="180px" Decimals="2" FieldName="@nameof(CBT01110ParamDTO.NCREDIT)" R_EnableAdd R_EnableEdit HeaderText="@_localizer["_Credit"]"></R_GridNumericColumn>
                 <R_GridTextColumn Width="500px" FieldName="@nameof(CBT01110ParamDTO.CDETAIL_DESC)" R_EnableAdd R_EnableEdit HeaderText="@_localizer["_Description"]"></R_GridTextColumn>
                 <R_GridTextColumn Width="120px" FieldName="@nameof(CBT01110ParamDTO.CDOCUMENT_NO)" MaxLength="30" R_EnableAdd R_EnableEdit HeaderText="@_localizer["_VoucherNo"]"></R_GridTextColumn>
-                <R_GridTextColumn Width="150px" FieldName="@nameof(CBT01110ParamDTO.CDOCUMENT_DATE)" R_EnableAdd R_EnableEdit HeaderText="@_localizer["_VoucherDate"]"></R_GridTextColumn>
+                <R_GridDatePickerColumn Width="150px" FieldName="@nameof(CBT01110ParamDTO.DDOCUMENT_DATE)" R_EnableAdd R_EnableEdit HeaderText="@_localizer["_VoucherDate"]"></R_GridDatePickerColumn>
                 <R_GridNumericColumn Width="150px" FieldName="@nameof(CBT01110ParamDTO.NLDEBIT)" Enabled="false" HeaderText="@_localizer["_DbLocal"]"></R_GridNumericColumn>
                 <R_GridNumericColumn Width="150px" FieldName="@nameof(CBT01110ParamDTO.NLCREDIT)" Enabled="false" HeaderText="@_localizer["_CrLocal"]"></R_GridNumericColumn>
                 <R_GridNumericColumn Width="150px" FieldName="@nameof(CBT01110ParamDTO.NBDEBIT)" Enabled="false" HeaderText="@_localizer["_DbBase"]"></R_GridNumericColumn>
@@ -420,4 +422,4 @@
 </R_Conductor>
 
 <R_ConductorGrid @ref="@_conductorDetailRef"
-                 R_ConductorParent="_conductorRef"/> 
+                 R_ConductorParent="_conductorRef" /> 

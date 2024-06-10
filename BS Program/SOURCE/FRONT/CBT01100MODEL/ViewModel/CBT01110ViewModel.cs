@@ -91,6 +91,11 @@ namespace CBT01100MODEL
             {
                 R_FrontContext.R_SetContext(ContextConstantCBT01100.CREC_ID, _CREC_ID);
                 var loResult = await _CBT01110Model.GetJournalDetailListAsync();
+                foreach (var item in loResult)
+                {
+                    if (!string.IsNullOrWhiteSpace(item.CDOCUMENT_DATE))
+                        item.DDOCUMENT_DATE = DateTime.ParseExact(item.CDOCUMENT_DATE, "yyyyMMdd", CultureInfo.InvariantCulture);
+                }
 
                 JournalDetailGrid = new ObservableCollection<CBT01101DTO>(loResult);
             }

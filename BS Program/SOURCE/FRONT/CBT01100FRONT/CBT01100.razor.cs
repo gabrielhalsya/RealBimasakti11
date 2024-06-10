@@ -74,7 +74,7 @@ namespace CBT01100FRONT
                 _TransactionListViewModel._isShowAll = false;
 
                 //clear data
-                
+
                 await _gridRef.R_RefreshGrid(null);
                 if (_TransactionListViewModel.JournalGrid.Count <= 0)
                 {
@@ -97,8 +97,8 @@ namespace CBT01100FRONT
             try
             {
                 //set param & rule button to view model
-                _TransactionListViewModel._isShowAll=true;
-                _TransactionListViewModel.JournalParam.CSEARCH_TEXT= "";
+                _TransactionListViewModel._isShowAll = true;
+                _TransactionListViewModel.JournalParam.CSEARCH_TEXT = "";
 
                 await _gridRef.R_RefreshGrid(_TransactionListViewModel.JournalParam);
                 if (_TransactionListViewModel.JournalGrid.Count <= 0)

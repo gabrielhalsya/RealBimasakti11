@@ -25,7 +25,7 @@ namespace PMR00200COMMON.Print_DTO
         public string LABEL_CSALESMAN_NAME { get; set; } = "Salesman";
         public string LABEL_CPERIOD { get; set; } = "Period";
         public string LABEL_LIS_OUTSTANDING { get; set; } = "Outstanding Agreement Only";
-        public string LABEL_TOTAL_AGGR_BASED_ON { get; set; } = "Total Aggreement Based On";
+        public string LABEL_TOTAL_AGGR_BASED_ON { get; set; } = "Total Agreement Based On";
         public string LABEL_GRAND_TOTAL_AGGR { get; set; } = "Grand Total of Agreements";
     }
 }

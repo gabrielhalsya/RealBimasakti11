@@ -117,70 +117,67 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="_btnPrint" xml:space="preserve">
-    <value>Print</value>
+  <data name="COLUMN_CREF_DATE" xml:space="preserve">
+    <value>LOI Date</value>
   </data>
-  <data name="_checkBoxOutAgreementTrans" xml:space="preserve">
-    <value>Outstanding Agreement Transaction</value>
+  <data name="COLUMN_CREF_NO" xml:space="preserve">
+    <value>LOI No.</value>
   </data>
-  <data name="_labelDepartment" xml:space="preserve">
-    <value>Department</value>
-  </data>
-  <data name="_labelFilter" xml:space="preserve">
-    <value>Filter</value>
-  </data>
-  <data name="_labelFrom" xml:space="preserve">
-    <value>From</value>
-  </data>
-  <data name="_labelPeriod" xml:space="preserve">
-    <value>Period</value>
-  </data>
-  <data name="_labelProperty" xml:space="preserve">
-    <value>Property</value>
-  </data>
-  <data name="_labelReportType" xml:space="preserve">
-    <value>Report Type</value>
-  </data>
-  <data name="_labelSalesman" xml:space="preserve">
+  <data name="COLUMN_CSALESMAN_ID_NAME" xml:space="preserve">
     <value>Salesman</value>
   </data>
-  <data name="_labelTo" xml:space="preserve">
-    <value>To</value>
+  <data name="COLUMN_CTAX" xml:space="preserve">
+    <value>Tax</value>
   </data>
-  <data name="_radioDetail" xml:space="preserve">
-    <value>Detail</value>
+  <data name="COLUMN_CTC_MESSAGE" xml:space="preserve">
+    <value>Term &amp; Condition</value>
   </data>
-  <data name="_radioSummary" xml:space="preserve">
-    <value>Summary</value>
+  <data name="COLUMN_CTENANT_NAME" xml:space="preserve">
+    <value>Tenant</value>
   </data>
-  <data name="_validationDeptFromResult" xml:space="preserve">
-    <value>Department [From] [INPUT Department Code] not found!</value>
+  <data name="COLUMN_CTENURE" xml:space="preserve">
+    <value>Tenure</value>
   </data>
-  <data name="_validationDeptToResult" xml:space="preserve">
-    <value>Department [To] [INPUT Department Code] not found!</value>
+  <data name="COLUMN_CTRANS_NAME" xml:space="preserve">
+    <value>Transaction Name</value>
   </data>
-  <data name="_validationEmptyFromDept" xml:space="preserve">
-    <value>Please select Department (From)!</value>
+  <data name="COLUMN_CTRANS_STATUS_NAME" xml:space="preserve">
+    <value>Transaction Status</value>
   </data>
-  <data name="_validationEmptyFromSalesman" xml:space="preserve">
-    <value>Please select Salesman (From)!</value>
+  <data name="COLUMN_GRAND_TOT_AREA" xml:space="preserve">
+    <value>Grand Total Area</value>
   </data>
-  <data name="_validationEmptyProperty" xml:space="preserve">
-    <value>Please select Property!</value>
+  <data name="COLUMN_NTOTAL_COMMON_AREA_SIZE" xml:space="preserve">
+    <value>Common</value>
   </data>
-  <data name="_validationEmptyToDept" xml:space="preserve">
-    <value>Please select Department (To)!</value>
+  <data name="COLUMN_NTOTAL_GROSS_AREA_SIZE" xml:space="preserve">
+    <value>Gross</value>
   </data>
-  <data name="_validationEmptyToSalesman" xml:space="preserve">
-    <value>Please select Salesman (To)!</value>
+  <data name="COLUMN_NTOTAL_NET_AREA_SIZE" xml:space="preserve">
+    <value>Net</value>
   </data>
-  <data name="_validationHigherPeriod" xml:space="preserve">
-    <value>Period (To) is higher than Period (From)!</value>
+  <data name="COLUMN_NTOTAL_PRICE" xml:space="preserve">
+    <value>Total Rent Price</value>
   </data>
-  <data name="_validationSalesmanFromResult" xml:space="preserve">
-    <value>Salesman [From] [INPUT Salesman Code] not found!</value>
+  <data name="LABEL_CDEPARTMENT_NAME" xml:space="preserve">
+    <value>Department</value>
   </data>
-  <data name="_validationSalesmanToResult" xml:space="preserve">
-    <value>Salesman [To] [INPUT Salesman Code] not found!</value>
+  <data name="LABEL_CPERIOD" xml:space="preserve">
+    <value>Period</value>
+  </data>
+  <data name="LABEL_CPROPERTY_NAME" xml:space="preserve">
+    <value>Property</value>
+  </data>
+  <data name="LABEL_CSALESMAN_NAME" xml:space="preserve">
+    <value>Salesman</value>
+  </data>
+  <data name="LABEL_GRAND_TOTAL_AGGR" xml:space="preserve">
+    <value>Grand Total of Agreements</value>
+  </data>
+  <data name="LABEL_LIS_OUTSTANDING" xml:space="preserve">
+    <value>Outstanding Agreement Only</value>
+  </data>
+  <data name="LABEL_TOTAL_AGGR_BASED_ON" xml:space="preserve">
+    <value>Total Agreement Based On</value>
   </data>
 </root>

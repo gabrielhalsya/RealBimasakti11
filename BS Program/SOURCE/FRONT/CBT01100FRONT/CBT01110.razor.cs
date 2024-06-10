@@ -36,7 +36,7 @@ namespace CBT01100FRONT
         private R_ConductorGrid _conductorDetailRef;
         private R_Grid<CBT01101DTO> _gridDetailRef;
 
-        [Inject] IClientHelper clientHelper { get; set; }
+        [Inject] IClientHelper _clientHelper { get; set; }
         [Inject] private R_ILocalizer<CBT01100FrontResources.Resources_Dummy_Class> _localizer { get; set; }
 
         private R_Lookup R_LookupBtnPrint;
@@ -91,11 +91,11 @@ namespace CBT01100FRONT
                 {
                     var loLockPar = new R_ServiceLockingLockParameterDTO
                     {
-                        Company_Id = clientHelper.CompanyId,
-                        User_Id = clientHelper.UserId,
+                        Company_Id = _clientHelper.CompanyId,
+                        User_Id = _clientHelper.UserId,
                         Program_Id = "CBT01100",
                         Table_Name = "CBT_TRANS_HD",
-                        Key_Value = string.Join("|", clientHelper.CompanyId, loData.CDEPT_CODE, loData.CTRANS_CODE, loData.CREF_NO)
+                        Key_Value = string.Join("|", _clientHelper.CompanyId, loData.CDEPT_CODE, loData.CTRANS_CODE, loData.CREF_NO)
                     };
 
                     loLockResult = await loCls.R_Lock(loLockPar);
@@ -104,11 +104,11 @@ namespace CBT01100FRONT
                 {
                     var loUnlockPar = new R_ServiceLockingUnLockParameterDTO
                     {
-                        Company_Id = clientHelper.CompanyId,
-                        User_Id = clientHelper.UserId,
+                        Company_Id = _clientHelper.CompanyId,
+                        User_Id = _clientHelper.UserId,
                         Program_Id = "CBT01100",
                         Table_Name = "CBT_TRANS_HD",
-                        Key_Value = string.Join("|", clientHelper.CompanyId, loData.CDEPT_CODE, loData.CTRANS_CODE, loData.CREF_NO)
+                        Key_Value = string.Join("|", _clientHelper.CompanyId, loData.CDEPT_CODE, loData.CTRANS_CODE, loData.CREF_NO)
                     };
 
                     loLockResult = await loCls.R_UnLock(loUnlockPar);
@@ -210,7 +210,7 @@ namespace CBT01100FRONT
 
                     _TransactionEntryViewModel.RefDate = DateTime.ParseExact(data.CREF_DATE, "yyyyMMdd", CultureInfo.InvariantCulture);
                     _TransactionEntryViewModel.DocDate = DateTime.ParseExact(data.CDOC_DATE, "yyyyMMdd", CultureInfo.InvariantCulture);
-                    ButtonCopySourceOnClick= false;
+                    ButtonCopySourceOnClick = false;
 
                     if (_gridDetailRef.DataSource.Count > 0)
                     {
@@ -221,8 +221,8 @@ namespace CBT01100FRONT
                 {
                     var loData = (CBT01100DTO)eventArgs.Data;
 
-                    loData.CCREATE_BY = clientHelper.UserId;
-                    loData.CUPDATE_BY = clientHelper.UserId;
+                    loData.CCREATE_BY = _clientHelper.UserId;
+                    loData.CUPDATE_BY = _clientHelper.UserId;
                     loData.DUPDATE_DATE = _TransactionEntryViewModel.VAR_TODAY.DTODAY;
                     loData.DCREATE_DATE = _TransactionEntryViewModel.VAR_TODAY.DTODAY;
                     _TransactionListViewModel.RefDate = _TransactionEntryViewModel.VAR_TODAY.DTODAY;
@@ -652,7 +652,7 @@ namespace CBT01100FRONT
                 loData.CCENTER_NAME = loFirstCenter.CCENTER_NAME;
                 loData.CDOCUMENT_NO = string.IsNullOrWhiteSpace(loHeaderData.CDOC_NO) ? "" : loHeaderData.CDOC_NO;
                 loData.CDOCUMENT_DATE = string.IsNullOrWhiteSpace(loHeaderData.CDOC_DATE) ? "" : loHeaderData.CDOC_DATE ?? ""; // Menangani nilai nullable dengan operator ??
-                loData.DDOCUMENT_DATE = _TransactionEntryViewModel.DocDate ?? DateTime.MinValue;
+                loData.DDOCUMENT_DATE = _TransactionEntryViewModel.DocDate ?? null;
 
             }
             catch (Exception ex)
@@ -921,6 +921,57 @@ namespace CBT01100FRONT
 
             loEx.ThrowExceptionIfErrors();
         }
+        private async Task JournalDet_CellLostFocusedAsync(R_CellLostFocusedEventArgs eventArgs)
+        {
+            R_Exception loEx = new();
+            try
+            {
+                var loColumn = eventArgs.ColumnName;
+
+                if (loColumn == nameof(CBT01110ParamDTO.CGLACCOUNT_NO))
+                {
+                    var loData = (CBT01110ParamDTO)eventArgs.Value;
+                    if (!string.IsNullOrWhiteSpace(loData.CGLACCOUNT_NO))
+                    {
+                        GSL00500ParameterDTO loParam = new GSL00500ParameterDTO()
+                        {
+                            CPROGRAM_CODE = "GLM00100",
+                            CBSIS = "",
+                            CDBCR = "",
+                            LCENTER_RESTR = false,
+                            LUSER_RESTR = false,
+                            CCENTER_CODE = "",
+                            CGOA_CODE = "",
+                            CSEARCH_TEXT = "",
+                            CCOMPANY_ID = _clientHelper.CompanyId,
+                            CUSER_ID = _clientHelper.UserId,
+                        };
+
+                        LookupGSL00500ViewModel loLookupViewModel = new LookupGSL00500ViewModel();
+
+                        var loResult = await loLookupViewModel.GetGLAccount(loParam);
+
+                        if (loResult == null)
+                        {
+                            loEx.Add(R_FrontUtility.R_GetError(
+                                    typeof(Lookup_GSFrontResources.Resources_Dummy_Class),
+                                    "_ErrLookup01"));
+                            //loData.CCB_NAME = "";
+                            goto EndBlock;
+                        }
+                    }
+
+                }
+            }
+            catch (Exception ex)
+            {
+                loEx.Add(ex);
+            }
+        EndBlock:
+            loEx.ThrowExceptionIfErrors();
+
+        }
+
         #endregion
 
         #region Process

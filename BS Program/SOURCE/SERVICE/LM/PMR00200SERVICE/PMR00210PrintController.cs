@@ -12,6 +12,12 @@ using System.Collections;
 using System.Diagnostics;
 using System.Globalization;
 using R_Cache;
+using PMR00200COMMON.Print_DTO;
+using System.Reflection;
+using BaseHeaderReportCOMMON;
+using System.Runtime.CompilerServices;
+using Microsoft.AspNetCore.Identity;
+using PMR00200PrintLogKey = PMR00200COMMON.PMR00200PrintLogKey;
 
 namespace PMR00200SERVICE
 {
@@ -21,7 +27,6 @@ namespace PMR00200SERVICE
         private R_ReportFastReportBackClass _ReportCls;
         private PMR00200PrintParamDTO _Parameter;
         private readonly ActivitySource _activitySource;
-        #region instantiation
 
         public PMR00210PrintController(ILogger<PMR00200PrintLogger> logger)
         {
@@ -35,17 +40,17 @@ namespace PMR00200SERVICE
             _ReportCls.R_GetMainDataAndName += _ReportCls_R_GetMainDataAndName;
             _ReportCls.R_SetNumberAndDateFormat += _ReportCls_R_SetNumberAndDateFormat;
         }
-        #endregion
-        #region Event Handler
+
+        #region reporthelper
 
         private void _ReportCls_R_InstantiateMainReportWithFileName(ref string pcFileTemplate)
         {
-            pcFileTemplate = System.IO.Path.Combine("Reports", "PMR01001.frx");
+            pcFileTemplate = System.IO.Path.Combine("Reports", "PMR00200Summary.frx");
         }
 
         private void _ReportCls_R_GetMainDataAndName(ref ArrayList poData, ref string pcDataSourceName)
         {
-            //poData.Add(GenerateDataPrint(_Parameter));
+            poData.Add(GenerateDataPrint(_Parameter));
             pcDataSourceName = "ResponseDataModel";
         }
 
@@ -63,8 +68,7 @@ namespace PMR00200SERVICE
         [HttpPost]
         public R_DownloadFileResultDTO DownloadResultPrintPost(PMR00200PrintParamDTO poParameter)
         {
-            using Activity activity = _activitySource.StartActivity("DownloadResultPrintPost");
-
+            using Activity activity = _activitySource.StartActivity($"{GetType().Name}.{MethodBase.GetCurrentMethod().Name}");
             _logger.LogInfo("Start - Post DownloadResultPrintPost Status");
             R_Exception loException = new R_Exception();
             PMR00200PrintLogKey loCache = null;
@@ -78,7 +82,7 @@ namespace PMR00200SERVICE
                     poLogKey = (R_NetCoreLogKeyDTO)R_NetCoreLogAsyncStorage.GetData(R_NetCoreLogConstant.LOG_KEY)
                 };
                 _logger.LogInfo("Set GUID Param - Post DownloadResultPrintPost Status");
-                //R_DistributedCache.R_Set(loRtn.GuidResult, R_NetCoreUtility.R_SerializeObjectToByte(loCache));
+                R_DistributedCache.R_Set(loRtn.GuidResult, R_NetCoreUtility.R_SerializeObjectToByte(loCache));
             }
             catch (Exception ex)
             {
@@ -87,14 +91,15 @@ namespace PMR00200SERVICE
             }
 
             loException.ThrowExceptionIfErrors();
-            _logger.LogInfo("End - Post COA Status");
+            _logger.LogInfo("End - Print LOI Status");
             return loRtn;
         }
 
         [HttpGet, AllowAnonymous]
-        public FileStreamResult DepositReportListGet(string pcGuid)
+        public FileStreamResult LOIStatsSummary_ReportListGet(string pcGuid)
         {
-            using Activity activity = _activitySource.StartActivity("DepositReport");
+            using Activity activity = _activitySource.StartActivity($"{GetType().Name}.{MethodBase.GetCurrentMethod().Name}");
+
             R_Exception loException = new R_Exception();
             FileStreamResult loRtn = null;
             PMR00200PrintLogKey loResultGUID = null;
@@ -124,134 +129,137 @@ namespace PMR00200SERVICE
             }
 
             loException.ThrowExceptionIfErrors();
-            _logger.LogInfo("End - Deposit Report Generation");
+            _logger.LogInfo("End - LOI Status Report Generation");
             return loRtn;
         }
 
         #region Helper
-        //private PMR01001PrintResultWithBaseHeaderPrintDTO GenerateDataPrint(PMR01000PrintParamDTO poParam)
-        //{
-        //    using Activity activity = _activitySource.StartActivity("GenerateDataPrint");
 
-        //    var loEx = new R_Exception();
-        //    PMR01001PrintResultWithBaseHeaderPrintDTO loRtn = new PMR01001PrintResultWithBaseHeaderPrintDTO();
-        //    var loParam = new BaseHeaderDTO();
+        private PMR00200PrintDislpayWithBaseHeaderDTO GenerateDataPrint(PMR00200PrintParamDTO poParam)
+        {
+            using Activity activity = _activitySource.StartActivity($"{GetType().Name}.{MethodBase.GetCurrentMethod().Name}");
 
-        //    System.Globalization.CultureInfo loCultureInfo =
-        //        new System.Globalization.CultureInfo(R_BackGlobalVar.REPORT_CULTURE);
+            var loEx = new R_Exception();
+            PMR00200PrintDislpayWithBaseHeaderDTO loRtn = new PMR00200PrintDislpayWithBaseHeaderDTO();
+            var loParam = new BaseHeaderDTO();
 
-        //    try
-        //    {
-        //        _logger.LogInfo("_logger.LogInfo(\"Start - Generating data for Print\");\n data for Deposit report.");
+            System.Globalization.CultureInfo loCultureInfo =
+                new System.Globalization.CultureInfo(R_BackGlobalVar.REPORT_CULTURE);
 
-        //        //Add Resources
-        //        loRtn.BaseHeaderColumn.Page = R_Utility.R_GetMessage(typeof(BaseHeaderResources.Resources_Dummy_Class),
-        //            "Page", loCultureInfo);
-        //        loRtn.BaseHeaderColumn.Of =
-        //            R_Utility.R_GetMessage(typeof(BaseHeaderResources.Resources_Dummy_Class), "Of", loCultureInfo);
-        //        loRtn.BaseHeaderColumn.Print_Date =
-        //            R_Utility.R_GetMessage(typeof(BaseHeaderResources.Resources_Dummy_Class), "Print_Date", loCultureInfo);
-        //        loRtn.BaseHeaderColumn.Print_By = R_Utility.R_GetMessage(typeof(BaseHeaderResources.Resources_Dummy_Class),
-        //            "Print_By", loCultureInfo);
+            try
+            {
+                _logger.LogInfo("_logger.LogInfo(\"Start - Generating data for Print\");\n data for LOI Status report.");
 
-        //        PMR01001PrintColoumnDTO loColumnObject = new PMR01001PrintColoumnDTO();
-        //        var loColumn = AssignValuesWithMessages(typeof(PMR01000BackResources.Resources_Dummy_Class),
-        //            loCultureInfo, loColumnObject);
+                //Add Resources
+                loRtn.BaseHeaderColumn.Page = R_Utility.R_GetMessage(typeof(BaseHeaderResources.Resources_Dummy_Class),
+                    "Page", loCultureInfo);
+                loRtn.BaseHeaderColumn.Of =
+                    R_Utility.R_GetMessage(typeof(BaseHeaderResources.Resources_Dummy_Class), "Of", loCultureInfo);
+                loRtn.BaseHeaderColumn.Print_Date =
+                    R_Utility.R_GetMessage(typeof(BaseHeaderResources.Resources_Dummy_Class), "Print_Date", loCultureInfo);
+                loRtn.BaseHeaderColumn.Print_By = R_Utility.R_GetMessage(typeof(BaseHeaderResources.Resources_Dummy_Class),
+                    "Print_By", loCultureInfo);
 
-        //        // Set base header data
-        //        _logger.LogDebug("Deserialized Print Parameters: {@PrintParameters}");
+                PMR00200SummaryColumnDTO loColumnObject = new PMR00200SummaryColumnDTO();
+                var loColumn = AssignValuesWithMessages(typeof(PMR00200BackResources.Resources_Dummy_Class),
+                    loCultureInfo, loColumnObject);
 
-        //        loParam.CCOMPANY_NAME = R_BackGlobalVar.COMPANY_ID.ToUpper();
-        //        loParam.CPRINT_CODE = "001";
-        //        loParam.CPRINT_NAME = "Deposit List Report";
-        //        loParam.CUSER_ID = R_BackGlobalVar.USER_ID.ToUpper();
+                // Set base header data
+                _logger.LogDebug("Deserialized Print Parameters: {@PrintParameters}");
 
-        //        // Create an instance of PMR01000PrintGOAResultDTo
-        //        PMR01001PrintResultDTO loData = new PMR01001PrintResultDTO()
-        //        {
-        //            Title = "Deposit Type List",
-        //            Header = "Deposit Type List",
-        //            Column = new PMR01001PrintColoumnDTO(),
-        //            Data = new List<PMR01001DataResultDTO>(),
-        //            HeaderParam = poParam
-        //        };
+                loParam.CCOMPANY_NAME = R_BackGlobalVar.COMPANY_ID.ToUpper();
+                loParam.CPRINT_CODE = "001";
+                loParam.CPRINT_NAME = "LOI Status Report";
+                loParam.CUSER_ID = R_BackGlobalVar.USER_ID.ToUpper();
 
-        //        // Create an instance of PMR01000Cls
-        //        var loCls = new PMR01000Cls();
-        //        poParam.CLANGUAGE_ID = R_BackGlobalVar.CULTURE;
-        //        // Get print data for Group Of Account report
-        //        var loCollection = loCls.GetPrintDataResult(poParam);
-        //        _logger.LogInfo("Data generation successful. Processing data for printing.");
+                // Create an instance of PMR01000PrintGOAResultDTo
+                PMR00200PrintDisplayDTO loData = new PMR00200PrintDisplayDTO()
+                {
+                    Title = "LOI Status",
+                    Header = "LOI Status Summary",
+                    Column = new PMR00200SummaryColumnDTO(),
+                    Data = new List<PMR00200DataResultDTO>(),
+                    HeaderParam = poParam
+                };
+
+                // Create an instance of PMR01000Cls
+                var loCls = new PMR00200Cls();
+                poParam.CLANG_ID = R_BackGlobalVar.CULTURE;
+                poParam.CCOMPANY_ID = R_BackGlobalVar.COMPANY_ID;
+
+                // Get print data for Group Of Account report
+                var loCollData = loCls.GetReportData(poParam);
+                _logger.LogInfo("Data generation successful. Processing data for printing.");
 
 
-        //        // Process the data and create a formatted list
-        //        var loTempData = loCollection
-        //        .GroupBy(data1a => new
-        //        {
-        //            data1a.CDEPOSIT_ID,
-        //            data1a.CDEPOSIT_NAME,
-        //        }).Select(data1b => new PMR01001DataResultDTO()
-        //        {
-        //            CDEPOSIT_ID = data1b.Key.CDEPOSIT_ID,
-        //            CDEPOSIT_NAME = data1b.Key.CDEPOSIT_NAME,
-        //            Detail1 = data1b.GroupBy(data2a => new
-        //            {
-        //                data2a.CBUILDING_ID,
-        //                data2a.CDEPOSIT_TYPE,
+                // Process the data and create a formatted list
+                var loTempData = loCollData.GroupBy(data1a => new
+                {
+                    data1a.CTRANS_CODE,
+                    data1a.CTRANS_NAME,
+                }).Select(data1b => new PMR00200DataResultDTO()
+                {
+                    CTRANS_CODE = data1b.Key.CTRANS_CODE,
+                    CTRANS_NAME = data1b.Key.CTRANS_NAME,
+                    Detail1 = data1b.GroupBy(data2a => new
+                    {
+                        data2a.CSALESMAN_ID,
+                        data2a.CSALESMAN_NAME,
 
-        //            }).Select(data2b => new PMR01001DataResultChild1DTO()
-        //            {
-        //                CBUILDING_ID = data2b.Key.CBUILDING_ID,
-        //                CDEPOSIT_TYPE = data2b.Key.CDEPOSIT_TYPE,
-        //                Detail2 = data2b.GroupBy(data2b => new
-        //                {
-        //                    data2b.CCUSTOMER_NAME,
-        //                    data2b.CTRANSACTION_TYPE,
-        //                    data2b.CREFERENCE_NO,
-        //                    data2b.CSTATUS,
-        //                    data2b.CUNIT_DESC,
-        //                    data2b.CINVOICE_NO,
-        //                    data2b.CDEPOSIT_DATE,
-        //                    data2b.CPAYMENT_STATUS,
-        //                    data2b.CCURRENCY_CODE,
-        //                    data2b.NDEPOSIT_AMOUNT,
-        //                    data2b.NDEPOSIT_BALANCE,
-        //                }).Select(data3b => new PMR01001DataResultChild2DTO()
-        //                {
-        //                    CCUSTOMER_NAME = data3b.Key.CCUSTOMER_NAME,
-        //                    CTRANSACTION_TYPE = data3b.Key.CTRANSACTION_TYPE,
-        //                    CREFERENCE_NO = data3b.Key.CREFERENCE_NO,
-        //                    CSTATUS = data3b.Key.CSTATUS,
-        //                    CUNIT_DESC = data3b.Key.CUNIT_DESC,
-        //                    CINVOICE_NO = data3b.Key.CINVOICE_NO,
-        //                    CDEPOSIT_DATE = data3b.Key.CDEPOSIT_DATE,
-        //                    CPAYMENT_STATUS = data3b.Key.CPAYMENT_STATUS,
-        //                    CCURRENCY_CODE = data3b.Key.CCURRENCY_CODE,
-        //                    NDEPOSIT_AMOUNT = data3b.Key.NDEPOSIT_AMOUNT,
-        //                    NDEPOSIT_BALANCE = data3b.Key.NDEPOSIT_BALANCE,
-        //                }).ToList()
-        //            }).ToList()
-        //        }).ToList();
+                    }).Select(data2b => new PMR00200DataRes1()
+                    {
+                        CSALESMAN_ID = data2b.Key.CSALESMAN_ID,
+                        CSALESMAN_NAME = data2b.Key.CSALESMAN_NAME,
+                        Detail2 = data2b.GroupBy(data2b => new
+                        {
+                            data2b.CREF_NO,
+                            data2b.CREF_DATE,
+                            data2b.CTENURE,
+                            data2b.NTOTAL_GROSS_AREA_SIZE,
+                            data2b.NTOTAL_NET_AREA_SIZE,
+                            data2b.NTOTAL_COMMON_AREA_SIZE,
+                            data2b.CTRANS_STATUS_NAME,
+                            data2b.NTOTAL_PRICE,
+                            data2b.CTAX,
+                            data2b.CTENANT_ID,
+                            data2b.CTENANT_NAME,
+                            data2b.CTC_MESSAGE,
+                        }).Select(data3b => new PMR00200DataRes2()
+                        {
+                            CREF_NO = data3b.Key.CREF_NO,
+                            CREF_DATE = data3b.Key.CREF_DATE,
+                            CTENURE = data3b.Key.CTENURE,
+                            NTOTAL_GROSS_AREA_SIZE = data3b.Key.NTOTAL_GROSS_AREA_SIZE,
+                            NTOTAL_NET_AREA_SIZE = data3b.Key.NTOTAL_NET_AREA_SIZE,
+                            NTOTAL_COMMON_AREA_SIZE = data3b.Key.NTOTAL_COMMON_AREA_SIZE,
+                            CTRANS_STATUS_NAME = data3b.Key.CTRANS_STATUS_NAME,
+                            NTOTAL_PRICE = data3b.Key.NTOTAL_PRICE,
+                            CTAX = data3b.Key.CTAX,
+                            CTENANT_ID = data3b.Key.CTENANT_ID,
+                            CTENANT_NAME = data3b.Key.CTENANT_NAME,
+                            CTC_MESSAGE = data3b.Key.CTC_MESSAGE,
+                        }).ToList()
+                    }).ToList()
+                }).ToList();
 
-        //        // Set the generated data in loRtn
-        //        _logger.LogInfo("Data processed successfully. Generating print output.");
-        //        loData.Data = loTempData;
-        //        loRtn.Data1 = loData;
-        //        loRtn.BaseHeaderData = loParam;
+                // Set the generated data in loRtn
+                _logger.LogInfo("Data processed successfully. Generating print output.");
+                loData.Data = loTempData;
+                loRtn.SummaryData = loData;
+                loRtn.BaseHeaderData = loParam;
 
-        //        _logger.LogInfo("Print output generated successfully. Saving print file.");
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        loEx.Add(ex);
-        //        _logger.LogError(loEx);
-        //    }
+                _logger.LogInfo("Print output generated successfully. Saving print file.");
+            }
+            catch (Exception ex)
+            {
+                loEx.Add(ex);
+                _logger.LogError(loEx);
+            }
 
-        //    loEx.ThrowExceptionIfErrors();
-        //    return loRtn;
-        //    _logger.LogInfo("End - Data Generation for Print");
-        //}
-        #endregion
+            loEx.ThrowExceptionIfErrors();
+            return loRtn;
+            _logger.LogInfo("End - Data Generation for Print");
+        }
 
         private object AssignValuesWithMessages(Type poResourceType, CultureInfo poCultureInfo, object poObject)
         {
@@ -267,5 +275,9 @@ namespace PMR00200SERVICE
 
             return loObj;
         }
+
+        #endregion
+
+
     }
 }

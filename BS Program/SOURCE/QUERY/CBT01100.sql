@@ -9,6 +9,9 @@ EXEC RSP_CB_SEARCH_TRANS_HD_LIST 'rcd','ghc','990030','ACC','202404','','DAM','e
 
 EXEC RSP_CB_DELETE_TRANS_JRN ''
 
+delete from sat_locking where CUSER_ID= 'GHC' 
+
+
 
 IF (OBJECT_ID('tempdb..#__SP_ERR_Table') is null) BEGIN
 	select SP_Name=cast('' as varchar(50)), Err_Code=cast('' as varchar(20)), Err_Detail=cast('' as nvarchar(max)) into #__SP_ERR_Table where 0=1

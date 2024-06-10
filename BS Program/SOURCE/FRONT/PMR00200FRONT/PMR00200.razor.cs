@@ -18,6 +18,7 @@ using R_BlazorFrontEnd.Exceptions;
 using R_BlazorFrontEnd.Helpers;
 using R_BlazorFrontEnd.Interfaces;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 
 namespace PMR00200FRONT
 {
@@ -29,9 +30,7 @@ namespace PMR00200FRONT
         [Inject] IClientHelper _clientHelper { get; set; }
         [Inject] private R_ILocalizer<Resources_Dummy_Class> _localizer { get; set; }
         [Inject] private R_IReport _reportService { get; set; }
-
         private R_RadioGroup<ReportTypeDTO, string> _radioReportType;
-
         protected override async Task R_Init_From_Master(object poParameter)
         {
 
@@ -352,22 +351,24 @@ namespace PMR00200FRONT
             R_Exception loEx = new R_Exception();
             try
             {
-                var loParam = new PMR00200PrintParamDTO();
-                loParam.CLANG_ID = _clientHelper.Culture.Name;
-                loParam.CCOMPANY_ID = _clientHelper.CompanyId;
-                loParam.CPROPERTY_ID = _viewModel._ReportParam.CPROPERTY_ID;
-                loParam.CPROPERTY_NAME = _viewModel._properties.Where(x => x.CPROPERTY_ID == _viewModel._ReportParam.CPROPERTY_ID).FirstOrDefault().CPROPERTY_NAME;
-                loParam.CFROM_DEPARTMENT_ID = _viewModel._ReportParam.CFROM_DEPARTMENT_ID;
-                loParam.CFROM_DEPARTMENT_NAME = _viewModel._ReportParam.CFROM_DEPARTMENT_NAME;
-                loParam.CTO_DEPARTMENT_ID = _viewModel._ReportParam.CTO_DEPARTMENT_ID;
-                loParam.CTO_DEPARTMENT_NAME = _viewModel._ReportParam.CTO_DEPARTMENT_NAME;
-                loParam.CFROM_SALESMAN_ID = _viewModel._ReportParam.CFROM_SALESMAN_ID;
-                loParam.CFROM_SALESMAN_NAME = _viewModel._ReportParam.CFROM_SALESMAN_NAME;
-                loParam.CTO_SALESMAN_ID = _viewModel._ReportParam.CTO_SALESMAN_ID;
-                loParam.CTO_SALESMAN_NAME = _viewModel._ReportParam.CTO_SALESMAN_NAME;
-                loParam.CFROM_PERIOD = _viewModel._YearFromPeriod + _viewModel._MonthFromPeriod;
-                loParam.CTO_PERIOD = _viewModel._YearToPeriod + _viewModel._MonthToPeriod;
-                loParam.LIS_OUTSTANDING = _viewModel._ReportParam.LIS_OUTSTANDING;
+                var loParam = new PMR00200PrintParamDTO()
+                {
+                    CLANG_ID = _clientHelper.Culture.Name,
+                    CCOMPANY_ID = _clientHelper.CompanyId,
+                    CPROPERTY_ID = _viewModel._ReportParam.CPROPERTY_ID,
+                    CPROPERTY_NAME = _viewModel._properties.Where(x => x.CPROPERTY_ID == _viewModel._ReportParam.CPROPERTY_ID).FirstOrDefault().CPROPERTY_NAME,
+                    CFROM_DEPARTMENT_ID = _viewModel._ReportParam.CFROM_DEPARTMENT_ID,
+                    CFROM_DEPARTMENT_NAME = _viewModel._ReportParam.CFROM_DEPARTMENT_NAME,
+                    CTO_DEPARTMENT_ID = _viewModel._ReportParam.CTO_DEPARTMENT_ID,
+                    CTO_DEPARTMENT_NAME = _viewModel._ReportParam.CTO_DEPARTMENT_NAME,
+                    CFROM_SALESMAN_ID = _viewModel._ReportParam.CFROM_SALESMAN_ID,
+                    CFROM_SALESMAN_NAME = _viewModel._ReportParam.CFROM_SALESMAN_NAME,
+                    CTO_SALESMAN_ID = _viewModel._ReportParam.CTO_SALESMAN_ID,
+                    CTO_SALESMAN_NAME = _viewModel._ReportParam.CTO_SALESMAN_NAME,
+                    CFROM_PERIOD = _viewModel._YearFromPeriod + _viewModel._MonthFromPeriod, //yyyyMM
+                    CTO_PERIOD = _viewModel._YearToPeriod + _viewModel._MonthToPeriod, //yyyyMM
+                    LIS_OUTSTANDING = _viewModel._ReportParam.LIS_OUTSTANDING,
+                };
 
                 //validation
                 if (string.IsNullOrWhiteSpace(loParam.CPROPERTY_ID))
@@ -390,9 +391,18 @@ namespace PMR00200FRONT
                 {
                     loEx.Add("", _localizer["_validationEmptyToSalesman"]);
                 }
-                if (int.Parse(loParam.CTO_PERIOD)>int.Parse(loParam.CFROM_PERIOD))
+                if (int.Parse(loParam.CTO_PERIOD) > int.Parse(loParam.CFROM_PERIOD))
                 {
                     loEx.Add("", _localizer["_validationHigherPeriod"]);
+                }
+
+                if (_viewModel._ReportType == "D")
+                {
+                    LOIStats_PrintDetail(loParam);
+                }
+                else
+                {
+                    LOIStats_PrintSummaryAsync(loParam);
                 }
             }
             catch (Exception ex)
@@ -401,8 +411,41 @@ namespace PMR00200FRONT
             }
             loEx.ThrowExceptionIfErrors();
         }
-    }
-    #endregion
+        private async Task LOIStats_PrintSummaryAsync(PMR00200PrintParamDTO poParam)
+        {
+            R_Exception loEx = new R_Exception();
+            try
+            {
+                await _reportService.GetReport(
+                    "R_DefaultServiceUrlPM",
+                    "PM",
+                    "rpt/PMR00210Print/DownloadResultPrintPost",
+                    "rpt/PMR00210Print/LOIStatsSummary_ReportListGet",
+                    poParam);
+            }
+            catch (Exception ex)
+            {
+                loEx.Add(ex);
+            }
+            loEx.ThrowExceptionIfErrors();
+        }
+        private void LOIStats_PrintDetail(PMR00200PrintParamDTO poParam)
+        {
+            R_Exception loEx = new R_Exception();
+            try
+            {
 
+            }
+            catch (Exception ex)
+            {
+                loEx.Add(ex);
+            }
+            loEx.ThrowExceptionIfErrors();
+        }
+
+        #endregion
+
+
+    }
 }
 
