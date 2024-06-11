@@ -1,6 +1,6 @@
 ﻿using BaseHeaderReportCOMMON;
 using GLM00200BACK;
-using GLM00200Common;
+using GLM00200COMMON;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;

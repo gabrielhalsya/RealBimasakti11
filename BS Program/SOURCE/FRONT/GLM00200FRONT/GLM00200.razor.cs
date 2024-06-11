@@ -1,5 +1,5 @@
-﻿using GLM00200Common;
-using GLM00200Model;
+﻿using GLM00200COMMON;
+using GLM00200MODEL;
 using Lookup_GSCOMMON.DTOs;
 using Lookup_GSFRONT;
 using Lookup_GSModel.ViewModel;
@@ -13,7 +13,7 @@ using R_BlazorFrontEnd.Controls.Tab;
 using R_BlazorFrontEnd.Exceptions;
 using R_BlazorFrontEnd.Helpers;
 
-namespace GLM00200Front
+namespace GLM00200FRONT
 {
     public partial class GLM00200 : R_Page
     {

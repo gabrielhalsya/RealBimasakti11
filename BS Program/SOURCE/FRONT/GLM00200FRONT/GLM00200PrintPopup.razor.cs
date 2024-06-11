@@ -1,5 +1,5 @@
 ﻿using BlazorClientHelper;
-using GLM00200Common;
+using GLM00200COMMON;
 using Lookup_GSCOMMON.DTOs;
 using Lookup_GSModel.ViewModel;
 using Microsoft.AspNetCore.Components;
@@ -8,7 +8,7 @@ using R_BlazorFrontEnd.Controls.Events;
 using R_BlazorFrontEnd.Exceptions;
 using R_BlazorFrontEnd.Interfaces;
 
-namespace GLM00200Front
+namespace GLM00200FRONT
 {
     public partial class GLM00200PrintPopup : R_Page
     {

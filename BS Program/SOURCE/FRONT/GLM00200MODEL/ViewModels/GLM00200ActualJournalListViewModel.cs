@@ -1,24 +1,17 @@
 ﻿
-using GLM00200Common;
-using Lookup_GSCOMMON.DTOs;
-using Lookup_GSModel;
+using GLM00200COMMON;
 using R_BlazorFrontEnd;
 using R_BlazorFrontEnd.Exceptions;
-using R_BlazorFrontEnd.Helpers;
-using R_CommonFrontBackAPI;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Globalization;
-using System.Linq;
 using System.Threading.Tasks;
-using System.Xml.Linq;
 
-namespace GLM00200Model
+namespace GLM00200MODEL
 {
     public class GLM00200ActualJournalListViewModel : R_ViewModel<JournalDTO>
     {
-        private GLM00200Model _model = new GLM00200Model();
+        private GLM00200MODEL _model = new GLM00200MODEL();
         public JournalDTO Journal { get; set; } = new JournalDTO();
         public ObservableCollection<JournalDetailActualGridDTO> JournaDetailActualGrid { get; set; } = new ObservableCollection<JournalDetailActualGridDTO>();
         public VAR_GSM_COMPANY_DTO GSM_COMPANY { get; set; } = new VAR_GSM_COMPANY_DTO();

@@ -16,9 +16,9 @@
 
 	<ItemGroup>
 		<ProjectReference Include="..\..\..\..\BS Shared Form\SOURCE\FRONT\Lookup_GSFRONT\Lookup_GSFRONT.csproj" />
-		<ProjectReference Include="..\..\COMMON\GL\GLM00200COMMON\GLM00200Common.csproj" />
-		<ProjectReference Include="..\GLM00200FrontResources\GLM00200FrontResources.csproj" />
-		<ProjectReference Include="..\GLM00200MODEL\GLM00200Model.csproj" />
+		<ProjectReference Include="..\..\COMMON\GL\GLM00200COMMON\GLM00200COMMON.csproj" />
+		<ProjectReference Include="..\GLM00200FRONTResources\GLM00200FRONTResources.csproj" />
+		<ProjectReference Include="..\GLM00200MODEL\GLM00200MODEL.csproj" />
 		<ProjectReference Include="..\GLTR00100FRONT\GLTR00100FRONT.csproj" />
 	</ItemGroup>
 

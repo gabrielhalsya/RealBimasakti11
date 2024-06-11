@@ -12,7 +12,7 @@
 
 	<ItemGroup>
 		<ProjectReference Include="..\..\..\BACK\GL\GLM00200BACK\GLM00200BACK.csproj" />
-		<ProjectReference Include="..\..\..\COMMON\GL\GLM00200Common\GLM00200Common.csproj" />
+		<ProjectReference Include="..\..\..\COMMON\GL\GLM00200COMMON\GLM00200COMMON.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>

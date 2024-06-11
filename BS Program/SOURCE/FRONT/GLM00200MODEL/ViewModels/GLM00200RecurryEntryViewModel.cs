@@ -1,5 +1,5 @@
 ﻿
-using GLM00200Common;
+using GLM00200COMMON;
 using Lookup_GSCOMMON.DTOs;
 using Lookup_GSModel;
 using R_BlazorFrontEnd;
@@ -15,11 +15,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 
-namespace GLM00200Model
+namespace GLM00200MODEL
 {
     public class GLM00200RecurryEntryViewModel : R_ViewModel<JournalDTO>
     {
-        private GLM00200Model _model = new GLM00200Model();
+        private GLM00200MODEL _model = new GLM00200MODEL();
 
         private PublicLookupModel _lookupGSModel = new PublicLookupModel();
         public RecurringJournalListParamDTO Parameter { get; set; } = new RecurringJournalListParamDTO();

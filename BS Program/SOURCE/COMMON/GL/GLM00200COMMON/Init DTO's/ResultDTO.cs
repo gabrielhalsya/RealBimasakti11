@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace GLM00200Common
+namespace GLM00200COMMON
 {
     public class RecordResultDTO<T> : R_APIResultBaseDTO
     {

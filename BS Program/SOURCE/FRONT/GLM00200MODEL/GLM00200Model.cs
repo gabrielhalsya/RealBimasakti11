@@ -1,4 +1,4 @@
-﻿using GLM00200Common;
+﻿using GLM00200COMMON;
 using R_APIClient;
 using R_BlazorFrontEnd;
 using R_BlazorFrontEnd.Exceptions;
@@ -8,14 +8,14 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace GLM00200Model
+namespace GLM00200MODEL
 {
-    public class GLM00200Model : R_BusinessObjectServiceClientBase<JournalParamDTO>, IGLM00200
+    public class GLM00200MODEL : R_BusinessObjectServiceClientBase<JournalParamDTO>, IGLM00200
     {
         private const string DEFAULT_HTTP_NAME = "R_DefaultServiceUrlGL";
         private const string DEFAULT_CHECKPOINT_NAME = "api/GLM00200";
         private const string DEFAULT_MODULE = "GL";
-        public GLM00200Model(string pcHttpClientName = DEFAULT_HTTP_NAME,
+        public GLM00200MODEL(string pcHttpClientName = DEFAULT_HTTP_NAME,
             string pcRequestServiceEndPoint = DEFAULT_CHECKPOINT_NAME,
             bool plSendWithContext = true,
             bool plSendWithToken = true

@@ -1,6 +1,6 @@
 ﻿using BlazorClientHelper;
-using GLM00200Common;
-using GLM00200Model;
+using GLM00200COMMON;
+using GLM00200MODEL;
 using Lookup_GSCOMMON.DTOs;
 using Lookup_GSFRONT;
 using Microsoft.AspNetCore.Components;
@@ -25,7 +25,7 @@ using GLTR00100COMMON;
 using GLTR00100FRONT;
 using Lookup_GSModel.ViewModel;
 
-namespace GLM00200Front
+namespace GLM00200FRONT
 {
     public partial class GLM00210 : R_Page
     {

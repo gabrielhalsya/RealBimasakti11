@@ -6,7 +6,6 @@ namespace PMT05000COMMON.DTO_s
 {
     public class AgreementChrgDiscDetailDTO
     {
-
         public string CCOMPANY_ID { get; set; }
         public string CPROPERTY_ID { get; set; }
         public string CREF_NO { get; set; }
@@ -25,8 +24,6 @@ namespace PMT05000COMMON.DTO_s
         public string DUPDATE_DATE { get; set; }
         public string CCREATE_BY { get; set; }
         public string DCREATE_DATE { get; set; }
-
-
     }
 
     public class AgreementChrgDiscDetailBulkDTO

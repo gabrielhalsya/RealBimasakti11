@@ -213,4 +213,7 @@
   <data name="_tabUndoDisc" xml:space="preserve">
     <value>Undo Discount</value>
   </data>
+  <data name="_validationUnitChargesLookup" xml:space="preserve">
+    <value>Data Not Found</value>
+  </data>
 </root>

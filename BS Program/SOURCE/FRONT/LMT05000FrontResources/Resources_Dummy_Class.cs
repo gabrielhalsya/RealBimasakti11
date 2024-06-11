@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace LMT05000FrontResources
+namespace PMT05000FrontResources
 {
     public class Resources_Dummy_Class
     {

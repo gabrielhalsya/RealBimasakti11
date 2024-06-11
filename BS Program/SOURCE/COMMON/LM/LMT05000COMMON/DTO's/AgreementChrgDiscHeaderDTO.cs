@@ -20,8 +20,6 @@ namespace PMT05000COMMON.DTO_s
         public string CAGREEMENT_TYPE { get; set; }
         public string CACTION { get; set; }
         public string CUSER_ID { get; set; }
-
-        
     }
 
     public class AgreementChrgDiscListParamDTO : AgreementChrgDiscHeaderDTO

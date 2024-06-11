@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace GLM00200Common
+namespace GLM00200COMMON
 {
     public class GLM00200ResultPrintDTO
     {

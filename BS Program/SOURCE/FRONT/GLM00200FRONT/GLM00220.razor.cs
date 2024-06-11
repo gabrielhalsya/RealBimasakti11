@@ -1,6 +1,6 @@
 ﻿using BlazorClientHelper;
-using GLM00200Common;
-using GLM00200Model;
+using GLM00200COMMON;
+using GLM00200MODEL;
 using GLTR00100COMMON;
 using GLTR00100FRONT;
 using Microsoft.AspNetCore.Components;
@@ -13,7 +13,7 @@ using R_BlazorFrontEnd.Helpers;
 using System.Globalization;
 using System.Xml.Linq;
 
-namespace GLM00200Front
+namespace GLM00200FRONT
 {
     public partial class GLM00220 : R_Page
     {

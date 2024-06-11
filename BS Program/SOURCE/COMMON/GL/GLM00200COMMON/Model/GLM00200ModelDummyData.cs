@@ -1,12 +1,12 @@
 ﻿using BaseHeaderReportCOMMON;
 using BaseHeaderReportCOMMON.Models;
-using GLM00200Common;
+using GLM00200COMMON;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 
-namespace GLM00200Common.Models
+namespace GLM00200COMMON.Models
 {
     public static class GenerateDataModelGLR00200
     {

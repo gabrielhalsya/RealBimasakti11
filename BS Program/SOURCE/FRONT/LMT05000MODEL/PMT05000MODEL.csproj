@@ -7,6 +7,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\COMMON\LM\LMT05000COMMON\PMT05000COMMON.csproj" />
+    <ProjectReference Include="..\LMT05000FrontResources\PMT05000FrontResources.csproj" />
   </ItemGroup>
 	<ItemGroup>
 		<Reference Include="R_APIClient">

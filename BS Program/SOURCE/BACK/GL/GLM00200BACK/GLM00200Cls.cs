@@ -1,4 +1,4 @@
-﻿using GLM00200Common;
+﻿using GLM00200COMMON;
 using R_BackEnd;
 using R_Common;
 using R_CommonFrontBackAPI;
@@ -7,7 +7,7 @@ using System.Data;
 using System.Transactions;
 using System.Data.SqlClient;
 using System.Diagnostics;
-using GLM00200Common.Loggers;
+using GLM00200COMMON.Loggers;
 using System.Reflection;
 
 namespace GLM00200BACK

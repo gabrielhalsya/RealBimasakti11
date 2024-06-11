@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace GLM00200FrontResources
+namespace GLM00200FRONTResources
 {
     public class Resources_Dummy_Class
     {

@@ -1,6 +1,6 @@
 ﻿using BlazorClientHelper;
-using GLM00200Common;
-using GLM00200Model;
+using GLM00200COMMON;
+using GLM00200MODEL;
 using Microsoft.AspNetCore.Components;
 using R_BlazorFrontEnd.Controls;
 using R_BlazorFrontEnd.Controls.DataControls;
@@ -9,7 +9,7 @@ using R_BlazorFrontEnd.Enums;
 using R_BlazorFrontEnd.Exceptions;
 using R_BlazorFrontEnd.Helpers;
 
-namespace GLM00200Front
+namespace GLM00200FRONT
 {
     public partial class ActualJournalList : R_Page
     {

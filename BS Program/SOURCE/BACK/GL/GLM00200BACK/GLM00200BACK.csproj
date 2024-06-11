@@ -11,7 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\COMMON\GL\GLM00200COMMON\GLM00200Common.csproj" />
+    <ProjectReference Include="..\..\..\COMMON\GL\GLM00200COMMON\GLM00200COMMON.csproj" />
     <ProjectReference Include="..\GLM00200BackResources\GLM00200BackResources.csproj" />
     <ProjectReference Include="..\GL_SPR\RSP_GL_PROCESS_RECURRINGResources\RSP_GL_PROCESS_RECURRINGResources.csproj" />
     <ProjectReference Include="..\GL_SPR\RSP_GL_SAVE_RECURRING_JRNResources\RSP_GL_SAVE_RECURRING_JRNResources.csproj" />

@@ -347,5 +347,14 @@ namespace PMT05000FrontResources {
                 return ResourceManager.GetString("_tabUndoDisc", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Data Not Found.
+        /// </summary>
+        internal static string _validationUnitChargesLookup {
+            get {
+                return ResourceManager.GetString("_validationUnitChargesLookup", resourceCulture);
+            }
+        }
     }
 }

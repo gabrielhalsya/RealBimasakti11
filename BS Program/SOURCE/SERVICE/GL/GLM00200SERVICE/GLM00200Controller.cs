@@ -1,6 +1,6 @@
 ﻿using GLM00200BACK;
-using GLM00200Common;
-using GLM00200Common.Loggers;
+using GLM00200COMMON;
+using GLM00200COMMON.Loggers;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using R_BackEnd;
