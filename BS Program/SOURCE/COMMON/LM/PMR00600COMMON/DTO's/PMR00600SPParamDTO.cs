@@ -11,18 +11,12 @@ namespace PMR00600COMMON.DTO_s
         public string CFROM_PERIOD { get; set; }
         public string CTO_PERIOD { get; set; }
         public string CFROM_BUILDING_ID { get; set; }
-        public string CFROM_BUILDING_NAME { get; set; }
         public string CTO_BUILDING_ID { get; set; }
-        public string CTO_BUILDING_NAME { get; set; }
         public string CFROM_DEPT_CODE { get; set; }
-        public string CFROM_DEPT_NAME { get; set; }
         public string CTO_DEPT_CODE { get; set; }
-        public string CTO_DEPT_NAME { get; set; }
         public string CREPORT_TYPE { get; set; }
         public string CFROM_TENANT_ID { get; set; }
-        public string CFROM_TENANT_NAME { get; set; }
         public string CTO_TENANT_ID { get; set; }
-        public string CTO_TENANT_NAME { get; set; }
         public string CFROM_SERVICE_ID { get; set; }
         public string CTO_SERVICE_ID { get; set; }
         public string CSTATUS { get; set; }

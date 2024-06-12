@@ -15,6 +15,7 @@ namespace PMR00600COMMON.DTO_s.Print
         public string TENANT_LABEL { get; set; } = "Tenant";
         public string SERVICE_LABEL { get; set; } = "Service";
         public string STATUS_LABEL { get; set; } = "Status";
+        public string AGREEMENT_LABEL { get; set; } = "LOI / Agreement No.";
         public string INVOICE_STATUS_LABEL { get; set; } = "Invoice Status";
         public string CHARGE_LABEL { get; set; } = "Charge";
         public string JANUARY_LABEL { get; set; } = "January";
