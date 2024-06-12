@@ -23,5 +23,13 @@ namespace DesignFormPM
         {
             _report = new Report();
         }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            ArrayList loData = new ArrayList();
+            loData.Add(PMR00600COMMON.DTO_s.Model.PMR00600DummyData.PMR00600PrintDislpayWithBaseHeader());
+            _report.RegisterData(loData, "ResponseDataModel");
+            _report.Design();
+        }
     }
 }

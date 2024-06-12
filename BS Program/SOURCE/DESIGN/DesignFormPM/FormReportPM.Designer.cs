@@ -29,25 +29,39 @@
         private void InitializeComponent()
         {
             PMR002000 = new Button();
+            button1 = new Button();
             SuspendLayout();
             // 
-            // button1
+            // PMR002000
             // 
-            PMR002000.Location = new Point(12, 12);
-            PMR002000.Name = "button1";
-            PMR002000.Size = new Size(500, 274);
+            PMR002000.Location = new Point(14, 16);
+            PMR002000.Margin = new Padding(3, 4, 3, 4);
+            PMR002000.Name = "PMR002000";
+            PMR002000.Size = new Size(571, 236);
             PMR002000.TabIndex = 0;
             PMR002000.Text = "PMR00200Summary";
             PMR002000.UseVisualStyleBackColor = true;
             PMR002000.Click += button1_Click;
             // 
-            // Form1
+            // button1
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            button1.Location = new Point(14, 270);
+            button1.Name = "button1";
+            button1.Size = new Size(571, 232);
+            button1.TabIndex = 1;
+            button1.Text = "PMR00600";
+            button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click_1;
+            // 
+            // FastReportPM
+            // 
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(914, 600);
+            Controls.Add(button1);
             Controls.Add(PMR002000);
-            Name = "Form1";
+            Margin = new Padding(3, 4, 3, 4);
+            Name = "FastReportPM";
             Text = "Form1";
             Load += DesignFormPMR_Load;
             ResumeLayout(false);
@@ -56,5 +70,6 @@
         #endregion
 
         private Button PMR002000;
+        private Button button1;
     }
 }

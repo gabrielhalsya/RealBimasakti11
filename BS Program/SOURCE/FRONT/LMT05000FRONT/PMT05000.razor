@@ -6,8 +6,8 @@
         <R_Label FontStyle="R_eFontStyle.Bold" FontColor="R_eFontColor.Danger">PROPERTY</R_Label>
     </R_ItemLayout>
     <R_ItemLayout col="3" Class="ms-1">
-        <R_DropDownList Data="@_pmt05000ViewModel._PropertyList"
-                        Value="@_pmt05000ViewModel._AgreementChrgDiscProcessParam.CPROPERTY_ID"
+        <R_DropDownList Data="@_agreementChrgDiscViewModel._PropertyList"
+                        Value="@_agreementChrgDiscViewModel._AgreementChrgDiscProcessParam.CPROPERTY_ID"
                         ValueField="@nameof(PropertyDTO.CPROPERTY_ID)"
                         TextField="@nameof(PropertyDTO.CPROPERTY_NAME)"
                         ValueChanged="@((string value) => ComboboxPropertyValueChanged(value))"
@@ -26,8 +26,8 @@
                 <R_Label>@_localizer["_labelChargeType"]</R_Label>
             </R_ItemLayout>
             <R_ItemLayout col="2">
-                <R_ComboBox Data="@_pmt05000ViewModel._ChargeTypeList"
-                            @bind-Value="@_pmt05000ViewModel._AgreementChrgDiscProcessParam.CCHARGES_TYPE"
+                <R_ComboBox Data="@_agreementChrgDiscViewModel._ChargeTypeList"
+                            @bind-Value="@_agreementChrgDiscViewModel._AgreementChrgDiscProcessParam.CCHARGES_TYPE"
                             ValueField="@nameof(GSB_CodeInfoDTO.CCODE)"
                             TextField="@nameof(GSB_CodeInfoDTO.CDESCRIPTION)" />
             </R_ItemLayout>
@@ -36,7 +36,7 @@
                 <R_Label>@_localizer["_labelCharge"]</R_Label>
             </R_ItemLayout>
             <R_ItemLayout col="2">
-                <R_TextBox @bind-Value="_pmt05000ViewModel._AgreementChrgDiscProcessParam.CCHARGES_ID"
+                <R_TextBox @bind-Value="_agreementChrgDiscViewModel._AgreementChrgDiscProcessParam.CCHARGES_ID"
                            R_ConductorSource="_conAgrChrgDisc"
                            Enabled="true"
                            MaxLength="int.MaxValue"
@@ -47,7 +47,7 @@
                 <R_Lookup R_ConductorSource="_conAgrChrgDisc" R_Before_Open_Lookup="@BeforeOpen_lookupUnitCharges" R_After_Open_Lookup="@AfterOpen_lookupUnitChargesAsync" TabIndex="2">...</R_Lookup>
             </R_ItemLayout>
             <R_ItemLayout>
-                <R_TextBox @bind-Value="_pmt05000ViewModel._chargesName" Enabled="false"></R_TextBox>
+                <R_TextBox @bind-Value="_agreementChrgDiscViewModel._chargesName" Enabled="false"></R_TextBox>
             </R_ItemLayout>
         </R_StackLayout>
 
@@ -57,7 +57,7 @@
                 <R_Label>@_localizer["_labelDiscount"]</R_Label>
             </R_ItemLayout>
             <R_ItemLayout col="2">
-                <R_TextBox @bind-Value="_pmt05000ViewModel._AgreementChrgDiscProcessParam.CDISCOUNT_CODE"
+                <R_TextBox @bind-Value="_agreementChrgDiscViewModel._AgreementChrgDiscProcessParam.CDISCOUNT_CODE"
                            R_ConductorSource="_conAgrChrgDisc"
                            Enabled="true"
                            MaxLength="int.MaxValue"
@@ -68,7 +68,7 @@
                 <R_Lookup R_ConductorSource="_conAgrChrgDisc" R_Before_Open_Lookup="@BeforeOpen_lookupDiscount" R_After_Open_Lookup="@AfterOpen_lookupDiscountAsync" TabIndex="2">...</R_Lookup>
             </R_ItemLayout>
             <R_ItemLayout>
-                <R_TextBox @bind-Value="_pmt05000ViewModel._discountName" Enabled="false"></R_TextBox>
+                <R_TextBox @bind-Value="_agreementChrgDiscViewModel._discountName" Enabled="false"></R_TextBox>
             </R_ItemLayout>
         </R_StackLayout>
     </R_TabStripTab>

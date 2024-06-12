@@ -25,7 +25,7 @@ namespace PMT05000FRONT
 {
     public partial class PMT05000 : R_Page
     {
-        private PMT05000ViewModel _pmt05000ViewModel = new PMT05000ViewModel();
+        private PMT05000ViewModel _agreementChrgDiscViewModel = new PMT05000ViewModel();
 
         private R_Conductor _conAgrChrgDisc;
 
@@ -44,7 +44,7 @@ namespace PMT05000FRONT
             var loEx = new R_Exception();
             try
             {
-                await _pmt05000ViewModel.InitAsync(_localizer);
+                await _agreementChrgDiscViewModel.InitAsync(_localizer);
             }
             catch (Exception ex)
             {
@@ -58,15 +58,15 @@ namespace PMT05000FRONT
             R_Exception loEx = new R_Exception();
             try
             {
-                _pmt05000ViewModel._AgreementChrgDiscProcessParam.CPROPERTY_ID = string.IsNullOrWhiteSpace(poParam) ? "" : poParam;
+                _agreementChrgDiscViewModel._AgreementChrgDiscProcessParam.CPROPERTY_ID = string.IsNullOrWhiteSpace(poParam) ? "" : poParam;
                 await Task.Delay(300);
-                if (_conAgrChrgDisc.R_ConductorMode == R_eConductorMode.Normal && _pmt05000ViewModel._AgreementChrgDiscProcessParam.CPROPERTY_ID != "")
+                if (_conAgrChrgDisc.R_ConductorMode == R_eConductorMode.Normal && _agreementChrgDiscViewModel._AgreementChrgDiscProcessParam.CPROPERTY_ID != "")
                 {
                     //sending property to another tab (will be catch at RefreshTabPageAsync)
                     switch (_tabStripAgrChrgDisc.ActiveTab.Id)
                     {
                         case nameof(PMT05001):
-                            await _tabUndoAgrChrgDisc.InvokeRefreshTabPageAsync(_pmt05000ViewModel._AgreementChrgDiscProcessParam.CPROPERTY_ID);
+                            await _tabUndoAgrChrgDisc.InvokeRefreshTabPageAsync(_agreementChrgDiscViewModel._AgreementChrgDiscProcessParam.CPROPERTY_ID);
                             break;
                     }
                 }
@@ -80,7 +80,7 @@ namespace PMT05000FRONT
 
         private void BeforeOpenTabPage_Undo(R_BeforeOpenTabPageEventArgs eventArgs)
         {
-            eventArgs.Parameter = _pmt05000ViewModel._AgreementChrgDiscProcessParam.CPROPERTY_ID;
+            eventArgs.Parameter = _agreementChrgDiscViewModel._AgreementChrgDiscProcessParam.CPROPERTY_ID;
             eventArgs.TargetPageType = typeof(PMT05001);
         }
 
@@ -144,7 +144,7 @@ namespace PMT05000FRONT
             }
             else
             {
-                _pmt05000ViewModel._AgreementChrgDiscListParam.CCHARGES_ID = loTempResult.CCHARGES_ID;
+                _agreementChrgDiscViewModel._AgreementChrgDiscListParam.CCHARGES_ID = loTempResult.CCHARGES_ID;
             }
         }
 
@@ -154,13 +154,13 @@ namespace PMT05000FRONT
 
             try
             {
-                if (!string.IsNullOrWhiteSpace(_pmt05000ViewModel._AgreementChrgDiscProcessParam.CCHARGES_ID))
+                if (!string.IsNullOrWhiteSpace(_agreementChrgDiscViewModel._AgreementChrgDiscProcessParam.CCHARGES_ID))
                 {
 
                     LookupLML00200ViewModel loLookupViewModel = new(); //use GSL's model
                     var loParam = new LML00200ParameterDTO // use match param as GSL's dto, send as type in search texbox
                     {
-                        CSEARCH_TEXT = _pmt05000ViewModel._AgreementChrgDiscProcessParam.CCHARGES_ID, // property that bindded to search textbox
+                        CSEARCH_TEXT = _agreementChrgDiscViewModel._AgreementChrgDiscProcessParam.CCHARGES_ID, // property that bindded to search textbox
                     };
                     var loResult = await loLookupViewModel.GetUnitCharges(loParam); //retrive single record
 
@@ -170,11 +170,11 @@ namespace PMT05000FRONT
                         loEx.Add(R_FrontUtility.R_GetError(
                                 typeof(Lookup_PMFrontResources.Resources_Dummy_Class_LookupPM),
                                 "_ErrLookup01"));
-                        _pmt05000ViewModel._AgreementChrgDiscProcessParam.CCHARGES_ID = ""; //kosongin bind textbox name kalo gaada
+                        _agreementChrgDiscViewModel._AgreementChrgDiscProcessParam.CCHARGES_ID = ""; //kosongin bind textbox name kalo gaada
                     }
                     else
                     {
-                        _pmt05000ViewModel._AgreementChrgDiscProcessParam.CCHARGES_ID = loResult.CCHARGES_ID;
+                        _agreementChrgDiscViewModel._AgreementChrgDiscProcessParam.CCHARGES_ID = loResult.CCHARGES_ID;
 
                     }
                 }
@@ -204,7 +204,7 @@ namespace PMT05000FRONT
             }
             else
             {
-                _pmt05000ViewModel._AgreementChrgDiscListParam.CCHARGES_ID = loTempResult.CCHARGES_ID;
+                _agreementChrgDiscViewModel._AgreementChrgDiscListParam.CCHARGES_ID = loTempResult.CCHARGES_ID;
             }
         }
 
@@ -214,13 +214,13 @@ namespace PMT05000FRONT
 
             try
             {
-                if (!string.IsNullOrWhiteSpace(_pmt05000ViewModel._AgreementChrgDiscProcessParam.CCHARGES_ID))
+                if (!string.IsNullOrWhiteSpace(_agreementChrgDiscViewModel._AgreementChrgDiscProcessParam.CCHARGES_ID))
                 {
 
                     LookupLML00200ViewModel loLookupViewModel = new(); //use GSL's model
                     var loParam = new LML00200ParameterDTO // use match param as GSL's dto, send as type in search texbox
                     {
-                        CSEARCH_TEXT = _pmt05000ViewModel._AgreementChrgDiscProcessParam.CCHARGES_ID, // property that bindded to search textbox
+                        CSEARCH_TEXT = _agreementChrgDiscViewModel._AgreementChrgDiscProcessParam.CCHARGES_ID, // property that bindded to search textbox
                     };
                     var loResult = await loLookupViewModel.GetUnitCharges(loParam); //retrive single record
 
@@ -230,11 +230,11 @@ namespace PMT05000FRONT
                         loEx.Add(R_FrontUtility.R_GetError(
                                 typeof(Lookup_PMFrontResources.Resources_Dummy_Class_LookupPM),
                                 "_ErrLookup01"));
-                        _pmt05000ViewModel._AgreementChrgDiscProcessParam.CCHARGES_ID = ""; //kosongin bind textbox name kalo gaada
+                        _agreementChrgDiscViewModel._AgreementChrgDiscProcessParam.CCHARGES_ID = ""; //kosongin bind textbox name kalo gaada
                     }
                     else
                     {
-                        _pmt05000ViewModel._AgreementChrgDiscProcessParam.CCHARGES_ID = loResult.CCHARGES_ID;
+                        _agreementChrgDiscViewModel._AgreementChrgDiscProcessParam.CCHARGES_ID = loResult.CCHARGES_ID;
 
                     }
                 }
