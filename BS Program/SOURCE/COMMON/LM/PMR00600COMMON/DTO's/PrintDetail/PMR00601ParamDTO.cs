@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Text;
 
-namespace PMR00600COMMON.DTO_s.Print
+namespace PMR00600COMMON.DTO_s.PrintDetail
 {
-    public class PMR00600ParamDTO : PMR00600SPParamDTO
+    public class PMR00601ParamDTO : PMR00600SPParamDTO
     {
+        public bool LIS_DETAIL_BY_TENANT { get; set; }
+        public bool LIS_DETAIL_BY_CHARGES { get; set; }
         public string CFROM_BUILDING_NAME { get; set; }
         public string CTO_BUILDING_NAME { get; set; }
         public string CPROPERTY_NAME { get; set; }
@@ -22,6 +24,7 @@ namespace PMR00600COMMON.DTO_s.Print
         public bool LSERVICE { get; set; }
         public bool LSTATUS { get; set; }
         public bool LINVOICE { get; set; }
+
         public string CPERIOD_DISPLAY
         {
             get
@@ -46,7 +49,5 @@ namespace PMR00600COMMON.DTO_s.Print
         public string CSERVICE_DISPLAY => CFROM_SERVICE_ID != CTO_SERVICE_ID
             ? $"{CFROM_SERVICE_NAME} ({CFROM_SERVICE_ID}) - {CTO_SERVICE_NAME} ({CTO_SERVICE_ID})"
             : $"{CFROM_SERVICE_NAME} ({CFROM_SERVICE_ID})";
-
-
     }
 }

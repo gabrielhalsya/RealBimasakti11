@@ -31,5 +31,13 @@ namespace DesignFormPM
             _report.RegisterData(loData, "ResponseDataModel");
             _report.Design();
         }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            ArrayList loData = new ArrayList();
+            loData.Add(PMR00600COMMON.Model.PMR00601DummyData.PMR00601PrintDislpayWithBaseHeader());
+            _report.RegisterData(loData, "ResponseDataModel");
+            _report.Design();
+        }
     }
 }
