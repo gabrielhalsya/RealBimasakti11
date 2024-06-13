@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using PMR00200BACK;
-using PMR00200COMMON;
+using PMR00600BACK;
+using PMR00600COMMON;
 using R_BackEnd;
 using R_Common;
 using R_CommonFrontBackAPI.Log;
@@ -12,27 +12,28 @@ using System.Collections;
 using System.Diagnostics;
 using System.Globalization;
 using R_Cache;
-using PMR00200COMMON.Print_DTO;
+using PMR00600COMMON.DTO_s;
 using System.Reflection;
 using BaseHeaderReportCOMMON;
 using System.Runtime.CompilerServices;
 using Microsoft.AspNetCore.Identity;
-using PMR00200PrintLogKey = PMR00200COMMON.PMR00200PrintLogKey;
+using PMR00600PrintLogKey = PMR00600COMMON.PMR00600PrintLogKey;
+using PMR00600COMMON.DTO_s.Print;
 
-namespace PMR00200SERVICE
+namespace PMR00600SERVICE
 {
-    public class PMR00210PrintController : R_ReportControllerBase
+    public class PMR00600PrintController : R_ReportControllerBase
     {
-        private PMR00200PrintLogger _logger;
+        private PMR00600PrintLogger _logger;
         private R_ReportFastReportBackClass _ReportCls;
-        private PMR00200PrintParamDTO _Parameter;
+        private PMR00600ParamDTO _Parameter;
         private readonly ActivitySource _activitySource;
 
-        public PMR00210PrintController(ILogger<PMR00200PrintLogger> logger)
+        public PMR00600PrintController(ILogger<PMR00600PrintLogger> logger)
         {
-            PMR00200PrintLogger.R_InitializeLogger(logger);
-            _logger = PMR00200PrintLogger.R_GetInstanceLogger();
-            _activitySource = PMR00200Activity.R_InitializeAndGetActivitySource(nameof(PMR00210PrintController));
+            PMR00600PrintLogger.R_InitializeLogger(logger);
+            _logger = PMR00600PrintLogger.R_GetInstanceLogger();
+            _activitySource = PMR00600Activity.R_InitializeAndGetActivitySource(nameof(PMR00600PrintController));
 
 
             _ReportCls = new R_ReportFastReportBackClass();
@@ -45,7 +46,7 @@ namespace PMR00200SERVICE
 
         private void _ReportCls_R_InstantiateMainReportWithFileName(ref string pcFileTemplate)
         {
-            pcFileTemplate = System.IO.Path.Combine("Reports", "PMR00200Summary.frx");
+            pcFileTemplate = System.IO.Path.Combine("Reports", "PMR00600Summary.frx");
         }
 
         private void _ReportCls_R_GetMainDataAndName(ref ArrayList poData, ref string pcDataSourceName)
@@ -66,17 +67,17 @@ namespace PMR00200SERVICE
         #endregion
 
         [HttpPost]
-        public R_DownloadFileResultDTO DownloadResultPrintPost(PMR00200PrintParamDTO poParameter)
+        public R_DownloadFileResultDTO DownloadResultPrintPost(PMR00600ParamDTO poParameter)
         {
             using Activity activity = _activitySource.StartActivity($"{GetType().Name}.{MethodBase.GetCurrentMethod().Name}");
             _logger.LogInfo("Start - Post DownloadResultPrintPost Status");
             R_Exception loException = new R_Exception();
-            PMR00200PrintLogKey loCache = null;
+            PMR00600PrintLogKey loCache = null;
             R_DownloadFileResultDTO loRtn = null;
             try
             {
                 loRtn = new R_DownloadFileResultDTO();
-                loCache = new PMR00200PrintLogKey
+                loCache = new PMR00600PrintLogKey
                 {
                     poParam = poParameter,
                     poLogKey = (R_NetCoreLogKeyDTO)R_NetCoreLogAsyncStorage.GetData(R_NetCoreLogConstant.LOG_KEY)
@@ -102,11 +103,11 @@ namespace PMR00200SERVICE
 
             R_Exception loException = new R_Exception();
             FileStreamResult loRtn = null;
-            PMR00200PrintLogKey loResultGUID = null;
+            PMR00600PrintLogKey loResultGUID = null;
             try
             {
                 // Deserialize the GUID from the cache
-                loResultGUID = R_NetCoreUtility.R_DeserializeObjectFromByte<PMR00200PrintLogKey>(R_DistributedCache.Cache.Get(pcGuid));
+                loResultGUID = R_NetCoreUtility.R_DeserializeObjectFromByte<PMR00600PrintLogKey>(R_DistributedCache.Cache.Get(pcGuid));
                 _logger.LogDebug("Deserialized GUID: {pcGuid}", pcGuid);
 
                 // Get Parameter
@@ -135,12 +136,12 @@ namespace PMR00200SERVICE
 
         #region Helper
 
-        private PMR00200PrintDislpayWithBaseHeaderDTO GenerateDataPrint(PMR00200PrintParamDTO poParam)
+        private PMR00600PrintDisplayDTO GenerateDataPrint(PMR00600ParamDTO poParam)
         {
             using Activity activity = _activitySource.StartActivity($"{GetType().Name}.{MethodBase.GetCurrentMethod().Name}");
 
             var loEx = new R_Exception();
-            PMR00200PrintDislpayWithBaseHeaderDTO loRtn = new PMR00200PrintDislpayWithBaseHeaderDTO();
+            PMR00600PrintDisplayDTO loRtn = new PMR00600PrintDisplayDTO();
             var loParam = new BaseHeaderDTO();
 
             System.Globalization.CultureInfo loCultureInfo =
@@ -160,9 +161,8 @@ namespace PMR00200SERVICE
                 loRtn.BaseHeaderColumn.Print_By = R_Utility.R_GetMessage(typeof(BaseHeaderResources.Resources_Dummy_Class),
                     "Print_By", loCultureInfo);
 
-                PMR00200SummaryColumnDTO loColumnObject = new PMR00200SummaryColumnDTO();
-                var loColumn = AssignValuesWithMessages(typeof(PMR00200BackResources.Resources_Dummy_Class),
-                    loCultureInfo, loColumnObject);
+                PMR00600LabelDTO loColumnObject = new PMR00600LabelDTO();
+                //var loColumn = AssignValuesWithMessages(typeof(PMR00600BackResources.Resources_Dummy_Class), loCultureInfo, loColumnObject);
 
                 // Set base header data
                 _logger.LogDebug("Deserialized Print Parameters: {@PrintParameters}");
@@ -173,79 +173,27 @@ namespace PMR00200SERVICE
                 loParam.CUSER_ID = R_BackGlobalVar.USER_ID.ToUpper();
 
                 // Create an instance of PMR01000PrintGOAResultDTo
-                PMR00200PrintDisplayDTO loData = new PMR00200PrintDisplayDTO()
+                PMR00600ReportDataDTO loData = new PMR00600ReportDataDTO()
                 {
                     Title = "LOI Status",
                     Header = "LOI Status Summary",
-                    Column = new PMR00200SummaryColumnDTO(),
-                    Data = new List<PMR00200DataResultDTO>(),
-                    HeaderParam = poParam
+                    Label = new PMR00600LabelDTO(),
+                    Param = poParam,
+                    Data = new List<PMR00600DataDTO>(),
                 };
 
                 // Create an instance of PMR01000Cls
-                var loCls = new PMR00200Cls();
+                var loCls = new PMR00600Cls();
                 poParam.CLANG_ID = R_BackGlobalVar.CULTURE;
                 poParam.CCOMPANY_ID = R_BackGlobalVar.COMPANY_ID;
 
                 // Get print data for Group Of Account report
-                var loCollData = loCls.GetReportData(poParam);
+                var loCollData = loCls.GetSummaryData(poParam);
                 _logger.LogInfo("Data generation successful. Processing data for printing.");
-
-
-                // Process the data and create a formatted list
-                var loTempData = loCollData.GroupBy(data1a => new
-                {
-                    data1a.CTRANS_CODE,
-                    data1a.CTRANS_NAME,
-                }).Select(data1b => new PMR00200DataResultDTO()
-                {
-                    CTRANS_CODE = data1b.Key.CTRANS_CODE,
-                    CTRANS_NAME = data1b.Key.CTRANS_NAME,
-                    Detail1 = data1b.GroupBy(data2a => new
-                    {
-                        data2a.CSALESMAN_ID,
-                        data2a.CSALESMAN_NAME,
-
-                    }).Select(data2b => new PMR00200DataRes1()
-                    {
-                        CSALESMAN_ID = data2b.Key.CSALESMAN_ID,
-                        CSALESMAN_NAME = data2b.Key.CSALESMAN_NAME,
-                        Detail2 = data2b.GroupBy(data2b => new
-                        {
-                            data2b.CREF_NO,
-                            data2b.CREF_DATE,
-                            data2b.CTENURE,
-                            data2b.NTOTAL_GROSS_AREA_SIZE,
-                            data2b.NTOTAL_NET_AREA_SIZE,
-                            data2b.NTOTAL_COMMON_AREA_SIZE,
-                            data2b.CTRANS_STATUS_NAME,
-                            data2b.NTOTAL_PRICE,
-                            data2b.CTAX,
-                            data2b.CTENANT_ID,
-                            data2b.CTENANT_NAME,
-                            data2b.CTC_MESSAGE,
-                        }).Select(data3b => new PMR00200DataRes2()
-                        {
-                            CREF_NO = data3b.Key.CREF_NO,
-                            CREF_DATE = data3b.Key.CREF_DATE,
-                            CTENURE = data3b.Key.CTENURE,
-                            NTOTAL_GROSS_AREA_SIZE = data3b.Key.NTOTAL_GROSS_AREA_SIZE,
-                            NTOTAL_NET_AREA_SIZE = data3b.Key.NTOTAL_NET_AREA_SIZE,
-                            NTOTAL_COMMON_AREA_SIZE = data3b.Key.NTOTAL_COMMON_AREA_SIZE,
-                            CTRANS_STATUS_NAME = data3b.Key.CTRANS_STATUS_NAME,
-                            NTOTAL_PRICE = data3b.Key.NTOTAL_PRICE,
-                            CTAX = data3b.Key.CTAX,
-                            CTENANT_ID = data3b.Key.CTENANT_ID,
-                            CTENANT_NAME = data3b.Key.CTENANT_NAME,
-                            CTC_MESSAGE = data3b.Key.CTC_MESSAGE,
-                        }).ToList()
-                    }).ToList()
-                }).ToList();
 
                 // Set the generated data in loRtn
                 _logger.LogInfo("Data processed successfully. Generating print output.");
-                loData.Data = loTempData;
-                loRtn.SummaryData = loData;
+                //loData.Data = new List<PMR00600DataDTO>(loCollData);
                 loRtn.BaseHeaderData = loParam;
 
                 _logger.LogInfo("Print output generated successfully. Saving print file.");
