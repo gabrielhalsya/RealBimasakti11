@@ -34,6 +34,5 @@ namespace PMR00600COMMON.DTO_s.Print
         public string GRANDTOTAL_LABEL { get; set; } = "Grand Total";
         public string LABEL_TENANT { get; set; }="Tenant";
         public string LABEL_CHARGE { get; set; } = "Charge";
-
     }
 }

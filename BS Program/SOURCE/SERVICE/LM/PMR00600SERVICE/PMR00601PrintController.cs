@@ -22,18 +22,18 @@ using PMR00600COMMON.DTO_s.Print;
 
 namespace PMR00600SERVICE
 {
-    public class PMR00600PrintController : R_ReportControllerBase
+    public class PMR00601PrintController : R_ReportControllerBase
     {
         private PMR00600PrintLogger _logger;
         private R_ReportFastReportBackClass _ReportCls;
         private PMR00600ParamDTO _Parameter;
         private readonly ActivitySource _activitySource;
 
-        public PMR00600PrintController(ILogger<PMR00600PrintLogger> logger)
+        public PMR00601PrintController(ILogger<PMR00600PrintLogger> logger)
         {
             PMR00600PrintLogger.R_InitializeLogger(logger);
             _logger = PMR00600PrintLogger.R_GetInstanceLogger();
-            _activitySource = PMR00600Activity.R_InitializeAndGetActivitySource(nameof(PMR00600PrintController));
+            _activitySource = PMR00600Activity.R_InitializeAndGetActivitySource(nameof(PMR00601PrintController));
 
 
             _ReportCls = new R_ReportFastReportBackClass();
@@ -46,7 +46,7 @@ namespace PMR00600SERVICE
 
         private void _ReportCls_R_InstantiateMainReportWithFileName(ref string pcFileTemplate)
         {
-            pcFileTemplate = System.IO.Path.Combine("Reports", "PMR00600SummaryByTenant.frx");
+            pcFileTemplate = System.IO.Path.Combine("Reports","PMR00600SummaryByCharges.frx");
         }
 
         private void _ReportCls_R_GetMainDataAndName(ref ArrayList poData, ref string pcDataSourceName)
@@ -92,7 +92,7 @@ namespace PMR00600SERVICE
             }
 
             loException.ThrowExceptionIfErrors();
-            _logger.LogInfo("End - Print LOI Status");
+            _logger.LogInfo("End - Print Overtime");
             return loRtn;
         }
 
@@ -130,7 +130,7 @@ namespace PMR00600SERVICE
             }
 
             loException.ThrowExceptionIfErrors();
-            _logger.LogInfo("End - LOI Status Report Generation");
+            _logger.LogInfo("End - Overtime Report Generation");
             return loRtn;
         }
 
@@ -149,7 +149,7 @@ namespace PMR00600SERVICE
 
             try
             {
-                _logger.LogInfo("_logger.LogInfo(\"Start - Generating data for Print\");\n data for LOI Status report.");
+                _logger.LogInfo("_logger.LogInfo(\"Start - Generating data for Print\");\n data for Overtime report.");
 
                 //Add Resources
                 loRtn.BaseHeaderColumn.Page = R_Utility.R_GetMessage(typeof(BaseHeaderResources.Resources_Dummy_Class),
@@ -169,14 +169,14 @@ namespace PMR00600SERVICE
 
                 loParam.CCOMPANY_NAME = R_BackGlobalVar.COMPANY_ID.ToUpper();
                 loParam.CPRINT_CODE = "001";
-                loParam.CPRINT_NAME = "Overtime Summary Group By Tenant Report";
+                loParam.CPRINT_NAME = "Overtime Summary Group By Charge Report";
                 loParam.CUSER_ID = R_BackGlobalVar.USER_ID.ToUpper();
 
                 // Create an instance of PMR01000PrintGOAResultDTo
                 PMR00600ReportDataDTO loData = new PMR00600ReportDataDTO()
                 {
                     Title = "Overtime",
-                    Header = "Overtime Summary Group By Tenant Report",
+                    Header = "Overtime Summary Group By Charge Report",
                     Label = new PMR00600LabelDTO(),
                     Param = poParam,
                     Data = new List<PMR00600DataDTO>(),

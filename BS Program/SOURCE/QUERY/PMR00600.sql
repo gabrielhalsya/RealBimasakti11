@@ -6,7 +6,7 @@ EXEC RSP_PMR00600_GET_REPORT 'RCD'
 , ''
 , ''
 , ''
-, '1'
+, '2'
 , ''
 , ''
 , ''
@@ -19,3 +19,12 @@ SELECT p.name AS ParameterName, t.name AS ParameterType, p.max_length AS Paramet
 FROM sys.parameters AS p
 JOIN sys.types AS t ON t.user_type_id = p.user_type_id
 WHERE object_id = OBJECT_ID('RSP_PMR00600_GET_REPORT')
+
+EXEC RSP_GS_GET_PERIOD_YEAR_RANGE 
+'RCD'
+, ''
+, ''
+
+EXEC RSP_GS_GET_PROPERTY_LIST
+'RCD'
+, 'ghc'

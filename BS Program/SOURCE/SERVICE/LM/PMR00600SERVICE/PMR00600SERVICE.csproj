@@ -8,6 +8,7 @@
 
 	<ItemGroup>
 		<FrameworkReference Include="Microsoft.AspNetCore.App" />
+		<ProjectReference Include="..\..\..\BACK\LM\PMR00600BackResources\PMR00600BackResources.csproj" />
 		<ProjectReference Include="..\..\..\BACK\LM\PMR00600BACK\PMR00600BACK.csproj" />
 		<ProjectReference Include="..\..\..\COMMON\LM\PMR00600COMMON\PMR00600COMMON.csproj" />
 		<ProjectReference Include="..\..\..\COMMON\BaseHeaderCOMMON\BaseHeaderResources\BaseHeaderResources.csproj" />
