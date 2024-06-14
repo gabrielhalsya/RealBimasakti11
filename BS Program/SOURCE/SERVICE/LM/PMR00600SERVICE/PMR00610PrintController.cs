@@ -22,18 +22,18 @@ using PMR00600COMMON.DTO_s.Print;
 
 namespace PMR00600SERVICE
 {
-    public class PMR00600PrintController : R_ReportControllerBase
+    public class PMR00610PrintController : R_ReportControllerBase
     {
         private PMR00600PrintLogger _logger;
         private R_ReportFastReportBackClass _ReportCls;
         private PMR00600ParamDTO _Parameter;
         private readonly ActivitySource _activitySource;
 
-        public PMR00600PrintController(ILogger<PMR00600PrintLogger> logger)
+        public PMR00610PrintController(ILogger<PMR00600PrintLogger> logger)
         {
             PMR00600PrintLogger.R_InitializeLogger(logger);
             _logger = PMR00600PrintLogger.R_GetInstanceLogger();
-            _activitySource = PMR00600Activity.R_InitializeAndGetActivitySource(nameof(PMR00600PrintController));
+            _activitySource = PMR00600Activity.R_InitializeAndGetActivitySource(nameof(PMR00610PrintController));
 
 
             _ReportCls = new R_ReportFastReportBackClass();
@@ -92,12 +92,12 @@ namespace PMR00600SERVICE
             }
 
             loException.ThrowExceptionIfErrors();
-            _logger.LogInfo("End - Print LOI Status");
+            _logger.LogInfo("End - Print Overtime");
             return loRtn;
         }
 
         [HttpGet, AllowAnonymous]
-        public FileStreamResult LOIStatsSummary_ReportListGet(string pcGuid)
+        public FileStreamResult OvertimeSummaryByTenant_ReportListGet(string pcGuid)
         {
             using Activity activity = _activitySource.StartActivity($"{GetType().Name}.{MethodBase.GetCurrentMethod().Name}");
 
@@ -130,7 +130,7 @@ namespace PMR00600SERVICE
             }
 
             loException.ThrowExceptionIfErrors();
-            _logger.LogInfo("End - LOI Status Report Generation");
+            _logger.LogInfo("End - Overtime Report Generation");
             return loRtn;
         }
 
@@ -149,7 +149,7 @@ namespace PMR00600SERVICE
 
             try
             {
-                _logger.LogInfo("_logger.LogInfo(\"Start - Generating data for Print\");\n data for LOI Status report.");
+                _logger.LogInfo("_logger.LogInfo(\"Start - Generating data for Print\");\n data for Overtime report.");
 
                 //Add Resources
                 loRtn.BaseHeaderColumn.Page = R_Utility.R_GetMessage(typeof(BaseHeaderResources.Resources_Dummy_Class),

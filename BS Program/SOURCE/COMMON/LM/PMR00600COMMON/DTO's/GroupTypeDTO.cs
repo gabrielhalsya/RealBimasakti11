@@ -4,7 +4,7 @@ using System.Text;
 
 namespace PMR00600COMMON.DTO_s
 {
-    public class ReportTypeDTO : GeneralTypeDTO
+    public class GroupTypeDTO : GeneralTypeDTO
     {
     }
 }

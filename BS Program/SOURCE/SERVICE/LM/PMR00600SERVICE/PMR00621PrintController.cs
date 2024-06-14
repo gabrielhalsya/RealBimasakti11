@@ -1,39 +1,38 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using BaseHeaderReportCOMMON;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using PMR00600BACK;
 using PMR00600COMMON;
+using PMR00600COMMON.DTO_s;
+using PMR00600COMMON.DTO_s.Print;
+using PMR00600COMMON.DTO_s.PrintDetail;
 using R_BackEnd;
+using R_Cache;
 using R_Common;
-using R_CommonFrontBackAPI.Log;
 using R_CommonFrontBackAPI;
+using R_CommonFrontBackAPI.Log;
 using R_ReportFastReportBack;
 using System.Collections;
 using System.Diagnostics;
 using System.Globalization;
-using R_Cache;
-using PMR00600COMMON.DTO_s;
 using System.Reflection;
-using BaseHeaderReportCOMMON;
-using System.Runtime.CompilerServices;
-using Microsoft.AspNetCore.Identity;
 using PMR00600PrintLogKey = PMR00600COMMON.PMR00600PrintLogKey;
-using PMR00600COMMON.DTO_s.Print;
 
 namespace PMR00600SERVICE
 {
-    public class PMR00601PrintController : R_ReportControllerBase
+    public class PMR00621PrintController : R_ReportControllerBase
     {
         private PMR00600PrintLogger _logger;
         private R_ReportFastReportBackClass _ReportCls;
         private PMR00600ParamDTO _Parameter;
         private readonly ActivitySource _activitySource;
 
-        public PMR00601PrintController(ILogger<PMR00600PrintLogger> logger)
+        public PMR00621PrintController(ILogger<PMR00600PrintLogger> logger)
         {
             PMR00600PrintLogger.R_InitializeLogger(logger);
             _logger = PMR00600PrintLogger.R_GetInstanceLogger();
-            _activitySource = PMR00600Activity.R_InitializeAndGetActivitySource(nameof(PMR00601PrintController));
+            _activitySource = PMR00600Activity.R_InitializeAndGetActivitySource(nameof(PMR00621PrintController));
 
 
             _ReportCls = new R_ReportFastReportBackClass();
@@ -46,7 +45,7 @@ namespace PMR00600SERVICE
 
         private void _ReportCls_R_InstantiateMainReportWithFileName(ref string pcFileTemplate)
         {
-            pcFileTemplate = System.IO.Path.Combine("Reports","PMR00600SummaryByCharges.frx");
+            pcFileTemplate = System.IO.Path.Combine("Reports", "PMR00600DetailByTenant.frx");
         }
 
         private void _ReportCls_R_GetMainDataAndName(ref ArrayList poData, ref string pcDataSourceName)
@@ -97,7 +96,7 @@ namespace PMR00600SERVICE
         }
 
         [HttpGet, AllowAnonymous]
-        public FileStreamResult LOIStatsSummary_ReportListGet(string pcGuid)
+        public FileStreamResult OvertimeDetailByTenant_ReportListGet(string pcGuid)
         {
             using Activity activity = _activitySource.StartActivity($"{GetType().Name}.{MethodBase.GetCurrentMethod().Name}");
 
@@ -136,12 +135,12 @@ namespace PMR00600SERVICE
 
         #region Helper
 
-        private PMR00600PrintDisplayDTO GenerateDataPrint(PMR00600ParamDTO poParam)
+        private PMR00601PrintDisplayDTO GenerateDataPrint(PMR00601ParamDTO poParam)
         {
             using Activity activity = _activitySource.StartActivity($"{GetType().Name}.{MethodBase.GetCurrentMethod().Name}");
 
             var loEx = new R_Exception();
-            PMR00600PrintDisplayDTO loRtn = new PMR00600PrintDisplayDTO();
+            PMR00601PrintDisplayDTO loRtn = new PMR00601PrintDisplayDTO();
             var loParam = new BaseHeaderDTO();
 
             System.Globalization.CultureInfo loCultureInfo =
@@ -161,7 +160,7 @@ namespace PMR00600SERVICE
                 loRtn.BaseHeaderColumn.Print_By = R_Utility.R_GetMessage(typeof(BaseHeaderResources.Resources_Dummy_Class),
                     "Print_By", loCultureInfo);
 
-                PMR00600LabelDTO loColumnObject = new PMR00600LabelDTO();
+                PMR00601LabelDTO loColumnObject = new PMR00601LabelDTO();
                 var loColumn = AssignValuesWithMessages(typeof(PMR00600BackResources.Resources_Dummy_Class), loCultureInfo, loColumnObject);
 
                 // Set base header data
@@ -169,17 +168,18 @@ namespace PMR00600SERVICE
 
                 loParam.CCOMPANY_NAME = R_BackGlobalVar.COMPANY_ID.ToUpper();
                 loParam.CPRINT_CODE = "001";
-                loParam.CPRINT_NAME = "Overtime Summary Group By Charge Report";
+                loParam.CPRINT_NAME = "Overtime Detail Group By Tenant Report";
                 loParam.CUSER_ID = R_BackGlobalVar.USER_ID.ToUpper();
 
                 // Create an instance of PMR01000PrintGOAResultDTo
-                PMR00600ReportDataDTO loData = new PMR00600ReportDataDTO()
+                PMR00601ReportDataDTO loData = new PMR00601ReportDataDTO()
                 {
                     Title = "Overtime",
-                    Header = "Overtime Summary Group By Charge Report",
-                    Label = new PMR00600LabelDTO(),
+                    Header = "Overtime Detail Group By Tenant" +
+                    " Report",
+                    Label = new PMR00601LabelDTO(),
                     Param = poParam,
-                    Data = new List<PMR00600DataDTO>(),
+                    Data = new List<PMR00601DataDTO>(),
                 };
 
                 // Create an instance of PMR01000Cls
@@ -188,13 +188,13 @@ namespace PMR00600SERVICE
                 poParam.CCOMPANY_ID = R_BackGlobalVar.COMPANY_ID;
 
                 // Get print data for Group Of Account report
-                var loCollData = loCls.GetSummaryData(poParam);
+                var loCollData = loCls.GetDetailData(poParam);
                 _logger.LogInfo("Data generation successful. Processing data for printing.");
 
                 // Set the generated data in loRtn
                 _logger.LogInfo("Data processed successfully. Generating print output.");
-                var loMappingData = R_Utility.R_ConvertCollectionToCollection<PMR00600SPResultDTO,PMR00600DataDTO>(loCollData);
-                loData.Data = new List<PMR00600DataDTO>(loMappingData);
+                var loMappingData = R_Utility.R_ConvertCollectionToCollection<PMR00601SPResultDTO,PMR00601DataDTO>(loCollData);
+                loData.Data = new List<PMR00601DataDTO>(loMappingData);
                 loRtn.BaseHeaderData = loParam;
 
                 _logger.LogInfo("Print output generated successfully. Saving print file.");
