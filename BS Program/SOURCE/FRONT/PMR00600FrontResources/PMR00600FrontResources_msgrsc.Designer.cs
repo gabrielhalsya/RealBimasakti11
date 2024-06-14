@@ -124,6 +124,15 @@ namespace PMR00600FrontResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Month.
+        /// </summary>
+        internal static string _label_Month {
+            get {
+                return ResourceManager.GetString("_label_Month", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Period.
         /// </summary>
         internal static string _label_Period {
@@ -169,6 +178,15 @@ namespace PMR00600FrontResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to -.
+        /// </summary>
+        internal static string _label_symbol_ {
+            get {
+                return ResourceManager.GetString("_label_symbol-", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Tenant.
         /// </summary>
         internal static string _label_Tenant {
@@ -187,20 +205,29 @@ namespace PMR00600FrontResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Charges.
+        ///   Looks up a localized string similar to Year.
         /// </summary>
-        internal static string _radio_Charges {
+        internal static string _label_Year {
             get {
-                return ResourceManager.GetString("_radio_Charges", resourceCulture);
+                return ResourceManager.GetString("_label_Year", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Data.
+        ///   Looks up a localized string similar to Charge.
         /// </summary>
-        internal static string _radio_Data {
+        internal static string _radio_Charge {
             get {
-                return ResourceManager.GetString("_radio_Data", resourceCulture);
+                return ResourceManager.GetString("_radio_Charge", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Detail.
+        /// </summary>
+        internal static string _radio_Detail {
+            get {
+                return ResourceManager.GetString("_radio_Detail", resourceCulture);
             }
         }
         

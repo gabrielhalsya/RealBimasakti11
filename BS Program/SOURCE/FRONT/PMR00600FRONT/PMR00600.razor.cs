@@ -33,6 +33,7 @@ namespace PMR00600FRONT
         [Inject] private R_IReport _reportService { get; set; }
 
         private R_RadioGroup<ReportTypeDTO, string> _radioReportType;
+        private R_RadioGroup<GroupTypeDTO, string> _radioGroupingType;
         protected override async Task R_Init_From_Master(object poParameter)
         {
 
@@ -78,8 +79,8 @@ namespace PMR00600FRONT
                 var loValidate = await R_MessageBox.Show("", _localizer["_validationDeptFromResult"], R_eMessageBoxButtonType.OK);
                 return;
             }
-            _viewModel._ReportParam.CFROM_DEPARTMENT_ID = loTempResult.CDEPT_CODE;
-            _viewModel._ReportParam.CFROM_DEPARTMENT_NAME = loTempResult.CDEPT_CODE;
+            _viewModel._ReportParam.CFROM_DEPT_CODE = loTempResult.CDEPT_CODE;
+            _viewModel._ReportParam.CFROM_DEPT_NAME = loTempResult.CDEPT_CODE;
         }
         private async Task OnLostFocus_LookupFromDept()
         {
@@ -87,13 +88,13 @@ namespace PMR00600FRONT
 
             try
             {
-                if (!string.IsNullOrWhiteSpace(_viewModel._ReportParam.CFROM_DEPARTMENT_ID))
+                if (!string.IsNullOrWhiteSpace(_viewModel._ReportParam.CFROM_DEPT_CODE))
                 {
 
                     LookupGSL00700ViewModel loLookupViewModel = new LookupGSL00700ViewModel(); //use GSL's model
                     var loParam = new GSL00700ParameterDTO // use match param as GSL's dto, send as type in search texbox
                     {
-                        CSEARCH_TEXT = _viewModel._ReportParam.CFROM_DEPARTMENT_ID, // property that bindded to search textbox
+                        CSEARCH_TEXT = _viewModel._ReportParam.CFROM_DEPT_CODE, // property that bindded to search textbox
                     };
                     var loResult = await loLookupViewModel.GetDepartment(loParam); //retrive single record 
 
@@ -103,11 +104,11 @@ namespace PMR00600FRONT
                         loEx.Add(R_FrontUtility.R_GetError(
                                 typeof(Lookup_GSFrontResources.Resources_Dummy_Class),
                                 "_ErrLookup01"));
-                        _viewModel._ReportParam.CFROM_DEPARTMENT_NAME = ""; //kosongin bind textbox name kalo gaada
+                        _viewModel._ReportParam.CFROM_DEPT_NAME = ""; //kosongin bind textbox name kalo gaada
                         goto EndBlock;
                     }
-                    _viewModel._ReportParam.CFROM_DEPARTMENT_ID = loResult.CDEPT_CODE;
-                    _viewModel._ReportParam.CFROM_DEPARTMENT_NAME = loResult.CDEPT_NAME; //assign bind textbox name kalo ada
+                    _viewModel._ReportParam.CFROM_DEPT_CODE = loResult.CDEPT_CODE;
+                    _viewModel._ReportParam.CFROM_DEPT_NAME = loResult.CDEPT_NAME; //assign bind textbox name kalo ada
                 }
             }
             catch (Exception ex)
@@ -118,9 +119,6 @@ namespace PMR00600FRONT
             R_DisplayException(loEx);
 
         }
-        #endregion
-
-        #region lookupFromDept
         private void BeforeOpen_lookupToDept(R_BeforeOpenLookupEventArgs eventArgs)
         {
             eventArgs.Parameter = new GSL00700ParameterDTO();
@@ -134,8 +132,8 @@ namespace PMR00600FRONT
                 var loValidate = await R_MessageBox.Show("", _localizer["_validationDeptToResult"], R_eMessageBoxButtonType.OK);
                 return;
             }
-            _viewModel._ReportParam.CTO_DEPARTMENT_ID = loTempResult.CDEPT_CODE;
-            _viewModel._ReportParam.CTO_DEPARTMENT_NAME = loTempResult.CDEPT_CODE;
+            _viewModel._ReportParam.CTO_DEPT_CODE = loTempResult.CDEPT_CODE;
+            _viewModel._ReportParam.CTO_DEPT_NAME = loTempResult.CDEPT_CODE;
         }
         private async Task OnLostFocus_LookupToDept()
         {
@@ -143,13 +141,13 @@ namespace PMR00600FRONT
 
             try
             {
-                if (!string.IsNullOrWhiteSpace(_viewModel._ReportParam.CTO_DEPARTMENT_ID))
+                if (!string.IsNullOrWhiteSpace(_viewModel._ReportParam.CTO_DEPT_CODE))
                 {
 
                     LookupGSL00700ViewModel loLookupViewModel = new LookupGSL00700ViewModel(); //use GSL's model
                     var loParam = new GSL00700ParameterDTO // use match param as GSL's dto, send as type in search texbox
                     {
-                        CSEARCH_TEXT = _viewModel._ReportParam.CTO_DEPARTMENT_ID, // property that bindded to search textbox
+                        CSEARCH_TEXT = _viewModel._ReportParam.CTO_DEPT_CODE, // property that bindded to search textbox
                     };
 
                     var loResult = await loLookupViewModel.GetDepartment(loParam); //retrive single record 
@@ -160,11 +158,11 @@ namespace PMR00600FRONT
                         loEx.Add(R_FrontUtility.R_GetError(
                                 typeof(Lookup_GSFrontResources.Resources_Dummy_Class),
                                 "_ErrLookup01"));
-                        _viewModel._ReportParam.CTO_DEPARTMENT_NAME = ""; //kosongin bind textbox name kalo gaada
+                        _viewModel._ReportParam.CTO_DEPT_NAME = ""; //kosongin bind textbox name kalo gaada
                         goto EndBlock;
                     }
-                    _viewModel._ReportParam.CTO_DEPARTMENT_ID = loResult.CDEPT_CODE;
-                    _viewModel._ReportParam.CTO_DEPARTMENT_NAME = loResult.CDEPT_NAME; //assign bind textbox name kalo ada
+                    _viewModel._ReportParam.CTO_DEPT_CODE = loResult.CDEPT_CODE;
+                    _viewModel._ReportParam.CTO_DEPT_NAME = loResult.CDEPT_NAME; //assign bind textbox name kalo ada
                 }
             }
             catch (Exception ex)
@@ -177,173 +175,114 @@ namespace PMR00600FRONT
         }
         #endregion
 
-        #region lookupFromSalesman
-        private void BeforeOpen_lookupFromSalesman(R_BeforeOpenLookupEventArgs eventArgs)
+        #region lookupBuilding
+        private void BeforeOpen_lookupFromBuilding(R_BeforeOpenLookupEventArgs eventArgs)
         {
-            eventArgs.Parameter = new LML00500ParameterDTO()
-            {
-                CPROPERTY_ID = _viewModel._ReportParam.CPROPERTY_ID,
-                CCOMPANY_ID = _clientHelper.CompanyId,
-                CUSER_ID = _clientHelper.UserId
-            };
-            eventArgs.TargetPageType = typeof(LML00500);
+            eventArgs.Parameter = new GSL02200ParameterDTO()
+            { CPROPERTY_ID = _viewModel._ReportParam.CPROPERTY_ID };
+            eventArgs.TargetPageType = typeof(GSL02200);
         }
-        private async Task AfterOpen_lookupFromSalesmanAsync(R_AfterOpenLookupEventArgs eventArgs)
+        private async Task AfterOpen_lookupFromBuildingAsync(R_AfterOpenLookupEventArgs eventArgs)
         {
-            var loTempResult = (LML00500DTO)eventArgs.Result;
+            var loTempResult = (GSL02200DTO)eventArgs.Result;
             if (loTempResult == null)
             {
-                var loValidate = await R_MessageBox.Show("", _localizer["_validationSalesmanFromResult"], R_eMessageBoxButtonType.OK);
+                var loValidate = await R_MessageBox.Show("", _localizer["_validationBuildingFromResult"], R_eMessageBoxButtonType.OK);
                 return;
             }
-            _viewModel._ReportParam.CFROM_SALESMAN_ID = loTempResult.CSALESMAN_ID;
-            _viewModel._ReportParam.CFROM_SALESMAN_NAME = loTempResult.CSALESMAN_NAME;
+            _viewModel._ReportParam.CFROM_BUILDING_ID = loTempResult.CBUILDING_ID;
+            _viewModel._ReportParam.CFROM_BUILDING_NAME = loTempResult.CBUILDING_NAME;
         }
-        private async Task OnLostFocus_LookupFromSalesman()
+        private async Task OnLostFocus_LookupFromBuilding()
         {
             var loEx = new R_Exception();
 
             try
             {
-                if (!string.IsNullOrWhiteSpace(_viewModel._ReportParam.CFROM_SALESMAN_ID))
+                if (!string.IsNullOrWhiteSpace(_viewModel._ReportParam.CFROM_BUILDING_ID))
                 {
-                    LookupLML00500ViewModel loLookupViewModel = new LookupLML00500ViewModel();
-                    var param = new LML00500ParameterDTO
+
+                    LookupGSL02200ViewModel loLookupViewModel = new LookupGSL02200ViewModel(); //use GSL's model
+                    var loParam = new GSL02200ParameterDTO // use match param as GSL's dto, send as type in search texbox
                     {
-                        CCOMPANY_ID = _clientHelper.CompanyId,
-                        CPROPERTY_ID = _viewModel._ReportParam.CPROPERTY_ID,
-                        CUSER_ID = _clientHelper.UserId,
-                        CSEARCH_TEXT = _viewModel._ReportParam.CFROM_SALESMAN_ID,
+                        CSEARCH_TEXT = _viewModel._ReportParam.CFROM_BUILDING_ID, // property that bindded to search textbox
                     };
-                    LML00500DTO loResult = await loLookupViewModel.GetSalesman(param);
+                    var loResult = await loLookupViewModel.GetBuilding(loParam); //retrive single record 
 
-
+                    //show result & show name/related another fields
                     if (loResult == null)
                     {
                         loEx.Add(R_FrontUtility.R_GetError(
-                                typeof(Lookup_PMFrontResources.Resources_Dummy_Class_LookupPM),
+                                typeof(Lookup_GSFrontResources.Resources_Dummy_Class),
                                 "_ErrLookup01"));
-                        _viewModel._ReportParam.CFROM_SALESMAN_ID = "";
-                        _viewModel._ReportParam.CFROM_SALESMAN_NAME = "";
+                        _viewModel._ReportParam.CFROM_BUILDING_NAME = ""; //kosongin bind textbox name kalo gaada
+                        goto EndBlock;
                     }
-                    else
-                    {
-                        _viewModel._ReportParam.CFROM_SALESMAN_ID = loResult.CSALESMAN_ID;
-                        _viewModel._ReportParam.CFROM_SALESMAN_NAME = loResult.CSALESMAN_NAME;
-                    }
-
+                    _viewModel._ReportParam.CFROM_BUILDING_ID = loResult.CBUILDING_ID;
+                    _viewModel._ReportParam.CFROM_BUILDING_NAME = loResult.CBUILDING_NAME; //assign bind textbox name kalo ada
                 }
             }
             catch (Exception ex)
             {
                 loEx.Add(ex);
             }
-
+        EndBlock:
             R_DisplayException(loEx);
-        }
-        #endregion
 
-        #region lookupFromSalesman
-        private void BeforeOpen_lookupToSalesman(R_BeforeOpenLookupEventArgs eventArgs)
-        {
-            eventArgs.Parameter = new LML00500ParameterDTO()
-            {
-                CPROPERTY_ID = _viewModel._ReportParam.CPROPERTY_ID,
-                CCOMPANY_ID = _clientHelper.CompanyId,
-                CUSER_ID = _clientHelper.UserId,
-            };
-            eventArgs.TargetPageType = typeof(LML00500);
         }
-        private async Task AfterOpen_lookupToSalesmanAsync(R_AfterOpenLookupEventArgs eventArgs)
+        private void BeforeOpen_lookupToBuilding(R_BeforeOpenLookupEventArgs eventArgs)
         {
-            var loTempResult = (LML00500DTO)eventArgs.Result;
+            eventArgs.Parameter = new GSL02200ParameterDTO()
+            { CPROPERTY_ID = _viewModel._ReportParam.CPROPERTY_ID };
+            eventArgs.TargetPageType = typeof(GSL02200);
+        }
+        private async Task AfterOpen_lookupToBuildingAsync(R_AfterOpenLookupEventArgs eventArgs)
+        {
+            var loTempResult = (GSL02200DTO)eventArgs.Result;
             if (loTempResult == null)
             {
-                var loValidate = await R_MessageBox.Show("", _localizer["_validationSalesmanFromResult"], R_eMessageBoxButtonType.OK);
+                var loValidate = await R_MessageBox.Show("", _localizer["_validationBuildingToResult"], R_eMessageBoxButtonType.OK);
                 return;
             }
-            _viewModel._ReportParam.CTO_SALESMAN_ID = loTempResult.CSALESMAN_ID;
-            _viewModel._ReportParam.CTO_SALESMAN_NAME = loTempResult.CSALESMAN_NAME;
+            _viewModel._ReportParam.CTO_BUILDING_ID = loTempResult.CBUILDING_ID;
+            _viewModel._ReportParam.CTO_BUILDING_NAME = loTempResult.CBUILDING_NAME;
         }
-        private async Task OnLostFocus_LookupToSalesman()
+        private async Task OnLostFocus_LookupToBuilding()
         {
             var loEx = new R_Exception();
 
             try
             {
-                if (!string.IsNullOrWhiteSpace(_viewModel._ReportParam.CTO_SALESMAN_ID))
+                if (!string.IsNullOrWhiteSpace(_viewModel._ReportParam.CTO_BUILDING_ID))
                 {
-                    LookupLML00500ViewModel loLookupViewModel = new LookupLML00500ViewModel();
-                    var param = new LML00500ParameterDTO
+
+                    LookupGSL02200ViewModel loLookupViewModel = new LookupGSL02200ViewModel(); //use GSL's model
+                    var loParam = new GSL02200ParameterDTO // use match param as GSL's dto, send as type in search texbox
                     {
-                        CCOMPANY_ID = _clientHelper.CompanyId,
-                        CPROPERTY_ID = _viewModel._ReportParam.CPROPERTY_ID,
-                        CUSER_ID = _clientHelper.UserId,
-                        CSEARCH_TEXT = _viewModel._ReportParam.CTO_SALESMAN_ID,
+                        CSEARCH_TEXT = _viewModel._ReportParam.CTO_BUILDING_ID, // property that bindded to search textbox
                     };
-                    LML00500DTO loResult = await loLookupViewModel.GetSalesman(param);
+                    var loResult = await loLookupViewModel.GetBuilding(loParam); //retrive single record 
 
-
+                    //show result & show name/related another fields
                     if (loResult == null)
                     {
                         loEx.Add(R_FrontUtility.R_GetError(
-                                typeof(Lookup_PMFrontResources.Resources_Dummy_Class_LookupPM),
+                                typeof(Lookup_GSFrontResources.Resources_Dummy_Class),
                                 "_ErrLookup01"));
-                        _viewModel._ReportParam.CTO_SALESMAN_ID = "";
-                        _viewModel._ReportParam.CTO_SALESMAN_NAME = "";
+                        _viewModel._ReportParam.CFROM_BUILDING_NAME = ""; //kosongin bind textbox name kalo gaada
+                        goto EndBlock;
                     }
-                    else
-                    {
-                        _viewModel._ReportParam.CTO_SALESMAN_ID = loResult.CSALESMAN_ID;
-                        _viewModel._ReportParam.CTO_SALESMAN_NAME = loResult.CSALESMAN_NAME;
-                    }
-
+                    _viewModel._ReportParam.CTO_BUILDING_ID = loResult.CBUILDING_ID;
+                    _viewModel._ReportParam.CTO_BUILDING_NAME = loResult.CBUILDING_NAME; //assign bind textbox name kalo ada
                 }
             }
             catch (Exception ex)
             {
                 loEx.Add(ex);
             }
-
+        EndBlock:
             R_DisplayException(loEx);
-        }
-        #endregion
 
-        #region PeriodOnchange
-        public async Task NumOnChanged_FromPeriod()
-        {
-            R_Exception loEx = new R_Exception();
-            try
-            {
-                _viewModel._fromPeriods = new ObservableCollection<PeriodDtDTO>(
-                    await _viewModel.GetPeriodDtAsync(
-                        string.IsNullOrWhiteSpace(_viewModel._YearFromPeriod.ToString())
-                        ? _viewModel._InitToday.Year.ToString()
-                        : _viewModel._YearFromPeriod.ToString())
-                    );
-            }
-            catch (Exception ex)
-            {
-                loEx.Add(ex);
-            }
-            loEx.ThrowExceptionIfErrors();
-        }
-        public async Task NumOnChanged_ToPeriod()
-        {
-            R_Exception loEx = new R_Exception();
-            try
-            {
-                _viewModel._toPeriods = new ObservableCollection<PeriodDtDTO>(
-                    await _viewModel.GetPeriodDtAsync(
-                        string.IsNullOrWhiteSpace(_viewModel._YearToPeriod.ToString())
-                        ? _viewModel._InitToday.Year.ToString()
-                        : _viewModel._YearToPeriod.ToString()));
-            }
-            catch (Exception ex)
-            {
-                loEx.Add(ex);
-            }
-            loEx.ThrowExceptionIfErrors();
         }
         #endregion
 
@@ -360,9 +299,9 @@ namespace PMR00600FRONT
                     //CPROPERTY_ID = _viewModel._ReportParam.CPROPERTY_ID,
                     //CPROPERTY_NAME = _viewModel._properties.Where(x => x.CPROPERTY_ID == _viewModel._ReportParam.CPROPERTY_ID).FirstOrDefault().CPROPERTY_NAME,
                     //Cfrom DEPARTMENT_CODE = _viewModel._ReportParam.CFROM_DEPARTMENT_CODE,
-                    //CFROM_DEPARTMENT_NAME = _viewModel._ReportParam.CFROM_DEPARTMENT_NAME,
-                    //CTO_DEPARTMENT_ID = _viewModel._ReportParam.CTO_DEPARTMENT_ID,
-                    //CTO_DEPARTMENT_NAME = _viewModel._ReportParam.CTO_DEPARTMENT_NAME,
+                    //CFROM_DEPT_NAME = _viewModel._ReportParam.CFROM_DEPT_NAME,
+                    //CTO_DEPT_CODE = _viewModel._ReportParam.CTO_DEPT_CODE,
+                    //CTO_DEPT_NAME = _viewModel._ReportParam.CTO_DEPT_NAME,
                     //CFROM_SALESMAN_ID = _viewModel._ReportParam.CFROM_SALESMAN_ID,
                     //CFROM_SALESMAN_NAME = _viewModel._ReportParam.CFROM_SALESMAN_NAME,
                     //CTO_SALESMAN_ID = _viewModel._ReportParam.CTO_SALESMAN_ID,
@@ -373,39 +312,39 @@ namespace PMR00600FRONT
                 };
 
                 //validation
-                if (string.IsNullOrWhiteSpace(loParam.CPROPERTY_ID))
-                {
-                    loEx.Add("", _localizer["_validationEmptyProperty"]);
-                }
-                if (string.IsNullOrWhiteSpace(loParam.CFROM_DEPARTMENT_ID))
-                {
-                    loEx.Add("", _localizer["_validationEmptyFromDept"]);
-                }
-                if (string.IsNullOrWhiteSpace(loParam.CTO_DEPARTMENT_ID))
-                {
-                    loEx.Add("", _localizer["_validationEmptyToDept"]);
-                }
-                if (string.IsNullOrWhiteSpace(loParam.CFROM_SALESMAN_ID))
-                {
-                    loEx.Add("", _localizer["_validationEmptyFromSalesman"]);
-                }
-                if (string.IsNullOrWhiteSpace(loParam.CTO_SALESMAN_ID))
-                {
-                    loEx.Add("", _localizer["_validationEmptyToSalesman"]);
-                }
-                if (int.Parse(loParam.CTO_PERIOD) > int.Parse(loParam.CFROM_PERIOD))
-                {
-                    loEx.Add("", _localizer["_validationHigherPeriod"]);
-                }
+                //if (string.IsNullOrWhiteSpace(loParam.CPROPERTY_ID))
+                //{
+                //    loEx.Add("", _localizer["_validationEmptyProperty"]);
+                //}
+                //if (string.IsNullOrWhiteSpace(loParam.CFROM_DEPT_CODE))
+                //{
+                //    loEx.Add("", _localizer["_validationEmptyFromDept"]);
+                //}
+                //if (string.IsNullOrWhiteSpace(loParam.CTO_DEPT_CODE))
+                //{
+                //    loEx.Add("", _localizer["_validationEmptyToDept"]);
+                //}
+                //if (string.IsNullOrWhiteSpace(loParam.CFROM_SALESMAN_ID))
+                //{
+                //    loEx.Add("", _localizer["_validationEmptyFromSalesman"]);
+                //}
+                //if (string.IsNullOrWhiteSpace(loParam.CTO_SALESMAN_ID))
+                //{
+                //    loEx.Add("", _localizer["_validationEmptyToSalesman"]);
+                //}
+                //if (int.Parse(loParam.CTO_PERIOD) > int.Parse(loParam.CFROM_PERIOD))
+                //{
+                //    loEx.Add("", _localizer["_validationHigherPeriod"]);
+                //}
 
-                if (_viewModel._ReportType == "D")
-                {
-                    Overtime_PrintDetail(loParam);
-                }
-                else
-                {
-                    Overtime_PrintSummaryAsync(loParam);
-                }
+                //if (_viewModel._ReportType == "D")
+                //{
+                //    Overtime_PrintDetail(loParam);
+                //}
+                //else
+                //{
+                //    Overtime_PrintSummaryAsync(loParam);
+                //}
             }
             catch (Exception ex)
             {
@@ -444,7 +383,6 @@ namespace PMR00600FRONT
             }
             loEx.ThrowExceptionIfErrors();
         }
-
         #endregion
 
 

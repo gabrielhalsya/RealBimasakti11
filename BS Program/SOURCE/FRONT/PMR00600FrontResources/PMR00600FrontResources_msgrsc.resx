@@ -138,6 +138,9 @@
   <data name="_label_Invoice" xml:space="preserve">
     <value>Invoice</value>
   </data>
+  <data name="_label_Month" xml:space="preserve">
+    <value>Month</value>
+  </data>
   <data name="_label_Period" xml:space="preserve">
     <value>Period</value>
   </data>
@@ -153,17 +156,23 @@
   <data name="_label_Status" xml:space="preserve">
     <value>Status</value>
   </data>
+  <data name="_label_symbol-" xml:space="preserve">
+    <value>-</value>
+  </data>
   <data name="_label_Tenant" xml:space="preserve">
     <value>Tenant</value>
   </data>
   <data name="_label_To" xml:space="preserve">
     <value>To</value>
   </data>
-  <data name="_radio_Charges" xml:space="preserve">
-    <value>Charges</value>
+  <data name="_label_Year" xml:space="preserve">
+    <value>Year</value>
   </data>
-  <data name="_radio_Data" xml:space="preserve">
-    <value>Data</value>
+  <data name="_radio_Charge" xml:space="preserve">
+    <value>Charge</value>
+  </data>
+  <data name="_radio_Detail" xml:space="preserve">
+    <value>Detail</value>
   </data>
   <data name="_radio_Summary" xml:space="preserve">
     <value>Summary</value>

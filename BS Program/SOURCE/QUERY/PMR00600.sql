@@ -1,12 +1,11 @@
-EXEC RSP_PMR00600_GET_REPORT 'RCD'
-, 'JBMPC'
+EXEC RSP_PMR00600_GET_REPORT 'RCD', 'JBMPC'
 , '202401'
 , '202412'
 , ''
 , ''
 , ''
 , ''
-, '2'
+, '1'
 , ''
 , ''
 , ''
@@ -28,3 +27,6 @@ EXEC RSP_GS_GET_PERIOD_YEAR_RANGE
 EXEC RSP_GS_GET_PROPERTY_LIST
 'RCD'
 , 'ghc'
+
+
+delete from SAT_LOCKING where CUSER_ID='ghc'
