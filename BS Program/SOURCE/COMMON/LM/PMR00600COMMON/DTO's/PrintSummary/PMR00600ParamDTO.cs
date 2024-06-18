@@ -24,7 +24,8 @@ namespace PMR00600COMMON.DTO_s.Print
         public bool LINVOICE { get; set; }
         public bool LIS_SUMMARY_BY_TENANT { get; set; }
         public bool LIS_SUMMARY_BY_CHARGES { get; set; }
-        
+        public string CREPORT_TYPE_DISPLAY { get; set; }
+
         public string CPERIOD_DISPLAY
         {
             get

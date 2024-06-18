@@ -2,7 +2,7 @@
 @using PMR00600COMMON.DTO_s
 @inherits R_Page
 
-<R_StackLayout Class="p-5">
+<R_StackLayout Class="px-5 py-2">
     @* property *@
     <R_StackLayout Row>
         <R_ItemLayout col="1">
@@ -19,11 +19,13 @@
                         TabIndex="0">
             </R_ComboBox>
         </R_ItemLayout>
-        <R_ItemLayout col="6" />
+        <R_ItemLayout col="7" />
     </R_StackLayout>
 
     @* hr line *@
+    <R_StackLayout Class="border-top ps-2 my-3"></R_StackLayout>
 
+    @* colum *@
     <R_StackLayout Row>
         <R_ItemLayout col="6">
 
@@ -32,13 +34,13 @@
                 <R_Label FontColor="R_eFontColor.Danger" FontStyle="R_eFontStyle.Bold">@_localizer["_label_Period"]</R_Label>
             </R_StackLayout>
             <R_StackLayout Row>
-                <R_ItemLayout><R_Label>@_localizer["_label_Year"]</R_Label></R_ItemLayout>
-                <R_ItemLayout><R_NumericTextBox @bind-Value="_viewModel._YearPeriod" Max="_viewModel._PeriodYear.IMAX_YEAR" Min="_viewModel._PeriodYear.IMIN_YEAR" ThousandSeparator="false" TabIndex="1" Arrows="true" /></R_ItemLayout>
+                <R_ItemLayout col="1"><R_Label>@_localizer["_label_Year"]</R_Label></R_ItemLayout>
+                <R_ItemLayout col="2"><R_NumericTextBox @bind-Value="_viewModel._YearPeriod" Max="_viewModel._PeriodYear.IMAX_YEAR" Min="_viewModel._PeriodYear.IMIN_YEAR" ThousandSeparator="false" TabIndex="1" Arrows="true" /></R_ItemLayout>
             </R_StackLayout>
             <R_StackLayout Row>
 
                 @* monthfrom *@
-                <R_ItemLayout><R_Label>@_localizer["_label_Month"]</R_Label></R_ItemLayout>
+                <R_ItemLayout col="1"><R_Label>@_localizer["_label_Month"]</R_Label></R_ItemLayout>
                 <R_ItemLayout>
                     <R_ComboBox @bind-Value="@_viewModel._MonthFromPeriod"
                                 Data="_viewModel._monthList"
@@ -63,9 +65,8 @@
 
             @* Building *@
             <R_StackLayout>
-                <R_Label FontColor="R_eFontColor.Danger" FontStyle="R_eFontStyle.Bold">@_localizer["_label_Period"]</R_Label>
+                <R_Label FontColor="R_eFontColor.Danger" FontStyle="R_eFontStyle.Bold">@_localizer["_label_Building"]</R_Label>
             </R_StackLayout>
-            @* from building *@
             <R_StackLayout Row>
                 <R_ItemLayout col="1">
                     <R_Label>@_localizer["_label_From"]</R_Label>
@@ -88,7 +89,6 @@
                                Enabled="false" />
                 </R_ItemLayout>
             </R_StackLayout>
-            @* to building *@
             <R_StackLayout Row>
                 <R_ItemLayout col="1">
                     <R_Label>@_localizer["_label_To"]</R_Label>
@@ -121,7 +121,6 @@
                     <R_Label FontStyle="R_eFontStyle.Bold" FontColor="R_eFontColor.Danger">@_localizer["_label_Department"]</R_Label>
                 </R_ItemLayout>
             </R_StackLayout>
-            @* from dept *@
             <R_StackLayout Row>
                 <R_ItemLayout col="1">
                     <R_Label>@_localizer["_label_From"]</R_Label>
@@ -144,7 +143,6 @@
                                Enabled="false" />
                 </R_ItemLayout>
             </R_StackLayout>
-            @* to dept *@
             <R_StackLayout Row>
                 <R_ItemLayout col="1">
                     <R_Label>@_localizer["_label_To"]</R_Label>
@@ -174,7 +172,7 @@
             <R_StackLayout Row>
 
                 @* report type *@
-                <R_ItemLayout>
+                <R_ItemLayout col="6">
                     <R_StackLayout>
                         <R_Label FontStyle="R_eFontStyle.Bold" FontColor="R_eFontColor.Danger">@_localizer["_label_ReportType"]</R_Label>
                     </R_StackLayout>
@@ -195,14 +193,14 @@
                 <R_ItemLayout Class="border-start border-translucent ps-4" />
 
                 @* grouping *@
-                <R_ItemLayout>
+                <R_ItemLayout col="6">
                     <R_StackLayout>
-                        <R_Label FontStyle="R_eFontStyle.Bold" FontColor="R_eFontColor.Danger">@_localizer["_label_Grouping"]</R_Label>
+                        <R_Label FontStyle="R_eFontStyle.Bold" FontColor="R_eFontColor.Danger">@_localizer["_label_GroupBy"]</R_Label>
                     </R_StackLayout>
                     <R_StackLayout>
                         <R_RadioGroup @ref="@_radioGroupingType"
-                                      Data="@_viewModel._radiogGroupingTypeList"
-                                      @bind-Value="@_viewModel._Grouping_Type"
+                                      Data="@_viewModel._radioGroupingList"
+                                      @bind-Value="@_viewModel._GroupBy"
                                       ValueField="@nameof(GroupTypeDTO.CTYPE_CODE)"
                                       TextField="@nameof(GroupTypeDTO.CTYPE_NAME)"
                                       Layout="R_eRadioGroupLayout.Vertical"
@@ -214,21 +212,185 @@
             </R_StackLayout>
 
         </R_ItemLayout>
+
+        @* vr line *@
         <R_ItemLayout Class="border-start border-translucent ps-4" />
+
         <R_ItemLayout col="6">
 
+            @* @* label *@
+            <R_StackLayout Row>
+                <R_ItemLayout col="12">
+                    <R_Label FontStyle="R_eFontStyle.Bold" FontColor="R_eFontColor.Danger">@_localizer["_label_Filter"]</R_Label>
+                </R_ItemLayout>
+            </R_StackLayout>
+
+            @* tenant filter *@
+            <R_StackLayout Row Class="pt-3">
+                <R_ItemLayout>
+                    <R_CheckBox @bind-Value="_viewModel._ReportParam.LTENANT" TabIndex="13"></R_CheckBox>
+                </R_ItemLayout>
+                <R_ItemLayout>
+                    <R_Label>@_localizer["_label_Tenant"]</R_Label>
+                </R_ItemLayout>
+            </R_StackLayout>
+            <R_StackLayout Row Class="ps-4">
+                <R_ItemLayout col="1">
+                    <R_Label>@_localizer["_label_From"]</R_Label>
+                </R_ItemLayout>
+                <R_ItemLayout col="2">
+                    <R_TextBox @bind-Value="_viewModel._ReportParam.CFROM_TENANT_ID"
+                               R_ConductorSource="_conductorRef"
+                               CharacterCasing="R_eCharacterCasing.Upper"
+                               MaxLength="int.MaxValue"
+                               OnLostFocus="OnLostFocus_LookupFromTenant"
+                               TabIndex="14"
+                               Enabled ="@_viewModel._ReportParam.LTENANT"/>
+                </R_ItemLayout>
+                <R_ItemLayout>
+                    <R_Lookup R_ConductorSource="_conductorRef" R_Before_Open_Lookup="@BeforeOpen_lookupFromTenant" R_After_Open_Lookup="@AfterOpen_lookupFromTenantAsync" TabIndex="15" Enabled="@_viewModel._ReportParam.LTENANT">...</R_Lookup>
+                </R_ItemLayout>
+                <R_ItemLayout col="4">
+                    <R_TextBox @bind-Value="_viewModel._ReportParam.CFROM_TENANT_NAME"
+                               R_ConductorSource="_conductorRef"
+                               Enabled="false" />
+                </R_ItemLayout>
+            </R_StackLayout>
+            <R_StackLayout Row Class="ps-4">
+                <R_ItemLayout col="1">
+                    <R_Label>@_localizer["_label_To"]</R_Label>
+                </R_ItemLayout>
+                <R_ItemLayout col="2">
+                    <R_TextBox @bind-Value="_viewModel._ReportParam.CTO_TENANT_ID"
+                               R_ConductorSource="_conductorRef"
+                               Enabled="@_viewModel._ReportParam.LTENANT"
+                               CharacterCasing="R_eCharacterCasing.Upper"
+                               MaxLength="int.MaxValue"
+                               OnLostFocus="OnLostFocus_LookupToTenant" TabIndex="16" />
+                </R_ItemLayout>
+                <R_ItemLayout>
+                    <R_Lookup R_ConductorSource="_conductorRef" R_Before_Open_Lookup="@BeforeOpen_lookupToTenant" R_After_Open_Lookup="@AfterOpen_lookupToTenantAsync" TabIndex="17" Enabled="@_viewModel._ReportParam.LTENANT">...</R_Lookup>
+                </R_ItemLayout>
+                <R_ItemLayout col="4">
+                    <R_TextBox @bind-Value="_viewModel._ReportParam.CTO_TENANT_NAME"
+                               R_ConductorSource="_conductorRef"
+                               Enabled="false" />
+                </R_ItemLayout>
+            </R_StackLayout>
+
+            @* service filter *@
+            <R_StackLayout Row Class="pt-3">
+                <R_ItemLayout>
+                    <R_CheckBox @bind-Value="_viewModel._ReportParam.LSERVICE" TabIndex="18"></R_CheckBox>
+                </R_ItemLayout>
+                <R_ItemLayout>
+                    <R_Label>@_localizer["_label_Service"]</R_Label>
+                </R_ItemLayout>
+            </R_StackLayout>
+            <R_StackLayout Row Class="ps-4">
+                <R_ItemLayout col="1">
+                    <R_Label>@_localizer["_label_From"]</R_Label>
+                </R_ItemLayout>
+                <R_ItemLayout col="2">
+                    <R_TextBox @bind-Value="_viewModel._ReportParam.CFROM_SERVICE_ID"
+                               R_ConductorSource="_conductorRef"
+                               Enabled="_viewModel._ReportParam.LSERVICE"
+                               CharacterCasing="R_eCharacterCasing.Upper"
+                               MaxLength="int.MaxValue"
+                               OnLostFocus="OnLostFocus_LookupFromService"
+                               TabIndex="19" />
+                </R_ItemLayout>
+                <R_ItemLayout>
+                    <R_Lookup R_ConductorSource="_conductorRef" R_Before_Open_Lookup="@BeforeOpen_lookupFromService" R_After_Open_Lookup="@AfterOpen_lookupFromServiceAsync" TabIndex="20" Enabled="_viewModel._ReportParam.LSERVICE">...</R_Lookup>
+                </R_ItemLayout>
+                <R_ItemLayout col="4">
+                    <R_TextBox @bind-Value="_viewModel._ReportParam.CFROM_SERVICE_NAME"
+                               R_ConductorSource="_conductorRef"
+                               Enabled="false" />
+                </R_ItemLayout>
+            </R_StackLayout>
+            <R_StackLayout Row Class="ps-4">
+                <R_ItemLayout col="1">
+                    <R_Label>@_localizer["_label_To"]</R_Label>
+                </R_ItemLayout>
+                <R_ItemLayout col="2">
+                    <R_TextBox @bind-Value="_viewModel._ReportParam.CTO_SERVICE_ID"
+                               R_ConductorSource="_conductorRef"
+                               Enabled="_viewModel._ReportParam.LSERVICE"
+                               CharacterCasing="R_eCharacterCasing.Upper"
+                               MaxLength="int.MaxValue"
+                               OnLostFocus="OnLostFocus_LookupToService" TabIndex="21" />
+                </R_ItemLayout>
+                <R_ItemLayout>
+                    <R_Lookup R_ConductorSource="_conductorRef" R_Before_Open_Lookup="@BeforeOpen_lookupToService" R_After_Open_Lookup="@AfterOpen_lookupToServiceAsync" TabIndex="22" Enabled="_viewModel._ReportParam.LSERVICE">...</R_Lookup>
+                </R_ItemLayout>
+                <R_ItemLayout col="4">
+                    <R_TextBox @bind-Value="_viewModel._ReportParam.CTO_SERVICE_NAME"
+                               R_ConductorSource="_conductorRef"
+                               Enabled="false" />
+                </R_ItemLayout>
+            </R_StackLayout>
+
+            @* status filter *@
+            <R_StackLayout Row Class="pt-3">
+                <R_ItemLayout>
+                    <R_CheckBox @bind-Value="_viewModel._ReportParam.LSTATUS" TabIndex="23"></R_CheckBox>
+                </R_ItemLayout>
+                <R_ItemLayout>
+                    <R_Label>@_localizer["_label_Status"]</R_Label>
+                </R_ItemLayout>
+            </R_StackLayout>
+            <R_StackLayout Class="ps-4">
+                <R_ItemLayout>
+                    <R_RadioGroup
+                                  Data="@_viewModel._radioStatusList"
+                                  @bind-Value="@_viewModel._Status"
+                                  Enabled="@_viewModel._ReportParam.LSTATUS"
+                                  ValueField="@nameof(StatusTypeDTO.CTYPE_CODE)"
+                                  TextField="@nameof(StatusTypeDTO.CTYPE_NAME)"
+                                  Layout="R_eRadioGroupLayout.Vertical"
+                                  LabelPosition="R_eRadioGroupLabelPosition.After"
+                                  TabIndex="24">
+                    </R_RadioGroup>
+                </R_ItemLayout>
+            </R_StackLayout>
+
+            @* invoice filter *@
+            <R_StackLayout Row Class="pt-3">
+                <R_ItemLayout>
+                    <R_CheckBox @bind-Value="_viewModel._ReportParam.LINVOICE" TabIndex="25"></R_CheckBox>
+                </R_ItemLayout>
+                <R_ItemLayout>
+                    <R_Label>@_localizer["_label_Invoice"]</R_Label>
+                </R_ItemLayout>
+            </R_StackLayout>
+            <R_StackLayout Class="ps-4">
+                <R_ItemLayout>
+                    <R_RadioGroup Data="@_viewModel._radioInvoiceList"
+                                  @bind-Value="@_viewModel._Invoice"
+                                  Enabled="@_viewModel._ReportParam.LINVOICE"
+                                  ValueField="@nameof(InvoiceTypeDTO.CTYPE_CODE)"
+                                  TextField="@nameof(InvoiceTypeDTO.CTYPE_NAME)"
+                                  Layout="R_eRadioGroupLayout.Vertical"
+                                  LabelPosition="R_eRadioGroupLabelPosition.After"
+                                  TabIndex="26">
+                    </R_RadioGroup>
+                </R_ItemLayout>
+            </R_StackLayout>
+
         </R_ItemLayout>
-    </R_StackLayout>>
+    </R_StackLayout>
 
     @* hr line *@
     <R_StackLayout Class="border-top ps-2 my-3"></R_StackLayout>
 
     @* print *@
-    <R_StackLayout Row Class="ps-4">
+    <R_StackLayout Row>
         <R_ItemLayout>
-            <R_Button OnClick="@OnclickBtn_Print">@_localizer["_btnPrint"]</R_Button>
+            <R_Button OnClick="@OnclickBtn_Print" TabIndex="27">@_localizer["_btn_Print"]</R_Button>
         </R_ItemLayout>
     </R_StackLayout>
+
 </R_StackLayout>
 
 

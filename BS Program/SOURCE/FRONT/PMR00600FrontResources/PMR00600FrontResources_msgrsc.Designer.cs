@@ -223,11 +223,47 @@ namespace PMR00600FrontResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Closed.
+        /// </summary>
+        internal static string _radio_Closed {
+            get {
+                return ResourceManager.GetString("_radio_Closed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Detail.
         /// </summary>
         internal static string _radio_Detail {
             get {
                 return ResourceManager.GetString("_radio_Detail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Invoiced.
+        /// </summary>
+        internal static string _radio_Invoiced {
+            get {
+                return ResourceManager.GetString("_radio_Invoiced", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Not Invoiced.
+        /// </summary>
+        internal static string _radio_Not_Invoiced {
+            get {
+                return ResourceManager.GetString("_radio_Not_Invoiced", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Open.
+        /// </summary>
+        internal static string _radio_Open {
+            get {
+                return ResourceManager.GetString("_radio_Open", resourceCulture);
             }
         }
         
@@ -246,6 +282,15 @@ namespace PMR00600FrontResources {
         internal static string _radio_Tenant {
             get {
                 return ResourceManager.GetString("_radio_Tenant", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to not found!.
+        /// </summary>
+        internal static string _val_not_found {
+            get {
+                return ResourceManager.GetString("_val_not_found", resourceCulture);
             }
         }
         

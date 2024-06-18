@@ -117,100 +117,10 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="_btn_Print" xml:space="preserve">
-    <value>Print</value>
+  <data name="DATA_EXISTS" xml:space="preserve">
+    <value>Sales No. {0} already exists!</value>
   </data>
-  <data name="_label_Building" xml:space="preserve">
-    <value>Building</value>
-  </data>
-  <data name="_label_Department" xml:space="preserve">
-    <value>Department</value>
-  </data>
-  <data name="_label_Filter" xml:space="preserve">
-    <value>Filter</value>
-  </data>
-  <data name="_label_From" xml:space="preserve">
-    <value>From</value>
-  </data>
-  <data name="_label_GroupBy" xml:space="preserve">
-    <value>Group By</value>
-  </data>
-  <data name="_label_Invoice" xml:space="preserve">
-    <value>Invoice</value>
-  </data>
-  <data name="_label_Month" xml:space="preserve">
-    <value>Month</value>
-  </data>
-  <data name="_label_Period" xml:space="preserve">
-    <value>Period</value>
-  </data>
-  <data name="_label_Property" xml:space="preserve">
-    <value>Property</value>
-  </data>
-  <data name="_label_ReportType" xml:space="preserve">
-    <value>Report Type</value>
-  </data>
-  <data name="_label_Service" xml:space="preserve">
-    <value>Service</value>
-  </data>
-  <data name="_label_Status" xml:space="preserve">
-    <value>Status</value>
-  </data>
-  <data name="_label_symbol-" xml:space="preserve">
-    <value>-</value>
-  </data>
-  <data name="_label_Tenant" xml:space="preserve">
-    <value>Tenant</value>
-  </data>
-  <data name="_label_To" xml:space="preserve">
-    <value>To</value>
-  </data>
-  <data name="_label_Year" xml:space="preserve">
-    <value>Year</value>
-  </data>
-  <data name="_radio_Charge" xml:space="preserve">
-    <value>Charge</value>
-  </data>
-  <data name="_radio_Closed" xml:space="preserve">
-    <value>Closed</value>
-  </data>
-  <data name="_radio_Detail" xml:space="preserve">
-    <value>Detail</value>
-  </data>
-  <data name="_radio_Invoiced" xml:space="preserve">
-    <value>Invoiced</value>
-  </data>
-  <data name="_radio_Not_Invoiced" xml:space="preserve">
-    <value>Not Invoiced</value>
-  </data>
-  <data name="_radio_Open" xml:space="preserve">
-    <value>Open</value>
-  </data>
-  <data name="_radio_Summary" xml:space="preserve">
-    <value>Summary</value>
-  </data>
-  <data name="_radio_Tenant" xml:space="preserve">
-    <value>Tenant</value>
-  </data>
-  <data name="_val1" xml:space="preserve">
-    <value>Please select Property</value>
-  </data>
-  <data name="_val2" xml:space="preserve">
-    <value>Please select Period</value>
-  </data>
-  <data name="_val3" xml:space="preserve">
-    <value>Please select Building</value>
-  </data>
-  <data name="_val4" xml:space="preserve">
-    <value>Please select Department</value>
-  </data>
-  <data name="_val5" xml:space="preserve">
-    <value>Please select Tenant</value>
-  </data>
-  <data name="_val6" xml:space="preserve">
-    <value>Please select Service</value>
-  </data>
-  <data name="_val_not_found" xml:space="preserve">
-    <value>not found!</value>
+  <data name="ERROR_PROCESS" xml:space="preserve">
+    <value>Process failed! unable to save Tenant Sales{0}</value>
   </data>
 </root>

@@ -1,11 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<inherited BaseReport="BaseHeaderCommon.frx" BaseReportAbsolutePath="D:\RealCode\RSF\BIMASAKTI_11\1.00\PROGRAM\BS Program\SOURCE\API\LM\BIMASAKTI_LM_API\Reports\BaseHeaderCommon.frx" ScriptLanguage="CSharp" ReportInfo.Created="08/04/2023 16:21:34" ReportInfo.Modified="06/13/2024 20:43:24" ReportInfo.CreatorVersion="2023.2.21.0">
+<inherited BaseReport="BaseHeaderCommon.frx" BaseReportAbsolutePath="D:\RealCode\RSF\BIMASAKTI_11\1.00\PROGRAM\BS Program\SOURCE\API\LM\BIMASAKTI_LM_API\Reports\BaseHeaderCommon.frx" ScriptLanguage="CSharp" ReportInfo.Created="08/04/2023 16:21:34" ReportInfo.Modified="06/18/2024 17:12:32" ReportInfo.CreatorVersion="2023.2.21.0">
   <Dictionary>
     <BusinessObjectDataSource Name="ResponseDataModel" ReferenceName="ResponseDataModel" DataType="System.Collections.ArrayList" Enabled="true">
-      <Column Name="ReportDataDTO" DataType="PMR00600COMMON.DTO_s.PrintDetail.PMR00601ReportDataDTO, PMR00600COMMON, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+      <Column Name="ReportDataDTO" DataType="PMR00600COMMON.DTO_s.Print.PMR00600ReportDataDTO, PMR00600COMMON, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
         <Column Name="Title" DataType="System.String"/>
         <Column Name="Header" DataType="System.String"/>
-        <Column Name="Label" DataType="PMR00600COMMON.DTO_s.PrintDetail.PMR00601LabelDTO, PMR00600COMMON, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+        <Column Name="Label" DataType="PMR00600COMMON.DTO_s.Print.PMR00600LabelDTO, PMR00600COMMON, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
           <Column Name="PROPERTY_LABEL" DataType="System.String"/>
           <Column Name="PERIOD_LABEL" DataType="System.String"/>
           <Column Name="BUILDING_LABEL" DataType="System.String"/>
@@ -20,21 +20,22 @@
           <Column Name="CHARGE_LABEL" DataType="System.String"/>
           <Column Name="SUBTOTAL_LABEL" DataType="System.String"/>
           <Column Name="GRANDTOTAL_LABEL" DataType="System.String"/>
-          <Column Name="INVOICE_NO_LABEL" DataType="System.String"/>
-          <Column Name="COLUMN_OVERTIME_DATE_LABEL" DataType="System.String"/>
-          <Column Name="COLUMN_TIMEIN_LABEL" DataType="System.String"/>
-          <Column Name="COLUMN_TIMEOUT_LABEL" DataType="System.String"/>
-          <Column Name="COLUMN_TENURE_LABEL" DataType="System.String"/>
-          <Column Name="COLUMN_NOTE_LABEL" DataType="System.String"/>
-          <Column Name="AMOUNT_LABEL" DataType="System.String"/>
-          <Column Name="INVOICE_LABEL" DataType="System.String"/>
-          <Column Name="TOTAL_LABEL" DataType="System.String"/>
-          <Column Name="COLUMN_UNIT_LABEL" DataType="System.String"/>
-          <Column Name="COLUMN_UNIT_PRICE_LABEL" DataType="System.String"/>
-          <Column Name="COLUMN_AMOUNT_LABEL" DataType="System.String"/>
-          <Column Name="COLUMN_STATUS_LABEL" DataType="System.String"/>
+          <Column Name="JANUARY_LABEL" DataType="System.String"/>
+          <Column Name="FEBRUARY_LABEL" DataType="System.String"/>
+          <Column Name="MARCH_LABEL" DataType="System.String"/>
+          <Column Name="APRIL_LABEL" DataType="System.String"/>
+          <Column Name="MAY_LABEL" DataType="System.String"/>
+          <Column Name="JUNE_LABEL" DataType="System.String"/>
+          <Column Name="JULY_LABEL" DataType="System.String"/>
+          <Column Name="AUGUST_LABEL" DataType="System.String"/>
+          <Column Name="SEPTEMBER_LABEL" DataType="System.String"/>
+          <Column Name="OCTOBER_LABEL" DataType="System.String"/>
+          <Column Name="NOVEMBER_LABEL" DataType="System.String"/>
+          <Column Name="DECEMBER_LABEL" DataType="System.String"/>
+          <Column Name="LABEL_TENANT" DataType="System.String"/>
+          <Column Name="LABEL_CHARGE" DataType="System.String"/>
         </Column>
-        <Column Name="Param" DataType="PMR00600COMMON.DTO_s.PrintDetail.PMR00601ParamDTO, PMR00600COMMON, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+        <Column Name="Param" DataType="PMR00600COMMON.DTO_s.Print.PMR00600ParamDTO, PMR00600COMMON, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
           <Column Name="CFROM_BUILDING_NAME" DataType="System.String"/>
           <Column Name="CTO_BUILDING_NAME" DataType="System.String"/>
           <Column Name="CPROPERTY_NAME" DataType="System.String"/>
@@ -71,10 +72,10 @@
           <Column Name="CSTATUS" DataType="System.String"/>
           <Column Name="CINVOICE" DataType="System.String"/>
           <Column Name="CLANG_ID" DataType="System.String"/>
-          <Column Name="LIS_DETAIL_BY_TENANT" DataType="System.Boolean" BindableControl="CheckBox"/>
-          <Column Name="LIS_DETAIL_BY_CHARGES" DataType="System.Boolean" BindableControl="CheckBox"/>
+          <Column Name="LIS_SUMMARY_BY_TENANT" DataType="System.Boolean" BindableControl="CheckBox"/>
+          <Column Name="LIS_SUMMARY_BY_CHARGES" DataType="System.Boolean" BindableControl="CheckBox"/>
         </Column>
-        <BusinessObjectDataSource Name="Data" DataType="System.Collections.Generic.List`1[[PMR00600COMMON.DTO_s.PrintDetail.PMR00601DataDTO, PMR00600COMMON, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]" Enabled="true">
+        <BusinessObjectDataSource Name="Data" DataType="System.Collections.Generic.List`1[[PMR00600COMMON.PMR00600DataDTO, PMR00600COMMON, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]" Enabled="true">
           <Column Name="CCOMPANY_ID" DataType="System.String"/>
           <Column Name="CPROPERTY_ID" DataType="System.String"/>
           <Column Name="CBUILDING_ID" DataType="System.String"/>
@@ -86,23 +87,19 @@
           <Column Name="CAGREEMENT_NO" DataType="System.String"/>
           <Column Name="CCHARGE_ID" DataType="System.String"/>
           <Column Name="CCHARGE_NAME" DataType="System.String"/>
-          <Column Name="CINVOICE_NO" DataType="System.String"/>
-          <Column Name="CINVOICE_DATE" DataType="System.String"/>
-          <Column Name="NINVOICE_AMOUNT" DataType="System.Decimal"/>
-          <Column Name="NINVOICE_TAX_AMOUNT" DataType="System.Decimal"/>
-          <Column Name="NINVOICE_TOTAL_AMOUNT" DataType="System.Decimal"/>
-          <Column Name="CAGREEMENT_DATE" DataType="System.String"/>
-          <Column Name="CUNIT_ID" DataType="System.String"/>
-          <Column Name="CUNIT_NAME" DataType="System.String"/>
-          <Column Name="COVERTIME_DATE" DataType="System.String"/>
-          <Column Name="CTIME_IN" DataType="System.String"/>
-          <Column Name="CTIME_OUT" DataType="System.String"/>
-          <Column Name="CTENURE" DataType="System.String"/>
-          <Column Name="NUNIT_PRICE" DataType="System.Decimal"/>
-          <Column Name="NUNIT_ACTUAL_AMOUNT" DataType="System.Decimal"/>
-          <Column Name="CNOTE" DataType="System.String"/>
-          <Column Name="CTRANS_STATUS_CODE" DataType="System.String"/>
-          <Column Name="CTRANS_STATUS_NAME" DataType="System.String"/>
+          <Column Name="NSUM_AMOUNT" DataType="System.Decimal"/>
+          <Column Name="NJAN_AMOUNT" DataType="System.Decimal"/>
+          <Column Name="NFEB_AMOUNT" DataType="System.Decimal"/>
+          <Column Name="NMAR_AMOUNT" DataType="System.Decimal"/>
+          <Column Name="NAPR_AMOUNT" DataType="System.Decimal"/>
+          <Column Name="NMAY_AMOUNT" DataType="System.Decimal"/>
+          <Column Name="NJUN_AMOUNT" DataType="System.Decimal"/>
+          <Column Name="NJUL_AMOUNT" DataType="System.Decimal"/>
+          <Column Name="NAUG_AMOUNT" DataType="System.Decimal"/>
+          <Column Name="NSEP_AMOUNT" DataType="System.Decimal"/>
+          <Column Name="NOCT_AMOUNT" DataType="System.Decimal"/>
+          <Column Name="NNOV_AMOUNT" DataType="System.Decimal"/>
+          <Column Name="NDEC_AMOUNT" DataType="System.Decimal"/>
         </BusinessObjectDataSource>
       </Column>
       <Column Name="BaseHeaderData" DataType="BaseHeaderReportCOMMON.BaseHeaderDTO, BaseHeaderReportCOMMON, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
@@ -175,13 +172,13 @@
             <GeneralFormat/>
           </Formats>
         </TextObject>
-        <TextObject Name="Text46" Left="-28.35" Top="94.5" Width="689.85" Height="18.9" Text="[ResponseDataModel.ReportDataDTO.Label.GROUP_BY_LABEL] : [ResponseDataModel.ReportDataDTO.Param.CTENANT_DISPLAY]" Font="Arial Unicode MS, 7pt">
+        <TextObject Name="Text46" Left="-28.35" Top="94.5" Width="689.85" Height="18.9" Text="[ResponseDataModel.ReportDataDTO.Label.GROUP_BY_LABEL] : [ResponseDataModel.ReportDataDTO.Label.CHARGE_LABEL]" Font="Arial Unicode MS, 7pt">
           <Formats>
             <GeneralFormat/>
             <GeneralFormat/>
           </Formats>
         </TextObject>
-        <TextObject Name="Text47" Left="-28.35" Top="113.4" Width="689.85" Height="18.9" VisibleExpression="[ResponseDataModel.ReportDataDTO.Param.LTENANT]" Text="[ResponseDataModel.ReportDataDTO.Label.TENANT_LABEL] : [ResponseDataModel.ReportDataDTO.Label.TENANT_LABEL]" Font="Arial Unicode MS, 7pt">
+        <TextObject Name="Text47" Left="-28.35" Top="113.4" Width="689.85" Height="18.9" VisibleExpression="[ResponseDataModel.ReportDataDTO.Param.LTENANT]" Text="[ResponseDataModel.ReportDataDTO.Label.TENANT_LABEL] : [ResponseDataModel.ReportDataDTO.Param.CTENANT_DISPLAY]" Font="Arial Unicode MS, 7pt">
           <Formats>
             <GeneralFormat/>
             <GeneralFormat/>

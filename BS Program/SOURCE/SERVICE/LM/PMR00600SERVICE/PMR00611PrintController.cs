@@ -79,7 +79,7 @@ namespace PMR00600SERVICE
                 loRtn = new R_DownloadFileResultDTO();
                 loCache = new PMR00600PrintLogKey
                 {
-                    poParam = poParameter,
+                    poParamSummary = poParameter,
                     poLogKey = (R_NetCoreLogKeyDTO)R_NetCoreLogAsyncStorage.GetData(R_NetCoreLogConstant.LOG_KEY)
                 };
                 _logger.LogInfo("Set GUID Param - Post DownloadResultPrintPost Status");
@@ -113,7 +113,7 @@ namespace PMR00600SERVICE
                 // Get Parameter
                 R_NetCoreLogUtility.R_SetNetCoreLogKey(loResultGUID.poLogKey);
 
-                _Parameter = loResultGUID.poParam;
+                _Parameter = loResultGUID.poParamSummary;
 
                 _logger.LogDebug("Deserialized GUID: {pcGuid}", pcGuid);
                 _logger.LogDebug("Deserialized Parameters: {@Parameters}", _Parameter);

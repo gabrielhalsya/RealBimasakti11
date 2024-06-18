@@ -4,11 +4,14 @@ using Lookup_GSFRONT;
 using Lookup_GSModel.ViewModel;
 using Lookup_PMCOMMON.DTOs;
 using Lookup_PMFRONT;
+using Lookup_PMModel.ViewModel.LML00400;
 using Lookup_PMModel.ViewModel.LML00500;
+using Lookup_PMModel.ViewModel.LML00600;
 using Microsoft.AspNetCore.Components;
 using PMR00600COMMON;
 using PMR00600COMMON.DTO_s;
 using PMR00600COMMON.DTO_s.Print;
+using PMR00600COMMON.DTO_s.PrintDetail;
 using PMR00600FrontResources;
 using PMR00600MODEL.View_Models;
 using R_BlazorFrontEnd.Controls;
@@ -74,13 +77,11 @@ namespace PMR00600FRONT
         private async Task AfterOpen_lookupFromDeptAsync(R_AfterOpenLookupEventArgs eventArgs)
         {
             var loTempResult = (GSL00700DTO)eventArgs.Result;
-            if (loTempResult == null)
+            if (loTempResult != null)
             {
-                var loValidate = await R_MessageBox.Show("", _localizer["_validationDeptFromResult"], R_eMessageBoxButtonType.OK);
-                return;
+                _viewModel._ReportParam.CFROM_DEPT_CODE = loTempResult.CDEPT_CODE;
+                _viewModel._ReportParam.CFROM_DEPT_NAME = loTempResult.CDEPT_CODE;
             }
-            _viewModel._ReportParam.CFROM_DEPT_CODE = loTempResult.CDEPT_CODE;
-            _viewModel._ReportParam.CFROM_DEPT_NAME = loTempResult.CDEPT_CODE;
         }
         private async Task OnLostFocus_LookupFromDept()
         {
@@ -127,13 +128,12 @@ namespace PMR00600FRONT
         private async Task AfterOpen_lookupToDeptAsync(R_AfterOpenLookupEventArgs eventArgs)
         {
             var loTempResult = (GSL00700DTO)eventArgs.Result;
-            if (loTempResult == null)
+            if (loTempResult != null)
             {
-                var loValidate = await R_MessageBox.Show("", _localizer["_validationDeptToResult"], R_eMessageBoxButtonType.OK);
-                return;
+                _viewModel._ReportParam.CTO_DEPT_CODE = loTempResult.CDEPT_CODE;
+                _viewModel._ReportParam.CTO_DEPT_NAME = loTempResult.CDEPT_CODE;
             }
-            _viewModel._ReportParam.CTO_DEPT_CODE = loTempResult.CDEPT_CODE;
-            _viewModel._ReportParam.CTO_DEPT_NAME = loTempResult.CDEPT_CODE;
+
         }
         private async Task OnLostFocus_LookupToDept()
         {
@@ -185,13 +185,11 @@ namespace PMR00600FRONT
         private async Task AfterOpen_lookupFromBuildingAsync(R_AfterOpenLookupEventArgs eventArgs)
         {
             var loTempResult = (GSL02200DTO)eventArgs.Result;
-            if (loTempResult == null)
+            if (loTempResult != null)
             {
-                var loValidate = await R_MessageBox.Show("", _localizer["_validationBuildingFromResult"], R_eMessageBoxButtonType.OK);
-                return;
+                _viewModel._ReportParam.CFROM_BUILDING_ID = loTempResult.CBUILDING_ID;
+                _viewModel._ReportParam.CFROM_BUILDING_NAME = loTempResult.CBUILDING_NAME;
             }
-            _viewModel._ReportParam.CFROM_BUILDING_ID = loTempResult.CBUILDING_ID;
-            _viewModel._ReportParam.CFROM_BUILDING_NAME = loTempResult.CBUILDING_NAME;
         }
         private async Task OnLostFocus_LookupFromBuilding()
         {
@@ -205,6 +203,8 @@ namespace PMR00600FRONT
                     LookupGSL02200ViewModel loLookupViewModel = new LookupGSL02200ViewModel(); //use GSL's model
                     var loParam = new GSL02200ParameterDTO // use match param as GSL's dto, send as type in search texbox
                     {
+
+                        CPROPERTY_ID = _viewModel._ReportParam.CPROPERTY_ID,
                         CSEARCH_TEXT = _viewModel._ReportParam.CFROM_BUILDING_ID, // property that bindded to search textbox
                     };
                     var loResult = await loLookupViewModel.GetBuilding(loParam); //retrive single record 
@@ -239,13 +239,11 @@ namespace PMR00600FRONT
         private async Task AfterOpen_lookupToBuildingAsync(R_AfterOpenLookupEventArgs eventArgs)
         {
             var loTempResult = (GSL02200DTO)eventArgs.Result;
-            if (loTempResult == null)
+            if (loTempResult != null)
             {
-                var loValidate = await R_MessageBox.Show("", _localizer["_validationBuildingToResult"], R_eMessageBoxButtonType.OK);
-                return;
+                _viewModel._ReportParam.CTO_BUILDING_ID = loTempResult.CBUILDING_ID;
+                _viewModel._ReportParam.CTO_BUILDING_NAME = loTempResult.CBUILDING_NAME;
             }
-            _viewModel._ReportParam.CTO_BUILDING_ID = loTempResult.CBUILDING_ID;
-            _viewModel._ReportParam.CTO_BUILDING_NAME = loTempResult.CBUILDING_NAME;
         }
         private async Task OnLostFocus_LookupToBuilding()
         {
@@ -259,6 +257,7 @@ namespace PMR00600FRONT
                     LookupGSL02200ViewModel loLookupViewModel = new LookupGSL02200ViewModel(); //use GSL's model
                     var loParam = new GSL02200ParameterDTO // use match param as GSL's dto, send as type in search texbox
                     {
+                        CPROPERTY_ID = _viewModel._ReportParam.CPROPERTY_ID,
                         CSEARCH_TEXT = _viewModel._ReportParam.CTO_BUILDING_ID, // property that bindded to search textbox
                     };
                     var loResult = await loLookupViewModel.GetBuilding(loParam); //retrive single record 
@@ -269,7 +268,7 @@ namespace PMR00600FRONT
                         loEx.Add(R_FrontUtility.R_GetError(
                                 typeof(Lookup_GSFrontResources.Resources_Dummy_Class),
                                 "_ErrLookup01"));
-                        _viewModel._ReportParam.CFROM_BUILDING_NAME = ""; //kosongin bind textbox name kalo gaada
+                        _viewModel._ReportParam.CTO_BUILDING_NAME = ""; //kosongin bind textbox name kalo gaada
                         goto EndBlock;
                     }
                     _viewModel._ReportParam.CTO_BUILDING_ID = loResult.CBUILDING_ID;
@@ -286,65 +285,301 @@ namespace PMR00600FRONT
         }
         #endregion
 
+        #region lookupTenant
+        private void BeforeOpen_lookupFromTenant(R_BeforeOpenLookupEventArgs eventArgs)
+        {
+            eventArgs.Parameter = new LML00600ParameterDTO()
+            { CCOMPANY_ID = _clientHelper.CompanyId, CPROPERTY_ID = _viewModel._ReportParam.CPROPERTY_ID, CCUSTOMER_TYPE = "01", CUSER_ID = _clientHelper.UserId, CSEARCH_TEXT = "" };
+            eventArgs.TargetPageType = typeof(LML00600);
+        }
+        private async Task AfterOpen_lookupFromTenantAsync(R_AfterOpenLookupEventArgs eventArgs)
+        {
+            var loTempResult = (LML00600DTO)eventArgs.Result;
+            if (loTempResult != null)
+            {
+                _viewModel._ReportParam.CFROM_TENANT_ID = loTempResult.CTENANT_ID;
+                _viewModel._ReportParam.CFROM_TENANT_NAME = loTempResult.CTENANT_NAME;
+            }
+        }
+        private async Task OnLostFocus_LookupFromTenant()
+        {
+            var loEx = new R_Exception();
+
+            try
+            {
+                if (!string.IsNullOrWhiteSpace(_viewModel._ReportParam.CFROM_TENANT_ID))
+                {
+
+                    LookupLML00600ViewModel loLookupViewModel = new LookupLML00600ViewModel(); //use GSL's model
+                    var loParam = new LML00600ParameterDTO // use match param as GSL's dto, send as type in search texbox
+                    {
+                        CCOMPANY_ID = _clientHelper.CompanyId,
+                        CPROPERTY_ID = _viewModel._ReportParam.CPROPERTY_ID,
+                        CCUSTOMER_TYPE = "01",
+                        CUSER_ID = _clientHelper.UserId,
+                        CSEARCH_TEXT = _viewModel._ReportParam.CFROM_TENANT_ID, // property that bindded to search textbox
+                    };
+                    var loResult = await loLookupViewModel.GetTenant(loParam); //retrive single record 
+
+                    //show result & show name/related another fields
+                    if (loResult == null)
+                    {
+                        loEx.Add(R_FrontUtility.R_GetError(
+                                typeof(Lookup_GSFrontResources.Resources_Dummy_Class),
+                                "_ErrLookup01"));
+                        _viewModel._ReportParam.CFROM_TENANT_NAME = ""; //kosongin bind textbox name kalo gaada
+                        goto EndBlock;
+                    }
+                    _viewModel._ReportParam.CFROM_TENANT_ID = loResult.CTENANT_ID;
+                    _viewModel._ReportParam.CFROM_TENANT_NAME = loResult.CTENANT_NAME; //assign bind textbox name kalo ada
+                }
+            }
+            catch (Exception ex)
+            {
+                loEx.Add(ex);
+            }
+        EndBlock:
+            R_DisplayException(loEx);
+
+        }
+        private void BeforeOpen_lookupToTenant(R_BeforeOpenLookupEventArgs eventArgs)
+        {
+            eventArgs.Parameter = new LML00600ParameterDTO()
+            { CCOMPANY_ID = _clientHelper.CompanyId, CPROPERTY_ID = _viewModel._ReportParam.CPROPERTY_ID, CCUSTOMER_TYPE = "01", CUSER_ID = _clientHelper.UserId, CSEARCH_TEXT = "" };
+            eventArgs.TargetPageType = typeof(LML00600);
+        }
+        private async Task AfterOpen_lookupToTenantAsync(R_AfterOpenLookupEventArgs eventArgs)
+        {
+            var loTempResult = (LML00600DTO)eventArgs.Result;
+            if (loTempResult != null)
+            {
+                _viewModel._ReportParam.CTO_TENANT_ID = loTempResult.CTENANT_ID;
+                _viewModel._ReportParam.CTO_TENANT_NAME = loTempResult.CTENANT_NAME;
+            }
+        }
+        private async Task OnLostFocus_LookupToTenant()
+        {
+            var loEx = new R_Exception();
+
+            try
+            {
+                if (!string.IsNullOrWhiteSpace(_viewModel._ReportParam.CTO_TENANT_ID))
+                {
+
+                    LookupLML00600ViewModel loLookupViewModel = new LookupLML00600ViewModel(); //use GSL's model
+                    var loParam = new LML00600ParameterDTO // use match param as GSL's dto, send as type in search texbox
+                    {
+                        CCOMPANY_ID = _clientHelper.CompanyId,
+                        CPROPERTY_ID = _viewModel._ReportParam.CPROPERTY_ID,
+                        CCUSTOMER_TYPE = "01",
+                        CUSER_ID = _clientHelper.UserId,
+                        CSEARCH_TEXT = _viewModel._ReportParam.CTO_TENANT_ID, // property that bindded to search textbox
+                    };
+                    var loResult = await loLookupViewModel.GetTenant(loParam); //retrive single record 
+
+                    //show result & show name/related another fields
+                    if (loResult == null)
+                    {
+                        loEx.Add(R_FrontUtility.R_GetError(
+                                typeof(Lookup_GSFrontResources.Resources_Dummy_Class),
+                                "_ErrLookup01"));
+                        _viewModel._ReportParam.CTO_TENANT_NAME = ""; //kosongin bind textbox name kalo gaada
+                        goto EndBlock;
+                    }
+                    _viewModel._ReportParam.CTO_TENANT_ID = loResult.CTENANT_ID;
+                    _viewModel._ReportParam.CTO_TENANT_NAME = loResult.CTENANT_NAME; //assign bind textbox name kalo ada
+                }
+            }
+            catch (Exception ex)
+            {
+                loEx.Add(ex);
+            }
+        EndBlock:
+            R_DisplayException(loEx);
+
+        }
+        #endregion
+
+        #region lookupService
+        private void BeforeOpen_lookupFromService(R_BeforeOpenLookupEventArgs eventArgs)
+        {
+            eventArgs.Parameter = new LML00400ParameterDTO()
+            { CCOMPANY_ID = _clientHelper.CompanyId, CPROPERTY_ID = _viewModel._ReportParam.CPROPERTY_ID, CCHARGE_TYPE_ID = "08", CUSER_ID = _clientHelper.UserId, CSEARCH_TEXT = "" };
+            eventArgs.TargetPageType = typeof(LML00400);
+        }
+        private async Task AfterOpen_lookupFromServiceAsync(R_AfterOpenLookupEventArgs eventArgs)
+        {
+            var loTempResult = (LML00400DTO)eventArgs.Result;
+            if (loTempResult != null)
+            {
+                _viewModel._ReportParam.CFROM_SERVICE_ID = loTempResult.CCHARGES_ID;
+                _viewModel._ReportParam.CFROM_SERVICE_NAME = loTempResult.CCHARGES_NAME;
+            }
+        }
+        private async Task OnLostFocus_LookupFromService()
+        {
+            var loEx = new R_Exception();
+
+            try
+            {
+                if (!string.IsNullOrWhiteSpace(_viewModel._ReportParam.CFROM_SERVICE_ID))
+                {
+
+                    LookupLML00400ViewModel loLookupViewModel = new LookupLML00400ViewModel(); //use GSL's model
+                    var loParam = new LML00400ParameterDTO // use match param as GSL's dto, send as type in search texbox
+                    {
+                        CCOMPANY_ID = _clientHelper.CompanyId,
+                        CPROPERTY_ID = _viewModel._ReportParam.CPROPERTY_ID,
+                        CCHARGE_TYPE_ID = "08",
+                        CUSER_ID = _clientHelper.UserId,
+                        CSEARCH_TEXT = _viewModel._ReportParam.CFROM_SERVICE_ID, // property that bindded to search textbox
+                    };
+                    var loResult = await loLookupViewModel.GetUtitlityCharges(loParam); //retrive single record 
+
+                    //show result & show name/related another fields
+                    if (loResult == null)
+                    {
+                        loEx.Add(R_FrontUtility.R_GetError(
+                                typeof(Lookup_GSFrontResources.Resources_Dummy_Class),
+                                "_ErrLookup01"));
+                        _viewModel._ReportParam.CFROM_SERVICE_NAME = ""; //kosongin bind textbox name kalo gaada
+                        goto EndBlock;
+                    }
+                    _viewModel._ReportParam.CFROM_SERVICE_ID = loResult.CCHARGES_ID;
+                    _viewModel._ReportParam.CFROM_SERVICE_NAME = loResult.CCHARGES_NAME; //assign bind textbox name kalo ada
+                }
+            }
+            catch (Exception ex)
+            {
+                loEx.Add(ex);
+            }
+        EndBlock:
+            R_DisplayException(loEx);
+
+        }
+        private void BeforeOpen_lookupToService(R_BeforeOpenLookupEventArgs eventArgs)
+        {
+            eventArgs.Parameter = new LML00400ParameterDTO()
+            { CCOMPANY_ID = _clientHelper.CompanyId, CPROPERTY_ID = _viewModel._ReportParam.CPROPERTY_ID, CCHARGE_TYPE_ID = "08", CUSER_ID = _clientHelper.UserId, CSEARCH_TEXT = "" };
+            eventArgs.TargetPageType = typeof(LML00400);
+        }
+        private async Task AfterOpen_lookupToServiceAsync(R_AfterOpenLookupEventArgs eventArgs)
+        {
+            var loTempResult = (LML00400DTO)eventArgs.Result;
+            if (loTempResult != null)
+            {
+                _viewModel._ReportParam.CTO_SERVICE_ID = loTempResult.CCHARGES_ID;
+                _viewModel._ReportParam.CTO_SERVICE_NAME = loTempResult.CCHARGES_NAME;
+            }
+        }
+        private async Task OnLostFocus_LookupToService()
+        {
+            var loEx = new R_Exception();
+
+            try
+            {
+                if (!string.IsNullOrWhiteSpace(_viewModel._ReportParam.CTO_SERVICE_ID))
+                {
+
+                    LookupLML00400ViewModel loLookupViewModel = new LookupLML00400ViewModel(); //use GSL's model
+                    var loParam = new LML00400ParameterDTO // use match param as GSL's dto, send as type in search texbox
+                    {
+                        CCOMPANY_ID = _clientHelper.CompanyId,
+                        CPROPERTY_ID = _viewModel._ReportParam.CPROPERTY_ID,
+                        CCHARGE_TYPE_ID = "08",
+                        CUSER_ID = _clientHelper.UserId,
+                        CSEARCH_TEXT = _viewModel._ReportParam.CTO_SERVICE_ID, // property that bindded to search textbox
+                    };
+                    var loResult = await loLookupViewModel.GetUtitlityCharges(loParam); //retrive single record 
+
+                    //show result & show name/related another fields
+                    if (loResult == null)
+                    {
+                        loEx.Add(R_FrontUtility.R_GetError(
+                                typeof(Lookup_GSFrontResources.Resources_Dummy_Class),
+                                "_ErrLookup01"));
+                        _viewModel._ReportParam.CTO_SERVICE_NAME = ""; //kosongin bind textbox name kalo gaada
+                        goto EndBlock;
+                    }
+                    _viewModel._ReportParam.CTO_SERVICE_ID = loResult.CCHARGES_ID;
+                    _viewModel._ReportParam.CTO_SERVICE_NAME = loResult.CCHARGES_NAME; //assign bind textbox name kalo ada
+                }
+            }
+            catch (Exception ex)
+            {
+                loEx.Add(ex);
+            }
+        EndBlock:
+            R_DisplayException(loEx);
+
+        }
+        #endregion
+
         #region print
-        private void OnclickBtn_Print()
+        private async Task OnclickBtn_Print()
         {
             R_Exception loEx = new R_Exception();
             try
             {
-                var loParam = new PMR00600ParamDTO()
-                {
-                    //CLANG_ID = _clientHelper.Culture.Name,
-                    //CCOMPANY_ID = _clientHelper.CompanyId,
-                    //CPROPERTY_ID = _viewModel._ReportParam.CPROPERTY_ID,
-                    //CPROPERTY_NAME = _viewModel._properties.Where(x => x.CPROPERTY_ID == _viewModel._ReportParam.CPROPERTY_ID).FirstOrDefault().CPROPERTY_NAME,
-                    //Cfrom DEPARTMENT_CODE = _viewModel._ReportParam.CFROM_DEPARTMENT_CODE,
-                    //CFROM_DEPT_NAME = _viewModel._ReportParam.CFROM_DEPT_NAME,
-                    //CTO_DEPT_CODE = _viewModel._ReportParam.CTO_DEPT_CODE,
-                    //CTO_DEPT_NAME = _viewModel._ReportParam.CTO_DEPT_NAME,
-                    //CFROM_SALESMAN_ID = _viewModel._ReportParam.CFROM_SALESMAN_ID,
-                    //CFROM_SALESMAN_NAME = _viewModel._ReportParam.CFROM_SALESMAN_NAME,
-                    //CTO_SALESMAN_ID = _viewModel._ReportParam.CTO_SALESMAN_ID,
-                    //CTO_SALESMAN_NAME = _viewModel._ReportParam.CTO_SALESMAN_NAME,
-                    //CFROM_PERIOD = _viewModel._YearFromPeriod + _viewModel._MonthFromPeriod, //yyyyMM
-                    //CTO_PERIOD = _viewModel._YearToPeriod + _viewModel._MonthToPeriod, //yyyyMM
-                    //LIS_OUTSTANDING = _viewModel._ReportParam.LIS_OUTSTANDING,
-                };
-
                 //validation
-                //if (string.IsNullOrWhiteSpace(loParam.CPROPERTY_ID))
-                //{
-                //    loEx.Add("", _localizer["_validationEmptyProperty"]);
-                //}
-                //if (string.IsNullOrWhiteSpace(loParam.CFROM_DEPT_CODE))
-                //{
-                //    loEx.Add("", _localizer["_validationEmptyFromDept"]);
-                //}
-                //if (string.IsNullOrWhiteSpace(loParam.CTO_DEPT_CODE))
-                //{
-                //    loEx.Add("", _localizer["_validationEmptyToDept"]);
-                //}
-                //if (string.IsNullOrWhiteSpace(loParam.CFROM_SALESMAN_ID))
-                //{
-                //    loEx.Add("", _localizer["_validationEmptyFromSalesman"]);
-                //}
-                //if (string.IsNullOrWhiteSpace(loParam.CTO_SALESMAN_ID))
-                //{
-                //    loEx.Add("", _localizer["_validationEmptyToSalesman"]);
-                //}
-                //if (int.Parse(loParam.CTO_PERIOD) > int.Parse(loParam.CFROM_PERIOD))
-                //{
-                //    loEx.Add("", _localizer["_validationHigherPeriod"]);
-                //}
+                if (string.IsNullOrWhiteSpace(_viewModel._ReportParam.CPROPERTY_ID))
+                {
+                    loEx.Add("", _localizer["_val1"]);
+                }
+                if (string.IsNullOrWhiteSpace(_viewModel._MonthFromPeriod) || string.IsNullOrWhiteSpace(_viewModel._MonthToPeriod) || _viewModel._YearPeriod == 0)
+                {
+                    loEx.Add("", _localizer["_val2"]);
+                }
+                if (string.IsNullOrWhiteSpace(_viewModel._ReportParam.CFROM_BUILDING_ID) || string.IsNullOrWhiteSpace(_viewModel._ReportParam.CTO_BUILDING_ID))
+                {
+                    loEx.Add("", _localizer["_val3"]);
+                }
+                if (string.IsNullOrWhiteSpace(_viewModel._ReportParam.CFROM_DEPT_CODE) || string.IsNullOrWhiteSpace(_viewModel._ReportParam.CTO_DEPT_CODE))
+                {
+                    loEx.Add("", _localizer["_val4"]);
+                }
+                if (_viewModel._ReportParam.LTENANT && (string.IsNullOrWhiteSpace(_viewModel._ReportParam.CFROM_TENANT_ID) || string.IsNullOrWhiteSpace(_viewModel._ReportParam.CTO_TENANT_ID)))
+                {
+                    loEx.Add("", _localizer["_val5"]);
 
-                //if (_viewModel._ReportType == "D")
-                //{
-                //    Overtime_PrintDetail(loParam);
-                //}
-                //else
-                //{
-                //    Overtime_PrintSummaryAsync(loParam);
-                //}
+                }
+                if (_viewModel._ReportParam.LSERVICE && (string.IsNullOrWhiteSpace(_viewModel._ReportParam.CFROM_SERVICE_ID) || string.IsNullOrWhiteSpace(_viewModel._ReportParam.CTO_SERVICE_ID)))
+                {
+                    loEx.Add("", _localizer["_val6"]);
+
+                }
+
+                //combine data
+                _viewModel._ReportParam.CSTATUS = _viewModel._Status;
+                _viewModel._ReportParam.CINVOICE = _viewModel._Invoice;
+                _viewModel._ReportParam.CSTATUS_DISPLAY = _viewModel._Status == "1" ? _localizer["_radio_Open"] : _localizer["_radio_CLosed"];
+                _viewModel._ReportParam.CINVOICE_DISPLAY = _viewModel._Invoice == "1" ? _localizer["_radio_Invoiced"] : _localizer["_radio_Not_Invoiced"];
+                var lcYearPeriod = _viewModel._YearPeriod.ToString();
+                _viewModel._ReportParam.CFROM_PERIOD = lcYearPeriod + _viewModel._MonthFromPeriod;
+                _viewModel._ReportParam.CTO_PERIOD = lcYearPeriod + _viewModel._MonthToPeriod;
+
+                if (_viewModel._Report_Type == "1" && _viewModel._GroupBy == "1")
+                {
+                    var loParam = R_FrontUtility.ConvertObjectToObject<PMR00600ParamDTO>(_viewModel._ReportParam);
+                    await Overtime_PrintSummaryByTenantAsync(loParam);
+                }
+                else if (_viewModel._Report_Type == "1" && _viewModel._GroupBy == "2")
+                {
+                    var loParam = R_FrontUtility.ConvertObjectToObject<PMR00600ParamDTO>(_viewModel._ReportParam);
+                    await Overtime_PrintSummaryByChargeAsync(loParam);
+                }
+                else if (_viewModel._Report_Type == "2" && _viewModel._GroupBy == "1")
+                {
+                    var loParam = R_FrontUtility.ConvertObjectToObject<PMR00601ParamDTO>(_viewModel._ReportParam);
+                    await Overtime_PrintDetailByTenantAsync(loParam);
+                }
+                else if (_viewModel._Report_Type == "2" && _viewModel._GroupBy == "2")
+                {
+                    var loParam = R_FrontUtility.ConvertObjectToObject<PMR00601ParamDTO>(_viewModel._ReportParam);
+                    await Overtime_PrintDetailByChargeAsync(loParam);
+                }
+
+
             }
             catch (Exception ex)
             {
@@ -352,7 +587,7 @@ namespace PMR00600FRONT
             }
             loEx.ThrowExceptionIfErrors();
         }
-        private async Task Overtime_PrintSummaryAsync(PMR00600ParamDTO poParam)
+        private async Task Overtime_PrintSummaryByTenantAsync(PMR00600ParamDTO poParam)
         {
             R_Exception loEx = new R_Exception();
             try
@@ -360,8 +595,8 @@ namespace PMR00600FRONT
                 await _reportService.GetReport(
                     "R_DefaultServiceUrlPM",
                     "PM",
-                    "rpt/PMR00210Print/DownloadResultPrintPost",
-                    "rpt/PMR00210Print/OvertimeSummary_ReportListGet",
+                    "rpt/PMR00610Print/DownloadResultPrintPost",
+                    "rpt/PMR00610Print/OvertimeSummaryByTenant_ReportListGet",
                     poParam);
             }
             catch (Exception ex)
@@ -370,12 +605,53 @@ namespace PMR00600FRONT
             }
             loEx.ThrowExceptionIfErrors();
         }
-        private void Overtime_PrintDetail(PMR00600ParamDTO poParam)
+        private async Task Overtime_PrintSummaryByChargeAsync(PMR00600ParamDTO poParam)
         {
             R_Exception loEx = new R_Exception();
             try
             {
-
+                await _reportService.GetReport(
+                    "R_DefaultServiceUrlPM",
+                    "PM",
+                    "rpt/PMR00611Print/DownloadResultPrintPost",
+                    "rpt/PMR00611Print/OvertimeSummaryByCharge_ReportListGet",
+                    poParam);
+            }
+            catch (Exception ex)
+            {
+                loEx.Add(ex);
+            }
+            loEx.ThrowExceptionIfErrors();
+        }
+        private async Task Overtime_PrintDetailByTenantAsync(PMR00601ParamDTO poParam)
+        {
+            R_Exception loEx = new R_Exception();
+            try
+            {
+                await _reportService.GetReport(
+                    "R_DefaultServiceUrlPM",
+                    "PM",
+                    "rpt/PMR00621Print/DownloadResultPrintPost",
+                    "rpt/PMR00621Print/OvertimeDetailByTenant_ReportListGet",
+                    poParam);
+            }
+            catch (Exception ex)
+            {
+                loEx.Add(ex);
+            }
+            loEx.ThrowExceptionIfErrors();
+        }
+        private async Task Overtime_PrintDetailByChargeAsync(PMR00601ParamDTO poParam)
+        {
+            R_Exception loEx = new R_Exception();
+            try
+            {
+                await _reportService.GetReport(
+                    "R_DefaultServiceUrlPM",
+                    "PM",
+                    "rpt/PMR00622Print/DownloadResultPrintPost",
+                    "rpt/PMR00622Print/OvertimeDetailByCharge_ReportListGet",
+                    poParam);
             }
             catch (Exception ex)
             {

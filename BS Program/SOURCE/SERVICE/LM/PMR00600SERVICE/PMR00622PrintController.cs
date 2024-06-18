@@ -25,7 +25,7 @@ namespace PMR00600SERVICE
     {
         private PMR00600PrintLogger _logger;
         private R_ReportFastReportBackClass _ReportCls;
-        private PMR00600ParamDTO _Parameter;
+        private PMR00601ParamDTO _Parameter;
         private readonly ActivitySource _activitySource;
 
         public PMR00622PrintController(ILogger<PMR00600PrintLogger> logger)
@@ -66,7 +66,7 @@ namespace PMR00600SERVICE
         #endregion
 
         [HttpPost]
-        public R_DownloadFileResultDTO DownloadResultPrintPost(PMR00600ParamDTO poParameter)
+        public R_DownloadFileResultDTO DownloadResultPrintPost(PMR00601ParamDTO poParameter)
         {
             using Activity activity = _activitySource.StartActivity($"{GetType().Name}.{MethodBase.GetCurrentMethod().Name}");
             _logger.LogInfo("Start - Post DownloadResultPrintPost Status");
@@ -78,7 +78,7 @@ namespace PMR00600SERVICE
                 loRtn = new R_DownloadFileResultDTO();
                 loCache = new PMR00600PrintLogKey
                 {
-                    poParam = poParameter,
+                    poParamDetail = poParameter,
                     poLogKey = (R_NetCoreLogKeyDTO)R_NetCoreLogAsyncStorage.GetData(R_NetCoreLogConstant.LOG_KEY)
                 };
                 _logger.LogInfo("Set GUID Param - Post DownloadResultPrintPost Status");
@@ -112,7 +112,7 @@ namespace PMR00600SERVICE
                 // Get Parameter
                 R_NetCoreLogUtility.R_SetNetCoreLogKey(loResultGUID.poLogKey);
 
-                _Parameter = loResultGUID.poParam;
+                _Parameter = loResultGUID.poParamDetail;
 
                 _logger.LogDebug("Deserialized GUID: {pcGuid}", pcGuid);
                 _logger.LogDebug("Deserialized Parameters: {@Parameters}", _Parameter);

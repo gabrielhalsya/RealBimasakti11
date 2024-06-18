@@ -24,7 +24,9 @@ namespace PMR00600MODEL.View_Models
         public ObservableCollection<PropertyDTO> _properties = new ObservableCollection<PropertyDTO>();
         public PMR00600ParamDTO _ReportParam = new PMR00600ParamDTO();
         public List<ReportTypeDTO> _radioReportTypeList { get; set; } = new List<ReportTypeDTO>();
-        public List<GroupTypeDTO> _radiogGroupingTypeList { get; set; } = new List<GroupTypeDTO>();
+        public List<GroupTypeDTO> _radioGroupingList { get; set; } = new List<GroupTypeDTO>();
+        public List<StatusTypeDTO> _radioStatusList { get; set; } = new List<StatusTypeDTO>();
+        public List<InvoiceTypeDTO> _radioInvoiceList { get; set; } = new List<InvoiceTypeDTO>();
         public List<MonthDTO> _monthList { get; set; } = Enumerable.Range(1, 12).Select(i => new MonthDTO
         {
             CNUMBER = i.ToString("D2"),
@@ -38,7 +40,9 @@ namespace PMR00600MODEL.View_Models
         public string _MonthFromPeriod { get; set; } = "";
         public string _MonthToPeriod { get; set; } = "";
         public string _Report_Type { get; set; } = "";
-        public string _Grouping_Type { get; set; } = "";
+        public string _GroupBy { get; set; } = "";
+        public string _Status { get; set; } = "";
+        public string _Invoice { get; set; } = "";
 
         public async Task InitProcess(R_ILocalizer<Resources_Dummy_Class> poParamLocalizer)
         {
@@ -50,9 +54,17 @@ namespace PMR00600MODEL.View_Models
                     new ReportTypeDTO { CTYPE_CODE = "1", CTYPE_NAME = poParamLocalizer["_radio_Summary"] },
                     new ReportTypeDTO { CTYPE_CODE = "2", CTYPE_NAME = poParamLocalizer ["_radio_Detail"] },
                 };
-                _radiogGroupingTypeList = new List<GroupTypeDTO> {
+                _radioGroupingList = new List<GroupTypeDTO> {
                     new GroupTypeDTO { CTYPE_CODE = "1", CTYPE_NAME = poParamLocalizer["_radio_Tenant"] },
                     new GroupTypeDTO { CTYPE_CODE = "2", CTYPE_NAME = poParamLocalizer["_radio_Charge"] },
+                };
+                _radioInvoiceList = new List<InvoiceTypeDTO> {
+                 new InvoiceTypeDTO { CTYPE_CODE = "1", CTYPE_NAME = poParamLocalizer["_radio_Invoiced"] },
+                 new InvoiceTypeDTO { CTYPE_CODE = "2", CTYPE_NAME = poParamLocalizer["_radio_Not_Invoiced"] },
+                };
+                _radioStatusList = new List<StatusTypeDTO> {
+                 new StatusTypeDTO { CTYPE_CODE = "1", CTYPE_NAME = poParamLocalizer["_radio_Open"] },
+                 new StatusTypeDTO { CTYPE_CODE = "2", CTYPE_NAME = poParamLocalizer["_radio_Closed"] },
                 };
 
                 //get init data
@@ -69,18 +81,19 @@ namespace PMR00600MODEL.View_Models
                     _InitToday = DateTime.Now;
                 }
 
+                //set default data
                 _MonthFromPeriod = _InitToday.ToString("MM");
                 _MonthToPeriod = _InitToday.ToString("MM");
                 _YearPeriod = _InitToday.Year;
 
-                //set default data
-
                 _Report_Type = "1";
-                _Grouping_Type = "1";
-                _ReportParam.LINVOICE = false;
+                _GroupBy = "1";
+                _Status = "1";
+                _Invoice = "1";
+                _ReportParam.LTENANT = false;
                 _ReportParam.LSERVICE = false;
                 _ReportParam.LSTATUS = false;
-                _ReportParam.LTENANT = false;
+                _ReportParam.LINVOICE = false;
             }
             catch (Exception ex)
             {

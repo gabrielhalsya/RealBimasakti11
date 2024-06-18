@@ -24,12 +24,12 @@
 
 	<ItemGroup>
 	  <ProjectReference Include="..\..\..\..\..\BS Shared Form\SOURCE\SERVICES\Lookup_LMSERVICES\Lookup_PMSERVICES.csproj" />
-	  <ProjectReference Include="..\..\..\FRONT\PMR00600FRONT\PMR00600FRONT.csproj" />
 	  <ProjectReference Include="..\..\..\SERVICE\LM\LMM00200Service\PMM00200SERVICE.csproj" />
 	  <ProjectReference Include="..\..\..\SERVICE\LM\LMM03700Service\PMM003700SERVICE.csproj" />
 	  <ProjectReference Include="..\..\..\SERVICE\LM\LMM04500SERVICE\PMM04500SERVICE.csproj" />
 	  <ProjectReference Include="..\..\..\SERVICE\LM\LMT05000SERVICE\PMT05000SERVICE.csproj" />
 	  <ProjectReference Include="..\..\..\SERVICE\LM\PMR00200SERVICE\PMR00200SERVICE.csproj" />
+	  <ProjectReference Include="..\..\..\SERVICE\LM\PMR00600SERVICE\PMR00600SERVICE.csproj" />
 	</ItemGroup>
 	
 	<ItemGroup>
