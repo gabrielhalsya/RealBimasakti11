@@ -24,6 +24,9 @@
 	  <ProjectReference Include="..\..\..\..\BS Program\SOURCE\FRONT\CBT01100FRONT\CBT01100FRONT.csproj" />
 	  <ProjectReference Include="..\..\..\..\BS Program\SOURCE\FRONT\GLM00200FRONT\GLM00200FRONT.csproj" />
 	  <ProjectReference Include="..\..\..\..\BS Program\SOURCE\FRONT\GLT00100FRONT\GLT00100FRONT.csproj" />
+	  <ProjectReference Include="..\..\..\..\BS Program\SOURCE\FRONT\LMM00200FRONT\PMM00200FRONT.csproj" />
+	  <ProjectReference Include="..\..\..\..\BS Program\SOURCE\FRONT\LMM03700Front\PMM03700FRONT.csproj" />
+	  <ProjectReference Include="..\..\..\..\BS Program\SOURCE\FRONT\LMM04500FRONT\PMM04500FRONT.csproj" />
 	  <ProjectReference Include="..\..\..\..\BS Program\SOURCE\FRONT\PMR00200FRONT\PMR00200FRONT.csproj" />
 	  <ProjectReference Include="..\..\..\..\BS Program\SOURCE\FRONT\PMR00600FRONT\PMR00600FRONT.csproj" />
 	</ItemGroup>

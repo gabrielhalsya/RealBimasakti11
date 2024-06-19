@@ -1,21 +1,20 @@
 {
   "runtimeTarget": {
-    "name": ".NETStandard,Version=v2.1/",
+    "name": ".NETCoreApp,Version=v6.0",
     "signature": ""
   },
   "compilationOptions": {},
   "targets": {
-    ".NETStandard,Version=v2.1": {},
-    ".NETStandard,Version=v2.1/": {
-      "R_SecurityTokenCommon/1.0.0": {
+    ".NETCoreApp,Version=v6.0": {
+      "R_MultiTenantDb.Abstract/1.0.0": {
         "runtime": {
-          "R_SecurityTokenCommon.dll": {}
+          "R_MultiTenantDb.Abstract.dll": {}
         }
       }
     }
   },
   "libraries": {
-    "R_SecurityTokenCommon/1.0.0": {
+    "R_MultiTenantDb.Abstract/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

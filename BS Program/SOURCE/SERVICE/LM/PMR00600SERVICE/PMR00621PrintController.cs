@@ -144,7 +144,7 @@ namespace PMR00600SERVICE
             var loParam = new BaseHeaderDTO();
 
             System.Globalization.CultureInfo loCultureInfo =
-                new System.Globalization.CultureInfo(R_BackGlobalVar.REPORT_CULTURE);
+                new System.Globalization.CultureInfo(poParam.CREPORT_CULTURE);
 
             try
             {
@@ -166,10 +166,10 @@ namespace PMR00600SERVICE
                 // Set base header data
                 _logger.LogDebug("Deserialized Print Parameters: {@PrintParameters}");
 
-                loParam.CCOMPANY_NAME = R_BackGlobalVar.COMPANY_ID.ToUpper();
+                loParam.CCOMPANY_NAME = poParam.CCOMPANY_ID.ToUpper();
                 loParam.CPRINT_CODE = "621";
                 loParam.CPRINT_NAME = "Overtime Detail";
-                loParam.CUSER_ID = R_BackGlobalVar.USER_ID.ToUpper();
+                loParam.CUSER_ID = poParam.CUSER_ID.ToUpper();
 
                 // Create an instance 
                 PMR00601ReportDataDTO loData = new PMR00601ReportDataDTO()
@@ -183,8 +183,6 @@ namespace PMR00600SERVICE
 
                 // Create an instance of PMR01000Cls
                 var loCls = new PMR00600Cls();
-                poParam.CLANG_ID = R_BackGlobalVar.CULTURE;
-                poParam.CCOMPANY_ID = R_BackGlobalVar.COMPANY_ID;
 
                 // Get print data for Group Of Account report
                 var loCollData = loCls.GetDetailData(poParam);
@@ -195,6 +193,7 @@ namespace PMR00600SERVICE
                 var loMappingData = R_Utility.R_ConvertCollectionToCollection<PMR00601SPResultDTO,PMR00601DataDTO>(loCollData);
                 loData.Data = new List<PMR00601DataDTO>(loMappingData);
                 loRtn.BaseHeaderData = loParam;
+                loRtn.ReportDataDTO = loData;
 
                 _logger.LogInfo("Print output generated successfully. Saving print file.");
             }

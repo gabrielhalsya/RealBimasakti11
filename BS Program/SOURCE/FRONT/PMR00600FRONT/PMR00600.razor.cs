@@ -551,6 +551,7 @@ namespace PMR00600FRONT
                 }
 
                 //combine data
+                
                 _viewModel._ReportParam.CPROPERTY_NAME = _viewModel._properties.FirstOrDefault(x => x.CPROPERTY_ID == _viewModel._ReportParam.CPROPERTY_ID).CPROPERTY_NAME;
                 _viewModel._ReportParam.CFROM_PERIOD = _viewModel._YearPeriod + _viewModel._MonthFromPeriod;
                 _viewModel._ReportParam.CTO_PERIOD = _viewModel._YearPeriod + _viewModel._MonthToPeriod;
@@ -564,7 +565,11 @@ namespace PMR00600FRONT
                 _viewModel._ReportParam.CINVOICE = _viewModel._Invoice;
                 _viewModel._ReportParam.CSTATUS_DISPLAY = _viewModel._Status == "1" ? _localizer["_radio_Open"] : _localizer["_radio_CLosed"];
                 _viewModel._ReportParam.CINVOICE_DISPLAY = _viewModel._Invoice == "1" ? _localizer["_radio_Invoiced"] : _localizer["_radio_Not_Invoiced"];
-                
+                _viewModel._ReportParam.CCOMPANY_ID = _clientHelper.CompanyId;
+                _viewModel._ReportParam.CUSER_ID = _clientHelper.UserId;
+                _viewModel._ReportParam.CREPORT_CULTURE = _clientHelper.ReportCulture.ToString(); 
+                _viewModel._ReportParam.CLANG_ID = _clientHelper.Culture.TwoLetterISOLanguageName;
+
                 //rute report
                 if (_viewModel._Report_Type == "1" && _viewModel._GroupBy == "1")
                 {

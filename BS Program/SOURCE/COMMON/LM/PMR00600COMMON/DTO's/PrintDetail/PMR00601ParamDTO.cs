@@ -7,6 +7,8 @@ namespace PMR00600COMMON.DTO_s.PrintDetail
 {
     public class PMR00601ParamDTO : PMR00600SPParamDTO
     {
+        public string CUSER_ID { get; set; }
+        public string CREPORT_CULTURE { get; set; }
         public bool LIS_DETAIL_BY_TENANT { get; set; }
         public bool LIS_DETAIL_BY_CHARGES { get; set; }
         public string CFROM_BUILDING_NAME { get; set; }

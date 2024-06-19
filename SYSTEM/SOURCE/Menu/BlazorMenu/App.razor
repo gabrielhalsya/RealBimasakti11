@@ -1,8 +1,10 @@
-﻿@using Microsoft.AspNetCore.Components.WebAssembly.Services
+﻿@using BlazorMenu.Routing
+@using Microsoft.AspNetCore.Components.WebAssembly.Services
 @using System.Reflection
 @using R_BlazorFrontEnd.Helpers
 @using BlazorMenu.Shared.Tabs
 @inject LazyAssemblyLoader AssemblyLoader
+@inject NavigationManager NavigationManager
 
 <CascadingAuthenticationState>
     <Router AppAssembly="@typeof(Program).Assembly"
@@ -35,11 +37,11 @@
         typeof(PMR00600FRONT.PMR00600).Assembly,
 
         //gl module
-        typeof(GLM00200FRONT.GLM00200).Assembly,
-        typeof(GLT00100FRONT.GLT00100).Assembly,
+        // typeof(GLM00200FRONT.GLM00200).Assembly,
+        // typeof(GLT00100FRONT.GLT00100).Assembly,
 
         //cb module
-        typeof(CBT01100FRONT.CBT01100).Assembly
+        // typeof(CBT01100FRONT.CBT01100).Assembly
     };
 
     private async Task OnNavigateAsync(NavigationContext args)
