@@ -30,6 +30,7 @@
 	  <ProjectReference Include="..\..\..\..\BS Program\SOURCE\FRONT\LMT05000FRONT\PMT05000FRONT.csproj" />
 	  <ProjectReference Include="..\..\..\..\BS Program\SOURCE\FRONT\PMR00200FRONT\PMR00200FRONT.csproj" />
 	  <ProjectReference Include="..\..\..\..\BS Program\SOURCE\FRONT\PMR00600FRONT\PMR00600FRONT.csproj" />
+	  <ProjectReference Include="..\..\..\..\BS Program\SOURCE\FRONT\PMR02400FRONT\PMR02400FRONT.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>

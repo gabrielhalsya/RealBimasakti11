@@ -30,6 +30,7 @@
 	  <ProjectReference Include="..\..\..\SERVICE\LM\LMT05000SERVICE\PMT05000SERVICE.csproj" />
 	  <ProjectReference Include="..\..\..\SERVICE\LM\PMR00200SERVICE\PMR00200SERVICE.csproj" />
 	  <ProjectReference Include="..\..\..\SERVICE\LM\PMR00600SERVICE\PMR00600SERVICE.csproj" />
+	  <ProjectReference Include="..\..\..\SERVICE\LM\PMR02400SERVICE\PMR02400SERVICE.csproj" />
 	</ItemGroup>
 	
 	<ItemGroup>
