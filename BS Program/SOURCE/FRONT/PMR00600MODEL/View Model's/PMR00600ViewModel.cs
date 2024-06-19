@@ -94,6 +94,14 @@ namespace PMR00600MODEL.View_Models
                 _ReportParam.LSERVICE = false;
                 _ReportParam.LSTATUS = false;
                 _ReportParam.LINVOICE = false;
+                _ReportParam.CFROM_TENANT_ID = "";
+                _ReportParam.CFROM_TENANT_NAME = "";
+                _ReportParam.CTO_TENANT_ID = "";
+                _ReportParam.CTO_TENANT_NAME = "";
+                _ReportParam.CFROM_SERVICE_NAME = "";
+                _ReportParam.CTO_SERVICE_NAME = "";
+                _ReportParam.CFROM_SERVICE_ID = "";
+                _ReportParam.CTO_SERVICE_ID = "";
             }
             catch (Exception ex)
             {

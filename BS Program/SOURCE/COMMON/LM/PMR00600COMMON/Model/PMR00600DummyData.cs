@@ -2,7 +2,7 @@
 using PMR00600COMMON.DTO_s.Print;
 using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Globalization;
 
 namespace PMR00600COMMON.DTO_s.Model
 {
@@ -52,12 +52,17 @@ namespace PMR00600COMMON.DTO_s.Model
                 CINVOICE = "1", //"2"
                 CINVOICE_DISPLAY = "Involved",
                 CLANG_ID = "en",
-                LINVOICE = true,
-                LSERVICE = true,
+                LINVOICE = false,
+                LSERVICE = false,
                 LSTATUS = true,
                 LTENANT = true
 
             };
+            DateTime loFromDate = DateTime.ParseExact(loRtn.ReportDataDTO.Param.CFROM_PERIOD, "yyyyMMdd", CultureInfo.InvariantCulture);
+            DateTime loToDate = DateTime.ParseExact(loRtn.ReportDataDTO.Param.CTO_PERIOD, "yyyyMMdd", CultureInfo.InvariantCulture);
+            loRtn.ReportDataDTO.Param.CPERIOD_DISPLAY = (loFromDate.Year != loToDate.Year || loFromDate.Month != loToDate.Month)
+                ? $"{loFromDate:MMMM yyyy} – {loToDate:MMMM yyyy}"
+                : $"{loFromDate:MMMM yyyy}";
             loRtn.ReportDataDTO.Data = new List<PMR00600DataDTO>()
             {
                // Tenant 1, Agreement 1, Charge 1

@@ -167,17 +167,16 @@ namespace PMR00600SERVICE
                 _logger.LogDebug("Deserialized Print Parameters: {@PrintParameters}");
 
                 loParam.CCOMPANY_NAME = R_BackGlobalVar.COMPANY_ID.ToUpper();
-                loParam.CPRINT_CODE = "001";
-                loParam.CPRINT_NAME = "Overtime Detail Group By Tenant Report";
+                loParam.CPRINT_CODE = "621";
+                loParam.CPRINT_NAME = "Overtime Detail";
                 loParam.CUSER_ID = R_BackGlobalVar.USER_ID.ToUpper();
 
-                // Create an instance of PMR01000PrintGOAResultDTo
+                // Create an instance 
                 PMR00601ReportDataDTO loData = new PMR00601ReportDataDTO()
                 {
                     Title = "Overtime",
-                    Header = "Overtime Detail Group By Tenant" +
-                    " Report",
-                    Label = new PMR00601LabelDTO(),
+                    Header = "Overtime Detail",
+                    Label = (PMR00601LabelDTO)loColumn,
                     Param = poParam,
                     Data = new List<PMR00601DataDTO>(),
                 };

@@ -1,5 +1,0 @@
-0501 = Error process, please contact your administrator!
-0502 = Duplicate Charges Id!
-0503 = Cannot Delete, Charges already in used!
-
-

@@ -26,18 +26,7 @@ namespace PMR00600COMMON.DTO_s.Print
         public bool LIS_SUMMARY_BY_CHARGES { get; set; }
         public string CREPORT_TYPE_DISPLAY { get; set; }
 
-        public string CPERIOD_DISPLAY
-        {
-            get
-            {
-                DateTime loFromDate = DateTime.ParseExact(CFROM_PERIOD, "yyyyMMdd", CultureInfo.InvariantCulture);
-                DateTime loToDate = DateTime.ParseExact(CTO_PERIOD, "yyyyMMdd", CultureInfo.InvariantCulture);
-
-                return (loFromDate.Year != loToDate.Year || loFromDate.Month != loToDate.Month)
-                    ? $"{loFromDate:MMMM yyyy} – {loToDate:MMMM yyyy}"
-                    : $"{loFromDate:MMMM yyyy}";
-            }
-        }
+        public string CPERIOD_DISPLAY { get; set; }
         public string CBUILDING_DISPLAY => CFROM_BUILDING_ID != CTO_BUILDING_ID
             ? $"{CFROM_BUILDING_NAME} ({CFROM_BUILDING_ID}) - {CTO_BUILDING_NAME} ({CTO_BUILDING_ID})"
             : $"{CFROM_BUILDING_NAME} ({CFROM_BUILDING_ID})";

@@ -23,6 +23,7 @@ using R_BlazorFrontEnd.Helpers;
 using R_BlazorFrontEnd.Interfaces;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Globalization;
 
 namespace PMR00600FRONT
 {
@@ -550,23 +551,28 @@ namespace PMR00600FRONT
                 }
 
                 //combine data
+                _viewModel._ReportParam.CPROPERTY_NAME = _viewModel._properties.FirstOrDefault(x => x.CPROPERTY_ID == _viewModel._ReportParam.CPROPERTY_ID).CPROPERTY_NAME;
+                _viewModel._ReportParam.CFROM_PERIOD = _viewModel._YearPeriod + _viewModel._MonthFromPeriod;
+                _viewModel._ReportParam.CTO_PERIOD = _viewModel._YearPeriod + _viewModel._MonthToPeriod;
+                var loFromDate = DateTime.ParseExact(_viewModel._ReportParam.CFROM_PERIOD, "yyyyMM", CultureInfo.InvariantCulture);
+                var loToDate = DateTime.ParseExact(_viewModel._ReportParam.CTO_PERIOD, "yyyyMM", CultureInfo.InvariantCulture);
+                _viewModel._ReportParam.CPERIOD_DISPLAY = loFromDate.Year != loToDate.Year || loFromDate.Month != loToDate.Month
+                    ? $"{loFromDate:MMMM yyyy} – {loToDate:MMMM yyyy}"
+                    : $"{loFromDate:MMMM yyyy}";
+                _viewModel._ReportParam.CREPORT_TYPE = _viewModel._Report_Type;
                 _viewModel._ReportParam.CSTATUS = _viewModel._Status;
                 _viewModel._ReportParam.CINVOICE = _viewModel._Invoice;
                 _viewModel._ReportParam.CSTATUS_DISPLAY = _viewModel._Status == "1" ? _localizer["_radio_Open"] : _localizer["_radio_CLosed"];
                 _viewModel._ReportParam.CINVOICE_DISPLAY = _viewModel._Invoice == "1" ? _localizer["_radio_Invoiced"] : _localizer["_radio_Not_Invoiced"];
-                var lcYearPeriod = _viewModel._YearPeriod.ToString();
-                _viewModel._ReportParam.CFROM_PERIOD = lcYearPeriod + _viewModel._MonthFromPeriod;
-                _viewModel._ReportParam.CTO_PERIOD = lcYearPeriod + _viewModel._MonthToPeriod;
-
+                
+                //rute report
                 if (_viewModel._Report_Type == "1" && _viewModel._GroupBy == "1")
                 {
-                    var loParam = R_FrontUtility.ConvertObjectToObject<PMR00600ParamDTO>(_viewModel._ReportParam);
-                    await Overtime_PrintSummaryByTenantAsync(loParam);
+                    await Overtime_PrintSummaryByTenantAsync(_viewModel._ReportParam);
                 }
                 else if (_viewModel._Report_Type == "1" && _viewModel._GroupBy == "2")
                 {
-                    var loParam = R_FrontUtility.ConvertObjectToObject<PMR00600ParamDTO>(_viewModel._ReportParam);
-                    await Overtime_PrintSummaryByChargeAsync(loParam);
+                    await Overtime_PrintSummaryByChargeAsync(_viewModel._ReportParam);
                 }
                 else if (_viewModel._Report_Type == "2" && _viewModel._GroupBy == "1")
                 {
