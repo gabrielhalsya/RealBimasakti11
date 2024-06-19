@@ -569,6 +569,8 @@ namespace PMR00600FRONT
                 _viewModel._ReportParam.CUSER_ID = _clientHelper.UserId;
                 _viewModel._ReportParam.CREPORT_CULTURE = _clientHelper.ReportCulture.ToString(); 
                 _viewModel._ReportParam.CLANG_ID = _clientHelper.Culture.TwoLetterISOLanguageName;
+                _viewModel._ReportParam.CREPORT_TYPE_DISPLAY = _viewModel._Report_Type == "1" ? _localizer["_radio_Summary"] : _localizer["_radio_Detail"];
+                _viewModel._ReportParam.CGROUP_TYPE_DISPLAY = _viewModel._GroupBy == "1" ? _localizer["_radio_Tenant"] : _localizer["_radio_Charge"];
 
                 //rute report
                 if (_viewModel._Report_Type == "1" && _viewModel._GroupBy == "1")

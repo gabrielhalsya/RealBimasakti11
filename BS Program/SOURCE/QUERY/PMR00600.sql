@@ -29,4 +29,4 @@ EXEC RSP_GS_GET_PROPERTY_LIST
 , 'ghc'
 
 
-delete from SAT_LOCKING where CUSER_ID='ryc'
+delete from SAT_LOCKING where CUSER_ID='ghc'

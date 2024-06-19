@@ -168,7 +168,7 @@ namespace PMR00600SERVICE
 
                 loParam.CCOMPANY_NAME = poParam.CCOMPANY_ID.ToUpper();
                 loParam.CPRINT_CODE = "610";
-                loParam.CPRINT_NAME = "Overtime Summary";
+                loParam.CPRINT_NAME = PMR00600ContextConstant.CPROGRAM_NAME;
                 loParam.CUSER_ID = poParam.CUSER_ID.ToUpper();
                 
                 // Create an instance of PMR01000Cls
@@ -180,15 +180,13 @@ namespace PMR00600SERVICE
                 // Create an instance 
                 PMR00600ReportDataDTO loData = new PMR00600ReportDataDTO()
                 {
-                    Title = "Overtime",
-                    Header = "Overtime Summary",
+                    Title = PMR00600ContextConstant.CPROGRAM_NAME,
+                    Header = PMR00600ContextConstant.CPROGRAM_NAME,
                     Label = (PMR00600LabelDTO)loColumn,
                     Param = poParam,
                     Data = new List<PMR00600DataDTO>(),
                 };
-
                 
-
                 // Get print data for Group Of Account report
                 var loCollData = loCls.GetSummaryData(poParam);
                 _logger.LogInfo("Data generation successful. Processing data for printing.");

@@ -55,7 +55,9 @@ namespace PMR00600COMMON.Model
                 LINVOICE = true,
                 LSERVICE = true,
                 LSTATUS = true,
-                LTENANT = true
+                LTENANT = true,
+                CGROUP_TYPE_DISPLAY = "Charges",
+                CREPORT_TYPE_DISPLAY = "Detail"
 
             };
             loRtn.ReportDataDTO.Data = new List<PMR00601DataDTO>();

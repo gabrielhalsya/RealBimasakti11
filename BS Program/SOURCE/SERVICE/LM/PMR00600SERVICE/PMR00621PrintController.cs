@@ -168,14 +168,14 @@ namespace PMR00600SERVICE
 
                 loParam.CCOMPANY_NAME = poParam.CCOMPANY_ID.ToUpper();
                 loParam.CPRINT_CODE = "621";
-                loParam.CPRINT_NAME = "Overtime Detail";
+                loParam.CPRINT_NAME = PMR00600ContextConstant.CPROGRAM_NAME;
                 loParam.CUSER_ID = poParam.CUSER_ID.ToUpper();
 
                 // Create an instance 
                 PMR00601ReportDataDTO loData = new PMR00601ReportDataDTO()
                 {
-                    Title = "Overtime",
-                    Header = "Overtime Detail",
+                    Title = PMR00600ContextConstant.CPROGRAM_NAME,
+                    Header = PMR00600ContextConstant.CPROGRAM_NAME,
                     Label = (PMR00601LabelDTO)loColumn,
                     Param = poParam,
                     Data = new List<PMR00601DataDTO>(),

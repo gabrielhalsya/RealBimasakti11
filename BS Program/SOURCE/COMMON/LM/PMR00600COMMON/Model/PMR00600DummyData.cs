@@ -55,7 +55,9 @@ namespace PMR00600COMMON.DTO_s.Model
                 LINVOICE = false,
                 LSERVICE = false,
                 LSTATUS = true,
-                LTENANT = true
+                LTENANT = true,
+                CGROUP_TYPE_DISPLAY="Tenant",
+                CREPORT_TYPE_DISPLAY = "Summary"
 
             };
             DateTime loFromDate = DateTime.ParseExact(loRtn.ReportDataDTO.Param.CFROM_PERIOD, "yyyyMMdd", CultureInfo.InvariantCulture);

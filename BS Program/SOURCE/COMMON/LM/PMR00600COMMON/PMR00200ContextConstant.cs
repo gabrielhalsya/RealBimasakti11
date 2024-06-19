@@ -6,6 +6,7 @@ namespace PMR00600COMMON
 {
     public class PMR00600ContextConstant
     {
+        public const string CPROGRAM_NAME = "PM Overtime";
         //param report
         public const string CCOMPANY_ID = "CCOMPANY_ID";
         public const string CPROPERTY_ID ="CPROPERTY_ID";

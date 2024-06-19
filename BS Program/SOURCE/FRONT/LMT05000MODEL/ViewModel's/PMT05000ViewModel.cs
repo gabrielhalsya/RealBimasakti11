@@ -35,8 +35,6 @@ namespace PMT05000MODEL.ViewModel_s
         public int _yearPeriod = DateTime.Now.Year;
         public string _discountName = "", _chargesName = "";
 
-
-
         #region init
 
         public async Task InitAsync(R_ILocalizer<Resources_Dummy_Class> poParamLocalizer)
@@ -51,7 +49,6 @@ namespace PMT05000MODEL.ViewModel_s
                 {
                     new AgreementTypeDTO{CAGREEMENT_TYPE="A", CAGREEMENT_TYPE_DISPLAY=poParamLocalizer["_labelAgreementTypeAll"]},
                     new AgreementTypeDTO{CAGREEMENT_TYPE="O", CAGREEMENT_TYPE_DISPLAY=poParamLocalizer["_labelAgreementTypeOwner"] },
-
                     new AgreementTypeDTO{CAGREEMENT_TYPE="L", CAGREEMENT_TYPE_DISPLAY=poParamLocalizer["_labelAgreementTypeLease"]},
                 };
 
