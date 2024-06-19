@@ -184,6 +184,9 @@ namespace PMR00600SERVICE
 
                 // Create an instance of PMR01000Cls
                 var loCls = new PMR00600Cls();
+                _logger.LogInfo("Set BaseHeader Report");
+                loParam.BLOGO_COMPANY = loCls.GetBaseHeaderLogoCompany(poParam.CCOMPANY_ID).CLOGO;
+
                 // Get print data for Group Of Account report
                 var loCollData = loCls.GetSummaryData(poParam);
                 _logger.LogInfo("Data generation successful. Processing data for printing.");
