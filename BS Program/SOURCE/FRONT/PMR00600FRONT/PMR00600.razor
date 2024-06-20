@@ -41,7 +41,7 @@
 
                 @* monthfrom *@
                 <R_ItemLayout col="1"><R_Label>@_localizer["_label_Month"]</R_Label></R_ItemLayout>
-                <R_ItemLayout>
+                <R_ItemLayout col="4">
                     <R_ComboBox @bind-Value="@_viewModel._MonthFromPeriod"
                                 Data="_viewModel._monthList"
                                 ValueField="@nameof(MonthDTO.CNUMBER)"
@@ -51,7 +51,7 @@
 
                 @* monthto *@
                 <R_ItemLayout><R_Label>@_localizer["_label_symbol-"]</R_Label></R_ItemLayout>
-                <R_ItemLayout>
+                <R_ItemLayout col="4">
                     <R_ComboBox @bind-Value="@_viewModel._MonthToPeriod"
                                 Data="_viewModel._monthList"
                                 ValueField="@nameof(MonthDTO.CNUMBER)"

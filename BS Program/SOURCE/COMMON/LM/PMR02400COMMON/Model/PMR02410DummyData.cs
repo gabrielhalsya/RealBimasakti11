@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Runtime.InteropServices;
+using System.Xml.Linq;
 
 namespace PMR02400COMMON.DTO_s.Model
 {
@@ -110,6 +111,12 @@ namespace PMR02400COMMON.DTO_s.Model
                     }
                 }
             }
+
+            foreach (var item in loRtn.ReportDataDTO.Data)
+            {
+                item.CDUE_DATE_DISPLAY = DateTime.TryParseExact(item.CDUE_DATE, "yyyyMMdd", CultureInfo.InvariantCulture, DateTimeStyles.AssumeUniversal, out DateTime poCutOffDate) ? poCutOffDate.ToString("dd MMM yyyy", CultureInfo.InvariantCulture) : "";
+            }
+
             return loRtn;
         }
     }

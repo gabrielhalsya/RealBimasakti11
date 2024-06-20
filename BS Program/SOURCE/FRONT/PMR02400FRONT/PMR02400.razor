@@ -40,12 +40,13 @@
                               ValueField="@nameof(ReportTypeDTO.CTYPE_CODE)"
                               TextField="@nameof(ReportTypeDTO.CTYPE_NAME)"
                               Layout="R_eRadioGroupLayout.Vertical"
-                              LabelPosition="R_eRadioGroupLabelPosition.After">
+                              LabelPosition="R_eRadioGroupLabelPosition.After"
+                              >
                 </R_RadioGroup>
             </R_StackLayout>
             <R_StackLayout Class="ps-4">
                 <R_ItemLayout col="8">
-                    <R_DatePicker @bind-Value="@_viewModel._DateCutOff"></R_DatePicker>
+                    <R_DatePicker @bind-Value="@_viewModel._DateCutOff" Enabled="@(_viewModel._DateBasedOn=="1")"></R_DatePicker>
                 </R_ItemLayout>
             </R_StackLayout>
 
@@ -69,13 +70,15 @@
                                       Max="@_viewModel._PeriodYear.IMAX_YEAR"
                                       Min="@_viewModel._PeriodYear.IMIN_YEAR"
                                       ThousandSeparator="false"
-                                      Style="height:25px" />
+                                      Style="height:25px"
+                                      Enabled="@(_viewModel._DateBasedOn=="2")" />
                 </R_ItemLayout>
-                <R_ItemLayout Class="col">
+                <R_ItemLayout col="4">
                     <R_ComboBox @bind-Value="@_viewModel._MonthFromPeriod"
                                 Data="_viewModel._monthList"
                                 ValueField="@nameof(MonthDTO.CTYPE_CODE)"
-                                TextField="@nameof(MonthDTO.CTYPE_NAME)" />
+                                TextField="@nameof(MonthDTO.CTYPE_NAME)"
+                                Enabled="@(_viewModel._DateBasedOn=="2")" />
                 </R_ItemLayout>
             </R_StackLayout>
             <R_StackLayout Row class="ps-4">
@@ -88,14 +91,16 @@
                                       Max="@_viewModel._PeriodYear.IMAX_YEAR"
                                       Min="@_viewModel._PeriodYear.IMIN_YEAR"
                                       ThousandSeparator="false"
-                                      Style="height:25px" />
+                                      Style="height:25px"
+                                      Enabled="@(_viewModel._DateBasedOn=="2")" />
                 </R_ItemLayout>
-                <R_ItemLayout class="col">
+                <R_ItemLayout col="4">
                     <R_ComboBox @bind-Value="@_viewModel._MonthToPeriod"
                                 Data="_viewModel._monthList"
                                 ValueField="@nameof(MonthDTO.CTYPE_CODE)"
                                 TextField="@nameof(MonthDTO.CTYPE_NAME)"
-                                TabIndex="12" />
+                                TabIndex="12"
+                                Enabled="@(_viewModel._DateBasedOn=="2")" />
                     <R_ItemLayout class="col"></R_ItemLayout>
                 </R_ItemLayout>
             </R_StackLayout>
@@ -113,7 +118,7 @@
             <R_StackLayout>
                 <R_ItemLayout>
                     <R_RadioGroup Data="@_viewModel._radioReportTypeList"
-                                  @bind-Value="@_viewModel._Report_Type"
+                                  @bind-Value="@_viewModel._ReportParam.CREPORT_TYPE"
                                   ValueField="@nameof(ReportTypeDTO.CTYPE_CODE)"
                                   TextField="@nameof(ReportTypeDTO.CTYPE_NAME)"
                                   Layout="R_eRadioGroupLayout.Vertical"

@@ -59,5 +59,194 @@ namespace PMR02400BackResources {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Agreement No..
+        /// </summary>
+        internal static string COLUMN_AGREEMENT_LABEL {
+            get {
+                return ResourceManager.GetString("COLUMN_AGREEMENT_LABEL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Amount.
+        /// </summary>
+        internal static string COLUMN_AMOUNT_LABEL {
+            get {
+                return ResourceManager.GetString("COLUMN_AMOUNT_LABEL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Building.
+        /// </summary>
+        internal static string COLUMN_BUILDING_LABEL {
+            get {
+                return ResourceManager.GetString("COLUMN_BUILDING_LABEL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Curr..
+        /// </summary>
+        internal static string COLUMN_CCURRENCY_LABEL {
+            get {
+                return ResourceManager.GetString("COLUMN_CCURRENCY_LABEL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Customer.
+        /// </summary>
+        internal static string COLUMN_CUSTOMER_LABEL {
+            get {
+                return ResourceManager.GetString("COLUMN_CUSTOMER_LABEL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Description.
+        /// </summary>
+        internal static string COLUMN_DESC_LABEL {
+            get {
+                return ResourceManager.GetString("COLUMN_DESC_LABEL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Due Date.
+        /// </summary>
+        internal static string COLUMN_DUE_DATE_LABEL {
+            get {
+                return ResourceManager.GetString("COLUMN_DUE_DATE_LABEL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Invoice.
+        /// </summary>
+        internal static string COLUMN_INVOICE_LABEL {
+            get {
+                return ResourceManager.GetString("COLUMN_INVOICE_LABEL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Late Days.
+        /// </summary>
+        internal static string COLUMN_LATE_DAYS_LABEL {
+            get {
+                return ResourceManager.GetString("COLUMN_LATE_DAYS_LABEL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No..
+        /// </summary>
+        internal static string COLUMN_NO_LABEL {
+            get {
+                return ResourceManager.GetString("COLUMN_NO_LABEL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Outstanding.
+        /// </summary>
+        internal static string COLUMN_OUTSTANDING_LABEL {
+            get {
+                return ResourceManager.GetString("COLUMN_OUTSTANDING_LABEL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Paid.
+        /// </summary>
+        internal static string COLUMN_PAID_LABEL {
+            get {
+                return ResourceManager.GetString("COLUMN_PAID_LABEL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Redeemed.
+        /// </summary>
+        internal static string COLUMN_REDEEMED_LABEL {
+            get {
+                return ResourceManager.GetString("COLUMN_REDEEMED_LABEL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unit Name.
+        /// </summary>
+        internal static string COLUMN_UNIT_LABEL {
+            get {
+                return ResourceManager.GetString("COLUMN_UNIT_LABEL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Customer.
+        /// </summary>
+        internal static string CUSTOMER_LABEL {
+            get {
+                return ResourceManager.GetString("CUSTOMER_LABEL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cut Off Date.
+        /// </summary>
+        internal static string CUTOFF_DATE_LABEL {
+            get {
+                return ResourceManager.GetString("CUTOFF_DATE_LABEL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Grand Total.
+        /// </summary>
+        internal static string GRANDTOTAL_LABEL {
+            get {
+                return ResourceManager.GetString("GRANDTOTAL_LABEL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Period.
+        /// </summary>
+        internal static string PERIOD_LABEL {
+            get {
+                return ResourceManager.GetString("PERIOD_LABEL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Property.
+        /// </summary>
+        internal static string PROPERTY_LABEL {
+            get {
+                return ResourceManager.GetString("PROPERTY_LABEL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Report Type.
+        /// </summary>
+        internal static string REPORT_TYPE_LABEL {
+            get {
+                return ResourceManager.GetString("REPORT_TYPE_LABEL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sub Total based on.
+        /// </summary>
+        internal static string SUBTOTAL_LABEL {
+            get {
+                return ResourceManager.GetString("SUBTOTAL_LABEL", resourceCulture);
+            }
+        }
     }
 }

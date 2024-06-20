@@ -17,6 +17,5 @@ namespace PMR02400COMMON.DTO_s
             ? $"{CFROM_CUSTOMER_NAME} ({CFROM_CUSTOMER_ID}) - {CTO_CUSTOMER_NAME} ({CTO_CUSTOMER_ID})"
             : $"{CFROM_CUSTOMER_NAME} ({CFROM_CUSTOMER_ID})";
         public bool LIS_BASED_ON_CUTOFF { get; set; }
-        public bool LIS_BASED_ON_PERIOD { get; set; }
     }
 }

@@ -153,4 +153,19 @@
   <data name="_radio_Summary" xml:space="preserve">
     <value>Summary</value>
   </data>
+  <data name="_val1" xml:space="preserve">
+    <value>Please select Property</value>
+  </data>
+  <data name="_val2" xml:space="preserve">
+    <value>Please select Cut Off Date</value>
+  </data>
+  <data name="_val3" xml:space="preserve">
+    <value>Please select Period</value>
+  </data>
+  <data name="_val4" xml:space="preserve">
+    <value>Period (From) cannot be more than Period (To)</value>
+  </data>
+  <data name="_val5" xml:space="preserve">
+    <value>Please select Customer</value>
+  </data>
 </root>

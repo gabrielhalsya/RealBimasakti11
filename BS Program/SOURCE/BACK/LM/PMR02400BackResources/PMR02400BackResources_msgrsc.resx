@@ -117,4 +117,67 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="COLUMN_AGREEMENT_LABEL" xml:space="preserve">
+    <value>Agreement No.</value>
+  </data>
+  <data name="COLUMN_AMOUNT_LABEL" xml:space="preserve">
+    <value>Amount</value>
+  </data>
+  <data name="COLUMN_BUILDING_LABEL" xml:space="preserve">
+    <value>Building</value>
+  </data>
+  <data name="COLUMN_CCURRENCY_LABEL" xml:space="preserve">
+    <value>Curr.</value>
+  </data>
+  <data name="COLUMN_CUSTOMER_LABEL" xml:space="preserve">
+    <value>Customer</value>
+  </data>
+  <data name="COLUMN_DESC_LABEL" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="COLUMN_DUE_DATE_LABEL" xml:space="preserve">
+    <value>Due Date</value>
+  </data>
+  <data name="COLUMN_INVOICE_LABEL" xml:space="preserve">
+    <value>Invoice</value>
+  </data>
+  <data name="COLUMN_LATE_DAYS_LABEL" xml:space="preserve">
+    <value>Late Days</value>
+  </data>
+  <data name="COLUMN_NO_LABEL" xml:space="preserve">
+    <value>No.</value>
+  </data>
+  <data name="COLUMN_OUTSTANDING_LABEL" xml:space="preserve">
+    <value>Outstanding</value>
+  </data>
+  <data name="COLUMN_PAID_LABEL" xml:space="preserve">
+    <value>Paid</value>
+  </data>
+  <data name="COLUMN_REDEEMED_LABEL" xml:space="preserve">
+    <value>Redeemed</value>
+  </data>
+  <data name="COLUMN_UNIT_LABEL" xml:space="preserve">
+    <value>Unit Name</value>
+  </data>
+  <data name="CUSTOMER_LABEL" xml:space="preserve">
+    <value>Customer</value>
+  </data>
+  <data name="CUTOFF_DATE_LABEL" xml:space="preserve">
+    <value>Cut Off Date</value>
+  </data>
+  <data name="GRANDTOTAL_LABEL" xml:space="preserve">
+    <value>Grand Total</value>
+  </data>
+  <data name="PERIOD_LABEL" xml:space="preserve">
+    <value>Period</value>
+  </data>
+  <data name="PROPERTY_LABEL" xml:space="preserve">
+    <value>Property</value>
+  </data>
+  <data name="REPORT_TYPE_LABEL" xml:space="preserve">
+    <value>Report Type</value>
+  </data>
+  <data name="SUBTOTAL_LABEL" xml:space="preserve">
+    <value>Sub Total based on</value>
+  </data>
 </root>

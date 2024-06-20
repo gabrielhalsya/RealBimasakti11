@@ -167,5 +167,50 @@ namespace PMR02400FrontResources {
                 return ResourceManager.GetString("_radio_Summary", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please select Property.
+        /// </summary>
+        internal static string _val1 {
+            get {
+                return ResourceManager.GetString("_val1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please select Cut Off Date.
+        /// </summary>
+        internal static string _val2 {
+            get {
+                return ResourceManager.GetString("_val2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please select Period.
+        /// </summary>
+        internal static string _val3 {
+            get {
+                return ResourceManager.GetString("_val3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Period (From) cannot be more than Period (To).
+        /// </summary>
+        internal static string _val4 {
+            get {
+                return ResourceManager.GetString("_val4", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please select Customer.
+        /// </summary>
+        internal static string _val5 {
+            get {
+                return ResourceManager.GetString("_val5", resourceCulture);
+            }
+        }
     }
 }

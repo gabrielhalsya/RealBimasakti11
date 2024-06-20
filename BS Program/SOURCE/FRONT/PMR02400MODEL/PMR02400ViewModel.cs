@@ -65,6 +65,7 @@ namespace PMR02400MODEL
                 if (_properties.Count > 0)
                 {
                     _ReportParam.CPROPERTY_ID = _properties.FirstOrDefault().CPROPERTY_ID;
+                    _ReportParam.CPROPERTY_NAME = _properties.FirstOrDefault().CPROPERTY_NAME;
                 }
 
                 _InitToday = await GetTodayAsync();
@@ -80,7 +81,7 @@ namespace PMR02400MODEL
                 _YearToPeriod = _InitToday.Year;
                 _YearFromPeriod = _InitToday.Year;
 
-                _Report_Type = "1";
+                _ReportParam.CREPORT_TYPE = "1";
                 _DateBasedOn = "1";
 
                 _ReportParam.CFROM_CUSTOMER_ID = "";

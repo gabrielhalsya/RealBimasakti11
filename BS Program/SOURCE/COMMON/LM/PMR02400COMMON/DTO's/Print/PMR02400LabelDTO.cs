@@ -21,12 +21,10 @@ namespace PMR02400COMMON.DTO_s.Print
         public string COLUMN_PAID_LABEL { get; set; } = "Paid";
         public string COLUMN_OUTSTANDING_LABEL { get; set; } = "Outstanding";
         public string COLUMN_AMOUNT_LABEL { get; set; } = "Amount";
-
         public string COLUMN_NO_LABEL { get; set; } = "No.";
         public string COLUMN_DESC_LABEL { get; set; } = "Description";
         public string COLUMN_DUE_DATE_LABEL { get; set; } = "Due Date";
         public string COLUMN_LATE_DAYS_LABEL { get; set; } = "Late Days";
-
         public string SUBTOTAL_LABEL { get; set; } = "Sub Total based on";
         public string GRANDTOTAL_LABEL { get; set; } = "Grand Total";
     }

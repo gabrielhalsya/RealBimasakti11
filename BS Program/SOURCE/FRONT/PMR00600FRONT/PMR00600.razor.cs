@@ -526,32 +526,36 @@ namespace PMR00600FRONT
                 if (string.IsNullOrWhiteSpace(_viewModel._ReportParam.CPROPERTY_ID))
                 {
                     loEx.Add("", _localizer["_val1"]);
+                    goto EndBlock;
                 }
                 if (string.IsNullOrWhiteSpace(_viewModel._MonthFromPeriod) || string.IsNullOrWhiteSpace(_viewModel._MonthToPeriod) || _viewModel._YearPeriod == 0)
                 {
                     loEx.Add("", _localizer["_val2"]);
+                    goto EndBlock;
                 }
                 if (string.IsNullOrWhiteSpace(_viewModel._ReportParam.CFROM_BUILDING_ID) || string.IsNullOrWhiteSpace(_viewModel._ReportParam.CTO_BUILDING_ID))
                 {
                     loEx.Add("", _localizer["_val3"]);
+                    goto EndBlock;
                 }
                 if (string.IsNullOrWhiteSpace(_viewModel._ReportParam.CFROM_DEPT_CODE) || string.IsNullOrWhiteSpace(_viewModel._ReportParam.CTO_DEPT_CODE))
                 {
                     loEx.Add("", _localizer["_val4"]);
+                    goto EndBlock;
                 }
                 if (_viewModel._ReportParam.LTENANT && (string.IsNullOrWhiteSpace(_viewModel._ReportParam.CFROM_TENANT_ID) || string.IsNullOrWhiteSpace(_viewModel._ReportParam.CTO_TENANT_ID)))
                 {
                     loEx.Add("", _localizer["_val5"]);
 
+                    goto EndBlock;
                 }
                 if (_viewModel._ReportParam.LSERVICE && (string.IsNullOrWhiteSpace(_viewModel._ReportParam.CFROM_SERVICE_ID) || string.IsNullOrWhiteSpace(_viewModel._ReportParam.CTO_SERVICE_ID)))
                 {
                     loEx.Add("", _localizer["_val6"]);
 
+                    goto EndBlock;
                 }
-
                 //combine data
-                
                 _viewModel._ReportParam.CPROPERTY_NAME = _viewModel._properties.FirstOrDefault(x => x.CPROPERTY_ID == _viewModel._ReportParam.CPROPERTY_ID).CPROPERTY_NAME;
                 _viewModel._ReportParam.CFROM_PERIOD = _viewModel._YearPeriod + _viewModel._MonthFromPeriod;
                 _viewModel._ReportParam.CTO_PERIOD = _viewModel._YearPeriod + _viewModel._MonthToPeriod;
@@ -598,6 +602,7 @@ namespace PMR00600FRONT
             {
                 loEx.Add(ex);
             }
+        EndBlock:
             loEx.ThrowExceptionIfErrors();
         }
         private async Task Overtime_PrintSummaryByTenantAsync(PMR00600ParamDTO poParam)
