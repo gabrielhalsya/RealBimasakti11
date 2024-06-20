@@ -15,12 +15,12 @@ namespace PMR02400COMMON
         public string CINVOICE_NO { get; set; }
         public string CINVOICE_DESCRIPTION { get; set; }
         public string CDUE_DATE { get; set; }
-        public string ILATE_DAYS { get; set; }
+        public int ILATE_DAYS { get; set; }
         public string CCURRENCY_CODE { get; set; }
         public string CCURRENCY_NAME { get; set; }
-        public string NINVOICE_AMOUNT { get; set; }
-        public string NREDEEMED_AMOUNT { get; set; }
-        public string NPAID_AMOUNT { get; set; }
-        public string NOUTSTANDING_AMOUNT { get; set; }
+        public decimal NINVOICE_AMOUNT { get; set; }
+        public decimal NREDEEMED_AMOUNT { get; set; }
+        public decimal NPAID_AMOUNT { get; set; }
+        public decimal NOUTSTANDING_AMOUNT { get; set; }
     }
 }

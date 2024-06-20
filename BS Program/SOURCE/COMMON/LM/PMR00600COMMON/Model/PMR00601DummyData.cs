@@ -62,64 +62,92 @@ namespace PMR00600COMMON.Model
             };
             loRtn.ReportDataDTO.Data = new List<PMR00601DataDTO>();
 
-            var tenants = new List<string> { "Muhammad Andika Putra", "Aurelius Irvin" };
-            var invoices = new List<string> { "INV-001", "INV-002", "INV-003", "INV-004" };
-            var agreements = new List<string> { "AGR-001", "AGR-002", "AGR-003", "AGR-004" };
-            var charges = new List<string> { "CHG01", "CHG02" };
+            string[] companyIds = { "C001" };
+            string[] propertyIds = { "P001" };
+            string[] buildingIds = { "B001" };
+            string[] buildingNames = { "Building A" };
+            string[] deptCodes = { "D001" };
+            string[] deptNames = { "Department A" };
+            string[] tenantIds = { "T001", "T002" };
+            string[] tenantNames = { "Tenant A", "Tenant B" };
+            string[] invoiceNos = { "INV001", "INV002" };
+            string[] agreementNos = { "AGR001", "AGR002" };
+            string[] chargeIds = { "CHG001", "CHG002" };
+            string[] chargeNames = { "Charge A", "Charge B" };
 
-            int amount = 100000000;
+            decimal amount = 100000000;
+            int invoiceCounter = 0;
 
-            for (int b = 1; b <= 2; b++) // Buildings
+            foreach (var companyId in companyIds)
             {
-                for (int d = 1; d <= 2; d++) // Departments
+                foreach (var propertyId in propertyIds)
                 {
-                    for (int t = 0; t < tenants.Count; t++) // Tenants
+                    foreach (var buildingId in buildingIds)
                     {
-                        for (int i = 0; i < 2; i++) // Invoices per Tenant
+                        foreach (var buildingName in buildingNames)
                         {
-                            for (int a = 0; a < 2; a++) // Agreements per Invoice
+                            foreach (var deptCode in deptCodes)
                             {
-                                for (int c = 0; c < charges.Count; c++) // Charges per Agreement
+                                foreach (var deptName in deptNames)
                                 {
-                                    loRtn.ReportDataDTO.Data.Add(new PMR00601DataDTO
+                                    foreach (var tenantId in tenantIds)
                                     {
-                                        CCOMPANY_ID = "COMP001",
-                                        CPROPERTY_ID = "PROP001",
-                                        CBUILDING_ID = $"BLD_{b}",
-                                        CBUILDING_NAME = $"Building {b}",
-                                        CDEPT_CODE = $"DPT_{d}",
-                                        CDEPT_NAME = $"Department {d}",
-                                        CTENANT_ID = $"TENANT{t + 1}",
-                                        CTENANT_NAME = tenants[t],
-                                        CINVOICE_NO = invoices[i + (t * 2)],
-                                        CINVOICE_DATE = "20240101",
-                                        NINVOICE_AMOUNT = amount,
-                                        NINVOICE_TAX_AMOUNT = amount,
-                                        NINVOICE_TOTAL_AMOUNT = 2 * amount,
-                                        CAGREEMENT_NO = agreements[a + (i * 2)],
-                                        CAGREEMENT_DATE = "20240101",
-                                        CCHARGE_ID = charges[c],
-                                        CCHARGE_NAME = charges[c] == "CHG01" ? "Overtime Weekday(s)" : "Overtime Weekend(s)",
-                                        CUNIT_ID = $"UNIT_{(c % 2 == 0 ? 'A' : 'B')}",
-                                        CUNIT_NAME = $"Unit {(c % 2 == 0 ? "Sederhana" : "Mewah")}",
-                                        COVERTIME_DATE = "20240101",
-                                        CTIME_IN = "18:00",
-                                        CTIME_OUT = "21:00",
-                                        CTENURE = "3H 0M",
-                                        NUNIT_PRICE = amount,
-                                        NUNIT_ACTUAL_AMOUNT = amount,
-                                        CNOTE = "Every Hour",
-                                        CTRANS_STATUS_CODE = "01",
-                                        CTRANS_STATUS_NAME = "Closed"
-                                    });
-
-                                    amount += 100000000; // Increase amount to ensure distinct values
+                                        foreach (var tenantName in tenantNames)
+                                        {
+                                            foreach (var invoiceNo in invoiceNos)
+                                            {
+                                                invoiceCounter++;
+                                                foreach (var agreementNo in agreementNos)
+                                                {
+                                                    foreach (var chargeId in chargeIds)
+                                                    {
+                                                        foreach (var chargeName in chargeNames)
+                                                        {
+                                                            loRtn.ReportDataDTO.Data.Add(new PMR00601DataDTO
+                                                            {
+                                                                CCOMPANY_ID = companyId,
+                                                                CPROPERTY_ID = propertyId,
+                                                                CBUILDING_ID = buildingId,
+                                                                CBUILDING_NAME = buildingName,
+                                                                CDEPT_CODE = deptCode,
+                                                                CDEPT_NAME = deptName,
+                                                                CTENANT_ID = tenantId,
+                                                                CTENANT_NAME = tenantName,
+                                                                CINVOICE_NO = invoiceNo,
+                                                                CINVOICE_DATE = DateTime.Now.ToString("yyyyMMdd"),
+                                                                NINVOICE_AMOUNT = amount,
+                                                                NINVOICE_TAX_AMOUNT = amount * 0.1m,
+                                                                NINVOICE_TOTAL_AMOUNT = amount * 1.1m,
+                                                                CAGREEMENT_NO = agreementNo,
+                                                                CAGREEMENT_DATE = DateTime.Now.ToString("yyyyMMdd"),
+                                                                CCHARGE_ID = chargeId,
+                                                                CCHARGE_NAME = chargeName,
+                                                                CUNIT_ID = "U001",
+                                                                CUNIT_NAME = "Unit 1",
+                                                                COVERTIME_DATE = DateTime.Now.ToString("yyyyMMdd"),
+                                                                CTIME_IN = "08:00",
+                                                                CTIME_OUT = "17:00",
+                                                                CTENURE = "3 Years",
+                                                                NUNIT_PRICE = amount,
+                                                                NUNIT_ACTUAL_AMOUNT = amount,
+                                                                CNOTE = "Note",
+                                                                CTRANS_STATUS_CODE = "1",
+                                                                CTRANS_STATUS_NAME = "Active"
+                                                            });
+                                                            amount += 100000000;
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
                                 }
                             }
                         }
                     }
                 }
             }
+
             return loRtn;
         }
     }

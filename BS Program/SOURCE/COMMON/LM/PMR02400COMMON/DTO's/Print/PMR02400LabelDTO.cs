@@ -7,6 +7,8 @@ namespace PMR02400COMMON.DTO_s.Print
     public class PMR02400LabelDTO
     {
         public string PROPERTY_LABEL { get; set; } = "Property";
+        public string PERIOD_LABEL { get; set; } = "Period";
+        public string CUTOFF_DATE_LABEL { get; set; } = "Cut Off Date";
         public string REPORT_TYPE_LABEL { get; set; } = "Report Type";
         public string CUSTOMER_LABEL { get; set; } = "Customer";
         public string COLUMN_CUSTOMER_LABEL { get; set; } = "Customer";
