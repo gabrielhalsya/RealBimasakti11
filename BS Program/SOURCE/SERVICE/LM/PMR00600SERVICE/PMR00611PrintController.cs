@@ -28,6 +28,7 @@ namespace PMR00600SERVICE
         private R_ReportFastReportBackClass _ReportCls;
         private PMR00600ParamDTO _Parameter;
         private readonly ActivitySource _activitySource;
+        PMR00600BackResources.Resources_Dummy_Class _backRes = new();
 
         public PMR00611PrintController(ILogger<PMR00600PrintLogger> logger)
         {

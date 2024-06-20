@@ -210,7 +210,7 @@ namespace PMR02400FRONT
                 _viewModel._ReportParam.LIS_BASED_ON_CUTOFF = _viewModel._DateBasedOn == "1" ? true : false;
                 _viewModel._ReportParam.CCUT_OFF = _viewModel._DateBasedOn == "1" ? _viewModel._DateCutOff.ToString("yyyyMMdd") : "";
 
-                //setting based on display
+                //set based on display
                 if (_viewModel._ReportParam.LIS_BASED_ON_CUTOFF)
                 {
                     _viewModel._ReportParam.CBASED_ON_DISPLAY = DateTime.TryParseExact(_viewModel._ReportParam.CCUT_OFF, "yyyyMMdd", CultureInfo.InvariantCulture, DateTimeStyles.AssumeUniversal, out DateTime poCutOffDate)
@@ -223,6 +223,7 @@ namespace PMR02400FRONT
                     var toPeriod = DateTime.TryParseExact(_viewModel._ReportParam.CTO_CPERIOD, "yyyyMM", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime toDate);
                     _viewModel._ReportParam.CBASED_ON_DISPLAY = fromPeriod != toPeriod ? $"{fromDate.ToString("MMM yyyy", CultureInfo.InvariantCulture)} - {toDate.ToString("MMM yyyy", CultureInfo.InvariantCulture)}" : $"{fromDate.ToString("MMM yyyy", CultureInfo.InvariantCulture)}";
                 }
+                //set globalvar
                 _viewModel._ReportParam.CCOMPANY_ID = _clientHelper.CompanyId;
                 _viewModel._ReportParam.CUSER_ID = _clientHelper.UserId;
                 _viewModel._ReportParam.CREPORT_CULTURE = _clientHelper.ReportCulture.ToString();
