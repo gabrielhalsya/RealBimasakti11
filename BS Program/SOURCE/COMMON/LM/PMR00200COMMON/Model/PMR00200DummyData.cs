@@ -40,43 +40,102 @@ namespace PMR00200COMMON.Model
                 CFROM_PERIOD = "202401",
                 CTO_PERIOD = "202402",
                 LIS_OUTSTANDING = true,
+                CIS_OUTSTANDING = "Yes"
             };
             DateTime loFromDate = DateTime.ParseExact(loRtn.SummaryData.HeaderParam.CFROM_PERIOD, "yyyyMM", CultureInfo.InvariantCulture);
             DateTime loToDate = DateTime.ParseExact(loRtn.SummaryData.HeaderParam.CTO_PERIOD, "yyyyMM", CultureInfo.InvariantCulture);
             loRtn.SummaryData.HeaderParam.CPERIOD_DISPLAY = (loFromDate.Year != loToDate.Year || loFromDate.Month != loToDate.Month)
                 ? $"{loFromDate:MMMM yyyy} – {loToDate:MMMM yyyy}"
                 : $"{loFromDate:MMMM yyyy}";
-            loRtn.SummaryData.Data = new List<PMR00200DataDTO>();
 
+            loRtn.SummaryData.Data = new List<PMR00200DataDTO>();
             int countData1 = 2, countData2 = 2, countData3 = 3;
             List<PMR00200DataDTO> loCollData = new List<PMR00200DataDTO>();
-            for (int a = 1; a <= countData1; a++)
+
+            string companyId = "C1";
+            string propertyId = "P1";
+            string deptCode = "D1";
+            string deptName = "Department 1";
+
+            string[] transCodes = { "T1", "T2" };
+            string[] transNames = { "Trans 1", "Trans 2" };
+
+            string[,] salesmen = { { "SM1", "Muhammad Andika Putra 1" }, { "SM2", "Muhammad Andika Putra 2" } };
+
+            for (int i = 0; i < transCodes.Length; i++)
             {
-                for (int b = 1; b <= countData2; b++)
+                string transCode = transCodes[i];
+                string transName = transNames[i];
+
+                for (int j = 0; j < salesmen.GetLength(0); j++)
                 {
-                    for (int c = 1; c <= countData3; c++)
+                    string salesmanId = salesmen[j, 0];
+                    string salesmanName = salesmen[j, 1];
+
+                    for (int k = 1; k <= 2; k++)
                     {
-                        loRtn.SummaryData.Data.Add(new PMR00200DataDTO()
+                        PMR00200DataDTO dto = new PMR00200DataDTO
                         {
-                            CTRANS_NAME = $"Trans {a}",
-                            CSALESMAN_ID = $"SM{b}",
-                            CSALESMAN_NAME = $"Muhammad Andika Putra{b}",
-                            CREF_NO = $"Ref00{c}",
-                            CREF_DATE = $"{c} Jan 2024",
-                            CTENURE = $"{c} Year(s), {c} Month(s), {c} Day(s)",
-                            NTOTAL_GROSS_AREA_SIZE = 25,
-                            NTOTAL_NET_AREA_SIZE = 22,
-                            NTOTAL_COMMON_AREA_SIZE = 20,
-                            CTRANS_STATUS_NAME = $"In Progress",
-                            NTOTAL_PRICE = 180000000,
+                            CCOMPANY_ID = companyId,
+                            CPROPERTY_ID = propertyId,
+                            CDEPT_CODE = deptCode,
+                            CDEPT_NAME = deptName,
+                            CTRANS_CODE = transCode,
+                            CTRANS_NAME = transName,
+                            CREF_NO = $"R{j + 1}{k}",
+                            CREF_DATE = DateTime.Now.ToString("yyyy-MM-dd"),
+                            CTENANT_ID = $"Tenant{j + 1}{k}",
+                            CTENANT_NAME = $"Tenant Name {j + 1}{k}",
+                            CTENURE = $"{i+1} Year(s), {j+1} Month(s), {k+1} Day(s)",
+                            CSALESMAN_ID = salesmanId,
+                            CSALESMAN_NAME = salesmanName,
+                            NREVISION_COUNT = 1,
+                            CTC_CODE = "TC1",
+                            CTC_MESSAGE = "This is dummy data for Term & Con.",
+                            CAGREEMENT_STATUS_ID = "A1",
+                            CAGREEMENT_STATUS_NAME = "Agreement Status",
+                            CTRANS_STATUS_ID = "TS1",
+                            CTRANS_STATUS_NAME = "In Progress",
                             CTAX = "PPN 11%",
-                            CTENANT_ID = "MU001",
-                            CTENANT_NAME = "Muhammad Andika Putra",
-                            CTC_MESSAGE = "This is dummy data for Term & Con."
-                        });
+                            NTOTAL_GROSS_AREA_SIZE = 100,
+                            NTOTAL_NET_AREA_SIZE = 80,
+                            NTOTAL_COMMON_AREA_SIZE = 20,
+                            NTOTAL_PRICE = 1000
+                        };
+
+                        loRtn.SummaryData.Data.Add(dto);
                     }
                 }
             }
+
+
+            //for (int a = 1; a <= countData1; a++)
+            //{
+            //    for (int b = 1; b <= countData2; b++)
+            //    {
+            //        for (int c = 1; c <= countData3; c++)
+            //        {
+            //            loRtn.SummaryData.Data.Add(new PMR00200DataDTO()
+            //            {
+            //                CTRANS_NAME = $"Trans {a}",
+            //                CSALESMAN_ID = $"SM{b}",
+            //                CSALESMAN_NAME = $"Muhammad Andika Putra{b}",
+            //                CREF_NO = $"Ref00{c}",
+            //                CREF_DATE = $"{c} Jan 2024",
+            //                CTENURE = $"{c} Year(s), {c} Month(s), {c} Day(s)",
+            //                NTOTAL_GROSS_AREA_SIZE = 25,
+            //                NTOTAL_NET_AREA_SIZE = 22,
+            //                NTOTAL_COMMON_AREA_SIZE = 20,
+            //                CTRANS_STATUS_NAME = $"In Progress",
+            //                NTOTAL_PRICE = 180000000,
+            //                CTAX = "PPN 11%",
+            //                CTENANT_ID = "MU001",
+            //                CTENANT_NAME = "Muhammad Andika Putra",
+            //                CTC_MESSAGE = "This is dummy data for Term & Con."
+            //            });
+            //        }
+            //    }
+            //}
             return loRtn;
         }
 

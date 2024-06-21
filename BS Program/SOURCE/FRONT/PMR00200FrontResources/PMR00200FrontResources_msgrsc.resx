@@ -120,6 +120,12 @@
   <data name="_btnPrint" xml:space="preserve">
     <value>Print</value>
   </data>
+  <data name="_checkboxDataNo" xml:space="preserve">
+    <value>No</value>
+  </data>
+  <data name="_checkboxDataYes" xml:space="preserve">
+    <value>Yes</value>
+  </data>
   <data name="_checkBoxOutAgreementTrans" xml:space="preserve">
     <value>Outstanding Agreement Transaction</value>
   </data>

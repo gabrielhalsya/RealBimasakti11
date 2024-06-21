@@ -22,14 +22,14 @@ namespace PMR00200BackResources {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class PMR00200BackResourcesResources_msgrsc {
+    internal class PMR00200BackResources_msgrsc {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal PMR00200BackResourcesResources_msgrsc() {
+        internal PMR00200BackResources_msgrsc() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace PMR00200BackResources {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("PMR00200BackResources.PMR00200BackResourcesResources_msgrsc", typeof(PMR00200BackResourcesResources_msgrsc).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("PMR00200BackResources.PMR00200BackResources_msgrsc", typeof(PMR00200BackResources_msgrsc).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -124,7 +124,7 @@ namespace PMR00200BackResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Transaction Name.
+        ///   Looks up a localized string similar to Transaction .
         /// </summary>
         internal static string COLUMN_CTRANS_NAME {
             get {

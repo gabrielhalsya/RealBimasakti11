@@ -15,7 +15,7 @@ EXEC RSP_PMR00200_GET_REPORT
 	, ''--@LIS_OUTSTANDING
 	, 'EN'--@CLANG_ID	
 		
-	delete from sat_locking where CUSER_ID= 'ghc' 
+	delete from sat_locking where CUSER_ID= 'GHC' 
 
 	
 		

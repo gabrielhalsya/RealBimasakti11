@@ -139,7 +139,7 @@
     <value>Tenure</value>
   </data>
   <data name="COLUMN_CTRANS_NAME" xml:space="preserve">
-    <value>Transaction Name</value>
+    <value>Transaction </value>
   </data>
   <data name="COLUMN_CTRANS_STATUS_NAME" xml:space="preserve">
     <value>Transaction Status</value>

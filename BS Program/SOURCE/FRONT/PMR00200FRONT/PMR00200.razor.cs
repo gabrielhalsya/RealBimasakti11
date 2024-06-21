@@ -19,6 +19,7 @@ using R_BlazorFrontEnd.Helpers;
 using R_BlazorFrontEnd.Interfaces;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Globalization;
 
 namespace PMR00200FRONT
 {
@@ -346,7 +347,7 @@ namespace PMR00200FRONT
         #endregion
 
         #region print
-        private void OnclickBtn_Print()
+        private async Task OnclickBtn_Print()
         {
             R_Exception loEx = new R_Exception();
             try
@@ -355,6 +356,8 @@ namespace PMR00200FRONT
                 {
                     CLANG_ID = _clientHelper.Culture.Name,
                     CCOMPANY_ID = _clientHelper.CompanyId,
+                    CREPORT_CULTURE = _clientHelper.ReportCulture.ToString(),
+                    CUSER_ID = _clientHelper.UserId,
                     CPROPERTY_ID = _viewModel._ReportParam.CPROPERTY_ID,
                     CPROPERTY_NAME = _viewModel._properties.Where(x => x.CPROPERTY_ID == _viewModel._ReportParam.CPROPERTY_ID).FirstOrDefault().CPROPERTY_NAME,
                     CFROM_DEPARTMENT_ID = _viewModel._ReportParam.CFROM_DEPARTMENT_ID,
@@ -368,32 +371,44 @@ namespace PMR00200FRONT
                     CFROM_PERIOD = _viewModel._YearFromPeriod + _viewModel._MonthFromPeriod, //yyyyMM
                     CTO_PERIOD = _viewModel._YearToPeriod + _viewModel._MonthToPeriod, //yyyyMM
                     LIS_OUTSTANDING = _viewModel._ReportParam.LIS_OUTSTANDING,
+                    CIS_OUTSTANDING = _viewModel._ReportParam.LIS_OUTSTANDING ? _localizer["_checkboxDataYes"] : _localizer["_checkboxDataNo"]
                 };
+                DateTime loFromDate = DateTime.ParseExact(loParam.CFROM_PERIOD, "yyyyMM", CultureInfo.InvariantCulture);
+                DateTime loToDate = DateTime.ParseExact(loParam.CTO_PERIOD, "yyyyMM", CultureInfo.InvariantCulture);
+                loParam.CPERIOD_DISPLAY = (loFromDate != loToDate)
+                    ? $"{loFromDate.ToString("MMMM yyyy", CultureInfo.InvariantCulture)} – {loToDate.ToString("MMMM yyyy", CultureInfo.InvariantCulture)}"
+                    : $"{loFromDate.ToString("MMMM yyyy", CultureInfo.InvariantCulture)}";
 
                 //validation
                 if (string.IsNullOrWhiteSpace(loParam.CPROPERTY_ID))
                 {
                     loEx.Add("", _localizer["_validationEmptyProperty"]);
+                    goto EndBlock;
                 }
                 if (string.IsNullOrWhiteSpace(loParam.CFROM_DEPARTMENT_ID))
                 {
                     loEx.Add("", _localizer["_validationEmptyFromDept"]);
+                    goto EndBlock;
                 }
                 if (string.IsNullOrWhiteSpace(loParam.CTO_DEPARTMENT_ID))
                 {
                     loEx.Add("", _localizer["_validationEmptyToDept"]);
+                    goto EndBlock;
                 }
                 if (string.IsNullOrWhiteSpace(loParam.CFROM_SALESMAN_ID))
                 {
                     loEx.Add("", _localizer["_validationEmptyFromSalesman"]);
+                    goto EndBlock;
                 }
                 if (string.IsNullOrWhiteSpace(loParam.CTO_SALESMAN_ID))
                 {
                     loEx.Add("", _localizer["_validationEmptyToSalesman"]);
+                    goto EndBlock;
                 }
-                if (int.Parse(loParam.CTO_PERIOD) > int.Parse(loParam.CFROM_PERIOD))
+                if (int.Parse(loParam.CTO_PERIOD) < int.Parse(loParam.CFROM_PERIOD))
                 {
                     loEx.Add("", _localizer["_validationHigherPeriod"]);
+                    goto EndBlock;
                 }
 
                 if (_viewModel._ReportType == "D")
@@ -402,13 +417,14 @@ namespace PMR00200FRONT
                 }
                 else
                 {
-                    LOIStats_PrintSummaryAsync(loParam);
+                    await LOIStats_PrintSummaryAsync(loParam);
                 }
             }
             catch (Exception ex)
             {
                 loEx.Add(ex);
             }
+        EndBlock:
             loEx.ThrowExceptionIfErrors();
         }
         private async Task LOIStats_PrintSummaryAsync(PMR00200ParamDTO poParam)
@@ -420,8 +436,7 @@ namespace PMR00200FRONT
                     "R_DefaultServiceUrlPM",
                     "PM",
                     "rpt/PMR00210Print/DownloadResultPrintPost",
-                    "rpt/PMR00210Print/LOIStatsSummary_ReportListGet",
-                    poParam);
+                    "rpt/PMR00210Print/LOIStatusSummary_ReportListGet", poParam);
             }
             catch (Exception ex)
             {

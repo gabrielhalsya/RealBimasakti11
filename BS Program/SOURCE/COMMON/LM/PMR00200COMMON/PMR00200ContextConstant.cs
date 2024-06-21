@@ -6,21 +6,9 @@ namespace PMR00200COMMON
 {
     public class PMR00200ContextConstant
     {
-        //param report
-        public const string CCOMPANY_ID = "CCOMPANY_ID";
-        public const string CPROPERTY_ID ="CPROPERTY_ID";
-        public const string CFROM_DEPARTMENT_ID ="CFROM_DEPARTMENT_ID";
-        public const string CTO_DEPARTMENT_ID ="CTO_DEPARTMENT_ID";
-        public const string CFROM_SALESMAN_ID ="CFROM_SALESMAN_ID";
-        public const string CTO_SALESMAN_ID ="CTO_SALESMAN_ID";
-        public const string CFROM_PERIOD ="CFROM_PERIOD";
-        public const string CTO_PERIOD ="CTO_PERIOD";
-        public const string LIS_OUTSTANDING ="LIS_OUTSTANDING";
-        public const string CLANG_ID ="CLANG_ID";
-
+        public const string CPROGRAM_NAME = "PM LOI Status";
         //param period
         public const string CYEAR = "CYEAR";
-
         //model
         public const string DEFAULT_HTTP_NAME = "R_DefaultServiceUrlPM";
         public const string DEFAULT_CHECKPOINT_NAME = "api/PMR00200";

@@ -70,6 +70,24 @@ namespace PMR00200FrontResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to No.
+        /// </summary>
+        internal static string _checkboxDataNo {
+            get {
+                return ResourceManager.GetString("_checkboxDataNo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Yes.
+        /// </summary>
+        internal static string _checkboxDataYes {
+            get {
+                return ResourceManager.GetString("_checkboxDataYes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Outstanding Agreement Transaction.
         /// </summary>
         internal static string _checkBoxOutAgreementTrans {
