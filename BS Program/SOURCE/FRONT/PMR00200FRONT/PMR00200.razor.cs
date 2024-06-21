@@ -351,7 +351,7 @@ namespace PMR00200FRONT
             R_Exception loEx = new R_Exception();
             try
             {
-                var loParam = new PMR00200PrintParamDTO()
+                var loParam = new PMR00200ParamDTO()
                 {
                     CLANG_ID = _clientHelper.Culture.Name,
                     CCOMPANY_ID = _clientHelper.CompanyId,
@@ -411,7 +411,7 @@ namespace PMR00200FRONT
             }
             loEx.ThrowExceptionIfErrors();
         }
-        private async Task LOIStats_PrintSummaryAsync(PMR00200PrintParamDTO poParam)
+        private async Task LOIStats_PrintSummaryAsync(PMR00200ParamDTO poParam)
         {
             R_Exception loEx = new R_Exception();
             try
@@ -429,7 +429,7 @@ namespace PMR00200FRONT
             }
             loEx.ThrowExceptionIfErrors();
         }
-        private void LOIStats_PrintDetail(PMR00200PrintParamDTO poParam)
+        private void LOIStats_PrintDetail(PMR00200ParamDTO poParam)
         {
             R_Exception loEx = new R_Exception();
             try

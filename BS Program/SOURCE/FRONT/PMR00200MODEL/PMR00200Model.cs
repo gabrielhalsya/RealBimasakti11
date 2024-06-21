@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace PMR00200MODEL
 {
-    public class PMR00200Model : R_BusinessObjectServiceClientBase<PMR00200DTO>, IPMR00200General
+    public class PMR00200Model : R_BusinessObjectServiceClientBase<PMR00200SPResultDTO>, IPMR00200General
     {
 
 
@@ -31,7 +31,7 @@ namespace PMR00200MODEL
             throw new NotImplementedException();
         }
 
-        public PMR00200Result<TodayDTO> GetTodayDate()
+        public PMR00200ResultBaseDTO<TodayDTO> GetTodayDate()
         {
             throw new NotImplementedException();
         }
@@ -41,7 +41,7 @@ namespace PMR00200MODEL
             throw new NotImplementedException();
         }
 
-        public PMR00200Result<PeriodYearDTO> GetPeriodYearRecord(PeriodYearDTO poParam)
+        public PMR00200ResultBaseDTO<PeriodYearDTO> GetPeriodYearRecord(PeriodYearDTO poParam)
         {
             throw new NotImplementedException();
         }
@@ -79,7 +79,7 @@ namespace PMR00200MODEL
             try
             {
                 R_HTTPClientWrapper.httpClientName = PMR00200ContextConstant.DEFAULT_HTTP_NAME;
-                var loTempResult = await R_HTTPClientWrapper.R_APIRequestObject<PMR00200Result<TodayDTO>>(
+                var loTempResult = await R_HTTPClientWrapper.R_APIRequestObject<PMR00200ResultBaseDTO<TodayDTO>>(
                     _RequestServiceEndPoint,
                     nameof(IPMR00200General.GetTodayDate),
                     PMR00200ContextConstant.DEFAULT_MODULE,
@@ -131,7 +131,7 @@ namespace PMR00200MODEL
             try
             {
                 R_HTTPClientWrapper.httpClientName = PMR00200ContextConstant.DEFAULT_HTTP_NAME;
-                var loTempResult = await R_HTTPClientWrapper.R_APIRequestObject<PMR00200Result<PeriodYearDTO>, PeriodYearDTO>(
+                var loTempResult = await R_HTTPClientWrapper.R_APIRequestObject<PMR00200ResultBaseDTO<PeriodYearDTO>, PeriodYearDTO>(
                     _RequestServiceEndPoint,
                     nameof(IPMR00200General.GetPeriodYearRecord),
                     poParam,

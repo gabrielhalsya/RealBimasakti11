@@ -4,7 +4,7 @@ using System.Text;
 
 namespace PMR00200COMMON.Print_DTO
 {
-    public class PMR00200SummaryColumnDTO
+    public class PMR00200LabelDTO
     {
         public string COLUMN_CTRANS_NAME { get; set; } = "Transaction Name";
         public string COLUMN_CSALESMAN_ID_NAME { get; set; } = "Salesman";

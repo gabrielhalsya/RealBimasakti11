@@ -19,6 +19,8 @@ namespace PMR00200SERVICE
 
         private readonly ActivitySource _activitySource;
 
+        PMR00200BackResources.Resources_Dummy_Class _backRes = new();
+
         public PMR00210Controller(ILogger<PMR00210Controller> logger)
         {
             //initiate
@@ -28,19 +30,19 @@ namespace PMR00200SERVICE
         }
 
         [HttpPost]
-        public IAsyncEnumerable<PMR00200DTO> GetReportData()
+        public IAsyncEnumerable<PMR00200SPResultDTO> GetReportData()
         {
             using Activity activity = _activitySource.StartActivity($"{GetType().Name}.{MethodBase.GetCurrentMethod().Name}");
             ShowLogStart();
             R_Exception loException = new R_Exception();
-            List<PMR00200DTO> loRtnTemp = null;
+            List<PMR00200SPResultDTO> loRtnTemp = null;
             PMR00200Cls loCls;
             try
             {
                 loCls = new PMR00200Cls();
                 ShowLogExecute();
 
-                loRtnTemp = loCls.GetReportData(new PMR00200ParamDTO()
+                loRtnTemp = loCls.GetReportData(new PMR00200SPParamDTO()
                 {
                     CCOMPANY_ID = R_BackGlobalVar.COMPANY_ID,
                     CFROM_DEPARTMENT_ID = R_Utility.R_GetStreamingContext<string>(PMR00200ContextConstant.CFROM_DEPARTMENT_ID),

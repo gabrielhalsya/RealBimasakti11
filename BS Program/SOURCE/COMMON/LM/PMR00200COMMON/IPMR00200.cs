@@ -6,6 +6,6 @@ namespace PMR00200COMMON
 {
     public interface IPMR00200
     {
-        IAsyncEnumerable<PMR00200DTO> GetReportData();
+        IAsyncEnumerable<PMR00200SPResultDTO> GetReportData();
     }
 }

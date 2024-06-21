@@ -57,12 +57,12 @@ namespace PMR00200SERVICE
         }
 
         [HttpPost]
-        public PMR00200Result<TodayDTO> GetTodayDate()
+        public PMR00200ResultBaseDTO<TodayDTO> GetTodayDate()
         {
             using Activity activity = _activitySource.StartActivity($"{GetType().Name}.{MethodBase.GetCurrentMethod().Name}");
             ShowLogStart();
             var loEx = new R_Exception();
-            PMR00200Result<TodayDTO> loRtn = new PMR00200Result<TodayDTO>();
+            PMR00200ResultBaseDTO<TodayDTO> loRtn = new PMR00200ResultBaseDTO<TodayDTO>();
 
             try
             {
@@ -109,11 +109,11 @@ namespace PMR00200SERVICE
         }
 
         [HttpPost]
-        public PMR00200Result<PeriodYearDTO> GetPeriodYearRecord(PeriodYearDTO poParam) {
+        public PMR00200ResultBaseDTO<PeriodYearDTO> GetPeriodYearRecord(PeriodYearDTO poParam) {
             using Activity activity = _activitySource.StartActivity($"{GetType().Name}.{MethodBase.GetCurrentMethod().Name}");
             ShowLogStart();
             var loEx = new R_Exception();
-            PMR00200Result<PeriodYearDTO> loRtn = new PMR00200Result<PeriodYearDTO>();
+            PMR00200ResultBaseDTO<PeriodYearDTO> loRtn = new PMR00200ResultBaseDTO<PeriodYearDTO>();
 
             try
             {

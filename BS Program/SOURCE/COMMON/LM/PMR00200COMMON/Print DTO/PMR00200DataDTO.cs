@@ -5,7 +5,7 @@ using System.Text;
 
 namespace PMR00200COMMON
 {
-    public class PMR00200ResultPrintSPDTO : PMR00200DTO
+    public class PMR00200DataDTO : PMR00200SPResultDTO
     {
     }
 }

@@ -5,7 +5,7 @@ using System.Text;
 
 namespace PMR00200COMMON.DTO_s
 {
-    public class PMR00200Result<T> : R_APIResultBaseDTO
+    public class PMR00200ResultBaseDTO<T> : R_APIResultBaseDTO
     {
         public T Data { get; set; }
     }

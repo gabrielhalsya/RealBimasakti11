@@ -23,7 +23,7 @@ namespace PMR00200MODEL.View_Models
         public ObservableCollection<PropertyDTO> _properties = new ObservableCollection<PropertyDTO>();
         public ObservableCollection<PeriodDtDTO> _fromPeriods = new ObservableCollection<PeriodDtDTO>();
         public ObservableCollection<PeriodDtDTO> _toPeriods = new ObservableCollection<PeriodDtDTO>();
-        public PMR00200ParamDTO _ReportParam = new PMR00200ParamDTO();
+        public PMR00200SPParamDTO _ReportParam = new PMR00200SPParamDTO();
         public List<ReportTypeDTO> _radioReportTypeList { get; set; } = new List<ReportTypeDTO>();
 
         public DateTime _InitToday = new DateTime();

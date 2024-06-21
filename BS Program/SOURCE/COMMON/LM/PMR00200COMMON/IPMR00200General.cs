@@ -6,9 +6,9 @@ namespace PMR00200COMMON
 {
     public interface IPMR00200General
     {
-        PMR00200Result<TodayDTO> GetTodayDate();
+        PMR00200ResultBaseDTO<TodayDTO> GetTodayDate();
         IAsyncEnumerable<PropertyDTO> GetPropertyList();
         IAsyncEnumerable<PeriodDtDTO> GetPeriodList();
-        PMR00200Result<PeriodYearDTO> GetPeriodYearRecord(PeriodYearDTO poParam);
+        PMR00200ResultBaseDTO<PeriodYearDTO> GetPeriodYearRecord(PeriodYearDTO poParam);
     }
 }

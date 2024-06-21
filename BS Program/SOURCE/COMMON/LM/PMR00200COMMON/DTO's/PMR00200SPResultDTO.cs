@@ -4,7 +4,7 @@ using System.Text;
 
 namespace PMR00200COMMON.DTO_s
 {
-    public class PMR00200DTO
+    public class PMR00200SPResultDTO
     {
         public string CCOMPANY_ID { get; set; }
         public string CPROPERTY_ID { get; set; }
