@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace RSP_PM_SAVE_ALLOCATIONResources {
+namespace RSP_PM_MAINTAIN_STAMP_RATEResources {
     using System;
     
     
@@ -22,14 +22,14 @@ namespace RSP_PM_SAVE_ALLOCATIONResources {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class RSP_PM_SAVE_ALLOCATIONResources_msgrsc {
+    internal class RSP_PM_MAINTAIN_STAMP_RATEResources_msgrsc {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal RSP_PM_SAVE_ALLOCATIONResources_msgrsc() {
+        internal RSP_PM_MAINTAIN_STAMP_RATEResources_msgrsc() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace RSP_PM_SAVE_ALLOCATIONResources {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("RSP_PM_SAVE_ALLOCATIONResources.RSP_PM_SAVE_ALLOCATIONResources_msgrsc", typeof(RSP_PM_SAVE_ALLOCATIONResources_msgrsc).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("RSP_PM_MAINTAIN_STAMP_RATEResources.RSP_PM_MAINTAIN_STAMP_RATEResources_msgrsc", typeof(RSP_PM_MAINTAIN_STAMP_RATEResources_msgrsc).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,56 +61,74 @@ namespace RSP_PM_SAVE_ALLOCATIONResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Process failed! unable to save PM Allocation {0}.
+        ///   Looks up a localized string similar to Error process, please contact your administrator!.
         /// </summary>
-        internal static string ERROR_PROCESS {
+        internal static string _7501 {
             get {
-                return ResourceManager.GetString("ERROR_PROCESS", resourceCulture);
+                return ResourceManager.GetString("7501", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to From PM GL Account No. not found!.
+        ///   Looks up a localized string similar to Duplicate Stamp Code!.
         /// </summary>
-        internal static string FR_AP_GLNO_NOT_FOUND {
+        internal static string _7502 {
             get {
-                return ResourceManager.GetString("FR_AP_GLNO_NOT_FOUND", resourceCulture);
+                return ResourceManager.GetString("7502", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Other Tax GL Account No. not found!.
+        ///   Looks up a localized string similar to Stamp Code cannot be empty!.
         /// </summary>
-        internal static string OTHER_TAX_GL_ACCOUNT_NO_NOT_FOUND {
+        internal static string _7503 {
             get {
-                return ResourceManager.GetString("OTHER_TAX_GL_ACCOUNT_NO_NOT_FOUND", resourceCulture);
+                return ResourceManager.GetString("7503", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Product GL Account No. not found!.
+        ///   Looks up a localized string similar to Stamp Code cannot be greater than 20 character!.
         /// </summary>
-        internal static string PROD_GLNO_NOT_FOUND {
+        internal static string _7504 {
             get {
-                return ResourceManager.GetString("PROD_GLNO_NOT_FOUND", resourceCulture);
+                return ResourceManager.GetString("7504", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Tax GL Account No. not found!.
+        ///   Looks up a localized string similar to Description cannot be empty!.
         /// </summary>
-        internal static string TAX_GL_ACCOUNT_NO_NOT_FOUND {
+        internal static string _7505 {
             get {
-                return ResourceManager.GetString("TAX_GL_ACCOUNT_NO_NOT_FOUND", resourceCulture);
+                return ResourceManager.GetString("7505", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to To PM GL Account No. not found!.
+        ///   Looks up a localized string similar to Description cannot be greater than 255 character!.
         /// </summary>
-        internal static string TO_AP_GLNO_NOT_FOUND {
+        internal static string _7506 {
             get {
-                return ResourceManager.GetString("TO_AP_GLNO_NOT_FOUND", resourceCulture);
+                return ResourceManager.GetString("7506", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Invalid Currency Code!.
+        /// </summary>
+        internal static string _7507 {
+            get {
+                return ResourceManager.GetString("7507", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cannot Delete, Stamp Rate Already in used!.
+        /// </summary>
+        internal static string _7508 {
+            get {
+                return ResourceManager.GetString("7508", resourceCulture);
             }
         }
     }

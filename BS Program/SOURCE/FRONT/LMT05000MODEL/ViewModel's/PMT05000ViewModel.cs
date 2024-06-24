@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using R_BlazorFrontEnd.Interfaces;
 using PMT05000FrontResources;
 using System.Linq;
+using R_BlazorFrontEnd;
 
 namespace PMT05000MODEL.ViewModel_s
 {
@@ -104,6 +105,7 @@ namespace PMT05000MODEL.ViewModel_s
             List<GSPeriodDT_DTO> loRtn = null;
             try
             {
+                R_FrontContext.R_SetStreamingContext(ContextConstantPMT05000.CYEAR, _yearPeriod.ToString());
                 loRtn = await _initModel.GetGSPeriodDTAsync();
             }
             catch (Exception ex)

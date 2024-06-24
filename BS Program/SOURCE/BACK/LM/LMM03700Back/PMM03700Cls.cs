@@ -127,7 +127,6 @@ namespace PMM03700BACK
             try
             {
                 loDb = new R_Db();
-                // loConn = loDb.GetConnection("BimasaktiConnectionString");
                 loConn = loDb.GetConnection();
                 loCmd = loDb.GetCommand();
 
@@ -161,6 +160,8 @@ namespace PMM03700BACK
                 {
                     ShowLogDebug(lcQuery, loCmd.Parameters);
                     loDb.SqlExecNonQuery(loConn, loCmd, false);
+                    var loTempResult = R_Utility.R_ConvertTo<CBT01100JournalHDParam>(loDataTable).FirstOrDefault();
+                    poNewEntity.cre = loTempResult.CREC_ID;
                 }
                 catch (Exception ex)
                 {

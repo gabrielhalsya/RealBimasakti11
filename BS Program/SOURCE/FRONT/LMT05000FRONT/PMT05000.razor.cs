@@ -17,6 +17,7 @@ using R_BlazorFrontEnd.Helpers;
 using R_BlazorFrontEnd.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -76,6 +77,21 @@ namespace PMT05000FRONT
                 loEx.Add(ex);
             }
             R_DisplayException(loEx);
+        }
+
+        public async Task OnChanged_YearPeriod()
+        {
+            var loEx = new R_Exception();
+            try
+            {
+                var loData = await _agreementChrgDiscViewModel.GetPeriodDTList();
+                _agreementChrgDiscViewModel._MonthPeriodList = new ObservableCollection<GSPeriodDT_DTO>(loData);
+            }
+            catch (Exception ex)
+            {
+                loEx.Add(ex);
+            }
+            loEx.ThrowExceptionIfErrors();
         }
 
         private void BeforeOpenTabPage_Undo(R_BeforeOpenTabPageEventArgs eventArgs)

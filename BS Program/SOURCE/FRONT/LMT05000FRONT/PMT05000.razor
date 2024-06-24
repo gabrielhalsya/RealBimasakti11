@@ -17,9 +17,8 @@
 </R_StackLayout>
 
 <R_TabStrip @ref="_tabStripAgrChrgDisc">
-
     <R_TabStripTab Title="@_localizer["_tabApplyDisc"]" id="@nameof(PMT05000)">
-        
+
         @* charge *@
         <R_StackLayout Row>
             <R_ItemLayout col="2">
@@ -71,6 +70,32 @@
                 <R_TextBox @bind-Value="_agreementChrgDiscViewModel._discountName" Enabled="false"></R_TextBox>
             </R_ItemLayout>
         </R_StackLayout>
+
+        @* discount type *@
+        <R_StackLayout Row>
+            <R_ItemLayout col="1">
+                <R_Label>@_localizer["_labelDiscountType"]</R_Label>
+            </R_ItemLayout>
+            <R_ItemLayout></R_ItemLayout>
+        </R_StackLayout>
+
+        @* invoice period *@
+        <R_StackLayout Row>
+            <R_ItemLayout col="1">
+                <R_Label>@_localizer["_labelInvoicePeriod"]</R_Label>
+            </R_ItemLayout>
+            <R_ItemLayout>
+                <R_NumericTextBox @bind-Value="_agreementChrgDiscViewModel._yearPeriod" Arrows="true" OnChanged="OnChanged_YearPeriod"></R_NumericTextBox>
+            </R_ItemLayout>
+            <R_ItemLayout>
+                <R_ComboBox Data="@_agreementChrgDiscViewModel._MonthPeriodList"
+                            @bind-Value="@_agreementChrgDiscViewModel._AgreementChrgDiscProcessParam.CCHARGES_TYPE"
+                            ValueField="@nameof(GSPeriodDT_DTO.CPERIOD_NO)"
+                            TextField="@nameof(GSPeriodDT_DTO.CPERIOD_NO)" />
+            </R_ItemLayout>
+        
+        </R_StackLayout>>
+
     </R_TabStripTab>
 
     <R_TabStripTab Title="@_localizer["_tabUndoDisc"]" Id="@nameof(PMT05001)">

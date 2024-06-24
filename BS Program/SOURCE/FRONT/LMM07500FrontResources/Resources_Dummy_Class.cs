@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace RSP_PM_SAVE_ALLOCATIONResources
+namespace PMM07500FrontResources
 {
     public class Resources_Dummy_Class
     {

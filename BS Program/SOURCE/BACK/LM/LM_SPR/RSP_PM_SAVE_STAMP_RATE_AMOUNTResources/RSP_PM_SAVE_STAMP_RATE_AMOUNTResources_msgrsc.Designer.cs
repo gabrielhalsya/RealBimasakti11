@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace RSP_PM_SAVE_ALLOCATIONResources {
+namespace RSP_PM_SAVE_STAMP_RATE_AMOUNTResources {
     using System;
     
     
@@ -22,14 +22,14 @@ namespace RSP_PM_SAVE_ALLOCATIONResources {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class RSP_PM_SAVE_ALLOCATIONResources_msgrsc {
+    internal class RSP_PM_SAVE_STAMP_RATE_AMOUNTResources_msgrsc {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal RSP_PM_SAVE_ALLOCATIONResources_msgrsc() {
+        internal RSP_PM_SAVE_STAMP_RATE_AMOUNTResources_msgrsc() {
         }
         
         /// <summary>
@@ -39,7 +39,8 @@ namespace RSP_PM_SAVE_ALLOCATIONResources {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("RSP_PM_SAVE_ALLOCATIONResources.RSP_PM_SAVE_ALLOCATIONResources_msgrsc", typeof(RSP_PM_SAVE_ALLOCATIONResources_msgrsc).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("RSP_PM_SAVE_STAMP_RATE_AMOUNTResources.RSP_PM_SAVE_STAMP_RATE_AMOUNTResources_msg" +
+                            "rsc", typeof(RSP_PM_SAVE_STAMP_RATE_AMOUNTResources_msgrsc).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,56 +62,20 @@ namespace RSP_PM_SAVE_ALLOCATIONResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Process failed! unable to save PM Allocation {0}.
+        ///   Looks up a localized string similar to Minimum Amount {0} already exists!.
+        /// </summary>
+        internal static string DATA_EXISTS {
+            get {
+                return ResourceManager.GetString("DATA_EXISTS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to failed! unable to save Stamp Rate Amount {0}.
         /// </summary>
         internal static string ERROR_PROCESS {
             get {
                 return ResourceManager.GetString("ERROR_PROCESS", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to From PM GL Account No. not found!.
-        /// </summary>
-        internal static string FR_AP_GLNO_NOT_FOUND {
-            get {
-                return ResourceManager.GetString("FR_AP_GLNO_NOT_FOUND", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Other Tax GL Account No. not found!.
-        /// </summary>
-        internal static string OTHER_TAX_GL_ACCOUNT_NO_NOT_FOUND {
-            get {
-                return ResourceManager.GetString("OTHER_TAX_GL_ACCOUNT_NO_NOT_FOUND", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Product GL Account No. not found!.
-        /// </summary>
-        internal static string PROD_GLNO_NOT_FOUND {
-            get {
-                return ResourceManager.GetString("PROD_GLNO_NOT_FOUND", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Tax GL Account No. not found!.
-        /// </summary>
-        internal static string TAX_GL_ACCOUNT_NO_NOT_FOUND {
-            get {
-                return ResourceManager.GetString("TAX_GL_ACCOUNT_NO_NOT_FOUND", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to To PM GL Account No. not found!.
-        /// </summary>
-        internal static string TO_AP_GLNO_NOT_FOUND {
-            get {
-                return ResourceManager.GetString("TO_AP_GLNO_NOT_FOUND", resourceCulture);
             }
         }
     }
