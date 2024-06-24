@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace PMM07500COMMON.DTO_s.Stamp_Code
+namespace PMM07500COMMON.DTO_s.stamp_code
 {
     public class PMM07500SaveDTO
     {
@@ -13,6 +13,6 @@ namespace PMM07500COMMON.DTO_s.Stamp_Code
         public string CREC_ID { get; set; }
         public string CSTAMP_CODE { get; set; }
         public string CDESCRIPTION { get; set; }
-        public string CCURRENCY_CODE { get; set; }
+        public char CCURRENCY_CODE { get; set; }
     }
 }

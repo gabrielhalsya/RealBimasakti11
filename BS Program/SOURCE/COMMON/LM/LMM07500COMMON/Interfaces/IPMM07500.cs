@@ -1,4 +1,4 @@
-﻿using PMM07500COMMON.DTO_s.Stamp_Code;
+﻿using PMM07500COMMON.DTO_s.stamp_code;
 using R_CommonFrontBackAPI;
 using System;
 using System.Collections.Generic;
