@@ -8,14 +8,12 @@ using R_CommonFrontBackAPI;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Globalization;
 using System.Linq;
-using System.Reflection.Emit;
 using System.Threading.Tasks;
 
 namespace PMM07500MODEL.View_Models
 {
-    partial class PMM07520ViewModel: R_ViewModel<PMM07520GridDTO>
+    public class PMM07520ViewModel: R_ViewModel<PMM07520GridDTO>
     {
         private PMM07520Model _model = new PMM07520Model();
         private PMM07500InitModel _initModel = new PMM07500InitModel();
@@ -48,7 +46,7 @@ namespace PMM07500MODEL.View_Models
             loEx.ThrowExceptionIfErrors();
         }
 
-        public async Task GetStampCodeListAsync()
+        public async Task GetStampAmountListAsync()
         {
             R_Exception loEx = new R_Exception();
             try
@@ -70,7 +68,7 @@ namespace PMM07500MODEL.View_Models
             loEx.ThrowExceptionIfErrors();
         }
 
-        public async Task GetStampCodeRecordAsync(PMM07520GridDTO poParam)
+        public async Task GetStampAmountRecordAsync(PMM07520GridDTO poParam)
         {
             R_Exception loEx = new R_Exception();
             try
@@ -86,7 +84,7 @@ namespace PMM07500MODEL.View_Models
             loEx.ThrowExceptionIfErrors();
         }
 
-        public async Task SaveStampCode(PMM07520GridDTO poParam, eCRUDMode poCRUDMode)
+        public async Task SaveStampAmountAsync(PMM07520GridDTO poParam, eCRUDMode poCRUDMode)
         {
             R_Exception loEx = new R_Exception();
             try
@@ -120,7 +118,7 @@ namespace PMM07500MODEL.View_Models
             loEx.ThrowExceptionIfErrors();
         }
 
-        public async Task DeleteStampCode(PMM07520GridDTO poParam)
+        public async Task DeleteStampAmountAsync(PMM07520GridDTO poParam)
         {
             var loEx = new R_Exception();
 

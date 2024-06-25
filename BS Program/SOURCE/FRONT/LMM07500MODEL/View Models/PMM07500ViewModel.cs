@@ -97,7 +97,7 @@ namespace PMM07500MODEL.View_Models
             loEx.ThrowExceptionIfErrors();
         }
 
-        public async Task SaveStampCode(PMM07500GridDTO poParam, eCRUDMode poCRUDMode)
+        public async Task SaveStampCodeAsync(PMM07500GridDTO poParam, eCRUDMode poCRUDMode)
         {
             R_Exception loEx = new R_Exception();
             try
@@ -128,7 +128,7 @@ namespace PMM07500MODEL.View_Models
             loEx.ThrowExceptionIfErrors();
         }
 
-        public async Task DeleteStampCode(PMM07500GridDTO poParam)
+        public async Task DeleteStampCodeAsync(PMM07500GridDTO poParam)
         {
             var loEx = new R_Exception();
 

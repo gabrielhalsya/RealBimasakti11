@@ -120,6 +120,36 @@
   <data name="_btn_refresh" xml:space="preserve">
     <value>Refresh</value>
   </data>
+  <data name="_column_created_date" xml:space="preserve">
+    <value>Created Date</value>
+  </data>
+  <data name="_column_create_by" xml:space="preserve">
+    <value>Create By</value>
+  </data>
+  <data name="_column_currency" xml:space="preserve">
+    <value>Currency</value>
+  </data>
+  <data name="_column_date" xml:space="preserve">
+    <value>Effective Date</value>
+  </data>
+  <data name="_column_description" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="_column_min_amount" xml:space="preserve">
+    <value>Minimum Amount</value>
+  </data>
+  <data name="_column_stamp_amount" xml:space="preserve">
+    <value>Stamp Amount</value>
+  </data>
+  <data name="_column_stamp_code" xml:space="preserve">
+    <value>Stamp Code</value>
+  </data>
+  <data name="_column_updated_date" xml:space="preserve">
+    <value>Updated Date</value>
+  </data>
+  <data name="_column_update_by" xml:space="preserve">
+    <value>Update By</value>
+  </data>
   <data name="_label_effective_date" xml:space="preserve">
     <value>Effective Date</value>
   </data>

@@ -15,7 +15,7 @@ using System.Threading.Tasks;
 
 namespace PMM07500MODEL.View_Models
 {
-    partial class PMM07510ViewModel : R_ViewModel<PMM07510GridDTO>
+    public class PMM07510ViewModel : R_ViewModel<PMM07510GridDTO>
     {
         private PMM07510Model _model = new PMM07510Model();
         private PMM07500InitModel _initModel = new PMM07500InitModel();
@@ -26,6 +26,7 @@ namespace PMM07500MODEL.View_Models
         public string PropertyId { get; set; } = "";
         public string ParentId { get; set; } = "";
         public string StampCode { get; set; } = "";
+        public DateTime? EffectiveDateDisplay { get; set; }
 
         public async Task GetPropertyList()
         {
@@ -93,7 +94,7 @@ namespace PMM07500MODEL.View_Models
             loEx.ThrowExceptionIfErrors();
         }
 
-        public async Task SaveStampDate(PMM07510GridDTO poParam, eCRUDMode poCRUDMode)
+        public async Task SaveStampDateAsync(PMM07510GridDTO poParam, eCRUDMode poCRUDMode)
         {
             R_Exception loEx = new R_Exception();
             try
@@ -113,7 +114,7 @@ namespace PMM07500MODEL.View_Models
             loEx.ThrowExceptionIfErrors();
         }
 
-        public async Task DeleteStampDate(PMM07510GridDTO poParam)
+        public async Task DeleteStampDateAsync(PMM07510GridDTO poParam)
         {
             var loEx = new R_Exception();
 

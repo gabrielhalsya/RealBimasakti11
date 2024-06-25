@@ -70,6 +70,96 @@ namespace PMM07500FrontResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Create By.
+        /// </summary>
+        internal static string _column_create_by {
+            get {
+                return ResourceManager.GetString("_column_create_by", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Created Date.
+        /// </summary>
+        internal static string _column_created_date {
+            get {
+                return ResourceManager.GetString("_column_created_date", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Currency.
+        /// </summary>
+        internal static string _column_currency {
+            get {
+                return ResourceManager.GetString("_column_currency", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Effective Date.
+        /// </summary>
+        internal static string _column_date {
+            get {
+                return ResourceManager.GetString("_column_date", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Description.
+        /// </summary>
+        internal static string _column_description {
+            get {
+                return ResourceManager.GetString("_column_description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Minimum Amount.
+        /// </summary>
+        internal static string _column_min_amount {
+            get {
+                return ResourceManager.GetString("_column_min_amount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Stamp Amount.
+        /// </summary>
+        internal static string _column_stamp_amount {
+            get {
+                return ResourceManager.GetString("_column_stamp_amount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Stamp Code.
+        /// </summary>
+        internal static string _column_stamp_code {
+            get {
+                return ResourceManager.GetString("_column_stamp_code", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Update By.
+        /// </summary>
+        internal static string _column_update_by {
+            get {
+                return ResourceManager.GetString("_column_update_by", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Updated Date.
+        /// </summary>
+        internal static string _column_updated_date {
+            get {
+                return ResourceManager.GetString("_column_updated_date", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Effective Date.
         /// </summary>
         internal static string _label_effective_date {

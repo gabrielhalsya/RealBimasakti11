@@ -13,6 +13,6 @@ namespace PMM07500COMMON.DTO_s.stamp_code
         public string CREC_ID { get; set; }
         public string CSTAMP_CODE { get; set; }
         public string CDESCRIPTION { get; set; }
-        public char CCURRENCY_CODE { get; set; }
+        public string CCURRENCY_CODE { get; set; }
     }
 }
