@@ -59,5 +59,95 @@ namespace PMM07500FrontResources {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Refresh.
+        /// </summary>
+        internal static string _btn_refresh {
+            get {
+                return ResourceManager.GetString("_btn_refresh", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Effective Date.
+        /// </summary>
+        internal static string _label_effective_date {
+            get {
+                return ResourceManager.GetString("_label_effective_date", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Property.
+        /// </summary>
+        internal static string _label_property {
+            get {
+                return ResourceManager.GetString("_label_property", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Stamp Rate.
+        /// </summary>
+        internal static string _label_stamp_rate {
+            get {
+                return ResourceManager.GetString("_label_stamp_rate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Minimum Amount may not be 0!.
+        /// </summary>
+        internal static string _val_stampamount1 {
+            get {
+                return ResourceManager.GetString("_val_stampamount1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Stamp Amount may not be 0!.
+        /// </summary>
+        internal static string _val_stampamount2 {
+            get {
+                return ResourceManager.GetString("_val_stampamount2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Stamp Code is required!.
+        /// </summary>
+        internal static string _val_stampcode1 {
+            get {
+                return ResourceManager.GetString("_val_stampcode1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Description is required!.
+        /// </summary>
+        internal static string _val_stampcode2 {
+            get {
+                return ResourceManager.GetString("_val_stampcode2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please select Currency!.
+        /// </summary>
+        internal static string _val_stampcode3 {
+            get {
+                return ResourceManager.GetString("_val_stampcode3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Effective Date is required!.
+        /// </summary>
+        internal static string _val_stampdate1 {
+            get {
+                return ResourceManager.GetString("_val_stampdate1", resourceCulture);
+            }
+        }
     }
 }
