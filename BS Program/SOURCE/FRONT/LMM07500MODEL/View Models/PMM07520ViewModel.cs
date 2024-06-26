@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace PMM07500MODEL.View_Models
 {
-    public class PMM07520ViewModel: R_ViewModel<PMM07520GridDTO>
+    public class PMM07520ViewModel : R_ViewModel<PMM07520GridDTO>
     {
         private PMM07520Model _model = new PMM07520Model();
         private PMM07500InitModel _initModel = new PMM07500InitModel();
@@ -25,6 +25,7 @@ namespace PMM07500MODEL.View_Models
         public string PropertyId { get; set; } = "";
         public string StampCode { get; set; } = "";
         public string ParentId { get; set; } = "";
+        public string EffectiveDate { get; set; } = "";
         public string GrandParentId { get; set; } = "";
 
         public async Task GetPropertyList()
@@ -56,10 +57,8 @@ namespace PMM07500MODEL.View_Models
                 R_FrontContext.R_SetStreamingContext(PMM07500ContextConstant.CGRAND_PARENT_ID, GrandParentId);
 
                 var loResult = await _model.GetStampAmountAsync();
-                if (loResult.Count > 0)
-                {
-                    StampAmountList = new ObservableCollection<PMM07520GridDTO>(loResult);
-                }
+                StampAmountList = new ObservableCollection<PMM07520GridDTO>(loResult);
+
             }
             catch (Exception ex)
             {
@@ -93,12 +92,14 @@ namespace PMM07500MODEL.View_Models
                 poParam.CSTAMP_CODE = StampCode;
                 poParam.CGRAND_PARENT_ID = GrandParentId;
                 poParam.CPARENT_ID = ParentId;
+                poParam.CDATE = EffectiveDate;
                 switch (poCRUDMode)
                 {
                     case eCRUDMode.NormalMode:
                         break;
                     case eCRUDMode.AddMode:
                         poParam.CACTION = "NEW";
+                        poParam.CREC_ID = "";
                         break;
                     case eCRUDMode.EditMode:
                         poParam.CACTION = "EDIT";

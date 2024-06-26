@@ -99,9 +99,7 @@
             </R_GridColumns>
         </R_Grid>
 
-        @* conductor *@
-        <R_ConductorGrid @ref="@_conGridPricing"
-                         R_IsHeader />
+        
     </R_ItemLayout>
 </R_StackLayout>
 
@@ -112,3 +110,6 @@
         <R_Button OnClick="@PricingAdd_Process">Process</R_Button>
     </R_ItemLayout>
 </R_StackLayout>
+@* conductor *@
+<R_ConductorGrid @ref="@_conGridPricing"
+                 R_IsHeader />

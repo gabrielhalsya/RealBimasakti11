@@ -13,14 +13,17 @@ namespace LMM07500MODEL
 {
     public class PMM07520Model : R_BusinessObjectServiceClientBase<PMM07520GridDTO>, IPMM07520
     {
-        public PMM07520Model(string pcHttpClientName = PMM07500ContextConstant.DEFAULT_HTTP_NAME,
-            string pcRequestServiceEndPoint = PMM07500ContextConstant.DEFAULT_CHECKPOINT_NAME,
+        private const string DEFAULT_HTTP_NAME = "R_DefaultServiceUrlPM";
+        private const string DEFAULT_CHECKPOINT_NAME = "api/PMM07520";
+        private const string DEFAULT_MODULE = "PM";
+        public PMM07520Model(string pcHttpClientName = DEFAULT_HTTP_NAME,
+            string pcRequestServiceEndPoint = DEFAULT_CHECKPOINT_NAME,
             bool plSendWithContext = true,
             bool plSendWithToken = true
             ) : base(
                 pcHttpClientName,
                 pcRequestServiceEndPoint,
-                PMM07500ContextConstant.DEFAULT_MODULE,
+                DEFAULT_MODULE,
                 plSendWithContext,
                 plSendWithToken)
         {
@@ -37,11 +40,11 @@ namespace LMM07500MODEL
             List<PMM07520GridDTO> loResult = null;
             try
             {
-                R_HTTPClientWrapper.httpClientName = PMM07500ContextConstant.DEFAULT_HTTP_NAME;
+                R_HTTPClientWrapper.httpClientName = DEFAULT_HTTP_NAME;
                 loResult = await R_HTTPClientWrapper.R_APIRequestStreamingObject<PMM07520GridDTO>(
                     _RequestServiceEndPoint,
                     nameof(IPMM07520.GetStampAmountList),
-                    PMM07500ContextConstant.DEFAULT_MODULE, _SendWithContext,
+                    DEFAULT_MODULE, _SendWithContext,
                     _SendWithToken);
             }
             catch (Exception ex)

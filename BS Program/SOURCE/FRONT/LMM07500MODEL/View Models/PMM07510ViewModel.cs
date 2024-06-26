@@ -59,13 +59,12 @@ namespace PMM07500MODEL.View_Models
                 {
                     if (DateTime.TryParseExact(item.CDATE, "yyyyMMdd", CultureInfo.InvariantCulture, DateTimeStyles.AssumeUniversal, out var loDate))
                     {
-                        item.DDATE =loDate;
+                        item.DDATE = loDate;
                     }
                 }
-                if (loResult.Count > 0)
-                {
-                    StampDateList = new ObservableCollection<PMM07510GridDTO>(loResult);
-                }
+
+                StampDateList = new ObservableCollection<PMM07510GridDTO>(loResult);
+
             }
             catch (Exception ex)
             {
@@ -102,9 +101,14 @@ namespace PMM07500MODEL.View_Models
                 poParam.CPROPERTY_ID = PropertyId;
                 poParam.CPARENT_ID = ParentId;
                 poParam.CSTAMP_CODE = StampCode;
+                poParam.CREC_ID = "";
                 poParam.CDATE = poParam.DDATE.ToString("yyyyMMdd");
                 poParam.CACTION = "NEW";
                 var loResult = await _model.R_ServiceSaveAsync(poParam, poCRUDMode);
+                if (DateTime.TryParseExact(loResult.CDATE, "yyyyMMdd", CultureInfo.InvariantCulture, DateTimeStyles.AssumeUniversal, out var loDate))
+                {
+                    loResult.DDATE = loDate;
+                }
                 StampDate = R_FrontUtility.ConvertObjectToObject<PMM07510GridDTO>(loResult);
             }
             catch (Exception ex)

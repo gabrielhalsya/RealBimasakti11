@@ -13,14 +13,17 @@ namespace LMM07500MODEL
 {
     public class PMM07500InitModel : R_BusinessObjectServiceClientBase<PMM07500GridDTO>, IPMM07500General
     {
-        public PMM07500InitModel(string pcHttpClientName = PMM07500ContextConstant.DEFAULT_HTTP_NAME,
-            string pcRequestServiceEndPoint = PMM07500ContextConstant.DEFAULT_CHECKPOINT_NAME,
+        private const string DEFAULT_HTTP_NAME = "R_DefaultServiceUrlPM";
+        private const string DEFAULT_CHECKPOINT_NAME = "api/PMM07500Init";
+        private const string DEFAULT_MODULE = "PM";
+        public PMM07500InitModel(string pcHttpClientName = DEFAULT_HTTP_NAME,
+            string pcRequestServiceEndPoint = DEFAULT_CHECKPOINT_NAME,
             bool plSendWithContext = true,
             bool plSendWithToken = true
             ) : base(
                 pcHttpClientName,
                 pcRequestServiceEndPoint,
-                PMM07500ContextConstant.DEFAULT_MODULE,
+                DEFAULT_MODULE,
                 plSendWithContext,
                 plSendWithToken)
         {
@@ -42,11 +45,11 @@ namespace LMM07500MODEL
             List<CurrencyDTO> loResult = null;
             try
             {
-                R_HTTPClientWrapper.httpClientName = PMM07500ContextConstant.DEFAULT_HTTP_NAME;
+                R_HTTPClientWrapper.httpClientName = DEFAULT_HTTP_NAME;
                 loResult = await R_HTTPClientWrapper.R_APIRequestStreamingObject<CurrencyDTO>(
                     _RequestServiceEndPoint,
                     nameof(IPMM07500General.GetCurrencyList),
-                    PMM07500ContextConstant.DEFAULT_MODULE, _SendWithContext,
+                    DEFAULT_MODULE, _SendWithContext,
                     _SendWithToken);
             }
             catch (Exception ex)
@@ -63,11 +66,11 @@ namespace LMM07500MODEL
             List<PropertyDTO> loResult = null;
             try
             {
-                R_HTTPClientWrapper.httpClientName = PMM07500ContextConstant.DEFAULT_HTTP_NAME;
+                R_HTTPClientWrapper.httpClientName = DEFAULT_HTTP_NAME;
                 loResult = await R_HTTPClientWrapper.R_APIRequestStreamingObject<PropertyDTO>(
                     _RequestServiceEndPoint,
                     nameof(IPMM07500General.GetPropertyList),
-                    PMM07500ContextConstant.DEFAULT_MODULE, _SendWithContext,
+                    DEFAULT_MODULE, _SendWithContext,
                     _SendWithToken);
             }
             catch (Exception ex)

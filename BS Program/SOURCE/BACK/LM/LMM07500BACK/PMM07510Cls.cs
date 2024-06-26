@@ -53,7 +53,8 @@ namespace PMM07500BACK
                 loCmd.CommandText = lcQuery;
 
                 loDB.R_AddCommandParameter(loCmd, "@CCOMPANY_ID", DbType.String, int.MaxValue, poEntity.CCOMPANY_ID);
-                loDB.R_AddCommandParameter(loCmd, "@CREC_ID", DbType.String, int.MaxValue, poEntity.CREC_ID);
+                loDB.R_AddCommandParameter(loCmd, "@CPROPERTY_ID", DbType.String, int.MaxValue, poEntity.CPROPERTY_ID);
+                loDB.R_AddCommandParameter(loCmd, "@CPARENT_ID", DbType.String, int.MaxValue, poEntity.CPARENT_ID);
                 loDB.R_AddCommandParameter(loCmd, "@CLANGUAGE_ID", DbType.String, int.MaxValue, poEntity.CLANGUAGE_ID);
                 ShowLogDebug(lcQuery, loCmd.Parameters);
                 var loRtnTemp = loDB.SqlExecQuery(loConn, loCmd, true);
@@ -179,7 +180,6 @@ namespace PMM07500BACK
                     ShowLogDebug(lcQuery, loCmd.Parameters);
                     var loResult = loDb.SqlExecQuery(loConn, loCmd, false);
                     poNewEntity.CREC_ID = R_Utility.R_ConvertTo<PMM07510GridDTO>(loResult).FirstOrDefault().CREC_ID;
-
                 }
                 catch (Exception ex)
                 {

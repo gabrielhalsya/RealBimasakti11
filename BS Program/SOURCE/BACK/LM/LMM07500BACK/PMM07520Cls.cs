@@ -56,6 +56,7 @@ namespace PMM07500BACK
                 loDB.R_AddCommandParameter(loCmd, "@CPARENT_ID", DbType.String, int.MaxValue, poEntity.CPARENT_ID);
                 loDB.R_AddCommandParameter(loCmd, "@CGRAND_PARENT_ID", DbType.String, int.MaxValue, poEntity.CGRAND_PARENT_ID);
                 loDB.R_AddCommandParameter(loCmd, "@CLANGUAGE_ID", DbType.String, int.MaxValue, poEntity.CLANGUAGE_ID);
+
                 ShowLogDebug(lcQuery, loCmd.Parameters);
                 var loRtnTemp = loDB.SqlExecQuery(loConn, loCmd, true);
                 loRtn = new();
@@ -128,7 +129,7 @@ namespace PMM07500BACK
                 loConn = loDB.GetConnection();
                 loCmd = loDB.GetCommand();
 
-                lcQuery = "RSP_PM_SAVE_STAMP_RATE_AMOUNT";
+                lcQuery = "RSP_PM_GET_STAMP_RATE_AMOUNT";
                 loCmd.CommandType = CommandType.StoredProcedure;
                 loCmd.CommandText = lcQuery;
 

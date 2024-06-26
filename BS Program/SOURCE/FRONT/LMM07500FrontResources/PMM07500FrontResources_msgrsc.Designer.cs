@@ -70,7 +70,7 @@ namespace PMM07500FrontResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Create By.
+        ///   Looks up a localized string similar to Created By.
         /// </summary>
         internal static string _column_create_by {
             get {
@@ -142,7 +142,7 @@ namespace PMM07500FrontResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Update By.
+        ///   Looks up a localized string similar to Updated By.
         /// </summary>
         internal static string _column_update_by {
             get {

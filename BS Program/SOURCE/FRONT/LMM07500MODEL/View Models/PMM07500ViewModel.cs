@@ -69,10 +69,8 @@ namespace PMM07500MODEL.View_Models
             {
                 R_FrontContext.R_SetStreamingContext(PMM07500ContextConstant.CPROPERTY_ID, PropertyId);
                 var loResult = await _model.GetStampListAsync();
-                if (loResult.Count > 0)
-                {
-                    StampRateList = new ObservableCollection<PMM07500GridDTO>(loResult);
-                }
+
+                StampRateList = new ObservableCollection<PMM07500GridDTO>(loResult);
             }
             catch (Exception ex)
             {
@@ -109,6 +107,7 @@ namespace PMM07500MODEL.View_Models
                         break;
                     case eCRUDMode.AddMode:
                         poParam.CACTION = "NEW";
+                        poParam.CREC_ID = "";
                         break;
                     case eCRUDMode.EditMode:
                         poParam.CACTION = "EDIT";
@@ -118,7 +117,7 @@ namespace PMM07500MODEL.View_Models
                     default:
                         break;
                 }
-                var loResult = await _model.R_ServiceSaveAsync(poParam,poCRUDMode);
+                var loResult = await _model.R_ServiceSaveAsync(poParam, poCRUDMode);
                 StampRate = R_FrontUtility.ConvertObjectToObject<PMM07500GridDTO>(loResult);
             }
             catch (Exception ex)

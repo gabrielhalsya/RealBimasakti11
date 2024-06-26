@@ -160,8 +160,6 @@ namespace PMM03700BACK
                 {
                     ShowLogDebug(lcQuery, loCmd.Parameters);
                     loDb.SqlExecNonQuery(loConn, loCmd, false);
-                    var loTempResult = R_Utility.R_ConvertTo<CBT01100JournalHDParam>(loDataTable).FirstOrDefault();
-                    poNewEntity.cre = loTempResult.CREC_ID;
                 }
                 catch (Exception ex)
                 {

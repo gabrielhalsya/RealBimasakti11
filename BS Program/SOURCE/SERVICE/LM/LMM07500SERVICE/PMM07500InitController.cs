@@ -19,12 +19,12 @@ namespace PMM07500SERVICE
 {
     [Route("api/[controller]/[action]")]
     [ApiController]
-    public class PMM007500InitController : ControllerBase, IPMM07500General
+    public class PMM07500InitController : ControllerBase, IPMM07500General
     {
         private LoggerPMM07500 _logger;
 
         private readonly ActivitySource _activitySource;
-        public PMM007500InitController(ILogger<LoggerPMM07500> logger)
+        public PMM07500InitController(ILogger<LoggerPMM07500> logger)
         {
             //initiate
             LoggerPMM07500.R_InitializeLogger(logger);

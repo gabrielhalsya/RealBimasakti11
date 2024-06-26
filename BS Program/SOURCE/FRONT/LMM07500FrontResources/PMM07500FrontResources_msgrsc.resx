@@ -124,7 +124,7 @@
     <value>Created Date</value>
   </data>
   <data name="_column_create_by" xml:space="preserve">
-    <value>Create By</value>
+    <value>Created By</value>
   </data>
   <data name="_column_currency" xml:space="preserve">
     <value>Currency</value>
@@ -148,7 +148,7 @@
     <value>Updated Date</value>
   </data>
   <data name="_column_update_by" xml:space="preserve">
-    <value>Update By</value>
+    <value>Updated By</value>
   </data>
   <data name="_label_effective_date" xml:space="preserve">
     <value>Effective Date</value>

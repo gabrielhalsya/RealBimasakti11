@@ -99,7 +99,7 @@ namespace PMM07500SERVICE
                 var loCls = new PMM07510Cls(); //create cls class instance
                 poParameter.Entity.CUSER_ID = R_BackGlobalVar.USER_ID;
                 poParameter.Entity.CCOMPANY_ID = R_BackGlobalVar.COMPANY_ID;
-                poParameter.Entity.CLANGUAGE_ID= R_BackGlobalVar.CULTURE;
+                poParameter.Entity.CLANGUAGE_ID = R_BackGlobalVar.CULTURE;
                 loRtn = new R_ServiceGetRecordResultDTO<PMM07510GridDTO>();
                 ShowLogExecute();
                 loRtn.data = loCls.R_GetRecord(poParameter.Entity);

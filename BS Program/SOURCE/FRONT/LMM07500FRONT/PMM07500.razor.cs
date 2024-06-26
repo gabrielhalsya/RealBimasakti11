@@ -39,6 +39,11 @@ namespace PMM07500FRONT
         [Inject] private R_ILocalizer<Resources_Dummy_Class> _localizer { get; set; }
         [Inject] IClientHelper _clientHelper { get; set; }
 
+        private bool _enableGridStampCode = true;
+        private bool _enableGridStampDate = true;
+        private bool _enableGridStampAmount = true;
+        private bool _enableComboboxProperty = true;
+
         protected override async Task R_Init_From_Master(object poParameter)
         {
             var loEx = new R_Exception();
@@ -100,7 +105,7 @@ namespace PMM07500FRONT
                         User_Id = _clientHelper.UserId,
                         Program_Id = PMM07500ContextConstant.PROGRAM_ID,
                         Table_Name = PMM07500ContextConstant.TABLE_NAME,
-                        Key_Value = string.Join("|", _clientHelper.CompanyId,loData.CSTAMP_CODE)
+                        Key_Value = string.Join("|", _clientHelper.CompanyId, loData.CSTAMP_CODE)
                     };
 
                     var loCls = new R_LockingServiceClient(PMM07500ContextConstant.DEFAULT_HTTP_NAME);
@@ -176,13 +181,21 @@ namespace PMM07500FRONT
             var loEx = new R_Exception();
             try
             {
-                var loParam = R_FrontUtility.ConvertObjectToObject<PMM07500GridDTO>(eventArgs.Data);
-                _stampDateViewModel.StampCode = loParam.CSTAMP_CODE;
-                _stampAmountViewModel.StampCode = loParam.CSTAMP_CODE;
-                _stampDateViewModel.ParentId = loParam.CREC_ID;
-                _stampAmountViewModel.GrandParentId = loParam.CREC_ID;
-
-                await _gridStampCode.R_RefreshGrid(null);
+                if (eventArgs.ConductorMode == R_BlazorFrontEnd.Enums.R_eConductorMode.Normal)
+                {
+                    var loParam = R_FrontUtility.ConvertObjectToObject<PMM07500GridDTO>(eventArgs.Data);
+                    _stampCodeViewModel.StampRate = loParam;
+                    _stampDateViewModel.StampCode = loParam.CSTAMP_CODE;
+                    _stampAmountViewModel.StampCode = loParam.CSTAMP_CODE;
+                    _stampDateViewModel.ParentId = loParam.CREC_ID;
+                    _stampAmountViewModel.GrandParentId = loParam.CREC_ID;
+                    await _gridStampDate.R_RefreshGrid(null);
+                    if (_stampDateViewModel.StampDateList.Count < 1)
+                    {
+                        _stampAmountViewModel.StampAmountList.Clear();
+                        _stampDateViewModel.EffectiveDateDisplay = null;
+                    }
+                }
 
             }
             catch (Exception ex)
@@ -261,9 +274,12 @@ namespace PMM07500FRONT
             var loEx = new R_Exception();
             try
             {
-                _gridStampDate.Enabled = eventArgs.Enable;
-                _gridStampAmount.Enabled = eventArgs.Enable;
-                _comboboxProperty.Enabled = eventArgs.Enable;
+                _enableComboboxProperty = eventArgs.Enable;
+                _enableGridStampAmount = eventArgs.Enable;
+                _enableGridStampDate = eventArgs.Enable;
+                //_enableGridStampDate.Enabled = eventArgs.Enable;
+                //_gridStampAmount.Enabled = eventArgs.Enable;
+                //_comboboxProperty.Enabled = eventArgs.Enable;
             }
             catch (Exception ex)
             {
@@ -334,10 +350,14 @@ namespace PMM07500FRONT
             var loEx = new R_Exception();
             try
             {
-                var loParam = R_FrontUtility.ConvertObjectToObject<PMM07510GridDTO>(eventArgs.Data);
-                _stampAmountViewModel.ParentId = loParam.CREC_ID;
-                _stampDateViewModel.EffectiveDateDisplay = DateTime.ParseExact(loParam.CDATE, "dd-MM-yyyy", CultureInfo.InvariantCulture);
-                await _gridStampAmount.R_RefreshGrid(null);
+                if (eventArgs.ConductorMode == R_BlazorFrontEnd.Enums.R_eConductorMode.Normal)
+                {
+                    var loParam = R_FrontUtility.ConvertObjectToObject<PMM07510GridDTO>(eventArgs.Data);
+                    _stampDateViewModel.EffectiveDateDisplay = DateTime.ParseExact(loParam.CDATE, "yyyyMMdd", CultureInfo.InvariantCulture);
+                    _stampAmountViewModel.ParentId = loParam.CREC_ID;
+                    _stampAmountViewModel.EffectiveDate = loParam.CDATE;
+                    await _gridStampAmount.R_RefreshGrid(null);
+                }
             }
             catch (Exception ex)
             {
@@ -367,6 +387,7 @@ namespace PMM07500FRONT
             try
             {
                 var loData = (PMM07510GridDTO)eventArgs.Data;
+                loData.DDATE = DateTime.Now;
                 loData.DUPDATE_DATE = DateTime.Now;
                 loData.DCREATE_DATE = DateTime.Now;
             }
@@ -414,9 +435,27 @@ namespace PMM07500FRONT
             var loEx = new R_Exception();
             try
             {
-                _gridStampCode.Enabled = eventArgs.Enable;
-                _gridStampAmount.Enabled = eventArgs.Enable;
-                _comboboxProperty.Enabled = eventArgs.Enable;
+                _enableGridStampCode = eventArgs.Enable;
+                _enableGridStampAmount = eventArgs.Enable;
+                _enableComboboxProperty = eventArgs.Enable;
+                //_gridStampCode.Enabled = eventArgs.Enable;
+                //_gridStampAmount.Enabled = eventArgs.Enable;
+                //_comboboxProperty.Enabled = eventArgs.Enable;
+            }
+            catch (Exception ex)
+            {
+                loEx.Add(ex);
+            }
+            R_DisplayException(loEx);
+        }
+
+        private async Task StampDate_AfterDeleteAsync()
+        {
+            R_Exception loEx = new();
+            try
+            {
+                await _gridStampAmount.R_RefreshGrid(null);
+                _stampDateViewModel.EffectiveDateDisplay = null;
             }
             catch (Exception ex)
             {
@@ -467,7 +506,10 @@ namespace PMM07500FRONT
             var loEx = new R_Exception();
             try
             {
-                var loParam = R_FrontUtility.ConvertObjectToObject<PMM07520GridDTO>(eventArgs.Data);
+                if (eventArgs.ConductorMode == R_BlazorFrontEnd.Enums.R_eConductorMode.Normal)
+                {
+                    var loParam = R_FrontUtility.ConvertObjectToObject<PMM07520GridDTO>(eventArgs.Data);
+                }
             }
             catch (Exception ex)
             {
@@ -543,9 +585,12 @@ namespace PMM07500FRONT
             var loEx = new R_Exception();
             try
             {
-                _gridStampCode.Enabled = eventArgs.Enable;
-                _gridStampDate.Enabled = eventArgs.Enable;
-                _comboboxProperty.Enabled = eventArgs.Enable;
+                _enableGridStampCode = eventArgs.Enable;
+                _enableGridStampDate = eventArgs.Enable;
+                _enableComboboxProperty = eventArgs.Enable;
+                //_gridStampCode.Enabled = eventArgs.Enable;
+                //_gridStampDate.Enabled = eventArgs.Enable;
+                //_comboboxProperty.Enabled = eventArgs.Enable;
             }
             catch (Exception ex)
             {
@@ -561,7 +606,7 @@ namespace PMM07500FRONT
             var loEx = new R_Exception();
             try
             {
-               await _gridStampCode.R_RefreshGrid(null);
+                await _gridStampCode.R_RefreshGrid(null);
             }
             catch (Exception ex)
             {

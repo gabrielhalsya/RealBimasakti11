@@ -173,6 +173,7 @@ namespace PMM07500BACK
                 loDb.R_AddCommandParameter(loCmd, "@CCOMPANY_ID", DbType.String, int.MaxValue, poNewEntity.CCOMPANY_ID);
                 loDb.R_AddCommandParameter(loCmd, "@CPROPERTY_ID", DbType.String, int.MaxValue, poNewEntity.CPROPERTY_ID);
                 loDb.R_AddCommandParameter(loCmd, "@CUSER_ID", DbType.String, int.MaxValue, poNewEntity.CUSER_ID);
+                loDb.R_AddCommandParameter(loCmd, "@CREC_ID", DbType.String, int.MaxValue, poNewEntity.CREC_ID);
                 loDb.R_AddCommandParameter(loCmd, "@CACTION", DbType.String, int.MaxValue, poNewEntity.CACTION);
                 loDb.R_AddCommandParameter(loCmd, "@CSTAMP_CODE", DbType.String, int.MaxValue, poNewEntity.CSTAMP_CODE);
                 loDb.R_AddCommandParameter(loCmd, "@CDESCRIPTION", DbType.String, int.MaxValue, poNewEntity.CDESCRIPTION);
