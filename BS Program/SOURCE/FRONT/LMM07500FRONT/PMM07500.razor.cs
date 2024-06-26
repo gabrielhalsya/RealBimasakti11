@@ -237,12 +237,29 @@ namespace PMM07500FRONT
             R_DisplayException(loEx);
         }
 
-        private void StampCode_Saving(R_SavingEventArgs eventArgs)
+        private void StampCode_Validation(R_ValidationEventArgs eventArgs)
         {
             var loEx = new R_Exception();
             try
             {
                 var loData = (PMM07500GridDTO)eventArgs.Data;
+                if (string.IsNullOrWhiteSpace(loData.CSTAMP_CODE) || string.IsNullOrEmpty(loData.CSTAMP_CODE))
+                {
+                    loEx.Add("", _localizer["_val_stampcode1"]);
+                    eventArgs.Cancel = true;
+                }
+
+                if (string.IsNullOrWhiteSpace(loData.CDESCRIPTION) || string.IsNullOrEmpty(loData.CDESCRIPTION))
+                {
+                    loEx.Add("", _localizer["_val_stampcode2"]);
+                    eventArgs.Cancel=true;
+                }
+
+                if (string.IsNullOrWhiteSpace(loData.CCURRENCY_CODE) || string.IsNullOrEmpty(loData.CCURRENCY_CODE))
+                {
+                    loEx.Add("", _localizer["_val_stampcode3"]);
+                    eventArgs.Cancel=true;
+                }
             }
             catch (Exception ex)
             {
@@ -398,12 +415,17 @@ namespace PMM07500FRONT
             R_DisplayException(loEx);
         }
 
-        private void StampDate_Saving(R_SavingEventArgs eventArgs)
+        private void StampDate_Validation(R_ValidationEventArgs eventArgs)
         {
             var loEx = new R_Exception();
             try
             {
                 var loData = (PMM07510GridDTO)eventArgs.Data;
+                if (loData.DDATE == null)
+                {
+                    loEx.Add("", _localizer["_val_stampdate1"]);
+                    eventArgs.Cancel = true;
+                }
             }
             catch (Exception ex)
             {
@@ -549,12 +571,22 @@ namespace PMM07500FRONT
             R_DisplayException(loEx);
         }
 
-        private void StampAmount_Saving(R_SavingEventArgs eventArgs)
+        private void StampAmount_Validation(R_ValidationEventArgs eventArgs)
         {
             var loEx = new R_Exception();
             try
             {
                 var loData = (PMM07520GridDTO)eventArgs.Data;
+                if (loData.NMIN_AMOUNT == 0)
+                {
+                    loEx.Add("", _localizer["_val_stampamount1"]);
+                    eventArgs.Cancel = true;
+                }
+                if (loData.NSTAMP_AMOUNT == 0)
+                {
+                    loEx.Add("", _localizer["_val_stampamount2"]);
+                    eventArgs.Cancel = true;
+                }
             }
             catch (Exception ex)
             {
