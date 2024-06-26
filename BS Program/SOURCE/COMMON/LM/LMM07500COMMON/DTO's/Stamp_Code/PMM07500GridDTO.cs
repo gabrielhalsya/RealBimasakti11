@@ -8,6 +8,7 @@ namespace PMM07500COMMON.DTO_s.stamp_code
     public class PMM07500GridDTO : PMM07500SaveDTO
     {
         public string CCURRENCY_NAME { get; set; }
+        public string CCURRENCY_DISPLAY { get; set; }
         public decimal NMIN_AMT { get; set; }
         public decimal NSTAMP_AMT { get; set; }
         public string CCREATE_BY { get; set; }

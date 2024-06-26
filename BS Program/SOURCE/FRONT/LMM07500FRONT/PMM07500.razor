@@ -36,7 +36,6 @@
             R_ServiceDelete="@StampCode_ServiceDelete"
             R_AfterAdd="@StampCode_AfterAdd"
             R_Validation="@StampCode_Validation"
-
             R_ServiceSave="@StampCode_ServiceSave">
         <R_GridColumns>
             <R_GridTextColumn FieldName="@nameof(PMM07500GridDTO.CSTAMP_CODE)"
@@ -44,23 +43,23 @@
                               R_EnableAdd="true"
                               R_EnableEdit="false"
                               MaxLength="20"
-                              Width="150px" />
+                              Width="120px" />
 
             <R_GridTextColumn FieldName="@nameof(PMM07500GridDTO.CDESCRIPTION)"
                               HeaderText="@(_localizer["_column_description"])"
                               R_EnableAdd
                               R_EnableEdit
                               MaxLength="100"
-                              Width="200px" />
+                              Width="150px" />
 
             <R_GridComboBoxColumn Data=@_stampCodeViewModel.CurrencyList
-                                  ValueField="@nameof(CurrencyDTO.CCURRENCY_CODE)"
-                                  TextField="@nameof(CurrencyDTO.CCURRENCY_NAME)"
-                                  FieldName="@nameof(PMM07500GridDTO.CCURRENCY_CODE)"
+                                  ValueField="@nameof(CurrencyDTO.CCURRENCY_DISPLAY)"
+                                  TextField="@nameof(CurrencyDTO.CCURRENCY_DISPLAY)"
+                                  FieldName="@nameof(PMM07500GridDTO.CCURRENCY_DISPLAY)"
                                   HeaderText="@(_localizer["_column_currency"])"
                                   R_EnableAdd
                                   R_EnableEdit
-                                  Width="200px" />
+                                  Width="150px" />
 
             <R_GridTextColumn FieldName="@nameof(PMM07500GridDTO.CUPDATE_BY)"
                               HeaderText="@(_localizer["_column_update_by"])"
@@ -70,7 +69,7 @@
 
             <R_GridDateTimePickerColumn FieldName="@nameof(PMM07500GridDTO.DUPDATE_DATE)"
                                         HeaderText="@(_localizer["_column_updated_date"])"
-                                        Width="200px"
+                                        Width="120px"
                                         R_EnableAdd="false"
                                         R_EnableEdit="false" />
 
@@ -82,7 +81,7 @@
 
             <R_GridDateTimePickerColumn FieldName="@nameof(PMM07500GridDTO.DCREATE_DATE)"
                                         HeaderText="@(_localizer["_column_created_date"])"
-                                        Width="200px"
+                                        Width="120px"
                                         R_EnableAdd="false"
                                         R_EnableEdit="false" />
         </R_GridColumns>
@@ -125,7 +124,7 @@
             <R_GridDatePickerColumn FieldName="@nameof(PMM07510GridDTO.DDATE)"
                                     HeaderText="@(_localizer["_column_date"])"
                                     R_EnableAdd="true"
-                                    Width="200px" DatePickerFormat="@R_eDatePickerFormat.Short" />
+                                    Width="120px" DatePickerFormat="@R_eDatePickerFormat.Short" />
             <R_GridTextColumn FieldName="@nameof(PMM07510GridDTO.CUPDATE_BY)"
                               HeaderText="@(_localizer["_column_update_by"])"
                               Width="120px"
@@ -133,7 +132,7 @@
                               R_EnableEdit="false"></R_GridTextColumn>
             <R_GridDateTimePickerColumn FieldName="@nameof(PMM07510GridDTO.DUPDATE_DATE)"
                                         HeaderText="@(_localizer["_column_updated_date"])"
-                                        Width="200px"
+                                        Width="120px"
                                         R_EnableAdd="false" />
 
             <R_GridTextColumn FieldName="@nameof(PMM07510GridDTO.CCREATE_BY)"
@@ -143,7 +142,7 @@
 
             <R_GridDateTimePickerColumn FieldName="@nameof(PMM07510GridDTO.DCREATE_DATE)"
                                         HeaderText="@(_localizer["_column_created_date"])"
-                                        Width="200px"
+                                        Width="120px"
                                         R_EnableAdd="false" />
         </R_GridColumns>
     </R_Grid>
@@ -179,7 +178,7 @@
             <R_GridNumericColumn FieldName="@nameof(PMM07520GridDTO.NMIN_AMOUNT)"
                                  HeaderText="@(_localizer["_column_min_amount"])"
                                  R_EnableAdd
-                                 Width="200px"
+                                 Width="100px"
                                  Min="0"
                                  ThousandSeparator
                                  Decimals="2" />
@@ -187,30 +186,30 @@
                                  HeaderText="@(_localizer["_column_stamp_amount"])"
                                  R_EnableAdd
                                  R_EnableEdit
-                                 Width="200px"
+                                 Width="100px"
                                  Min="0"
                                  ThousandSeparator
                                  Decimals="2" />
             <R_GridTextColumn FieldName="@nameof(PMM07520GridDTO.CUPDATE_BY)"
                               HeaderText="@(_localizer["_column_update_by"])"
-                              Width="120px"
+                              Width="87px"
                               R_EnableAdd="false"
                               R_EnableEdit="false"></R_GridTextColumn>
             <R_GridDateTimePickerColumn FieldName="@nameof(PMM07520GridDTO.DUPDATE_DATE)"
                                         HeaderText="@(_localizer["_column_updated_date"])"
-                                        Width="200px"
+                                        Width="120px"
                                         R_EnableAdd="false"
                                         R_EnableEdit="false" />
 
             <R_GridTextColumn FieldName="@nameof(PMM07520GridDTO.CCREATE_BY)"
                               HeaderText="@(_localizer["_column_create_by"])"
-                              Width="120px"
+                              Width="87px"
                               R_EnableAdd="false"
                               R_EnableEdit="false" />
 
             <R_GridDateTimePickerColumn FieldName="@nameof(PMM07520GridDTO.DCREATE_DATE)"
                                         HeaderText="@(_localizer["_column_created_date"])"
-                                        Width="200px"
+                                        Width="120px"
                                         R_EnableAdd="false"
                                         R_EnableEdit="false" />
         </R_GridColumns>

@@ -9,6 +9,7 @@ namespace PMM07500COMMON.DTO_s
     {
         public string CCOMPANY_ID { get; set; }
         public string CCURRENCY_CODE { get; set; }
+        public string CCURRENCY_DISPLAY { get; set; }
         public string CCURRENCY_SYMBOL { get; set; }
         public string CCURRENCY_NAME { get; set; }
         public string CCREATE_BY { get; set; }

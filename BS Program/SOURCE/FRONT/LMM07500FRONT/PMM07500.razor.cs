@@ -97,6 +97,11 @@ namespace PMM07500FRONT
             {
                 var loData = (PMM07500GridDTO)eventArgs.Data;
 
+                var loCls = new R_LockingServiceClient(pcModuleName: PMM07500ContextConstant.DEFAULT_MODULE,
+                plSendWithContext: true,
+                plSendWithToken: true,
+                pcHttpClientName: PMM07500ContextConstant.DEFAULT_HTTP_NAME);
+
                 if (eventArgs.Mode == R_eLockUnlock.Lock)
                 {
                     var loLockPar = new R_ServiceLockingLockParameterDTO
@@ -108,7 +113,6 @@ namespace PMM07500FRONT
                         Key_Value = string.Join("|", _clientHelper.CompanyId, loData.CSTAMP_CODE)
                     };
 
-                    var loCls = new R_LockingServiceClient(PMM07500ContextConstant.DEFAULT_HTTP_NAME);
 
                     loLockResult = await loCls.R_Lock(loLockPar);
                 }
@@ -123,7 +127,6 @@ namespace PMM07500FRONT
                         Key_Value = string.Join("|", _clientHelper.CompanyId, loData.CSTAMP_CODE)
                     };
 
-                    var loCls = new R_LockingServiceClient(PMM07500ContextConstant.DEFAULT_HTTP_NAME);
 
                     loLockResult = await loCls.R_UnLock(loUnlockPar);
                 }
@@ -192,7 +195,7 @@ namespace PMM07500FRONT
                     await _gridStampDate.R_RefreshGrid(null);
                     if (_stampDateViewModel.StampDateList.Count < 1)
                     {
-                        _stampAmountViewModel.StampAmountList.Clear();
+                        _stampAmountViewModel.StampAmountList = new();
                         _stampDateViewModel.EffectiveDateDisplay = null;
                     }
                 }
@@ -252,13 +255,13 @@ namespace PMM07500FRONT
                 if (string.IsNullOrWhiteSpace(loData.CDESCRIPTION) || string.IsNullOrEmpty(loData.CDESCRIPTION))
                 {
                     loEx.Add("", _localizer["_val_stampcode2"]);
-                    eventArgs.Cancel=true;
+                    eventArgs.Cancel = true;
                 }
 
                 if (string.IsNullOrWhiteSpace(loData.CCURRENCY_CODE) || string.IsNullOrEmpty(loData.CCURRENCY_CODE))
                 {
                     loEx.Add("", _localizer["_val_stampcode3"]);
-                    eventArgs.Cancel=true;
+                    eventArgs.Cancel = true;
                 }
             }
             catch (Exception ex)
@@ -312,10 +315,10 @@ namespace PMM07500FRONT
             {
                 if (eventArgs.ColumnName == nameof(PMM07500GridDTO.CCURRENCY_NAME))
                 {
-                    var loData = eventArgs.CurrentRow as PMM07500GridDTO;
+                    var loData = (PMM07500GridDTO)eventArgs.CurrentRow;
                     string lcCurrName = _stampCodeViewModel.CurrencyList.Where(x => x.CCURRENCY_CODE == eventArgs.Value.ToString()).FirstOrDefault().CCURRENCY_NAME;
                     loData.CCURRENCY_CODE = eventArgs.Value.ToString();
-                    loData.CCURRENCY_NAME = eventArgs.Value.ToString() + " - " + lcCurrName;
+                    loData.CCURRENCY_DISPLAY = eventArgs.Value.ToString() + " - " + lcCurrName;
                 }
             }
             catch (Exception ex)
@@ -638,7 +641,12 @@ namespace PMM07500FRONT
             var loEx = new R_Exception();
             try
             {
-                await _gridStampCode.R_RefreshGrid(null);
+                if (!string.IsNullOrWhiteSpace(_stampCodeViewModel.PropertyId))
+                {
+                    _stampDateViewModel.PropertyId = _stampCodeViewModel.PropertyId;
+                    _stampAmountViewModel.PropertyId = _stampCodeViewModel.PropertyId;
+                    await _gridStampCode.R_RefreshGrid(null);
+                }
             }
             catch (Exception ex)
             {

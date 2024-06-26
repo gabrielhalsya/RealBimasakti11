@@ -52,6 +52,10 @@ namespace PMM07500MODEL.View_Models
                 var loResult = await _initModel.GetCurrencyListAsync();
                 if (loResult.Count > 0)
                 {
+                    foreach (var item in loResult)
+                    {
+                        item.CCURRENCY_DISPLAY = $"{item.CCURRENCY_CODE} - {item.CCURRENCY_NAME}";
+                    }
                     CurrencyList = new List<CurrencyDTO>(loResult);
                 }
             }
@@ -70,6 +74,11 @@ namespace PMM07500MODEL.View_Models
                 R_FrontContext.R_SetStreamingContext(PMM07500ContextConstant.CPROPERTY_ID, PropertyId);
                 var loResult = await _model.GetStampListAsync();
 
+                foreach (var item in loResult)
+                {
+                    item.CCURRENCY_DISPLAY = $"{item.CCURRENCY_CODE} - {item.CCURRENCY_NAME}";
+                }
+
                 StampRateList = new ObservableCollection<PMM07500GridDTO>(loResult);
             }
             catch (Exception ex)
@@ -86,6 +95,8 @@ namespace PMM07500MODEL.View_Models
             {
                 poParam.CPROPERTY_ID = PropertyId;
                 var loResult = await _model.R_ServiceGetRecordAsync(poParam);
+                loResult.CCURRENCY_DISPLAY = $"{loResult.CCURRENCY_CODE} - {loResult.CCURRENCY_NAME}";
+
                 StampRate = R_FrontUtility.ConvertObjectToObject<PMM07500GridDTO>(loResult);
             }
             catch (Exception ex)
@@ -101,6 +112,7 @@ namespace PMM07500MODEL.View_Models
             try
             {
                 poParam.CPROPERTY_ID = PropertyId;
+                poParam.CCURRENCY_CODE= poParam.CCURRENCY_DISPLAY.Split(" - ")[0];
                 switch (poCRUDMode)
                 {
                     case eCRUDMode.NormalMode:
@@ -118,6 +130,7 @@ namespace PMM07500MODEL.View_Models
                         break;
                 }
                 var loResult = await _model.R_ServiceSaveAsync(poParam, poCRUDMode);
+                loResult.CCURRENCY_DISPLAY = $"{loResult.CCURRENCY_CODE} - {loResult.CCURRENCY_NAME}";
                 StampRate = R_FrontUtility.ConvertObjectToObject<PMM07500GridDTO>(loResult);
             }
             catch (Exception ex)
