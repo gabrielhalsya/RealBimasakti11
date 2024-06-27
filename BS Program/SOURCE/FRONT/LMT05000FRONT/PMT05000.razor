@@ -76,7 +76,9 @@
             <R_ItemLayout col="1">
                 <R_Label>@_localizer["_labelDiscountType"]</R_Label>
             </R_ItemLayout>
-            <R_ItemLayout></R_ItemLayout>
+            <R_ItemLayout>
+                <R_TextBox @bind-Value="_agreementChrgDiscViewModel._AgreementChrgDiscProcessParam.CDISCOUNT_CODE"></R_TextBox>
+            </R_ItemLayout>
         </R_StackLayout>
 
         @* invoice period *@
@@ -93,8 +95,48 @@
                             ValueField="@nameof(GSPeriodDT_DTO.CPERIOD_NO)"
                             TextField="@nameof(GSPeriodDT_DTO.CPERIOD_NO)" />
             </R_ItemLayout>
-        
-        </R_StackLayout>>
+
+        </R_StackLayout>
+
+        @* building *@
+        <R_StackLayout>
+            <R_ItemLayout>
+                <R_CheckBox @bind-Value="_agreementChrgDiscViewModel._AgreementChrgDiscProcessParam.LALL_BUILDING"></R_CheckBox>
+            </R_ItemLayout>
+            <R_ItemLayout>
+                <R_Label>@_localizer["_comboAllBuilding"]</R_Label>
+            </R_ItemLayout>
+            <R_ItemLayout col="2" Class="ps-2">
+                <R_TextBox @bind-Value="_agreementChrgDiscViewModel._AgreementChrgDiscProcessParam.CBUILDING_ID"
+                           R_ConductorSource="_conAgrChrgDisc"
+                           Enabled
+                           CharacterCasing="R_eCharacterCasing.Upper"
+                           MaxLength="int.MaxValue"
+                           OnLostFocus="OnLostFocus_LookupBuilding"/>
+            </R_ItemLayout>
+            <R_ItemLayout>
+                <R_Lookup R_ConductorSource="_conAgrChrgDisc" R_Before_Open_Lookup="@BeforeOpen_lookupBuilding" R_After_Open_Lookup="@AfterOpen_lookupBuildingAsync">...</R_Lookup>
+            </R_ItemLayout>
+            <R_ItemLayout col="4">
+                <R_TextBox @bind-Value="_agreementChrgDiscViewModel._AgreementChrgDiscProcessParam.CBUILDING_NAME"
+                           R_ConductorSource="_conAgrChrgDisc"
+                           Enabled="false" />
+            </R_ItemLayout>
+        </R_StackLayout>
+
+        @* agreement type *@
+        <R_StackLayout Row>
+            <R_ItemLayout>
+                <R_RadioGroup Data="@_agreementChrgDiscViewModel._AgreementTypeList"
+                              @bind-Value="@_agreementChrgDiscViewModel._AgreementChrgDiscProcessParam.CAGREEMENT_TYPE"
+                              ValueField="@nameof(AgreementTypeDTO.CAGREEMENT_TYPE)"
+                              TextField="@nameof(AgreementTypeDTO.CAGREEMENT_TYPE_DISPLAY)"
+                              Layout="R_eRadioGroupLayout.Horizontal"
+                              LabelPosition="R_eRadioGroupLabelPosition.After">
+                </R_RadioGroup>
+            </R_ItemLayout>
+            <R_ItemLayout></R_ItemLayout>
+        </R_StackLayout>
 
     </R_TabStripTab>
 

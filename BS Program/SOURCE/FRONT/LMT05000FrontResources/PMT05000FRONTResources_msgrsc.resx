@@ -126,6 +126,9 @@
   <data name="_btnUndo" xml:space="preserve">
     <value>Undo</value>
   </data>
+  <data name="_comboAllBuilding" xml:space="preserve">
+    <value>All Building</value>
+  </data>
   <data name="_grid#Unit" xml:space="preserve">
     <value>#Unit</value>
   </data>

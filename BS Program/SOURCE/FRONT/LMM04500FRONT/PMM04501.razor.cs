@@ -203,10 +203,6 @@ namespace PMM04500FRONT
             R_Exception loEx = new R_Exception();
             try
             {
-                if (eventArgs.Result == null)
-                {
-                    return;
-                }
                 await _gridPricingDate.R_RefreshGrid(null);
             }
             catch (Exception ex)

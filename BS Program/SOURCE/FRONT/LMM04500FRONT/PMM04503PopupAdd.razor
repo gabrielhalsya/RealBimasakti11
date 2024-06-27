@@ -10,12 +10,13 @@
             <R_ItemLayout col="4">
                 <R_DatePicker Value="_viewModel_PricingRate._pricingRateDateDisplay"
                               ValueChanged="@((DateTime? pdParam)=>
-                    PricingRateAddForm_RateDateValueChangedAsync(pdParam))" R_ConductorGridSource ="@_conGridPricingRate"></R_DatePicker>
+                    PricingRateAddForm_RateDateValueChangedAsync(pdParam))" R_ConductorGridSource="@_conGridPricingRate"></R_DatePicker>
             </R_ItemLayout>
         </R_StackLayout>
 
         <R_Grid DataSource="@_viewModel_PricingRate._pricingSaveList"
                 @ref="@_gridPricingRate"
+                Pageable="false"
                 R_ConductorGridSource="@_conGridPricingRate"
                 R_GridType="R_eGridType.Batch"
                 Height="300px"
@@ -50,10 +51,6 @@
                                      Min="0"></R_GridNumericColumn>
             </R_GridColumns>
         </R_Grid>
-
-        @* conductor *@
-        <R_ConductorGrid @ref="@_conGridPricingRate"
-                         R_IsHeader />
     </R_ItemLayout>
 </R_StackLayout>
 <R_StackLayout Row Class="mt-2">
@@ -63,3 +60,6 @@
         <R_Button OnClick="@PricingRateAdd_Process">Process</R_Button>
     </R_ItemLayout>
 </R_StackLayout>
+@* conductor *@
+<R_ConductorGrid @ref="@_conGridPricingRate"
+                 R_IsHeader />

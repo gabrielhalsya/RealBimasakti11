@@ -1,4 +1,7 @@
-﻿using Lookup_PMCOMMON.DTOs;
+﻿using Lookup_GSCOMMON.DTOs;
+using Lookup_GSFRONT;
+using Lookup_GSModel.ViewModel;
+using Lookup_PMCOMMON.DTOs;
 using Lookup_PMFRONT;
 using Lookup_PMModel;
 using Lookup_PMModel.ViewModel.LML00200;
@@ -260,6 +263,62 @@ namespace PMT05000FRONT
                 loEx.Add(ex);
             }
         EndBlock:
+            R_DisplayException(loEx);
+
+        }
+
+        private void BeforeOpen_lookupBuilding(R_BeforeOpenLookupEventArgs eventArgs)
+        {
+            eventArgs.Parameter = new GSL02200ParameterDTO()
+            { CPROPERTY_ID = _agreementChrgDiscViewModel._AgreementChrgDiscProcessParam.CPROPERTY_ID };
+            eventArgs.TargetPageType = typeof(GSL02200);
+        }
+        private async Task AfterOpen_lookupBuildingAsync(R_AfterOpenLookupEventArgs eventArgs)
+        {
+            var loTempResult = (GSL02200DTO)eventArgs.Result;
+            if (loTempResult != null)
+            {
+                _agreementChrgDiscViewModel._AgreementChrgDiscProcessParam.CBUILDING_ID = loTempResult.CBUILDING_ID;
+                _agreementChrgDiscViewModel._AgreementChrgDiscProcessParam.CBUILDING_NAME = loTempResult.CBUILDING_NAME;
+            }
+        }
+        private async Task OnLostFocus_LookupBuilding()
+        {
+            var loEx = new R_Exception();
+
+            try
+            {
+                if (!string.IsNullOrWhiteSpace(_agreementChrgDiscViewModel._AgreementChrgDiscProcessParam.CBUILDING_ID))
+                {
+
+                    LookupGSL02200ViewModel loLookupViewModel = new LookupGSL02200ViewModel(); //use GSL's model
+                    var loParam = new GSL02200ParameterDTO // use match param as GSL's dto, send as type in search texbox
+                    {
+
+                        CPROPERTY_ID = _agreementChrgDiscViewModel._AgreementChrgDiscProcessParam.CPROPERTY_ID,
+                        CSEARCH_TEXT = _agreementChrgDiscViewModel._AgreementChrgDiscProcessParam.CBUILDING_ID, // property that bindded to search textbox
+                    };
+                    var loResult = await loLookupViewModel.GetBuilding(loParam); //retrive single record 
+
+                    //show result & show name/related another fields
+                    if (loResult == null)
+                    {
+                        loEx.Add(R_FrontUtility.R_GetError(
+                                typeof(Lookup_GSFrontResources.Resources_Dummy_Class),
+                                "_ErrLookup01"));
+                        _agreementChrgDiscViewModel._AgreementChrgDiscProcessParam.CBUILDING_NAME = ""; //kosongin bind textbox name kalo gaada
+                    }
+                    else
+                    {
+                        _agreementChrgDiscViewModel._AgreementChrgDiscProcessParam.CBUILDING_ID = loResult.CBUILDING_ID;
+                        _agreementChrgDiscViewModel._AgreementChrgDiscProcessParam.CBUILDING_NAME = loResult.CBUILDING_NAME; //assign bind textbox name kalo ada
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                loEx.Add(ex);
+            }
             R_DisplayException(loEx);
 
         }

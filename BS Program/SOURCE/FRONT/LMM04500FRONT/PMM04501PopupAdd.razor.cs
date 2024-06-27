@@ -64,7 +64,6 @@ namespace PMM04500FRONT
             try
             {
                 await _pricingAdd_ViewModel.GetPricingForSaveList();
-
                 var loCheckedData = RemoveIDBeforeDisplay(new List<PricingBulkSaveDTO>(_pricingAdd_ViewModel._pricingSaveList), _pricingAdd_ViewModel._validDateForm.Value);
                 _pricingAdd_ViewModel._pricingSaveList = new ObservableCollection<PricingBulkSaveDTO>(loCheckedData);
                 eventArgs.ListEntityResult = _pricingAdd_ViewModel._pricingSaveList;
@@ -131,8 +130,6 @@ namespace PMM04500FRONT
                     {
                         _pricingAdd_ViewModel._validDateForm = poDate; //set value
                         await _gridPricing.R_RefreshGrid(null);
-
-                        goto EndBlock;
                     }
                     else
                     {

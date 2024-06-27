@@ -175,13 +175,13 @@ namespace PMM04500BACK
 	                        , LOVERWRITE			BIT
                               ) ";
                 //exec temptable
-                _logger.LogDebug($"{lcQuery}");
                 loDB.SqlExecNonQuery(lcQuery, loConn, false);
 
                 //convert data
                 var loConvertedData = ConvertListToBulkDTO(poParam.PRICING_LIST);
 
                 //savebulk
+                _logger.LogDebug($"INSERT INTO #LEASE_PRICING {loConvertedData}");//log insert
                 loDB.R_BulkInsert<PricingDBSaveBulkDTO>((SqlConnection)loConn, "#LEASE_PRICING", loConvertedData);
 
                 //exec rsp

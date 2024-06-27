@@ -88,6 +88,15 @@ namespace PMT05000FrontResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to All Building.
+        /// </summary>
+        internal static string _comboAllBuilding {
+            get {
+                return ResourceManager.GetString("_comboAllBuilding", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to *.
         /// </summary>
         internal static string _grid_ {

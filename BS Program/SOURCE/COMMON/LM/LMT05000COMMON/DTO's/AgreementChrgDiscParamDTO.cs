@@ -7,7 +7,9 @@ namespace PMT05000COMMON.DTO_s
 {
     public class AgreementChrgDiscParamDTO : AgreementChrgDiscHeaderDTO
     {
+        public string CBUILDING_NAME { get; set; }
         public string CDISCOUNT_CODE { get; set; }
+        public string CDISCOUNT_TYPE { get; set; }
         public List<AgreementChrgDiscDetailDTO> AgreementChrgDiscDetail { get; set; }
     }
 
