@@ -35,7 +35,7 @@ namespace GLTR00100BACK
             try
             {
                 var loDb = new R_Db();
-                var loConn = loDb.GetConnection("R_DefaultConnectionString");
+                var loConn = loDb.GetConnection(R_Db.eDbConnectionStringType.ReportConnectionString);
                 var loCmd = loDb.GetCommand();
 
                 var lcQuery = "SELECT dbo.RFN_GET_DB_TODAY(@CCOMPANY_ID) AS DTODAY";
@@ -83,7 +83,7 @@ namespace GLTR00100BACK
             try
             {
                 var loDb = new R_Db();
-                var loConn = loDb.GetConnection("R_DefaultConnectionString");
+                var loConn = loDb.GetConnection(R_Db.eDbConnectionStringType.ReportConnectionString);
 
                 var loCmd = loDb.GetCommand();
 
@@ -129,7 +129,7 @@ namespace GLTR00100BACK
             try
             {
                 var loDb = new R_Db();
-                var loConn = loDb.GetConnection("R_ReportConnectionString");
+                var loConn = loDb.GetConnection(R_Db.eDbConnectionStringType.ReportConnectionString);
                 var loCmd = loDb.GetCommand();
 
 
@@ -165,7 +165,7 @@ namespace GLTR00100BACK
             try
             {
                 var loDb = new R_Db();
-                var loConn = loDb.GetConnection("R_ReportConnectionString");
+                var loConn = loDb.GetConnection(R_Db.eDbConnectionStringType.ReportConnectionString);
 
                 var loCmd = loDb.GetCommand();
 

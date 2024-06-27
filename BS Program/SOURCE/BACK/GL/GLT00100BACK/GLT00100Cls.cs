@@ -34,7 +34,7 @@ namespace GLT00100BACK
             try
             {
                 var loDb = new R_Db();
-                var loConn = loDb.GetConnection("R_DefaultConnectionString");
+                var loConn = loDb.GetConnection();
                 var loCmd = loDb.GetCommand();
 
                 var lcQuery = "RSP_GL_SEARCH_JOURNAL_LIST";
@@ -76,7 +76,7 @@ namespace GLT00100BACK
             try
             {
                 var loDb = new R_Db();
-                var loConn = loDb.GetConnection("R_DefaultConnectionString");
+                var loConn = loDb.GetConnection();
                 var loCmd = loDb.GetCommand();
 
                 var lcQuery = "RSP_GL_GET_JOURNAL_DETAIL_LIST";
@@ -180,7 +180,7 @@ namespace GLT00100BACK
             try
             {
                 var loDb = new R_Db();
-                var loConn = loDb.GetConnection("R_DefaultConnectionString");
+                var loConn = loDb.GetConnection();
                 var loCmd = loDb.GetCommand();
 
                 var lcQuery = @"RSP_GS_GET_ALLOW_APPROVAL_STATUS";

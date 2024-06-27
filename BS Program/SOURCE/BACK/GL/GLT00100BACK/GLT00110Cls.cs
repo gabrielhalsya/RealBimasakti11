@@ -161,7 +161,7 @@ namespace GLT00100BACK
             try
             {
                 var loDb = new R_Db();
-                var loConn = loDb.GetConnection("R_DefaultConnectionString");
+                var loConn = loDb.GetConnection();
                 var loCmd = loDb.GetCommand();
 
                 var lcQuery = @"RSP_GS_GET_LAST_CURRENCY_RATE";
@@ -198,7 +198,7 @@ namespace GLT00100BACK
             try
             {
                 var loDb = new R_Db();
-                var loConn = loDb.GetConnection("R_DefaultConnectionString");
+                var loConn = loDb.GetConnection();
                 var loCmd = loDb.GetCommand();
 
                 var lcQuery = @"RSP_GL_GET_JOURNAL";
@@ -241,7 +241,7 @@ namespace GLT00100BACK
             {
                 using (TransactionScope transactionScope = new TransactionScope(TransactionScopeOption.Required))
                 {
-                    loConn = loDb.GetConnection("R_DefaultConnectionString");
+                    loConn = loDb.GetConnection();
                     loCmd = loDb.GetCommand();
 
                     //Bulk Insert Data

@@ -39,7 +39,7 @@ namespace GLM00200BACK
             try
             {
                 loDB = new R_Db();
-                loConn = loDB.GetConnection("R_DefaultConnectionString");
+                loConn = loDB.GetConnection();
                 loCmd = loDB.GetCommand();
 
                 lcQuery = "RSP_GL_GET_RECURRING_JRN";
@@ -342,7 +342,7 @@ namespace GLM00200BACK
             try
             {
                 var loDb = new R_Db();
-                var loConn = loDb.GetConnection("R_DefaultConnectionString");
+                var loConn = loDb.GetConnection();
                 var loCmd = loDb.GetCommand();
 
                 var lcQuery = @"RSP_GS_GET_LAST_CURRENCY_RATE";
@@ -417,7 +417,7 @@ namespace GLM00200BACK
             try
             {
                 loDB = new R_Db();
-                loConn = loDB.GetConnection("R_ReportConnectionString");
+                loConn = loDB.GetConnection(R_Db.eDbConnectionStringType.ReportConnectionString);
                 loCmd = loDB.GetCommand();
 
                 lcQuery = "RSP_GL_GET_RECURRING_JRN";
@@ -450,7 +450,7 @@ namespace GLM00200BACK
             try
             {
                 loDB = new R_Db();
-                loConn = loDB.GetConnection("R_ReportConnectionString");
+                loConn = loDB.GetConnection(R_Db.eDbConnectionStringType.ReportConnectionString);
                 loCmd = loDB.GetCommand();
 
                 lcQuery = "RSP_GL_GET_RECURRING_ACTUAL_JRN_LIST";
@@ -482,7 +482,7 @@ namespace GLM00200BACK
             try
             {
                 var loDb = new R_Db();
-                var loConn = loDb.GetConnection("R_ReportConnectionString");
+                var loConn = loDb.GetConnection(R_Db.eDbConnectionStringType.ReportConnectionString);
                 var loCmd = loDb.GetCommand();
 
 

@@ -28,7 +28,7 @@ namespace GLT00100BACK
             try
             {
                 var loDb = new R_Db();
-                var loConn = loDb.GetConnection("R_DefaultConnectionString");
+                var loConn = loDb.GetConnection();
                 var loCmd = loDb.GetCommand();
 
                 var lcQuery = "RSP_GS_GET_COMPANY_INFO";
@@ -63,7 +63,7 @@ namespace GLT00100BACK
             try
             {
                 var loDb = new R_Db();
-                var loConn = loDb.GetConnection("R_DefaultConnectionString");
+                var loConn = loDb.GetConnection();
                 var loCmd = loDb.GetCommand();
 
                 var lcQuery = "RSP_GL_GET_SYSTEM_PARAM";
@@ -98,7 +98,7 @@ namespace GLT00100BACK
             try
             {
                 var loDb = new R_Db();
-                var loConn = loDb.GetConnection("R_DefaultConnectionString");
+                var loConn = loDb.GetConnection();
                 var loCmd = loDb.GetCommand();
 
                 var lcQuery = "RSP_GS_GET_PERIOD_DT_INFO";
@@ -134,7 +134,7 @@ namespace GLT00100BACK
             try
             {
                 var loDb = new R_Db();
-                var loConn = loDb.GetConnection("R_DefaultConnectionString");
+                var loConn = loDb.GetConnection();
                 var loCmd = loDb.GetCommand();
 
                 var lcQuery = "RSP_GL_GET_SYSTEM_ENABLE_OPTION_INFO";
@@ -169,7 +169,7 @@ namespace GLT00100BACK
             try
             {
                 var loDb = new R_Db();
-                var loConn = loDb.GetConnection("R_DefaultConnectionString");
+                var loConn = loDb.GetConnection();
                 var loCmd = loDb.GetCommand();
 
                 var lcQuery = "RSP_GS_GET_TRANS_CODE_INFO";
@@ -204,7 +204,7 @@ namespace GLT00100BACK
             try
             {
                 var loDb = new R_Db();
-                var loConn = loDb.GetConnection("R_DefaultConnectionString");
+                var loConn = loDb.GetConnection();
                 var loCmd = loDb.GetCommand();
 
                 var lcQuery = "RSP_GS_GET_PERIOD_YEAR_RANGE";
@@ -240,7 +240,7 @@ namespace GLT00100BACK
             try
             {
                 var loDb = new R_Db();
-                var loConn = loDb.GetConnection("R_DefaultConnectionString");
+                var loConn = loDb.GetConnection();
                 var loCmd = loDb.GetCommand();
 
                 var lcQuery = "SELECT dbo.RFN_GET_DB_TODAY(@CCOMPANY_ID) AS DTODAY";
@@ -274,7 +274,7 @@ namespace GLT00100BACK
             try
             {
                 var loDb = new R_Db();
-                var loConn = loDb.GetConnection("R_DefaultConnectionString");
+                var loConn = loDb.GetConnection();
                 var loCmd = loDb.GetCommand();
 
                 var lcQuery = "RSP_GS_GET_GSB_CODE_LIST";
@@ -311,7 +311,7 @@ namespace GLT00100BACK
             try
             {
                 var loDb = new R_Db();
-                var loConn = loDb.GetConnection("R_DefaultConnectionString");
+                var loConn = loDb.GetConnection();
                 var loCmd = loDb.GetCommand();
 
                 var lcQuery = "RSP_GS_GET_CURRENCY_LIST";
@@ -346,7 +346,7 @@ namespace GLT00100BACK
             try
             {
                 var loDb = new R_Db();
-                var loConn = loDb.GetConnection("R_DefaultConnectionString");
+                var loConn = loDb.GetConnection();
                 var loCmd = loDb.GetCommand();
 
                 var lcQuery = "RSP_GS_GET_CENTER_LIST";
