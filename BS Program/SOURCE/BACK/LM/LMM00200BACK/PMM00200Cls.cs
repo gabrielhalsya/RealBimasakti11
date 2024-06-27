@@ -41,7 +41,7 @@ namespace PMM00200BACK
             try
             {
                 loDB = new R_Db();
-                loConn = loDB.GetConnection("R_DefaultConnectionString");
+                loConn = loDB.GetConnection();
                 loCmd = loDB.GetCommand();
 
                 lcQuery = "RSP_PM_GET_USER_PARAM_DETAIL";
@@ -159,7 +159,7 @@ namespace PMM00200BACK
             try
             {
                 loDB = new R_Db();
-                loConn = loDB.GetConnection("R_DefaultConnectionString");
+                loConn = loDB.GetConnection();
                 loCmd = loDB.GetCommand();
 
                 lcQuery = "RSP_PM_GET_USER_PARAM_LIST";
@@ -193,7 +193,7 @@ namespace PMM00200BACK
             try
             {
                 loDb = new R_Db();
-                loConn = loDb.GetConnection("R_DefaultConnectionString");
+                loConn = loDb.GetConnection();
                 loCmd = loDb.GetCommand();
                 lcQuery = "RSP_PM_MAINTAIN_USER_PARAM";
                 loCmd.CommandType = CommandType.StoredProcedure;

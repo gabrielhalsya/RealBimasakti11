@@ -86,7 +86,7 @@ namespace PMT05000BACK
                 using (TransactionScope transactionScope = new TransactionScope(TransactionScopeOption.Required))
                 {
                     //List<AgreementChrgDiscDetailBulkDTO> loDetailData = poEntity.AgreementChrgDiscDetail;
-                    loConn = loDb.GetConnection("R_DefaultConnectionString");
+                    loConn = loDb.GetConnection();
                     loCmd = loDb.GetCommand();
 
                     //create temptable

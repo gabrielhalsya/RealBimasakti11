@@ -34,7 +34,7 @@ namespace PMR00200BACK
             try
             {
                 loDB = new R_Db();
-                loConn = loDB.GetConnection();
+                loConn = loDB.GetConnection(R_Db.eDbConnectionStringType.ReportConnectionString);
                 loCmd = loDB.GetCommand();
 
                 lcQuery = "RSP_PMR00200_GET_REPORT";
@@ -74,7 +74,7 @@ namespace PMR00200BACK
             try
             {
                 var loDb = new R_Db();
-                var loConn = loDb.GetConnection("R_ReportConnectionString");
+                var loConn = loDb.GetConnection();
                 var loCmd = loDb.GetCommand();
 
 

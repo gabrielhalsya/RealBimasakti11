@@ -39,7 +39,7 @@ namespace PMR02400BACK
             try
             {
                 loDB = new R_Db();
-                loConn = loDB.GetConnection();
+                loConn = loDB.GetConnection(R_Db.eDbConnectionStringType.ReportConnectionString);
                 loCmd = loDB.GetCommand();
 
                 lcQuery = "RSP_PMR02400_GET_REPORT";
@@ -82,7 +82,7 @@ namespace PMR02400BACK
             try
             {
                 loDB = new R_Db();
-                loConn = loDB.GetConnection();
+                loConn = loDB.GetConnection(R_Db.eDbConnectionStringType.ReportConnectionString);
                 loCmd = loDB.GetCommand();
 
                 lcQuery = "RSP_PMR02400_GET_REPORT";

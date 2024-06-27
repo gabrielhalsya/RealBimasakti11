@@ -41,7 +41,7 @@ namespace PMM03700BACK
             try
             {
                 loDB = new R_Db();
-                loConn = loDB.GetConnection("R_DefaultConnectionString");
+                loConn = loDB.GetConnection();
                 loCmd = loDB.GetCommand();
                 R_ExternalException.R_SP_Init_Exception(loConn);
                 lcQuery = "RSP_PM_MAINTAIN_TENANT_CLASS";
@@ -101,7 +101,7 @@ namespace PMM03700BACK
             try
             {
                 loDB = new R_Db();
-                loConn = loDB.GetConnection("R_DefaultConnectionString");
+                loConn = loDB.GetConnection();
                 loCmd = loDB.GetCommand();
 
                 lcQuery = "RSP_PM_GET_TENANT_CLASS_DETAIL";
@@ -214,7 +214,7 @@ namespace PMM03700BACK
             try
             {
                 loDB = new R_Db();
-                loConn = loDB.GetConnection("R_DefaultConnectionString");
+                loConn = loDB.GetConnection();
                 loCmd = loDB.GetCommand();
 
                 lcQuery = "RSP_PM_GET_TENANT_CLASS_LIST";
@@ -251,7 +251,7 @@ namespace PMM03700BACK
             try
             {
                 loDb = new R_Db();
-                loConn = loDb.GetConnection("R_DefaultConnectionString");
+                loConn = loDb.GetConnection();
                 loCmd = loDb.GetCommand();
 
                 lcQuery = "RSP_PM_GET_TENANT_CLASS_TENANT_LIST";
@@ -289,7 +289,7 @@ namespace PMM03700BACK
             try
             {
                 loDB = new R_Db();
-                loConn = loDB.GetConnection("R_DefaultConnectionString");
+                loConn = loDB.GetConnection();
                 loCmd = loDB.GetCommand();
 
                 lcQuery = "RSP_PM_GET_ASSIGN_TENANT_CLASS_LIST";
@@ -389,7 +389,7 @@ namespace PMM03700BACK
             try
             {
                 loDB = new R_Db();
-                loConn = loDB.GetConnection("R_DefaultConnectionString");
+                loConn = loDB.GetConnection();
                 loCmd = loDB.GetCommand();
 
                 lcQuery = "RSP_PM_GET_TENANT_LIST_CLASS";

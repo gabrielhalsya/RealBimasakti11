@@ -41,7 +41,7 @@ namespace PMM03700BACK
             try
             {
                 loDb = new R_Db();
-                loConn = loDb.GetConnection("R_DefaultConnectionString");
+                loConn = loDb.GetConnection();
                 loCmd = loDb.GetCommand();
                 R_ExternalException.R_SP_Init_Exception(loConn);
 
@@ -90,7 +90,7 @@ namespace PMM03700BACK
             try
             {
                 loDB = new R_Db();
-                loConn = loDB.GetConnection("R_DefaultConnectionString");
+                loConn = loDB.GetConnection();
                 loCmd = loDB.GetCommand();
 
                 lcQuery = "RSP_PM_GET_TENANT_CLASS_GRP_DETAIL";
@@ -204,7 +204,7 @@ namespace PMM03700BACK
             try
             {
                 loDB = new R_Db();
-                loConn = loDB.GetConnection("R_DefaultConnectionString");
+                loConn = loDB.GetConnection();
                 loCmd = loDB.GetCommand();
 
                 lcQuery = "RSP_PM_GET_TENANT_CLASS_GRP_LIST";
@@ -240,7 +240,7 @@ namespace PMM03700BACK
             try
             {
                 loDB = new R_Db();
-                loConn = loDB.GetConnection("R_DefaultConnectionString");
+                loConn = loDB.GetConnection();
                 loCmd = loDB.GetCommand();
 
                 lcQuery = "RSP_GS_GET_PROPERTY_LIST";

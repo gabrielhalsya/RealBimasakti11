@@ -44,7 +44,7 @@ namespace PMM07500BACK
             try
             {
                 loDB = new R_Db();
-                loConn = loDB.GetConnection("R_DefaultConnectionString");
+                loConn = loDB.GetConnection();
                 loCmd = loDB.GetCommand();
 
                 lcQuery = "RSP_PM_GET_STAMP_RATE_LIST";
@@ -126,7 +126,7 @@ namespace PMM07500BACK
             try
             {
                 loDB = new R_Db();
-                loConn = loDB.GetConnection("R_DefaultConnectionString");
+                loConn = loDB.GetConnection();
                 loCmd = loDB.GetCommand();
 
                 lcQuery = "RSP_PM_GET_STAMP_RATE";
