@@ -74,7 +74,7 @@ namespace PMR00200BACK
             try
             {
                 var loDb = new R_Db();
-                var loConn = loDb.GetConnection();
+                var loConn = loDb.GetConnection(R_Db.eDbConnectionStringType.ReportConnectionString);
                 var loCmd = loDb.GetCommand();
 
 
