@@ -52,7 +52,7 @@ namespace CBT01100BACK
             try
             {
                 var loDb = new R_Db();
-                var loConn = loDb.GetConnection("R_DefaultConnectionString");
+                var loConn = loDb.GetConnection();
                 var loCmd = loDb.GetCommand();
 
                 var lcQuery = "RSP_CB_GET_TRANS_JRN_LIST";
@@ -88,7 +88,7 @@ namespace CBT01100BACK
             try
             {
                 var loDb = new R_Db();
-                var loConn = loDb.GetConnection("R_DefaultConnectionString");
+                var loConn = loDb.GetConnection();
                 var loCmd = loDb.GetCommand();
 
                 var lcQuery = @"RSP_CB_GET_TRANS_JRN";
@@ -215,7 +215,7 @@ namespace CBT01100BACK
             try
             {
                 var loDb = new R_Db();
-                var loConn = loDb.GetConnection("R_DefaultConnectionString");
+                var loConn = loDb.GetConnection();
                 var loCmd = loDb.GetCommand();
 
                 var lcQuery = @"RSP_CB_DELETE_TRANS_JRN";
