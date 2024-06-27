@@ -160,6 +160,33 @@ namespace PMM07500FrontResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Delete Selected Stamp Amount?.
+        /// </summary>
+        internal static string _confirm_delete_stampamount {
+            get {
+                return ResourceManager.GetString("_confirm_delete_stampamount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Delete Selected Stamp Code?.
+        /// </summary>
+        internal static string _confirm_delete_stampcode {
+            get {
+                return ResourceManager.GetString("_confirm_delete_stampcode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Delete Selected Effective?.
+        /// </summary>
+        internal static string _confirm_delete_stampdate {
+            get {
+                return ResourceManager.GetString("_confirm_delete_stampdate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Effective Date.
         /// </summary>
         internal static string _label_effective_date {
@@ -183,6 +210,15 @@ namespace PMM07500FrontResources {
         internal static string _label_stamp_rate {
             get {
                 return ResourceManager.GetString("_label_stamp_rate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Confirmation.
+        /// </summary>
+        internal static string _msg_title_confirmation {
+            get {
+                return ResourceManager.GetString("_msg_title_confirmation", resourceCulture);
             }
         }
         

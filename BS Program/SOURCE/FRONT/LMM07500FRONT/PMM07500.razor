@@ -2,6 +2,7 @@
 @inherits R_Page
 @using R_BlazorFrontEnd.Controls.Events
 
+@* property *@
 <R_StackLayout Row>
     <R_ItemLayout col="1">
         <R_Label FontStyle="R_eFontStyle.Bold" FontColor="R_eFontColor.Danger">@_localizer["_label_property"]</R_Label>
@@ -21,6 +22,7 @@
     </R_ItemLayout>
 </R_StackLayout>
 
+@* grid stamp code *@
 <R_StackLayout>
     <R_Grid DataSource="@_stampCodeViewModel.StampRateList"
             @ref="@_gridStampCode"
@@ -33,10 +35,13 @@
             R_ServiceGetListRecord="@StampCode_ServiceGetListRecord"
             R_ServiceGetRecord="@StampCode_ServiceGetRecord"
             R_Display="@StampCode_RDisplay"
+            R_BeforeDelete="@StampCode_BeforeDeleteAsync"
             R_ServiceDelete="@StampCode_ServiceDelete"
+            R_AfterDelete="@StampCode_AfterDelete"
             R_AfterAdd="@StampCode_AfterAdd"
             R_Validation="@StampCode_Validation"
-            R_ServiceSave="@StampCode_ServiceSave">
+            R_ServiceSave="@StampCode_ServiceSave"
+            R_DisableDeleteConfirmation="true">
         <R_GridColumns>
             <R_GridTextColumn FieldName="@nameof(PMM07500GridDTO.CSTAMP_CODE)"
                               HeaderText="@(_localizer["_column_stamp_code"])"
@@ -88,20 +93,23 @@
     </R_Grid>
 </R_StackLayout>
 
+@* selected stamp rate *@
 <R_StackLayout Row Class="pt-1">
-    <R_ItemLayout col="2">
+    <R_ItemLayout col="1">
         <R_Label Style="height:15px">@_localizer["_label_stamp_rate"]</R_Label>
     </R_ItemLayout>
     <R_ItemLayout col="2">
         <R_TextBox Style="height:15px" Enabled="false" @bind-Value="@_stampCodeViewModel.StampRate.CSTAMP_CODE"></R_TextBox>
     </R_ItemLayout>
-    <R_ItemLayout col="4">
+    <R_ItemLayout col="3">
         <R_TextBox Style="height:15px" Enabled="false" @bind-Value="@_stampCodeViewModel.StampRate.CDESCRIPTION"></R_TextBox>
     </R_ItemLayout>
     <R_ItemLayout col="1">
         <R_TextBox Style="height:15px" Enabled="false" @bind-Value="@_stampCodeViewModel.StampRate.CCURRENCY_CODE"></R_TextBox>
     </R_ItemLayout>
 </R_StackLayout>
+
+@* grid stampdate *@
 <R_StackLayout>
     <R_Grid DataSource="@_stampDateViewModel.StampDateList"
             @ref="@_gridStampDate"
@@ -114,12 +122,14 @@
             R_ServiceGetListRecord="@StampDate_ServiceGetListRecord"
             R_ServiceGetRecord="@StampDate_ServiceGetRecord"
             R_Display="@StampDate_RDisplayAsync"
+            R_BeforeDelete="@StampDate_BeforeDeleteAsync"
             R_ServiceDelete="@StampDate_ServiceDelete"
+            R_AfterDelete="@StampDate_AfterDelete"
             R_AfterAdd="@StampDate_AfterAdd"
             R_Validation="@StampDate_Validation"
             R_ServiceSave="@StampDate_ServiceSave"
-            R_AfterDelete="@StampDate_AfterDeleteAsync"
-            Enabled="@_enableGridStampDate">
+            Enabled="@_enableGridStampDate"
+            R_DisableDeleteConfirmation>
         <R_GridColumns>
             <R_GridDatePickerColumn FieldName="@nameof(PMM07510GridDTO.DDATE)"
                                     HeaderText="@(_localizer["_column_date"])"
@@ -147,16 +157,20 @@
         </R_GridColumns>
     </R_Grid>
 </R_StackLayout>
+
+@* selected date *@
 <R_StackLayout Row>
-    <R_ItemLayout col="2">
+    <R_ItemLayout col="1">
         <R_Label Style="height:15px">@_localizer["_label_effective_date"]</R_Label>
     </R_ItemLayout>
-    <R_ItemLayout col="4">
+    <R_ItemLayout col="2">
         <R_DatePicker Style="height:15px"
                       @bind-Value="@_stampDateViewModel.EffectiveDateDisplay"
                       Enabled="false" />
     </R_ItemLayout>
 </R_StackLayout>
+
+@* grid stampamount *@
 <R_StackLayout>
     <R_Grid DataSource="@_stampAmountViewModel.StampAmountList"
             @ref="@_gridStampAmount"
@@ -169,11 +183,13 @@
             R_ServiceGetListRecord="@StampAmount_ServiceGetListRecord"
             R_ServiceGetRecord="@StampAmount_ServiceGetRecord"
             R_Display="@StampAmount_RDisplay"
+            R_BeforeDelete="@StampAmount_BeforeDeleteAsync"
             R_ServiceDelete="@StampAmount_ServiceDelete"
             R_AfterAdd="@StampAmount_AfterAdd"
             R_Validation="@StampAmount_Validation"
             R_ServiceSave="@StampAmount_ServiceSave"
-            Enabled="@_enableGridStampAmount">
+            Enabled="@_enableGridStampAmount"
+            R_DisableDeleteConfirmation>
         <R_GridColumns>
             <R_GridNumericColumn FieldName="@nameof(PMM07520GridDTO.NMIN_AMOUNT)"
                                  HeaderText="@(_localizer["_column_min_amount"])"
@@ -215,6 +231,8 @@
         </R_GridColumns>
     </R_Grid>
 </R_StackLayout>
+
+
 <R_ConductorGrid @ref="@_conStampCode"
                  R_SetOther="@StampCode_SetOther"
                  R_IsHeader />

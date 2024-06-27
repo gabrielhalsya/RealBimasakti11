@@ -1,22 +1,22 @@
-﻿using Microsoft.AspNetCore.Components;
+﻿using BlazorClientHelper;
+using Microsoft.AspNetCore.Components;
 using PMM07500COMMON;
 using PMM07500COMMON.DTO_s.stamp_amount;
 using PMM07500COMMON.DTO_s.stamp_code;
 using PMM07500COMMON.DTO_s.stamp_date;
-using PMM07500MODEL.View_Models;
 using PMM07500FrontResources;
+using PMM07500MODEL.View_Models;
 using R_BlazorFrontEnd.Controls;
 using R_BlazorFrontEnd.Controls.DataControls;
+using R_BlazorFrontEnd.Controls.Enums;
 using R_BlazorFrontEnd.Controls.Events;
+using R_BlazorFrontEnd.Controls.MessageBox;
 using R_BlazorFrontEnd.Exceptions;
 using R_BlazorFrontEnd.Helpers;
 using R_BlazorFrontEnd.Interfaces;
 using R_CommonFrontBackAPI;
-using System;
-using System.Globalization;
-using R_BlazorFrontEnd.Controls.Enums;
 using R_LockingFront;
-using BlazorClientHelper;
+using System.Globalization;
 
 namespace PMM07500FRONT
 {
@@ -208,6 +208,23 @@ namespace PMM07500FRONT
             R_DisplayException(loEx);
         }
 
+        private async Task StampCode_BeforeDeleteAsync(R_BeforeDeleteEventArgs eventArgs)
+        {
+            var loEx = new R_Exception();
+            try
+            {
+                if (await R_MessageBox.Show(_localizer["_msg_title_confirmation"], _localizer["_confirm_delete_stampcode"], R_BlazorFrontEnd.Controls.MessageBox.R_eMessageBoxButtonType.YesNo) == R_eMessageBoxResult.No)
+                {
+                    eventArgs.Cancel = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                loEx.Add(ex);
+            }
+            R_DisplayException(loEx);
+        }
+
         private async Task StampCode_ServiceDelete(R_ServiceDeleteEventArgs eventArgs)
         {
             var loEx = new R_Exception();
@@ -222,6 +239,21 @@ namespace PMM07500FRONT
             }
             R_DisplayException(loEx);
 
+        }
+
+        private void StampCode_AfterDelete()
+        {
+            R_Exception loEx = new();
+            try
+            {
+                _stampCodeViewModel.StampRate = new();
+                _stampDateViewModel.StampDateList = new();
+            }
+            catch (Exception ex)
+            {
+                loEx.Add(ex);
+            }
+            R_DisplayException(loEx);
         }
 
         private void StampCode_AfterAdd(R_AfterAddEventArgs eventArgs)
@@ -258,7 +290,7 @@ namespace PMM07500FRONT
                     eventArgs.Cancel = true;
                 }
 
-                if (string.IsNullOrWhiteSpace(loData.CCURRENCY_CODE) || string.IsNullOrEmpty(loData.CCURRENCY_CODE))
+                if (string.IsNullOrWhiteSpace(loData.CCURRENCY_DISPLAY))
                 {
                     loEx.Add("", _localizer["_val_stampcode3"]);
                     eventArgs.Cancel = true;
@@ -386,19 +418,20 @@ namespace PMM07500FRONT
             R_DisplayException(loEx);
         }
 
-        private async Task StampDate_ServiceDelete(R_ServiceDeleteEventArgs eventArgs)
+        private void StampDate_SetOther(R_SetEventArgs eventArgs)
         {
             var loEx = new R_Exception();
             try
             {
-                await _stampDateViewModel.DeleteStampDateAsync(R_FrontUtility.ConvertObjectToObject<PMM07510GridDTO>(eventArgs.Data));
+                _enableGridStampCode = eventArgs.Enable;
+                _enableGridStampAmount = eventArgs.Enable;
+                _enableComboboxProperty = eventArgs.Enable;
             }
             catch (Exception ex)
             {
                 loEx.Add(ex);
             }
             R_DisplayException(loEx);
-
         }
 
         private void StampDate_AfterAdd(R_AfterAddEventArgs eventArgs)
@@ -455,17 +488,15 @@ namespace PMM07500FRONT
 
         }
 
-        private void StampDate_SetOther(R_SetEventArgs eventArgs)
+        private async Task StampDate_BeforeDeleteAsync(R_BeforeDeleteEventArgs eventArgs)
         {
             var loEx = new R_Exception();
             try
             {
-                _enableGridStampCode = eventArgs.Enable;
-                _enableGridStampAmount = eventArgs.Enable;
-                _enableComboboxProperty = eventArgs.Enable;
-                //_gridStampCode.Enabled = eventArgs.Enable;
-                //_gridStampAmount.Enabled = eventArgs.Enable;
-                //_comboboxProperty.Enabled = eventArgs.Enable;
+                if (await R_MessageBox.Show(_localizer["_msg_title_confirmation"], _localizer["_confirm_delete_stampdate"], R_BlazorFrontEnd.Controls.MessageBox.R_eMessageBoxButtonType.YesNo) == R_eMessageBoxResult.No)
+                {
+                    eventArgs.Cancel = true;
+                }
             }
             catch (Exception ex)
             {
@@ -474,13 +505,28 @@ namespace PMM07500FRONT
             R_DisplayException(loEx);
         }
 
-        private async Task StampDate_AfterDeleteAsync()
+        private async Task StampDate_ServiceDelete(R_ServiceDeleteEventArgs eventArgs)
+        {
+            var loEx = new R_Exception();
+            try
+            {
+                await _stampDateViewModel.DeleteStampDateAsync(R_FrontUtility.ConvertObjectToObject<PMM07510GridDTO>(eventArgs.Data));
+            }
+            catch (Exception ex)
+            {
+                loEx.Add(ex);
+            }
+            R_DisplayException(loEx);
+
+        }
+
+        private void StampDate_AfterDelete()
         {
             R_Exception loEx = new();
             try
             {
-                await _gridStampAmount.R_RefreshGrid(null);
                 _stampDateViewModel.EffectiveDateDisplay = null;
+                _stampAmountViewModel.StampAmountList = new();
             }
             catch (Exception ex)
             {
@@ -534,6 +580,23 @@ namespace PMM07500FRONT
                 if (eventArgs.ConductorMode == R_BlazorFrontEnd.Enums.R_eConductorMode.Normal)
                 {
                     var loParam = R_FrontUtility.ConvertObjectToObject<PMM07520GridDTO>(eventArgs.Data);
+                }
+            }
+            catch (Exception ex)
+            {
+                loEx.Add(ex);
+            }
+            R_DisplayException(loEx);
+        }
+
+        private async Task StampAmount_BeforeDeleteAsync(R_BeforeDeleteEventArgs eventArgs)
+        {
+            var loEx = new R_Exception();
+            try
+            {
+                if (await R_MessageBox.Show(_localizer["_msg_title_confirmation"], _localizer["_confirm_delete_stampamount"], R_BlazorFrontEnd.Controls.MessageBox.R_eMessageBoxButtonType.YesNo) == R_eMessageBoxResult.No)
+                {
+                    eventArgs.Cancel = true;
                 }
             }
             catch (Exception ex)

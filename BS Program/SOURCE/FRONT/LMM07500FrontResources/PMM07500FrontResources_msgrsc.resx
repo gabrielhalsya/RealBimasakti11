@@ -150,6 +150,15 @@
   <data name="_column_update_by" xml:space="preserve">
     <value>Updated By</value>
   </data>
+  <data name="_confirm_delete_stampamount" xml:space="preserve">
+    <value>Delete Selected Stamp Amount?</value>
+  </data>
+  <data name="_confirm_delete_stampcode" xml:space="preserve">
+    <value>Delete Selected Stamp Code?</value>
+  </data>
+  <data name="_confirm_delete_stampdate" xml:space="preserve">
+    <value>Delete Selected Effective?</value>
+  </data>
   <data name="_label_effective_date" xml:space="preserve">
     <value>Effective Date</value>
   </data>
@@ -158,6 +167,9 @@
   </data>
   <data name="_label_stamp_rate" xml:space="preserve">
     <value>Stamp Rate</value>
+  </data>
+  <data name="_msg_title_confirmation" xml:space="preserve">
+    <value>Confirmation</value>
   </data>
   <data name="_val_stampamount1" xml:space="preserve">
     <value>Minimum Amount may not be 0!</value>
