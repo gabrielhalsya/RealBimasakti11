@@ -274,7 +274,7 @@ namespace GSM04000Back
             try
             {
                 R_Db loDb = new R_Db();
-                DbConnection loConn = loDb.GetConnection("R_DefaultConnectionString");
+                DbConnection loConn = loDb.GetConnection("");
                 string lcQuery = $"SELECT TOP 1 1 FROM GSM_DEPT_USER (NOLOCK) WHERE CCOMPANY_ID = @CCOMPANY_ID AND CDEPT_CODE = @CDEPT_CODE";
                 DbCommand loCmd = loDb.GetCommand();
                 loCmd.CommandText = lcQuery;

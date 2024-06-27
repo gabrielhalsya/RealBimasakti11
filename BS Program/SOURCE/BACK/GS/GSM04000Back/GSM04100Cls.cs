@@ -38,7 +38,7 @@ namespace GSM04000Back
             try
             {
                 loDB = new R_Db();
-                loConn = loDB.GetConnection("R_DefaultConnectionString");
+                loConn = loDB.GetConnection();
                 loCmd = loDB.GetCommand();
 
                 lcQuery = "RSP_GS_MAINTAIN_DEPT_USER";
@@ -74,7 +74,7 @@ namespace GSM04000Back
             try
             {
                 loDB = new R_Db();
-                loConn = loDB.GetConnection("R_DefaultConnectionString");
+                loConn = loDB.GetConnection();
                 loCmd = loDB.GetCommand();
 
                 lcQuery = "RSP_GS_GET_DEPT_USER_DETAIL";
@@ -164,7 +164,7 @@ namespace GSM04000Back
             try
             {
                 loDB = new R_Db();
-                loConn = loDB.GetConnection("R_DefaultConnectionString");
+                loConn = loDB.GetConnection();
                 loCmd = loDB.GetCommand();
 
                 lcQuery = "RSP_GS_GET_DEPT_USER_LIST";
