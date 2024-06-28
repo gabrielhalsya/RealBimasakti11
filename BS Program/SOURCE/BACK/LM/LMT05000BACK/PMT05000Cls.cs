@@ -37,7 +37,7 @@ namespace PMT05000BACK
                 var loConn = loDb.GetConnection();
                 var loCmd = loDb.GetCommand();
 
-                var lcQuery = "RSP_LM_GET_AGREEMENT_CHARGES_DISC_LIST";
+                var lcQuery = "RSP_PM_GET_AGREEMENT_CHARGES_DISC_LIST";
                 loCmd.CommandText = lcQuery;
                 loCmd.CommandType = CommandType.StoredProcedure;
 
@@ -90,7 +90,7 @@ namespace PMT05000BACK
                     loCmd = loDb.GetCommand();
 
                     //create temptable
-                    lcQuery = @"CREATE TABLE #LEASE_PRICING
+                    lcQuery = @"CREATE TABLE #AGREEMENT_CHARGES_DISCOUNT
                         (	
 	                      CCOMPANY_ID VARCHAR(8)
                         , CPROPERTY_ID VARCHAR(20)
@@ -99,25 +99,25 @@ namespace PMT05000BACK
                         , CFLOOR_ID VARCHAR(30)
                         , CUNIT_ID VARCHAR(30)
                         , CTENANT_ID VARCHAR(30)
-                        , NCHARGES_AMOUNT NUMERIC(18,2)
-                        , NCHARGE_DISCOUNT NUMERIC(18,2)
-                        , NNET_CHARGE VARCHAR(30)
+                        , NCHARGES_AMOUNT NUMERIC(16,2)
+                        , NCHARGE_DISCOUNT NUMERIC(16,2)
+                        , NNET_CHARGE NUMERIC(16,2)
                         , CAGREEMENT_NO VARCHAR(30)
                         , CSTART_DATE VARCHAR(30)
                         , CEND_DATE VARCHAR(30)
                         , CEXISTING_DISCOUNT_CODE VARCHAR(30)
-                        , NEXISTING_CHARGE_DISCOUNT VARCHAR(30)
+                        , NEXISTING_CHARGE_DISCOUNT NUMERIC(16,2)
                         )";
                     ShowLogDebug(lcQuery, loCmd.Parameters);//log create
                     loDb.SqlExecNonQuery(lcQuery, loConn, false);
 
                     //logger
-                    _logger.LogDebug($"INSERT INTO #LEASE_PRICING {loDetaildata}");//log insert
+                    _logger.LogDebug($"INSERT INTO #AGREEMENT_CHARGES_DISCOUNT {loDetaildata}");//log insert
                     //copybulk
                     loDb.R_BulkInsert<AgreementChrgDiscDetailBulkDTO>((SqlConnection)loConn, "#LEASE_PRICING", loDetaildata);
 
                     //exec sp
-                    lcQuery = "RSP_LM_PROCESS_AGREEMENT_CHARGE_DISCOUNT";
+                    lcQuery = "RSP_PM_PROCESS_AGREEMENT_CHARGE_DISCOUNT";
                     loCmd.CommandText = lcQuery;
                     loCmd.CommandType = CommandType.StoredProcedure;
 

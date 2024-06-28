@@ -1,4 +1,4 @@
-﻿delete from sat_locking where cuser_id = 'TJ' 
+﻿delete from sat_locking where cuser_id = 'ghc' 
 
 --get property 
 EXEC RSP_GS_GET_PROPERTY_LIST 'rcd','ghc'

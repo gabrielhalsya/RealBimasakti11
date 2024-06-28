@@ -124,6 +124,16 @@ namespace PMT05000MODEL.ViewModel_s
             R_Exception loEx = new R_Exception();
             try
             {
+                R_FrontContext.R_SetStreamingContext(ContextConstantPMT05000.CPROPERTY_ID, _AgreementChrgDiscProcessParam.CPROPERTY_ID);
+                R_FrontContext.R_SetStreamingContext(ContextConstantPMT05000.CCHARGES_TYPE, _AgreementChrgDiscProcessParam.CCHARGES_TYPE);
+                R_FrontContext.R_SetStreamingContext(ContextConstantPMT05000.CCHARGES_ID, _AgreementChrgDiscProcessParam.CCHARGES_ID);
+                R_FrontContext.R_SetStreamingContext(ContextConstantPMT05000.CDISCOUNT_CODE, _AgreementChrgDiscProcessParam.CDISCOUNT_CODE);
+                R_FrontContext.R_SetStreamingContext(ContextConstantPMT05000.CDISCOUNT_TYPE, _AgreementChrgDiscProcessParam.CDISCOUNT_TYPE);
+                R_FrontContext.R_SetStreamingContext(ContextConstantPMT05000.CINV_PRD, _yearPeriod.ToString()+_monthPeriod);
+                R_FrontContext.R_SetStreamingContext(ContextConstantPMT05000.CDISCOUNT_TYPE, _AgreementChrgDiscProcessParam.LALL_BUILDING);
+                R_FrontContext.R_SetStreamingContext(ContextConstantPMT05000.CBUILDING_ID, _AgreementChrgDiscProcessParam.CBUILDING_ID);
+                R_FrontContext.R_SetStreamingContext(ContextConstantPMT05000.CBUILDING_ID, _AgreementChrgDiscProcessParam.CAGREEMENT_TYPE);
+
                 var loRtn = await _model.GetAgreementChargesDiscountListAsync();
                 _AgreementChrgDiscDetailList = new ObservableCollection<AgreementChrgDiscDetailDTO>(loRtn);
             }

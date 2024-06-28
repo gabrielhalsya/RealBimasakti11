@@ -3,7 +3,6 @@ using Lookup_GSFRONT;
 using Lookup_GSModel.ViewModel;
 using Lookup_PMCOMMON.DTOs;
 using Lookup_PMFRONT;
-using Lookup_PMModel;
 using Lookup_PMModel.ViewModel.LML00200;
 using Microsoft.AspNetCore.Components;
 using PMT05000COMMON.DTO_s;
@@ -18,12 +17,7 @@ using R_BlazorFrontEnd.Enums;
 using R_BlazorFrontEnd.Exceptions;
 using R_BlazorFrontEnd.Helpers;
 using R_BlazorFrontEnd.Interfaces;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PMT05000FRONT
 {
@@ -31,7 +25,7 @@ namespace PMT05000FRONT
     {
         private PMT05000ViewModel _agreementChrgDiscViewModel = new PMT05000ViewModel();
 
-        private R_Conductor _conAgrChrgDisc;
+        private R_ConductorGrid _conAgrChrgDisc;
 
         private R_Grid<AgreementChrgDiscDetailDTO> _GridAgrChrgDisc;
 
@@ -103,12 +97,13 @@ namespace PMT05000FRONT
             eventArgs.TargetPageType = typeof(PMT05001);
         }
 
-        private void AgrChrgDiscList_GetList(R_ServiceGetListRecordEventArgs eventArgs)
+        private async Task AgrChrgDiscList_GetList(R_ServiceGetListRecordEventArgs eventArgs)
         {
             R_Exception loEx = new R_Exception();
             try
             {
-
+                await _agreementChrgDiscViewModel.GetAgreementChrgDiscListAsync();
+                eventArgs.ListEntityResult= _agreementChrgDiscViewModel._AgreementChrgDiscDetailList;
             }
             catch (Exception ex)
             {
@@ -117,12 +112,12 @@ namespace PMT05000FRONT
             loEx.ThrowExceptionIfErrors();
         }
 
-        private void BtnRefresh_Click()
+        private void AgrChrgDiscList_GetRecord(R_ServiceGetRecordEventArgs eventArgs)
         {
             R_Exception loEx = new R_Exception();
             try
             {
-
+                eventArgs.Result = eventArgs.Data as AgreementChrgDiscDetailDTO;
             }
             catch (Exception ex)
             {
@@ -131,12 +126,26 @@ namespace PMT05000FRONT
             loEx.ThrowExceptionIfErrors();
         }
 
-        private void BtnProcess_Click()
+        private async Task BtnRefresh_Click()
         {
             R_Exception loEx = new R_Exception();
             try
             {
+                await _agreementChrgDiscViewModel.GetAgreementChrgDiscListAsync();
+            }
+            catch (Exception ex)
+            {
+                loEx.Add(ex);
+            }
+            loEx.ThrowExceptionIfErrors();
+        }
 
+        private async Task BtnProcess_ClickAsync()
+        {
+            R_Exception loEx = new R_Exception();
+            try
+            {
+                await _agreementChrgDiscViewModel.ProcessAgreementChrgDiscAsync();
             }
             catch (Exception ex)
             {
@@ -163,7 +172,7 @@ namespace PMT05000FRONT
             }
             else
             {
-                _agreementChrgDiscViewModel._AgreementChrgDiscListParam.CCHARGES_ID = loTempResult.CCHARGES_ID;
+                _agreementChrgDiscViewModel._AgreementChrgDiscProcessParam.CCHARGES_ID = loTempResult.CCHARGES_ID;
             }
         }
 
@@ -223,7 +232,7 @@ namespace PMT05000FRONT
             }
             else
             {
-                _agreementChrgDiscViewModel._AgreementChrgDiscListParam.CCHARGES_ID = loTempResult.CCHARGES_ID;
+                _agreementChrgDiscViewModel._AgreementChrgDiscProcessParam.CCHARGES_ID = loTempResult.CCHARGES_ID;
             }
         }
 
