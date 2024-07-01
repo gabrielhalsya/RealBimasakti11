@@ -18,7 +18,7 @@ namespace PMT05000COMMON
         public const string CINV_PERIOD_MONTH="CINV_PERIOD_MONTH";
         public const string LALL_BUILDING="LALL_BUILDING";
         public const string CBUILDING_ID="CBUILDING_ID";
-        public const string CAGREEMENT_TYPE="CAGREEMENT_TYPE";
+        public const string CAGREEMENNT_TYPE = "CAGREEMENNT_TYPE";
         public const string CACTION="CACTION";
         public const string CUSER_ID = "CUSER_ID";
         public const string CDISCOUNT_TYPE = "CDISCOUNT_TYPE";
@@ -29,9 +29,9 @@ namespace PMT05000COMMON
         public const string CSTART_DATE = "CSTART_DATE";
         public const string CEND_DATE = "CEND_DATE";
 
-        public const string CLASS_APPLICATION = "CLASS_APPLICATION";
-        public const string CLASS_ID = "CLASS_ID";
-        public const string REC_ID_LIST = "REC_ID_LIST";
+        public const string CLASS_APPLICATION = "BIMASAKTI";
+        public const string CLASS_ID = "_BS_UNIT_CHARGES_TYPE";
+        public const string REC_ID_LIST = "";
 
     }
 }

@@ -1,9 +1,11 @@
-﻿using Lookup_GSCOMMON.DTOs;
+﻿using BlazorClientHelper;
+using Lookup_GSCOMMON.DTOs;
 using Lookup_GSFRONT;
 using Lookup_GSModel.ViewModel;
 using Lookup_PMCOMMON.DTOs;
 using Lookup_PMFRONT;
 using Lookup_PMModel.ViewModel.LML00200;
+using Lookup_PMModel.ViewModel.LML00700;
 using Microsoft.AspNetCore.Components;
 using PMT05000COMMON.DTO_s;
 using PMT05000FrontResources;
@@ -32,6 +34,8 @@ namespace PMT05000FRONT
         private R_TabStrip _tabStripAgrChrgDisc; //ref Tabstrip
 
         private R_TabPage _tabUndoAgrChrgDisc; //tabpageNextPricing
+
+        [Inject] IClientHelper _clientHelper { get; set; }
 
         [Inject] private R_ILocalizer<Resources_Dummy_Class> _localizer { get; set; }
 
@@ -103,7 +107,7 @@ namespace PMT05000FRONT
             try
             {
                 await _agreementChrgDiscViewModel.GetAgreementChrgDiscListAsync();
-                eventArgs.ListEntityResult= _agreementChrgDiscViewModel._AgreementChrgDiscDetailList;
+                eventArgs.ListEntityResult = _agreementChrgDiscViewModel._AgreementChrgDiscDetailList;
             }
             catch (Exception ex)
             {
@@ -145,7 +149,8 @@ namespace PMT05000FRONT
             R_Exception loEx = new R_Exception();
             try
             {
-                await _agreementChrgDiscViewModel.ProcessAgreementChrgDiscAsync();
+
+                await _agreementChrgDiscViewModel.ProcessAgreementChrgDiscAsync("PROCESS");
             }
             catch (Exception ex)
             {
@@ -158,7 +163,12 @@ namespace PMT05000FRONT
 
         private void BeforeOpen_lookupUnitCharges(R_BeforeOpenLookupEventArgs eventArgs)
         {
-            eventArgs.Parameter = new LML00200ParameterDTO();
+            eventArgs.Parameter = new LML00200ParameterDTO()
+            {
+                CPROPERTY_ID = _agreementChrgDiscViewModel._AgreementChrgDiscProcessParam.CPROPERTY_ID,
+                CCOMPANY_ID = _clientHelper.CompanyId,
+                CUSER_ID = _clientHelper.UserId,
+            };
             eventArgs.TargetPageType = typeof(LML00200);
         }
 
@@ -186,11 +196,13 @@ namespace PMT05000FRONT
                 {
 
                     LookupLML00200ViewModel loLookupViewModel = new(); //use GSL's model
-                    var loParam = new LML00200ParameterDTO // use match param as GSL's dto, send as type in search texbox
+                    var loResult = await loLookupViewModel.GetUnitCharges(new LML00200ParameterDTO // use match param as GSL's dto, send as type in search texbox
                     {
+                        CPROPERTY_ID = _agreementChrgDiscViewModel._AgreementChrgDiscProcessParam.CPROPERTY_ID,
+                        CCOMPANY_ID = _clientHelper.CompanyId,
+                        CUSER_ID = _clientHelper.UserId,
                         CSEARCH_TEXT = _agreementChrgDiscViewModel._AgreementChrgDiscProcessParam.CCHARGES_ID, // property that bindded to search textbox
-                    };
-                    var loResult = await loLookupViewModel.GetUnitCharges(loParam); //retrive single record
+                    }); //retrive single record
 
                     //show result & show name/related another fields
                     if (loResult == null)
@@ -218,13 +230,18 @@ namespace PMT05000FRONT
 
         private void BeforeOpen_lookupDiscount(R_BeforeOpenLookupEventArgs eventArgs)
         {
-            eventArgs.Parameter = new LML00200ParameterDTO();
-            eventArgs.TargetPageType = typeof(LML00200);
+            eventArgs.Parameter = new LML00700ParameterDTO()
+            {
+                CPROPERTY_ID = _agreementChrgDiscViewModel._AgreementChrgDiscProcessParam.CPROPERTY_ID,
+                CCOMPANY_ID = _clientHelper.CompanyId,
+                CUSER_ID = _clientHelper.UserId,
+            };
+            eventArgs.TargetPageType = typeof(LML00700);
         }
 
         private async Task AfterOpen_lookupDiscountAsync(R_AfterOpenLookupEventArgs eventArgs)
         {
-            var loTempResult = (LML00200DTO)eventArgs.Result;
+            var loTempResult = (LML00700DTO)eventArgs.Result;
             if (loTempResult == null)
             {
                 var loValidate = await R_MessageBox.Show("", _localizer["_validationDeptFromResult"], R_eMessageBoxButtonType.OK);
@@ -232,7 +249,8 @@ namespace PMT05000FRONT
             }
             else
             {
-                _agreementChrgDiscViewModel._AgreementChrgDiscProcessParam.CCHARGES_ID = loTempResult.CCHARGES_ID;
+                _agreementChrgDiscViewModel._AgreementChrgDiscProcessParam.CDISCOUNT_CODE = loTempResult.CDISCOUNT_CODE;
+                _agreementChrgDiscViewModel._AgreementChrgDiscProcessParam.CDISCOUNT_TYPE = loTempResult.CDISCOUNT_TYPE;
             }
         }
 
@@ -242,15 +260,17 @@ namespace PMT05000FRONT
 
             try
             {
-                if (!string.IsNullOrWhiteSpace(_agreementChrgDiscViewModel._AgreementChrgDiscProcessParam.CCHARGES_ID))
+                if (!string.IsNullOrWhiteSpace(_agreementChrgDiscViewModel._AgreementChrgDiscProcessParam.CDISCOUNT_CODE))
                 {
 
-                    LookupLML00200ViewModel loLookupViewModel = new(); //use GSL's model
-                    var loParam = new LML00200ParameterDTO // use match param as GSL's dto, send as type in search texbox
+                    LookupLML00700ViewModel loLookupViewModel = new(); //use GSL's model
+                    var loResult = await loLookupViewModel.GetDiscount(new LML00700ParameterDTO // use match param as GSL's dto, send as type in search texbox
                     {
+                        CPROPERTY_ID = _agreementChrgDiscViewModel._AgreementChrgDiscProcessParam.CPROPERTY_ID,
+                        CCOMPANY_ID = _clientHelper.CompanyId,
+                        CUSER_ID = _clientHelper.UserId,
                         CSEARCH_TEXT = _agreementChrgDiscViewModel._AgreementChrgDiscProcessParam.CCHARGES_ID, // property that bindded to search textbox
-                    };
-                    var loResult = await loLookupViewModel.GetUnitCharges(loParam); //retrive single record
+                    }); //retrive single record
 
                     //show result & show name/related another fields
                     if (loResult == null)
@@ -258,12 +278,13 @@ namespace PMT05000FRONT
                         loEx.Add(R_FrontUtility.R_GetError(
                                 typeof(Lookup_PMFrontResources.Resources_Dummy_Class_LookupPM),
                                 "_ErrLookup01"));
-                        _agreementChrgDiscViewModel._AgreementChrgDiscProcessParam.CCHARGES_ID = ""; //kosongin bind textbox name kalo gaada
+                        _agreementChrgDiscViewModel._AgreementChrgDiscProcessParam.CDISCOUNT_CODE = ""; //kosongin bind textbox name kalo gaada
+                        _agreementChrgDiscViewModel._AgreementChrgDiscProcessParam.CDISCOUNT_TYPE = ""; //kosongin bind textbox name kalo gaada
                     }
                     else
                     {
-                        _agreementChrgDiscViewModel._AgreementChrgDiscProcessParam.CCHARGES_ID = loResult.CCHARGES_ID;
-
+                        _agreementChrgDiscViewModel._AgreementChrgDiscProcessParam.CDISCOUNT_CODE = loResult.CDISCOUNT_CODE;
+                        _agreementChrgDiscViewModel._AgreementChrgDiscProcessParam.CDISCOUNT_TYPE = loResult.CDISCOUNT_TYPE;
                     }
                 }
             }
@@ -279,9 +300,13 @@ namespace PMT05000FRONT
         private void BeforeOpen_lookupBuilding(R_BeforeOpenLookupEventArgs eventArgs)
         {
             eventArgs.Parameter = new GSL02200ParameterDTO()
-            { CPROPERTY_ID = _agreementChrgDiscViewModel._AgreementChrgDiscProcessParam.CPROPERTY_ID };
+            {
+                CPROPERTY_ID = _agreementChrgDiscViewModel._AgreementChrgDiscProcessParam.CPROPERTY_ID,
+                CSEARCH_TEXT = ""
+            };
             eventArgs.TargetPageType = typeof(GSL02200);
         }
+
         private async Task AfterOpen_lookupBuildingAsync(R_AfterOpenLookupEventArgs eventArgs)
         {
             var loTempResult = (GSL02200DTO)eventArgs.Result;
@@ -291,6 +316,7 @@ namespace PMT05000FRONT
                 _agreementChrgDiscViewModel._AgreementChrgDiscProcessParam.CBUILDING_NAME = loTempResult.CBUILDING_NAME;
             }
         }
+
         private async Task OnLostFocus_LookupBuilding()
         {
             var loEx = new R_Exception();

@@ -9,6 +9,8 @@ using R_BlazorFrontEnd.Interfaces;
 using PMT05000FrontResources;
 using System.Linq;
 using R_BlazorFrontEnd;
+using System.Globalization;
+using System.Security.Cryptography;
 
 namespace PMT05000MODEL.ViewModel_s
 {
@@ -55,8 +57,16 @@ namespace PMT05000MODEL.ViewModel_s
 
                 //set default
                 _AgreementChrgDiscProcessParam.CPROPERTY_ID = _PropertyList.Count > 0 ? _PropertyList.FirstOrDefault().CPROPERTY_ID : "";
+                _AgreementChrgDiscProcessParam.CCHARGES_ID = _ChargeTypeList.Count > 0 ? _ChargeTypeList.FirstOrDefault().CCODE : "";
+                _monthPeriod = _MonthPeriodList.Count > 0 ? DateTime.Now.ToString("MM") : "";
                 _AgreementChrgDiscProcessParam.CAGREEMENT_TYPE = _AgreementTypeList.FirstOrDefault().CAGREEMENT_TYPE;
                 _AgreementChrgDiscProcessParam.LALL_BUILDING = true;
+                _AgreementChrgDiscProcessParam.CBUILDING_ID = "";
+                _AgreementChrgDiscProcessParam.CBUILDING_NAME = "";
+                _AgreementChrgDiscProcessParam.CCHARGES_TYPE = "";
+                _AgreementChrgDiscProcessParam.CCHARGES_ID = "";
+                _AgreementChrgDiscProcessParam.CDISCOUNT_CODE = "";
+                _AgreementChrgDiscProcessParam.CDISCOUNT_TYPE = "";
 
             }
             catch (Exception ex)
@@ -129,12 +139,20 @@ namespace PMT05000MODEL.ViewModel_s
                 R_FrontContext.R_SetStreamingContext(ContextConstantPMT05000.CCHARGES_ID, _AgreementChrgDiscProcessParam.CCHARGES_ID);
                 R_FrontContext.R_SetStreamingContext(ContextConstantPMT05000.CDISCOUNT_CODE, _AgreementChrgDiscProcessParam.CDISCOUNT_CODE);
                 R_FrontContext.R_SetStreamingContext(ContextConstantPMT05000.CDISCOUNT_TYPE, _AgreementChrgDiscProcessParam.CDISCOUNT_TYPE);
-                R_FrontContext.R_SetStreamingContext(ContextConstantPMT05000.CINV_PRD, _yearPeriod.ToString()+_monthPeriod);
-                R_FrontContext.R_SetStreamingContext(ContextConstantPMT05000.CDISCOUNT_TYPE, _AgreementChrgDiscProcessParam.LALL_BUILDING);
+                R_FrontContext.R_SetStreamingContext(ContextConstantPMT05000.CINV_PRD, _yearPeriod.ToString() + _monthPeriod);
+                R_FrontContext.R_SetStreamingContext(ContextConstantPMT05000.LALL_BUILDING, _AgreementChrgDiscProcessParam.LALL_BUILDING);
                 R_FrontContext.R_SetStreamingContext(ContextConstantPMT05000.CBUILDING_ID, _AgreementChrgDiscProcessParam.CBUILDING_ID);
-                R_FrontContext.R_SetStreamingContext(ContextConstantPMT05000.CBUILDING_ID, _AgreementChrgDiscProcessParam.CAGREEMENT_TYPE);
+                R_FrontContext.R_SetStreamingContext(ContextConstantPMT05000.CAGREEMENNT_TYPE, _AgreementChrgDiscProcessParam.CAGREEMENT_TYPE);
 
                 var loRtn = await _model.GetAgreementChargesDiscountListAsync();
+
+                foreach (var loData in loRtn)
+                {
+                    loData.DSTART_DATE = DateTime.TryParseExact(loData.CSTART_DATE, "yyyyMMdd", CultureInfo.InvariantCulture, DateTimeStyles.AssumeUniversal, out var ldStartDate) ? ldStartDate : null as DateTime?;
+                    loData.DEND_DATE = DateTime.TryParseExact(loData.CEND_DATE, "yyyyMMdd", CultureInfo.InvariantCulture, DateTimeStyles.AssumeUniversal, out var ldEndDate) ? ldEndDate : null as DateTime?;
+                    loData.CALREADY_HAVE_DISCOUNT = loData.LALREADY_HAVE_DISCOUNT ? "*" : "";
+                    loData.CFLOOR_DISPLAY = $"({loData.CBUILDING_NAME ?? ""}){loData.CFLOOR_NAME ?? ""}";
+                }
                 _AgreementChrgDiscDetailList = new ObservableCollection<AgreementChrgDiscDetailDTO>(loRtn);
             }
             catch (Exception ex)
@@ -144,12 +162,15 @@ namespace PMT05000MODEL.ViewModel_s
             loEx.ThrowExceptionIfErrors();
         }
 
-        public async Task ProcessAgreementChrgDiscAsync()
+        public async Task ProcessAgreementChrgDiscAsync(string pcAction)
         {
             R_Exception loEx = new R_Exception();
             try
             {
-                await _model.ProcessAgreementChargeDiscountAsync(_AgreementChrgDiscProcessParam);
+                _AgreementChrgDiscProcessParam.CACTION = pcAction;
+                _AgreementChrgDiscProcessParam.AgreementChrgDiscDetail = _AgreementChrgDiscDetailList.Where(x => x.LSELECTED).ToList();
+                var loParam = _AgreementChrgDiscProcessParam;
+                await _model.ProcessAgreementChargeDiscountAsync(loParam);
             }
             catch (Exception ex)
             {

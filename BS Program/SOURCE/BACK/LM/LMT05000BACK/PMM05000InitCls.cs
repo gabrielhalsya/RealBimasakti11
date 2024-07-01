@@ -80,7 +80,7 @@ namespace PMT05000BACK
                 loDB.R_AddCommandParameter(loCmd, "@CCOMPANY_ID", DbType.String, int.MaxValue, poParam.CCOMPANY_ID);
                 loDB.R_AddCommandParameter(loCmd, "@CLASS_ID", DbType.String, int.MaxValue, poParam.CLASS_ID);
                 loDB.R_AddCommandParameter(loCmd, "@REC_ID_LIST", DbType.String, int.MaxValue, poParam.REC_ID_LIST);
-                loDB.R_AddCommandParameter(loCmd, "@LANG_ID", DbType.Boolean, int.MaxValue, poParam.LANG_ID);
+                loDB.R_AddCommandParameter(loCmd, "@LANG_ID", DbType.String, int.MaxValue, poParam.LANG_ID);
 
                 ShowLogDebug(lcQuery, loCmd.Parameters);
                 var loRtnTemp = loDB.SqlExecQuery(loConn, loCmd, true);

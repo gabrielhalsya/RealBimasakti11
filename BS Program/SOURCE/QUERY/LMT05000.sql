@@ -2,7 +2,7 @@
 SELECT p.name AS ParameterName, t.name AS ParameterType, p.max_length AS ParameterLength
 FROM sys.parameters AS p
 JOIN sys.types AS t ON t.user_type_id = p.user_type_id
-WHERE object_id = OBJECT_ID('RSP_PM_SAVE_STAMP_RATE')
+WHERE object_id = OBJECT_ID('RSP_PM_GET_AGREEMENT_CHARGES_DISC_LIST')
 
 delete from sat_locking where CUSER_ID= 'ghc' 
 
@@ -45,18 +45,18 @@ CREATE TABLE #AGREEMENT_CHARGES_DISCOUNT
 )
 
 EXEC RSP_PM_PROCESS_AGREEMENT_CHARGE_DISCOUNT 
- 'CCOMPANY_ID'			
-,'CPROPERTY_ID'
-, 'CREF_NO		'
-, 'CREF_DATE			'
-, 'CCHARGES_TYPE		'
-, 'CCHARGES_ID			'
-, 'CDISCOUNT_CODE		'
-, 'CINV_PERIOD_YEAR		'
-, 'CINV_PERIOD_MONTH	'
-, true --LALL_BUILDING
-, 'CBUILDING_ID			'
-, 'CAGREEMENT_TYPE		'
-, 'PROCESS'		---untuk proces undo hanya mengganti bagian ini
-, 'CUSER_ID'
-DROP TABLE #LEASE_PRICING
+ 'rcd'--'CCOMPANY_ID'			
+, 'ASHMD'--'CPROPERTY_ID'
+, 'refno1'-- 'CREF_NO		
+, '202309'-- 'CREF_DATE			
+, 'ct01'--'CCHARGES_TYPE		
+, 'ch01'--'CCHARGES_ID			
+, 'disc01'--'CDISCOUNT_CODE		
+, '2024'--'CINV_PERIOD_YEAR		
+, '09'--'CINV_PERIOD_MONTH	
+, true--true --LALL_BUILDING
+, 'TW-A1'--'CBUILDING_ID			
+, 'cagrrtype'--'CAGREEMENT_TYPE		
+, 'ADD'--'PROCESS		---untuk proces undo hanya mengganti bagian ini
+, 'ghc'--'CUSER_ID
+DROP TABLE #AGREEMENT_CHARGES_DISCOUNT

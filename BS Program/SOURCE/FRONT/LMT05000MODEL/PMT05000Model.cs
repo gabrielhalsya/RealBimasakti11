@@ -14,7 +14,7 @@ namespace PMT05000MODEL
     public class PMT05000Model : R_BusinessObjectServiceClientBase<AgreementChrgDiscParamDTO>, IPMM05000Init
     {
         private const string DEFAULT_HTTP_NAME = "R_DefaultServiceUrlPM";
-        private const string DEFAULT_CHECKPOINT_NAME = "api/PMM05000";
+        private const string DEFAULT_CHECKPOINT_NAME = "api/PMT05000";
         private const string DEFAULT_MODULE = "PM";
         public PMT05000Model(string pcHttpClientName = DEFAULT_HTTP_NAME,
             string pcRequestServiceEndPoint = DEFAULT_CHECKPOINT_NAME,

@@ -18,12 +18,12 @@ namespace PMT05000COMMON.DTO_s
         public string NNET_CHARGE { get; set; }
         public string CREF_NO { get; set; }
         public string CSTART_DATE { get; set; }
-        public DateTime DSTART_DATE { get; set; }
+        public DateTime? DSTART_DATE { get; set; }
         public string CEND_DATE { get; set; }
-        public DateTime DEND_DATE { get; set; }
+        public DateTime? DEND_DATE { get; set; }
         public string CEXISTS_DISCOUNT_CODE { get; set; }
-        public string NEXIST_CHARGE_DISCOUNT { get; set; }
-        public string LALREADY_HAVE_DISCOUNT { get; set; }
+        public decimal NEXIST_CHARGE_DISCOUNT { get; set; }
+        public bool LALREADY_HAVE_DISCOUNT { get; set; }
         public string CALREADY_HAVE_DISCOUNT { get; set; }
         public string ITOTAL_UNIT { get; set; }
     }

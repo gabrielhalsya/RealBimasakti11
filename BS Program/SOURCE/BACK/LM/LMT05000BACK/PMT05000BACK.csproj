@@ -12,6 +12,7 @@
 
 	<ItemGroup>
 		<ProjectReference Include="..\..\..\COMMON\LM\LMT05000COMMON\PMT05000COMMON.csproj" />
+		<ProjectReference Include="..\LM_SPR\RSP_PM_PROCESS_AGREEMENT_CHARGE_DISCOUNTResources\RSP_PM_PROCESS_AGREEMENT_CHARGE_DISCOUNTResources.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>

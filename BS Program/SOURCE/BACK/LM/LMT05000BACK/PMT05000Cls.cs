@@ -14,6 +14,8 @@ namespace PMT05000BACK
 {
     public class PMT05000Cls
     {
+        private RSP_PM_PROCESS_AGREEMENT_CHARGE_DISCOUNTResources.Resources_Dummy_Class _rsp = new RSP_PM_PROCESS_AGREEMENT_CHARGE_DISCOUNTResources.Resources_Dummy_Class();
+
         private LogerPMT05000 _logger;
 
         private readonly ActivitySource _activitySource;
@@ -25,7 +27,7 @@ namespace PMT05000BACK
         }
 
         //method start here
-        public List<AgreementChrgDiscDetailDTO> GetAgreementChargesDiscountList( AgreementChrgDiscListParamDTO poParam)
+        public List<AgreementChrgDiscDetailDTO> GetAgreementChargesDiscountList(AgreementChrgDiscListParamDTO poParam)
         {
             using Activity activity = _activitySource.StartActivity(MethodBase.GetCurrentMethod().Name);
             var loEx = new R_Exception();
@@ -48,9 +50,9 @@ namespace PMT05000BACK
                 loDb.R_AddCommandParameter(loCmd, "@CDISCOUNT_CODE", DbType.String, int.MaxValue, poParam.CDISCOUNT_CODE);
                 loDb.R_AddCommandParameter(loCmd, "@CDISCOUNT_TYPE", DbType.String, int.MaxValue, poParam.CDISCOUNT_TYPE);
                 loDb.R_AddCommandParameter(loCmd, "@CINV_PRD", DbType.String, int.MaxValue, poParam.CINV_PRD);
-                loDb.R_AddCommandParameter(loCmd, "@CINV_PRD", DbType.Boolean, 10, poParam.LALL_BUILDING);
+                loDb.R_AddCommandParameter(loCmd, "@LALL_BUILDING", DbType.Boolean, 2, poParam.LALL_BUILDING);
                 loDb.R_AddCommandParameter(loCmd, "@CBUILDING_ID", DbType.String, int.MaxValue, poParam.CBUILDING_ID);
-                loDb.R_AddCommandParameter(loCmd, "@CAGREEMENT_TYPE", DbType.String, int.MaxValue, poParam.CAGREEMENT_TYPE);
+                loDb.R_AddCommandParameter(loCmd, "@CAGREEMENNT_TYPE", DbType.String, int.MaxValue, poParam.CAGREEMENT_TYPE);
                 loDb.R_AddCommandParameter(loCmd, "@CUSER_ID", DbType.String, int.MaxValue, poParam.CUSER_ID);
 
 
@@ -80,12 +82,11 @@ namespace PMT05000BACK
             DbConnection loConn = null;
             DbCommand loCmd = null;
             AgreementChrgDiscParamDTO loRtn = poEntity;
-            var loDetaildata = new List<AgreementChrgDiscDetailBulkDTO>();
             try
             {
                 using (TransactionScope transactionScope = new TransactionScope(TransactionScopeOption.Required))
                 {
-                    //List<AgreementChrgDiscDetailBulkDTO> loDetailData = poEntity.AgreementChrgDiscDetail;
+
                     loConn = loDb.GetConnection();
                     loCmd = loDb.GetCommand();
 
@@ -111,10 +112,16 @@ namespace PMT05000BACK
                     ShowLogDebug(lcQuery, loCmd.Parameters);//log create
                     loDb.SqlExecNonQuery(lcQuery, loConn, false);
 
+                    var loDetData = R_Utility.R_ConvertCollectionToCollection<AgreementChrgDiscDetailDTO, AgreementChrgDiscDetailBulkDTO>(poEntity.AgreementChrgDiscDetail);
                     //logger
-                    _logger.LogDebug($"INSERT INTO #AGREEMENT_CHARGES_DISCOUNT {loDetaildata}");//log insert
+
+                    foreach (var loItem in loDetData)
+                    {
+                        _logger.LogDebug($"INSERT INTO #AGREEMENT_CHARGES_DISCOUNT {loItem}");//log insert
+                    }
+
                     //copybulk
-                    loDb.R_BulkInsert<AgreementChrgDiscDetailBulkDTO>((SqlConnection)loConn, "#LEASE_PRICING", loDetaildata);
+                    loDb.R_BulkInsert<AgreementChrgDiscDetailBulkDTO>((SqlConnection)loConn, "#AGREEMENT_CHARGES_DISCOUNT", loDetData);
 
                     //exec sp
                     lcQuery = "RSP_PM_PROCESS_AGREEMENT_CHARGE_DISCOUNT";
@@ -141,9 +148,6 @@ namespace PMT05000BACK
                     {
                         ShowLogDebug(lcQuery, loCmd.Parameters);
                         var loDataTable = loDb.SqlExecQuery(loConn, loCmd, false);
-
-                        //var loTempResult = R_Utility.R_ConvertTo<ConvertRecID>(loDataTable).FirstOrDefault();
-                        //loRtn.CREC_ID = loTempResult.CJRN_ID;
                     }
                     catch (Exception ex)
                     {

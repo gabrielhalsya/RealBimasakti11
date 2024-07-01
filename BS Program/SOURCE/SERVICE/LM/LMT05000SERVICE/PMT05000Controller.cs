@@ -53,10 +53,10 @@ namespace PMT05000SERVICE
                 var loParam = new GSB_CodeInfoParam()
                 {
                     CCOMPANY_ID = R_BackGlobalVar.COMPANY_ID,
-                    CLASS_APPLICATION=R_Utility.R_GetStreamingContext<string>(ContextConstantPMT05000.CLASS_APPLICATION ),
-                    CLASS_ID=R_Utility.R_GetStreamingContext<string>(ContextConstantPMT05000.CLASS_ID ),
-                    REC_ID_LIST=R_Utility.R_GetStreamingContext<string>(ContextConstantPMT05000.REC_ID_LIST ),
-                    LANG_ID= R_BackGlobalVar.CULTURE
+                    CLASS_APPLICATION = ContextConstantPMT05000.CLASS_APPLICATION,
+                    CLASS_ID = ContextConstantPMT05000.CLASS_ID,
+                    REC_ID_LIST = ContextConstantPMT05000.REC_ID_LIST,
+                    LANG_ID = R_BackGlobalVar.CULTURE
                 };
                 var loTempRtn = loCls.GetGSBCodeInfoList(loParam);
 
@@ -91,7 +91,7 @@ namespace PMT05000SERVICE
                 var loParam = new GSTPeriodDT_Param()
                 {
                     CCOMPANY_ID = R_BackGlobalVar.COMPANY_ID,
-                    CYEAR= R_Utility.R_GetStreamingContext<string>(ContextConstantPMT05000. CYEAR),
+                    CYEAR = R_Utility.R_GetStreamingContext<string>(ContextConstantPMT05000.CYEAR),
                 };
                 var loTempRtn = loCls.GetGSPeriodDT(loParam);
 
